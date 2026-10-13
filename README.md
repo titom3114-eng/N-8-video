@@ -15,6 +15,7 @@ Une seule phrase, à la fin : *« Dans toutes les langues, la nuit s'écrit N+8.
 | `output/N8_La-Nuit_16x9.mp4` | 1920×1080, 30 i/s, cadre cinéma 2.39:1 | site, YouTube, présentation, écran boutique |
 | `output/N8_La-Nuit_9x16.mp4` | 1080×1920, 30 i/s | Instagram Reels, Stories, TikTok |
 | `output/N8_affiche_16x9.png` / `output/N8_affiche_9x16.png` | image fixe du logo final | miniature, couverture |
+| `output/apercu/*_apercu-720p.mp4` | 720p, < 30 Mo | envoi rapide par messagerie, validation |
 
 Durée : 63 s. Son stéréo AAC 256 kb/s normalisé à −14 LUFS (crête −1,5 dBTP).
 
