@@ -120,7 +120,7 @@
     const a = prog(u, 0.2, 0.5, E.out) * (fadeOut ? 1 - prog(u, d - 0.35, 0.35, E.in) : 1);
     if (a <= 0) return;
     reset(ctx);
-    const size = (LAND ? 3.2 : 4.4) * U, y = SY(LAND ? 25 : 40);
+    const size = (LAND ? 3.7 : 5.0) * U, y = SY(LAND ? 25 : 40);
     shade(W / 2, y - size * 0.3, 60 * U, 6 * U, a);
     ctx.font = `italic 400 ${size}px ${F.serif}`; ctx.textAlign = 'center';
     ctx.fillStyle = rgb(C.white, 0.92 * a);
@@ -240,7 +240,8 @@
     reset(ctx); ctx.clearRect(0, 0, W, H);
     const s = SHOTS.find(sh => t >= sh.start && t < sh.start + sh.dur) || SHOTS[SHOTS.length - 1];
     const u = t - s.start;
-    if (s.render === 'finale') { finale(u, s.dur); return; }
+    if (s.render === 'finale') { const k = s.speed || 1; finale(u * k, s.dur * k); return; }
+    if (s.render) return;  // plan noir
     if (s.phrase) {
       // la phrase court sur plusieurs plans consécutifs
       const first = SHOTS.find(sh => sh.phrase === s.phrase);
@@ -278,7 +279,9 @@
       document.fonts.load(`400 60px "Amiri"`, 'ليل'),
     ]);
     await document.fonts.ready;
-    EDL = await (await fetch('../footage/edl.json')).json();
+    // montage : footage/edl.json (film) ou footage/<edl>.json (ex. ?edl=edl_teaser)
+    const EDL_NAME = new URLSearchParams(location.search).get('edl') || 'edl';
+    EDL = await (await fetch(`../footage/${EDL_NAME}.json`)).json();
     LOGO.meta = await (await fetch('logo/parts.json')).json();
     for (const name of Object.keys(LOGO.meta.parts)) {
       const img = await loadImage(`logo/${name}.png`);

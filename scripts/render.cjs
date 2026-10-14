@@ -58,7 +58,7 @@ function launch() {
 
 (async () => {
   const srv = await serve();
-  const pageUrl = `http://127.0.0.1:${srv.address().port}/src/${args.page || 'index.html'}?render=1`;
+  const pageUrl = `http://127.0.0.1:${srv.address().port}/src/${args.page || 'index.html'}?render=1${args.edl ? `&edl=${encodeURIComponent(args.edl)}` : ''}`;
   const browser = await launch();
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
   page.on('console', m => { if (m.type() === 'error') console.error('[page]', m.text()); });

@@ -13,6 +13,7 @@ Bande-son de « Nuits » en images réelles.
 - Réverbération propre à chaque lieu, musique légèrement abaissée sous les bruitages, limiteur doux.
 
     python3 scripts/sound_reel.py build/reel/cues.json build/reel/soundtrack.wav
+    python3 scripts/sound_reel.py build/teaser/cues.json build/teaser/soundtrack.wav footage/edl_teaser.json
 """
 import json
 import subprocess
@@ -59,7 +60,7 @@ FX = {
     'chimes':  [dict(f=2014, db=-13, len=2.2, onset=True, rev=0.4)],
     'glitter': [dict(f=2352, db=-19, len=2.6, onset=True, hp=1800, rev=0.4)],
     'rumble':  [dict(f=2297, db=-6, len=3.0, onset=True, rev=0.1)],
-    'whoosh':  [dict(f=(1490, 1462, 2607), db=-9, len=0.9, onset=True, rev=0.15)],
+    'whoosh':  [dict(f=(1490, 1462, 2607), db=-12, len=0.8, onset=True, rev=0.15)],
     'hit':     [dict(f=549, db=-2, len=4.0, onset=True, rev=0.3), dict(f=2297, db=-10, len=2.5, onset=True)],
     'riser':   [dict(f=784, db=-5, peak=True, tail=1.2, rev=0.2)],
     'logo':    [dict(f=2897, db=-2, len=6.0, onset=True, rev=0.35), dict(f=619, db=-14, len=6.0, onset=True, delay=0.25, rev=0.5)],
@@ -202,14 +203,18 @@ def music_bus(cues, edl, N):
     segs = m['map']
     xf = int(0.03 * SR)
     for i, (fb, tb) in enumerate(segs):
+        if tb is None:  # silence (respiration avant le logo)
+            continue
         f0 = fb * beat
         f1 = segs[i + 1][0] * beat if i + 1 < len(segs) else N / SR
         s0 = m['beat0'] + tb * beat
-        a, b = int(round(s0 * SR)) - xf, int(round((s0 + f1 - f0) * SR)) + xf
+        before_silence = i + 1 < len(segs) and segs[i + 1][1] is None
+        xo = int(0.12 * SR) if before_silence else xf      # arrêt net mais pas sec avant le silence
+        a, b = int(round(s0 * SR)) - xf, int(round((s0 + f1 - f0) * SR)) + (0 if before_silence else xf)
         x = src[:, max(0, a):b].copy()
         w = np.ones(x.shape[1])
         w[:xf] = np.sin(np.linspace(0, np.pi / 2, xf)) ** 2 if i else 1
-        w[-xf:] = np.cos(np.linspace(0, np.pi / 2, xf)) ** 2
+        w[-xo:] = np.cos(np.linspace(0, np.pi / 2, xo)) ** 2
         place(out, x * w, f0 - xf / SR)
     # niveau : moyenne de la partie rythmée ramenée à MUSIC_RMS
     beat_entry = int(segs[1][0] * beat * SR)
@@ -324,9 +329,11 @@ def credits(edl):
 
 def main():
     src, dst = sys.argv[1], sys.argv[2]
+    edl_path = Path(sys.argv[3]) if len(sys.argv) > 3 and not sys.argv[3].startswith('--') else ROOT / 'footage' / 'edl.json'
     cues = json.load(open(src))
-    edl = json.loads((ROOT / 'footage' / 'edl.json').read_text())
-    credits(edl)
+    edl = json.loads(edl_path.read_text())
+    if edl_path.stem == 'edl':
+        credits(edl)
     st = build(cues, edl)
     write_wav(dst, st)
     print(f'Bande-son écrite : {dst} ({st.shape[1] / SR:.2f} s)')

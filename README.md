@@ -48,6 +48,12 @@ blanc, grain et format cinéma. Aucun ingrédient n'est écrit : chaque ville d�
 un plan « héros » un peu plus long et, quand c'est possible, le geste de sentir, souligné par une inspiration.
 La carte de chaque ville (*N + huit → nuit*) reste 3,5 s, le temps de lire le jeu de lettres.
 
+Mise en scène : ouverture sur le noir et une inspiration, l'allumette s'enflamme d'emblée ; chaque ville a sa
+température d'image (Paris ambre-tabac, Rome pierre argentée, Oman ambre profond) ; une brume dorée passe devant
+les plans où l'on sent (tabac, cognac humé, écorce d'orange, pétales) ; un bref fondu au noir ferme chaque ville ;
+après la salve des capitales, la musique s'arrête net : les mots se rassemblent dans le silence, puis le logo frappe
+et le piano revient.
+
 - **Ouverture** — une allumette craque dans le noir, une braise, *« Chaque nuit a son parfum. »*
 - **Paris** — tour Eiffel, Arc de Triomphe, le bar. *Tabac* : feuilles dorées, briquet, cigare, fumée soufflée,
   cendre. *Cognac* : versé, tourné dans le verre, humé les yeux fermés. *Cuir* : capitonné noir, saxophone.
@@ -70,7 +76,9 @@ aux entrées de ville ; réverbération propre à chaque lieu ; la musique s'eff
 |---|---|---|
 | `output/N8_Nuits-Reel_16x9.mp4` | 1920×1080, 30 i/s, cadre cinéma 2.39:1 | site, YouTube, présentation, écran boutique |
 | `output/N8_Nuits-Reel_9x16.mp4` | 1080×1920, 30 i/s | Instagram Reels, Stories, TikTok |
-| `output/apercu/N8_Nuits-Reel_*_apercu-720p.mp4` | 720p, < 30 Mo | envoi rapide, validation |
+| `output/N8_Nuits-Teaser_16x9.mp4`, `output/N8_Nuits-Teaser_9x16.mp4` | 16 s, mêmes formats | publicité, Reels, TikTok, stories |
+| `output/N8_Nuits-Reel_affiche_*.png` | image du logo final | miniature, couverture |
+| `output/apercu/N8_Nuits-*_apercu-720p.mp4` | 720p, < 30 Mo | envoi rapide, validation |
 
 **Droits** — images : Pexels License (vidéos et photos) et Mixkit Stock Video Free License ;
 musique : Coverr License ; bruitages : Mixkit Sound Effects Free License. Toutes autorisent l'usage commercial
@@ -94,7 +102,9 @@ aucun logo de marque n'apparaît dans les plans retenus.
 - Calque des titres : `src/reel.html` / `src/reel.js`
 - Montage, étalonnage, recadrage 16:9 et 9:16 : `scripts/footage/assemble.py`
 - Bande-son (musique, ambiances, bruitages, réverbérations, mixage) : `scripts/sound_reel.py`
-- Tout d'un coup : `./scripts/build_reel.sh` → `output/N8_Nuits-Reel_16x9.mp4`, `output/N8_Nuits-Reel_9x16.mp4`
+- Version courte : `footage/edl_teaser.json` (même syntaxe ; `assemble.py --edl`, `render.cjs --edl`,
+  `sound_reel.py … footage/edl_teaser.json`, `mux.py --film teaser`).
+- Tout d'un coup : `./scripts/build_reel.sh` → film, version courte et affiches dans `output/`
 
 Accès réseau nécessaire : `videos.pexels.com`, `assets.mixkit.co`, `cdn.coverr.co`. Vos propres images peuvent
 remplacer n'importe quel plan : déposez `footage/override/<id>.mp4` (prioritaire sur la vidéo choisie).

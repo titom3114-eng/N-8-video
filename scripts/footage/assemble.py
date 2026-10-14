@@ -7,8 +7,11 @@ puis calque des titres (rendu par src/reel.html) par-dessus.
     python3 scripts/footage/assemble.py --format 16x9
     python3 scripts/footage/assemble.py --format 9x16
     python3 scripts/footage/assemble.py --format 16x9 --placeholders   (essai de la chaîne sans vidéos)
+    python3 scripts/footage/assemble.py --format 16x9 --edl footage/edl_teaser.json   (autre montage → build/teaser)
 
-Sortie : build/reel/video_<format>.mp4 (sans son ; le son est ajouté par scripts/mux.py --film reel).
+Sortie : build/<nom>/video_<format>.mp4 (sans son ; le son est ajouté par scripts/mux.py).
+Par plan : "grade" (sinon celui de la ville), "haze" (brume de fumée en surimpression, opacité),
+"dip_in" / "dip_out" (images de fondu au noir), "zoom", "focus", "focus_v", "vf".
 """
 import argparse
 import json
@@ -22,12 +25,22 @@ CLIPS = ROOT / 'footage' / 'clips'
 OVERRIDE = ROOT / 'footage' / 'override'
 BUILD = ROOT / 'build' / 'reel'
 FORMATS = {'16x9': (1920, 1080), '9x16': (1080, 1920)}
+SECTION_GRADE = {'roma': 'stone', 'oman': 'amber'}   # sinon 'gold'
+HAZE = CLIPS / 'i03.mp4'                              # fumée sur fond noir, pour la brume « odeur »
 FPS = 30
 GRADES = {
     # or et noir : noirs écrasés, hautes lumières dorées, couleurs retenues
     'gold': ("eq=contrast=1.12:saturation=0.36:gamma=0.94:brightness=-0.02,"
              "colorbalance=rs=0.05:bs=-0.07:rm=0.08:gm=0.02:bm=-0.09:rh=0.09:gh=0.04:bh=-0.07,"
              "curves=all='0/0 0.12/0.025 0.38/0.25 0.72/0.66 1/0.95'"),
+    # Rome : pierre et encens — plus froid dans les hautes lumières, argenté, couleurs très retenues
+    'stone': ("eq=contrast=1.13:saturation=0.27:gamma=0.95:brightness=-0.02,"
+              "colorbalance=rs=0.02:bs=-0.02:rm=0.05:gm=0.02:bm=-0.05:rh=0.03:gh=0.03:bh=0.01,"
+              "curves=all='0/0 0.12/0.025 0.38/0.25 0.72/0.67 1/0.96'"),
+    # Oman : ambre profond — rouges et ors plus denses (rose, oud, braises)
+    'amber': ("eq=contrast=1.14:saturation=0.46:gamma=0.93:brightness=-0.02,"
+              "colorbalance=rs=0.08:bs=-0.09:rm=0.10:gm=0.0:bm=-0.12:rh=0.10:gh=0.03:bh=-0.09,"
+              "curves=all='0/0 0.12/0.022 0.38/0.24 0.72/0.65 1/0.95'"),
     # noir et blanc à peine réchauffé
     'mono': ("hue=s=0,eq=contrast=1.16:gamma=0.94,"
              "colorbalance=rh=0.05:gh=0.03:bh=-0.03:rm=0.02:bm=-0.02,"
@@ -74,7 +87,7 @@ def source_for(sh, placeholders, by_id=None):
     return p
 
 
-def shot_filter(sh, info, W, H, d, portrait):
+def shot_filter(sh, info, W, H, d, portrait, section=''):
     speed = sh.get('speed', 1.0)
     need = d * speed
     if info['dur'] < need + 0.05:
@@ -99,7 +112,8 @@ def shot_filter(sh, info, W, H, d, portrait):
         sw = even(info['w'] * k0)
         scale = f"scale={sw}:-2:flags=lanczos"
         crop = f"crop={W}:{H}:x='(iw-{W})*{fx}':y='(ih-{H})*{fy}'"
-    grade = GRADES[sh.get('grade', 'gold')]
+    g = sh.get('grade', 'gold')
+    grade = GRADES[g if g != 'gold' else SECTION_GRADE.get(section, 'gold')]
     extra = sh.get('vf', '')
     chain = [f"trim=start={ss:.3f}:duration={need + 0.2:.3f}", f"setpts=(PTS-STARTPTS)/{speed:.4f}", f"fps={FPS}",
              scale, crop, grade]
@@ -107,8 +121,21 @@ def shot_filter(sh, info, W, H, d, portrait):
         chain.append('unsharp=5:5:0.55:5:5:0')
     if extra:
         chain.append(extra)
+    if sh.get('dip_in'):
+        chain.append(f"fade=t=in:st=0:d={sh['dip_in'] / FPS:.3f}")
+    if sh.get('dip_out'):
+        chain.append(f"fade=t=out:st={d - sh['dip_out'] / FPS:.3f}:d={sh['dip_out'] / FPS:.3f}")
     chain += ["tpad=stop_mode=clone:stop_duration=1", "setsar=1", "format=yuv420p"]
     return ','.join(chain)
+
+
+def haze_graph(vf, d, W, H, opacity, offset):
+    """Plan + brume de fumée dorée en « screen » (l'odeur rendue visible)."""
+    return (f"[0:v]{vf},format=gbrp[a];"
+            f"[1:v]trim=start={offset:.2f}:duration={d + 0.4:.3f},setpts=PTS-STARTPTS,fps={FPS},"
+            f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},hue=s=0,"
+            f"colorchannelmixer=rr=1:gg=0.84:bb=0.58,setsar=1,format=gbrp[h];"
+            f"[a][h]blend=all_mode=screen:all_opacity={opacity},format=yuv420p[v]")
 
 
 def main():
@@ -117,15 +144,21 @@ def main():
     ap.add_argument('--placeholders', action='store_true')
     ap.add_argument('--skip-overlay', action='store_true')
     ap.add_argument('--redo', default='', help='ne refaire que ces plans (les autres segments existants sont gardés)')
+    ap.add_argument('--edl', default=str(EDL))
     args = ap.parse_args()
     W, H = FORMATS[args.format]
     portrait = H > W
-    edl = json.loads(EDL.read_text())
+    edl_path = Path(args.edl)
+    edl = json.loads(edl_path.read_text())
+    global BUILD
+    name = 'reel' if edl_path.stem == 'edl' else edl_path.stem.replace('edl_', '')
+    BUILD = ROOT / 'build' / name
     beat = 60 / edl['bpm']
     seg_dir = BUILD / f'seg_{args.format}'
     seg_dir.mkdir(parents=True, exist_ok=True)
     listing = []
     shots = [sh for sec in edl['sections'] for sh in sec['shots']]
+    section_of = {sh['id']: sec['name'] for sec in edl['sections'] for sh in sec['shots']}
     by_id = {sh['id']: sh for sh in shots}
     t_cum = 0.0
     for i, sh in enumerate(shots):
@@ -143,9 +176,15 @@ def main():
         else:
             src = source_for(sh, args.placeholders, by_id)
             info = probe(src)
-            vf = shot_filter(sh, info, W, H, d, portrait)
-            run(['ffmpeg', '-y', '-v', 'error', '-i', str(src), '-an', '-vf', vf, '-frames:v', str(frames), '-r', str(FPS),
-                 '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '12', '-pix_fmt', 'yuv420p', str(seg)])
+            vf = shot_filter(sh, info, W, H, d, portrait, section_of[sh['id']])
+            if sh.get('haze') and HAZE.exists():
+                run(['ffmpeg', '-y', '-v', 'error', '-i', str(src), '-i', str(HAZE), '-an',
+                     '-filter_complex', haze_graph(vf, d, W, H, sh['haze'], 2.0 + (i * 3.7) % 30), '-map', '[v]',
+                     '-frames:v', str(frames), '-r', str(FPS), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '12',
+                     '-pix_fmt', 'yuv420p', str(seg)])
+            else:
+                run(['ffmpeg', '-y', '-v', 'error', '-i', str(src), '-an', '-vf', vf, '-frames:v', str(frames), '-r', str(FPS),
+                     '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '12', '-pix_fmt', 'yuv420p', str(seg)])
         listing.append(f"file '{seg.as_posix()}'")
         print(f"[{args.format}] {sh['id']} {d:.2f} s")
     lst = BUILD / f'concat_{args.format}.txt'
@@ -156,7 +195,7 @@ def main():
     ov = BUILD / f'ov_{args.format}'
     if not args.skip_overlay and not (ov / '00000.png').exists():
         run(['node', str(ROOT / 'scripts' / 'render.cjs'), '--page', 'reel.html', '--format', args.format,
-             '--alpha', '--frames-dir', str(ov)])
+             '--edl', edl_path.stem, '--alpha', '--frames-dir', str(ov)])
     bar = round((H - W / 2.39) / 2) if not portrait else 0
     post = "noise=alls=7:allf=t+u,vignette=angle=PI/4.6"
     cmd = ['ffmpeg', '-y', '-v', 'error', '-i', str(base)]

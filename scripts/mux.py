@@ -19,6 +19,7 @@ FILMS = {
     'la-nuit': (ROOT / 'build', 'N8_La-Nuit'),
     'nuits': (ROOT / 'build' / 'nuits', 'N8_Nuits'),
     'reel': (ROOT / 'build' / 'reel', 'N8_Nuits-Reel'),
+    'teaser': (ROOT / 'build' / 'teaser', 'N8_Nuits-Teaser'),
 }
 BUILD = FILMS['la-nuit'][0]
 
