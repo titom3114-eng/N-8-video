@@ -34,6 +34,7 @@ usage commercial, publicité en ligne, télévision et radio autorisés, sans at
 | 1490 | Fast whoosh transition |
 | 1494 | Sand swish |
 | 2014 | Wind chimes |
+| 2237 | Child deep breath |
 | 2297 | Bass rumble hum |
 | 2352 | Magic glitter or particles |
 | 2475 | Crickets at night in nature |
@@ -47,3 +48,4 @@ usage commercial, publicité en ligne, télévision et radio autorisés, sans at
 | 2897 | Movie logo presentation impact |
 | 2936 | Wine glass clink |
 | 3179 | Water drop splashes in cave |
+| 3215 | Spray water or liquid |
