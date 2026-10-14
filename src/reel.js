@@ -199,8 +199,10 @@
     };
     drawPart('n', logoA); drawPart('plus', prog(u, 2.25, 0.35, E.out)); drawPart('eight', prog(u, 2.35, 0.4, E.out));
     const CX = 767.5, CY = 456, R = 310, SIDE = 246, HALF = SIDE + Math.PI / 2 * R;
-    drawPart('arch', arch > 0 ? 1 : 0, x => {
-      const dd = arch * HALF, hh = Math.min(dd, SIDE + 4);
+    // l'arche se trace des pieds vers le sommet ; les montants recouvrent le départ des arcs (aucune coupure),
+    // puis, une fois tracée, elle est dessinée entière
+    drawPart('arch', arch > 0 ? 1 : 0, arch >= 1 ? null : x => {
+      const dd = arch * HALF, hh = dd > SIDE ? 712 - CY + 10 : dd;
       x.rect(440, 712 - hh, 60, hh); x.rect(1036, 712 - hh, 60, hh);
       if (dd > SIDE) { const a = Math.min(Math.PI / 2, (dd - SIDE) / R); x.moveTo(CX, CY); x.arc(CX, CY, R + 40, Math.PI, Math.PI + a); x.closePath(); x.moveTo(CX, CY); x.arc(CX, CY, R + 40, -a, 0); x.closePath(); }
     });

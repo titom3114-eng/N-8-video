@@ -42,7 +42,7 @@ glaçon, briquet, pas sur la pierre, chaîne de l'encensoir, braises, goutte.
 
 ## « Nuits » en images réelles
 
-Le film principal en vraies vidéos de nuit : 73 plans en 53 s, coupés sur le tempo de la musique
+Le film principal en vraies vidéos de nuit : 71 plans en 53 s, coupés sur le tempo de la musique
 (85,3 BPM : surtout des demi-temps de 0,35 s, quelques plans d'un temps et demi), étalonnés or / noir / gris /
 blanc, grain et format cinéma. Aucun ingrédient n'est écrit : chaque ville déroule trois matières, chacune avec
 un plan « héros » un peu plus long et, quand c'est possible, le geste de sentir, souligné par une inspiration.
@@ -50,13 +50,13 @@ La carte de chaque ville (*N + huit → nuit*) reste 3,5 s, le temps de lire le 
 
 Mise en scène : ouverture sur le noir et une inspiration, l'allumette s'enflamme d'emblée ; chaque ville a sa
 température d'image (Paris ambre-tabac, Rome pierre argentée, Oman ambre profond) ; une brume dorée passe devant
-les plans où l'on sent (tabac, cognac humé, écorce d'orange, pétales) ; un bref fondu au noir ferme chaque ville ;
+les plans où l'on sent (tabac, écorce d'orange, pétales) ; un bref fondu au noir ferme chaque ville ;
 après la salve des capitales, la musique s'arrête net : les mots se rassemblent dans le silence, puis le logo frappe
 et le piano revient.
 
 - **Ouverture** — une allumette craque dans le noir, une braise, *« Chaque nuit a son parfum. »*
 - **Paris** — tour Eiffel, Arc de Triomphe, le bar. *Tabac* : feuilles dorées, briquet, cigare, fumée soufflée,
-  cendre. *Cognac* : versé, tourné dans le verre, humé les yeux fermés. *Cuir* : capitonné noir, saxophone.
+  cendre. *Cognac* : versé, verre de cristal, glaçon. *Cuir* : capitonné noir, saxophone.
 - **Rome** — Colisée, pont Saint-Ange, pluie. *Encens* : rayons dans l'église, encensoir, chœur, cierges, cloche.
   *Agrumes* : écorce en spirale, orange pressée, citrons qui plongent. *Pierre mouillée* : pluie sur le pavé, fontaine.
 - **Oman** — ciel étoilé, lustre de la mosquée Sultan Qaboos, mosquée, chameau, dunes. *Oud* : copeaux qui
@@ -67,10 +67,10 @@ et le piano revient.
 
 **Son** : musique « Disturbing Night » (Coverr) montée sur la grille du film — raccords sur les mesures,
 passage dans sa partie calme à l'arrivée du logo ; ambiances réelles par lieu (rue de Paris puis rumeur du bar,
-pluie et cloches de Rome, vent du désert et grillons à Oman) ; bruitages réels synchronisés plan par plan
-(allumette, molette du briquet, braise et cendre, souffle, inspiration, verre, versement, glaçon, gouttes, chœur,
-cloche, jus d'orange pressé, plongeon des citrons, eau, braises, flamme, goutte, vent et sable) ; impacts graves
-aux entrées de ville ; réverbération propre à chaque lieu ; la musique s'efface légèrement sous chaque bruitage.
+pluie légère à Rome, vent du désert à Oman, discrets) ; un seul bruitage réel par matière, jamais répété
+(allumette, molette du briquet, souffle de fumée, cendre, versement, glaçon, cloche, chœur, cierge, jus pressé,
+plongeon des citrons, gouttes, eau, rafale, braises, flamme, goutte d'ambre) ; impact grave à l'entrée de chaque
+ville ; réverbération propre à chaque lieu ; la musique s'efface légèrement sous chaque bruitage.
 
 | Fichier | Format | Usage |
 |---|---|---|

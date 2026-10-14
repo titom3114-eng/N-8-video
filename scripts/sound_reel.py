@@ -67,14 +67,14 @@ FX = {
 }
 # ambiances par section : fichier, niveau moyen (dBFS), départ dans le fichier, filtres
 BEDS = {
-    'intro':  [dict(f=1177, db=-31)],
-    'paris':  [dict(f=2678, db=-31, start=12.0)],
-    'roma':   [dict(f=1251, db=-27, start=2.0), dict(f=370, db=-31, start=18.0)],
-    'oman':   [dict(f=1158, db=-27, start=6.0), dict(f=2475, db=-38, start=10.0, hp=1500)],
-    'villes': [dict(f=2678, db=-30, start=60.0)],
-    'finale': [dict(f=1177, db=-33, start=20.0, delay=2.1)],   # après le silence
+    'intro':  [dict(f=1177, db=-34)],
+    'paris':  [],                                            # la rumeur du bar suffit (plan marqué "bar")
+    'roma':   [dict(f=1251, db=-31, start=2.0)],             # pluie légère sur la pierre
+    'oman':   [dict(f=1158, db=-31, start=6.0, lp=6000)],    # vent du désert, adouci
+    'villes': [],
+    'finale': [dict(f=1177, db=-34, start=20.0, delay=2.1)],   # après le silence
 }
-BAR = dict(f=444, db=-27, start=30.0, lp=2400)        # rumeur du bar, à partir du plan marqué "bar"
+BAR = dict(f=444, db=-32, start=30.0, lp=2200)        # rumeur du bar, à partir du plan marqué "bar"
 ROOMS = {'intro': (2.6, 2.0), 'paris': (1.1, 0.8), 'roma': (3.2, 2.0), 'oman': (2.2, 1.4), 'villes': (1.4, 1.0), 'finale': (4.0, 2.4)}
 REF = -10.5          # niveau (dBFS, fenêtre la plus forte de 0,3 s) d'un bruitage à 0 dB
 MUSIC_RMS = -21.0    # niveau moyen de la musique sur la partie rythmée

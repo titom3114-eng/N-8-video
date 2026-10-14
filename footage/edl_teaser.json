@@ -149,12 +149,6 @@
       0.6,
       0.5
      ],
-     "sfx": [
-      {
-       "n": "inhale",
-       "at": 0.0
-      }
-     ],
      "haze": 0.32
     },
     {
@@ -179,12 +173,6 @@
      "focus_v": [
       0.55,
       0.5
-     ],
-     "sfx": [
-      {
-       "n": "crackle",
-       "at": 0.0
-      }
      ]
     },
     {
@@ -200,7 +188,7 @@
      "sfx": [
       {
        "n": "exhale",
-       "at": 0.05
+       "at": 0.15
       }
      ]
     },
@@ -234,40 +222,27 @@
      ]
     },
     {
-     "id": "pn1",
-     "beats": 1,
-     "src": "pp:15776250",
+     "id": "pc2",
+     "beats": 0.5,
+     "src": "p:10823241",
+     "in": 2.0
+    },
+    {
+     "id": "p08",
+     "beats": 0.5,
+     "src": "p:7255095",
+     "in": 2,
      "move": "push",
-     "focus": [
-      0.62,
-      0.45
-     ],
      "focus_v": [
-      0.66,
-      0.45
-     ],
-     "grade": "gold",
-     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
-     "sfx": [
-      {
-       "n": "inhale",
-       "at": 0.1
-      }
-     ],
-     "haze": 0.38
+      0.32,
+      0.5
+     ]
     },
     {
      "id": "pl1",
      "beats": 1,
      "src": "pp:6045051",
      "move": "push",
-     "sfx": [
-      {
-       "n": "swoosh",
-       "at": 0.0,
-       "db": -8
-      }
-     ],
      "dip_out": 4
     }
    ]
@@ -301,8 +276,7 @@
      "sfx": [
       {
        "n": "choir",
-       "end": true,
-       "db": -4
+       "end": true
       }
      ]
     },
@@ -319,7 +293,6 @@
       0.5,
       0.5
      ],
-     "sfx": [],
      "haze": 0.3
     },
     {
@@ -354,13 +327,6 @@
      "id": "ow1",
      "beats": 0.5,
      "src": "p:6448156",
-     "sfx": [
-      {
-       "n": "swoosh",
-       "at": 0.0,
-       "db": -6
-      }
-     ],
      "in": 0.8,
      "vf": "curves=all='0/0 0.5/0.33 1/0.8'"
     },
@@ -368,12 +334,6 @@
      "id": "os1",
      "beats": 0.5,
      "src": "p:8091551",
-     "sfx": [
-      {
-       "n": "inhale",
-       "at": 0.15
-      }
-     ],
      "in": 3.6,
      "vf": "curves=all='0/0 0.5/0.25 1/0.7'"
     },
@@ -431,30 +391,21 @@
      "zoom": 1.45,
      "zoom_v": 1.15,
      "city": "MADRID",
-     "word": "noche",
-     "sfx": [
-      "whoosh"
-     ]
+     "word": "noche"
     },
     {
      "id": "v03",
      "beats": 0.5,
      "src": "p:18999814",
      "city": "BERLIN",
-     "word": "Nacht",
-     "sfx": [
-      "whoosh"
-     ]
+     "word": "Nacht"
     },
     {
      "id": "v04",
      "beats": 0.5,
      "src": "p:12564020",
      "city": "LISBOA",
-     "word": "noite",
-     "sfx": [
-      "whoosh"
-     ]
+     "word": "noite"
     }
    ]
   },
