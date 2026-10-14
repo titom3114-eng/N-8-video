@@ -1,10 +1,10 @@
 """
 Récupère les vidéos réelles du montage « Nuits » (images réelles) d'après footage/edl.json.
 
-Sources (libres de droits, usage commercial autorisé, sans attribution obligatoire) :
-  - Pexels  : nécessite la variable d'environnement PEXELS_API_KEY (clé gratuite sur pexels.com/api)
-              et l'accès réseau à api.pexels.com, videos.pexels.com, images.pexels.com
-  - Mixkit  : sans clé ; accès réseau à mixkit.co et assets.mixkit.co
+Sources (libres de droits, usage commercial et publicitaire autorisé, sans attribution obligatoire) :
+  - choix à l'œil : champ "src" du plan — « p:<id> » Pexels (index build/reel/pexels, scripts/footage/pexels.py),
+    « c:<id> » Coverr (scripts/footage/coverr_index.py), « m:<id> » Mixkit Free License (mixkit_index.py)
+  - recherche automatique à défaut : Pexels (variable PEXELS_API_KEY) puis Mixkit
 
     python3 scripts/footage/fetch.py                 # tous les plans manquants
     python3 scripts/footage/fetch.py --only p04,r01  # certains plans
@@ -131,6 +131,33 @@ def mixkit_item(iid):
     return {'id': iid, 'slug': m.group(1), 'license': lic, 'hi': hi[-1] if hi else None, 'page': page}
 
 
+def chosen(src):
+    """Fiche de téléchargement d'une vidéo choisie : « p:<id> » Pexels, « c:<id> » Coverr, « m:<id> » Mixkit."""
+    kind, iid = src.split(':', 1)
+    if kind == 'p':
+        idx = json.loads((ROOT / 'build' / 'reel' / 'pexels' / 'index.json').read_text())
+        v = idx.get(iid)
+        if not v:
+            return None
+        # le plus grand fichier jusqu'au 4K (net en recadrage vertical)
+        files = sorted(((int(k.split('x')[0]) * int(k.split('x')[1]), u) for k, u in v['files'].items()
+                        if max(map(int, k.split('x'))) <= 4096))
+        return {'provider': 'pexels', 'uid': f'pexels:{iid}', 'link': files[-1][1], 'page': v['page'], 'author': '—',
+                'license': 'Pexels License (https://www.pexels.com/license/)', 'query': v['slug']}
+    if kind == 'c':
+        idx = json.loads((ROOT / 'build' / 'reel' / 'coverr' / 'index.json').read_text())
+        v = idx.get(iid)
+        if not v:
+            return None
+        return {'provider': 'coverr', 'uid': f'coverr:{iid}', 'link': v['mp4'], 'page': v['page'], 'author': '—',
+                'license': 'Coverr License (https://coverr.co/license)', 'query': v['title']}
+    v = mixkit_item(iid)
+    if not v or v['license'] != 'free' or not v.get('hi'):
+        return None
+    return {'provider': 'mixkit', 'uid': f'mixkit:{iid}', 'link': v['hi'], 'page': v['page'], 'author': 'Mixkit',
+            'license': 'Mixkit Stock Video Free License (https://mixkit.co/license/#videoFree)', 'query': v['slug']}
+
+
 # ------------------------------------------------------------------ sélection
 def shots(edl):
     for sec in edl['sections']:
@@ -180,19 +207,18 @@ def main():
             continue
         need = sh['beats'] * 60 / bpm / sh.get('speed', 1.0) + 0.6
         got = None
-        if sh.get('mixkit'):
-            # vidéo choisie à l'œil sur les planches (licence libre vérifiée)
-            info_mk = mixkit_item(str(sh['mixkit']))
-            if info_mk and info_mk['license'] == 'free' and info_mk.get('hi'):
-                download(info_mk['hi'], dst)
-                meta = {'provider': 'mixkit', 'uid': f"mixkit:{info_mk['id']}", 'link': info_mk['hi'], 'page': info_mk['page'],
-                        'author': 'Mixkit', 'license': 'Mixkit Stock Video Free License (https://mixkit.co/license/#videoFree)',
-                        **probe(dst), 'shot': sid, 'section': sec, 'query': info_mk['slug']}
+        src = sh.get('src') or (f"m:{sh['mixkit']}" if sh.get('mixkit') else '')
+        if src:
+            # vidéo choisie à l'œil sur les planches (licence vérifiée)
+            meta = chosen(src)
+            if meta:
+                download(meta['link'], dst)
+                meta.update(probe(dst), shot=sid, section=sec)
                 (CLIPS / f'{sid}.json').write_text(json.dumps(meta, indent=1, ensure_ascii=False))
                 used.add(meta['uid'])
-                print(f"{sid}: mixkit {meta['width']}x{meta['height']} {meta['duration']:.1f}s « {info_mk['slug']} »")
+                print(f"{sid}: {meta['provider']} {meta['width']}x{meta['height']} {meta['duration']:.1f}s « {meta['query']} »")
                 continue
-            print(f"{sid}: la vidéo Mixkit {sh['mixkit']} n'est pas en licence libre ou introuvable — recherche automatique")
+            print(f"{sid}: la vidéo {src} n'est pas en licence libre ou introuvable — recherche automatique")
         for q in sh['q']:
             for prov in providers:
                 try:

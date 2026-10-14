@@ -23,13 +23,13 @@ gold golden honey oil drop jewelry necklace horse london big-ben madrid berlin l
 acropolis perfume slow-motion dark black-background""".split()
 
 
-def get(url, tries=3):
+def get(url, tries=4):
     for k in range(tries):
         try:
             req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept': 'text/html'})
-            return urllib.request.urlopen(req, timeout=40).read().decode('utf-8', 'ignore')
+            return urllib.request.urlopen(req, timeout=12).read().decode('utf-8', 'ignore')
         except Exception:
-            time.sleep(1 + k)
+            time.sleep(0.5 + k)
     return ''
 
 
@@ -73,11 +73,18 @@ def main():
             tags[tag] = found
             print(f'{tag:14s} {len(found)}')
     todo = {iid: slug for found in tags.values() for iid, slug in found.items() if iid not in index}
-    print(f'{len(todo)} fiches à lire…')
-    with cf.ThreadPoolExecutor(4) as ex:
-        for info in ex.map(lambda kv: item_info(*kv), todo.items()):
+    print(f'{len(todo)} fiches à lire…', flush=True)
+    done = 0
+    with cf.ThreadPoolExecutor(6) as ex:
+        futs = [ex.submit(item_info, iid, slug) for iid, slug in todo.items()]
+        for fu in cf.as_completed(futs):
+            info = fu.result()
+            done += 1
             if info:
                 index[info['id']] = info
+            if done % 100 == 0:
+                idx_path.write_text(json.dumps(index, indent=0))
+                print(f'{done}/{len(todo)} lues, index {len(index)}', flush=True)
     (OUT / 'tags_full.json').write_text(json.dumps(tags))
     idx_path.write_text(json.dumps(index, indent=0))
     free = sum(1 for v in index.values() if v['license'] == 'free')
