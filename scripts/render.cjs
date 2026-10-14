@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * Rendu image par image de src/index.html vers une vidéo H.264 (sans son).
+ * Rendu image par image d'un film (src/index.html par défaut, ou --page nuits.html) vers une vidéo H.264 (sans son).
  *
  *   node scripts/render.cjs --format 16x9 --out output/video_16x9.mp4
  *   node scripts/render.cjs --format 9x16 --out output/video_9x16.mp4
@@ -57,14 +57,14 @@ function launch() {
 
 (async () => {
   const srv = await serve();
-  const pageUrl = `http://127.0.0.1:${srv.address().port}/src/index.html?render=1`;
+  const pageUrl = `http://127.0.0.1:${srv.address().port}/src/${args.page || 'index.html'}?render=1`;
   const browser = await launch();
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
   page.on('console', m => { if (m.type() === 'error') console.error('[page]', m.text()); });
   page.on('pageerror', e => console.error('[page error]', e.message));
   await page.goto(pageUrl, { waitUntil: 'load' });
   await page.evaluate(() => window.N8.ready);
-  const info = await page.evaluate(() => ({ duration: window.N8.duration, scenes: window.N8.scenes, events: window.N8.events, env: window.N8.audioEnv(100) }));
+  const info = await page.evaluate(() => ({ duration: window.N8.duration, scenes: window.N8.scenes, events: window.N8.events, env: window.N8.audioEnv ? window.N8.audioEnv(100) : null, music: window.N8.music || null }));
 
   if (args.cues) {
     fs.mkdirSync(path.dirname(path.resolve(args.cues)), { recursive: true });

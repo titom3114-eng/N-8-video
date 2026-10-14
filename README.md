@@ -1,84 +1,83 @@
-# N+8 — « La nuit »
+# N+8 — Films de marque
 
-Court-métrage de marque pour **N+8, Maison de parfums nocturne**.
+Courts-métrages pour **N+8, Maison de parfums nocturne**.
 
-Le film ne présente pas le concept, il le fait **découvrir** : la nuit tombe sur une ville,
-une enseigne énigmatique « N+8 » s'allume sur un toit… puis, de rue en rue, de pays en pays,
-le « 8 » grésille et devient *huit*, *ocho*, *eight*, *otto*… et les lettres glissent pour écrire
-**nuit, noche, night, notte, Nacht, noite, nacht, natt, noapte, νύχτα**.
-Une seule phrase, à la fin : *« Dans toutes les langues, la nuit s'écrit N+8. »* — puis l'arche du logo se trace.
+## « Nuits » — film principal
 
-## Les films
+La nuit, et surtout son odeur, à travers les villes. Une allumette s'enflamme, un cigare rougeoie :
+*« Chaque nuit a son parfum. »* Puis, en plans courts montés sur le tempo :
+
+- **Paris** — la tour scintille au-dessus des toits ; un bar, des bouteilles à contre-jour, le cognac
+  qu'on verse, des silhouettes d'hommes en chapeau, la fumée des cigares à travers les stores.
+  *Tabac, cognac, cuir, bois fumé.*
+- **Rome** — le Colisée sous la bruine, les pavés mouillés, un encensoir qui se balance, la bergamote,
+  un buste antique dans la fumée, une fontaine, des cierges.
+  *Pierre mouillée, encens, bergamote, fumée.*
+- **Oman** — dunes sous le croissant de lune, mosquée dorée, encensoir à oud, pétales de rose,
+  lanterne ajourée, goutte d'ambre, poussière d'or.
+  *Oud, rose, ambre.*
+- **Les autres villes** défilent : London *night*, Madrid *noche*, Berlin *Nacht*, Lisboa *noite*,
+  Amsterdam *nacht*, Stockholm *natt*, București *noapte*, Αθήνα *νύχτα* — le N toujours en or.
+- **Finale** — toutes les nuits s'alignent, leurs N se rejoignent : *« Dans toutes les langues,
+  la nuit s'écrit N+8. »* Le logo se révèle en or.
+
+Le concept N+8 reste en filigrane : sur chaque carte de ville, la nuit s'écrit sous nos yeux
+(*N + huit → nuit*, *N + otto → notte*, et *ليل* pour Oman).
 
 | Fichier | Format | Usage |
 |---|---|---|
-| `output/N8_La-Nuit_16x9.mp4` | 1920×1080, 30 i/s, cadre cinéma 2.39:1 | site, YouTube, présentation, écran boutique |
-| `output/N8_La-Nuit_9x16.mp4` | 1080×1920, 30 i/s | Instagram Reels, Stories, TikTok |
-| `output/N8_affiche_16x9.png` / `output/N8_affiche_9x16.png` | image fixe du logo final | miniature, couverture |
-| `output/apercu/*_apercu-720p.mp4` | 720p, < 30 Mo | envoi rapide par messagerie, validation |
+| `output/N8_Nuits_16x9.mp4` | 1920×1080, 30 i/s, cadre cinéma 2.39:1 | site, YouTube, présentation, écran boutique |
+| `output/N8_Nuits_9x16.mp4` | 1080×1920, 30 i/s | Instagram Reels, Stories, TikTok |
+| `output/N8_Nuits_affiche_*.png` | image du logo final | miniature, couverture |
+| `output/apercu/N8_Nuits_*_apercu-720p.mp4` | 720p, < 30 Mo | envoi rapide, validation |
 
-Durée : 63 s. Son stéréo AAC 256 kb/s normalisé à −14 LUFS (crête −1,5 dBTP).
+Durée : 63 s. Tempo 96 BPM, coupes sur le temps. Son stéréo AAC normalisé à −14 LUFS (crête −1,5 dBTP).
 
-## Découpage
+**Direction artistique** : or, noir, gris, blanc ; toujours sombre. Silhouettes en contre-jour
+liserées d'or, fumée, bokeh, profondeur de champ, grain argentique, cadre 2.39:1.
+**Musique** : groove feutré (piano électrique, contrebasse, balais) à Paris ; chœur, cloches et pluie
+à Rome ; percussions sur cadre, oud en mode hijaz et nappe sombre à Oman ; montée rythmique sur les
+villes ; silence net, puis accord final sur le logo. Bruitages synchronisés : allumette, verre,
+glaçon, briquet, pas sur la pierre, chaîne de l'encensoir, braises, goutte.
 
-| Temps | Plan | Ce qu'on voit / entend |
-|---|---|---|
-| 0:00 – 0:10 | **La nuit tombe** | Ville au crépuscule au bord de l'eau, le ciel s'éteint, les fenêtres s'allument. Sur un toit, une enseigne grésille : « N+8 ». La caméra plonge vers elle. Vent, rumeur de ville, la pluie arrive. |
-| 0:10 – 0:20 | **Français** | Mur de béton sous la pluie, sol mouillé. « N+8 »… le 8 s'éteint, *huit* s'allume lettre à lettre, le *h* meurt dans une gerbe d'étincelles, les lettres glissent : **nuit**. Des phares balaient le mur. |
-| 0:20 – 0:26 | **Español** | Contre-plongée, balcon en fer forgé, réverbère dans la brume : *ocho* → **noche**. |
-| 0:26 – 0:32 | **English** | Derrière une vitre ruisselante, mise au point sur l'enseigne : *eight* → **night**. |
-| 0:32 – 0:38 | **Italiano** | D'abord le reflet à l'envers dans l'eau noire d'un canal, puis la caméra se lève : *otto* → **notte**. |
-| 0:38 – 0:45 | **Montage** | Coupes rapides au rythme d'un battement : **Nacht** (métal), **noite** (réverbère), **nacht** (reflet), **natt** (neige), **noapte** (vitre), **νύχτα** (pierre). Montée de tension… |
-| 0:45 – 0:51 | **Silence** | Noir. Seul « N », puis « + », puis « 8 » s'allument. *Dans toutes les langues, la nuit s'écrit N+8.* |
-| 0:51 – 1:03 | **Logo** | L'arche se trace en lumière autour de N+8, *MAISON DE PARFUMS — NOCTURNE* apparaît, accord final, fondu au noir. |
+## « La nuit » — première version
 
-## Direction artistique
+Néons bleu nuit sous la pluie : l'enseigne « N+8 » se transforme en *nuit, noche, night, notte…*
+Fichiers : `output/N8_La-Nuit_*`.
 
-- **Palette** : noir, gris, bleu nuit très foncé uniquement. Les lettres sont en verre gris bleuté,
-  leur halo bleu nuit éclaire le béton, la brique, la pierre et la pluie.
-- **Image** : format cinéma 2.39:1 (version 16:9), grain argentique, vignettage, brouillard, reflets
-  ondulants, caméra à l'épaule, mises au point, coupes franches.
-- **Typographie** : Didone (Bodoni Moda, GFS Didot pour le grec), en écho au N+8 du logo.
-- **Logo** : le logo fourni (`assets/logo-n8-original.png`) a été détouré en calques
-  (`src/logo/` : arche, N, +, 8, deux lignes de texte) et adapté au fond noir : tracé gris
-  argenté et halo bleu nuit, révélé élément par élément.
-- **Son** : pluie (claire ou étouffée derrière la vitre), vent, clapotis, grésillement et bourdonnement
-  des enseignes, étincelles, voiture qui passe, impacts aux coupes, pulsation cardiaque pendant le montage,
-  nappe sombre en ré mineur, vrai silence avant la révélation, accord final sur le logo.
-
-## Refaire ou modifier le film
+## Refaire ou modifier les films
 
 Prérequis : Node.js 18+ avec Playwright et Chromium, Python 3 avec numpy, ffmpeg (libx264, aac).
 
 ```bash
-./scripts/build.sh
+./scripts/build.sh            # « Nuits »
+./scripts/build.sh la-nuit    # « La nuit »
 ```
 
 Le script exporte la chronologie, synthétise la bande-son, rend chaque image des deux formats,
-puis assemble les films et les affiches dans `output/`.
+puis assemble les films, les aperçus et les affiches dans `output/`.
 
-Aperçu en temps réel (sans le son) : servir le dossier et ouvrir `src/index.html`, par exemple
-`npx serve .` puis `http://localhost:3000/src/index.html`.
+Aperçu en temps réel (sans le son) : `npx serve .` puis `http://localhost:3000/src/nuits.html`.
 
-Points d'entrée pour les modifications, tous dans `src/film.js` :
+Points d'entrée pour les modifications :
 
-- `buildFilm()` : ordre des plans, durées, langues (`def: { eight, night, map }`), décors, météo, caméra.
-- `COL` : palette (halo, verre des lettres, logo).
-- `sceneFinale()` : la phrase de fin et le minutage de la révélation du logo.
-- `scripts/soundtrack.py` : niveaux, accords et sons de chaque événement.
+- `src/nuits.js`, fonction `buildFilm()` : ordre des plans, durées en temps (1 temps = 0,625 s),
+  notes olfactives affichées, cartes des villes (nom, coordonnées, formule de la nuit).
+- `src/nuits.js`, objet `C` : palette ; chaque plan est une fonction `shot…` lisible séparément.
+- `scripts/soundtrack_nuits.py` : accords, rythmes, riffs d'oud, niveaux des bruitages et ambiances.
 
 ## Arborescence
 
 ```
-assets/logo-n8-original.png   logo fourni
-assets/logo-n8-mask.png       logo détouré (transparent)
-src/index.html, src/film.js   le film (rendu image par image dans un canvas)
-src/logo/                     calques du logo + positions (parts.json)
+assets/                       logo fourni et logo détouré
+src/nuits.html, nuits.js      film « Nuits »
+src/index.html, film.js       film « La nuit »
+src/logo/                     calques du logo (arche, N, +, 8, textes) + positions
 src/fonts/                    polices (licence SIL Open Font License)
-scripts/render.cjs            rendu des images → vidéo master (build/)
-scripts/soundtrack.py         bande-son synchronisée
-scripts/mux.py                normalisation du son + encodage final
+scripts/render.cjs            rendu image par image → vidéo master (build/)
+scripts/soundtrack_nuits.py   bande-son de « Nuits »
+scripts/soundtrack.py         bande-son de « La nuit » (et fonctions partagées)
+scripts/mux.py                normalisation du son, encodage final et aperçus
 scripts/build.sh              chaîne complète
-scripts/fetch_fonts.py        téléchargement des polices
-output/                       films et affiches finaux
+output/                       films, aperçus et affiches
 ```

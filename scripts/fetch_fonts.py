@@ -10,8 +10,10 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
 FAMILIES = [
     "Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700",
     "GFS+Didot",
+    "Montserrat:wght@300..500",
+    "Amiri",
 ]
-KEEP = {"latin", "latin-ext", "greek"}
+KEEP = {"latin", "latin-ext", "greek", "arabic"}
 OUT = Path(__file__).resolve().parent.parent / "src" / "fonts"
 
 
