@@ -83,7 +83,7 @@
     tracked(ctx, o.name, ax, ay, 2.3 * U, 0.62, `300 ${2.3 * U}px ${F.sans}`, rgb(C.goldHi, aName));
     tracked(ctx, o.coords, ax, ay + 3.6 * U, 1.35 * U, 0.35, `300 ${1.35 * U}px ${F.sans}`, rgb(C.white, aCo * 0.75));
     ctx.fillStyle = rgb(C.gold, aCo * 0.7); ctx.fillRect(ax - 3 * U, ay + 5.6 * U, 6 * U, Math.max(1, 0.1 * U));
-    const fy = ay + 14 * U, size = (LAND ? 7.5 : 9) * U;
+    const fy = ay + 15 * U, size = (LAND ? 9 : 11) * U;
     if (o.arabic) {
       const a = prog(u, 0.45, 0.5, E.out) * out;
       ctx.font = `400 ${size * 1.25}px ${F.arabic}`; ctx.textAlign = 'center'; ctx.direction = 'rtl';
@@ -95,8 +95,9 @@
     }
     const f = o.formula, N = 'N', eight = [...f.eight], night = [...f.night];
     const r1 = rowX([N, '+', ...eight]), r2 = rowX(night);
-    const aIn = prog(u, 0.4, 0.3, E.out) * out, pS = prog(u, 0.95, 0.45, E.inOut), pSw = prog(u, 1.15, 0.25, E.inOut);
-    const pOff = prog(u, 0.85, 0.25, E.out);
+    // N + huit, puis les lettres glissent : nuit (un peu plus lent, pour que l'idée se lise)
+    const aIn = prog(u, 0.35, 0.3, E.out) * out, pS = prog(u, 1.15, 0.6, E.inOut), pSw = prog(u, 1.4, 0.35, E.inOut);
+    const pOff = prog(u, 1.0, 0.3, E.out);
     ctx.font = `400 ${size}px ${F.serif}`; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
     ctx.shadowColor = rgb(C.gold, 0.45 * aIn); ctx.shadowBlur = 1.4 * U;
     const put = (ch, xEm, a, col = C.gold) => { if (a <= 0.003) return; ctx.fillStyle = rgb(col, a); ctx.fillText(ch, ax + xEm * size, fy); };
@@ -177,10 +178,10 @@
         x0 += ws[k] + gap;
       });
     });
-    const pA = prog(u, 1.6, 0.5, E.out) * (1 - prog(u, 3.5, 0.5, E.in));
+    const pA = prog(u, 1.6, 0.5, E.out) * (1 - prog(u, 5.0, 0.5, E.in));
     if (pA > 0) {
-      ctx.font = `italic 400 ${(LAND ? 2.6 : 3.4) * U}px ${F.serif}`; ctx.textAlign = 'center';
-      ctx.fillStyle = rgb(C.gray, pA);
+      ctx.font = `italic 400 ${(LAND ? 3.0 : 3.8) * U}px ${F.serif}`; ctx.textAlign = 'center';
+      ctx.fillStyle = rgb(C.white, 0.8 * pA);
       ctx.fillText('Dans toutes les langues, la nuit s’écrit N+8.', W / 2, toS(0, 905)[1]);
     }
     const logoA = prog(u, 2.1, 0.45, E.out), arch = prog(u, 2.45, 1.2, E.inOut);

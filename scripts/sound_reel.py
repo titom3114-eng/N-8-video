@@ -37,6 +37,8 @@ FX = {
     'crackle': [dict(f=1330, db=-9, len='dur', start=3.0, hp=700, lp=9000, rev=0.15)],
     'ash':     [dict(f=1330, db=-5, len=0.8, start=7.0, hp=1200, lp=9000, rev=0.1)],
     'exhale':  [dict(f=2661, db=-8, len=1.0, onset=True, lp=2600, rev=0.3), dict(f=1458, db=-15, len=1.0, onset=True, delay=0.05)],
+    # inspiration (on « sent ») : montée lente, coupure nette, un peu plus grave
+    'inhale':  [dict(f=2237, db=-9, start=0.08, len=0.5, rate=0.86, lp=7000, rev=0.3)],
     'steps':   [dict(f=1270, db=-11, len='dur', start=2.0, rev=0.3)],
     'glass':   [dict(f=2936, db=-7, len=1.4, onset=True, rev=0.3)],
     'pour':    [dict(f=142, db=-4, len='dur', onset=True, rev=0.2)],
@@ -163,6 +165,10 @@ def render_fx(spec, ev, k):
     if length == 'dur':
         length = ev['dur'] + 0.35
     x = src[:, start:start + int(length * SR)] if length else src[:, start:]
+    if spec.get('rate'):  # < 1 : plus grave et plus lent (rééchantillonnage)
+        n = int(x.shape[1] / spec['rate'])
+        xi = np.linspace(0, x.shape[1] - 1, n)
+        x = np.stack([np.interp(xi, np.arange(x.shape[1]), c) for c in x])
     if spec.get('peak') and spec.get('tail'):  # on coupe peu après le point culminant
         x = x[:, :int(np.argmax(envelope(x, 0.02))) + int(spec['tail'] * SR)]
     x = fft_filter(x, spec.get('hp'), spec.get('lp'))
