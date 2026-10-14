@@ -2,8 +2,8 @@
 # « Nuits » en images réelles, de bout en bout :
 # vidéos libres de droits → chronologie → bande-son → calque titres → montage étalonné → films finaux.
 #
-# Prérequis réseau : mixkit.co + assets.mixkit.co (sans clé), et/ou
-#                    api.pexels.com + videos.pexels.com + images.pexels.com avec la variable PEXELS_API_KEY.
+# Prérequis réseau : videos.pexels.com (vidéos choisies, champ "src" de footage/edl.json), mixkit.co +
+#                    assets.mixkit.co ; recherche automatique Pexels facultative avec la variable PEXELS_API_KEY.
 # Vos propres images : déposez footage/override/<id_du_plan>.mp4 (voir footage/edl.json).
 set -euo pipefail
 cd "$(dirname "$0")/.."

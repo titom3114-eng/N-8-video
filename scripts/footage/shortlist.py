@@ -40,7 +40,8 @@ def pool():
     if PEX.exists():
         for v in json.loads(PEX.read_text()).values():
             out.append({'ref': f"p:{v['id']}", 'text': v['slug'], 'label': v['slug'], 'dur': v.get('duration') or 99,
-                        'thumb': v['thumb'], 'w': v['w'], 'vertical': v['vertical'], 'shots': v.get('shots', [])})
+                        'thumb': v['thumb'], 'thumb_mp4': v['small'], 'w': v['w'], 'vertical': v['vertical'],
+                        'shots': v.get('shots', [])})
     if MIX.exists():
         for v in json.loads(MIX.read_text()).values():
             if v['license'] == 'free' and v.get('preview') and v.get('hi'):
@@ -69,8 +70,10 @@ def thumb(c):
     jpg = THUMBS / (c['ref'].replace(':', '_') + '.jpg')
     if jpg.exists():
         return jpg
-    if c.get('thumb'):
-        return jpg if fetch(c['thumb'], jpg) else None
+    if c.get('thumb') and fetch(c['thumb'], jpg):
+        return jpg
+    if not c.get('thumb_mp4'):
+        return None
     mp4 = THUMBS / (c['ref'].replace(':', '_') + '.mp4')
     if not fetch(c['thumb_mp4'], mp4):
         return None

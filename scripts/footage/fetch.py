@@ -135,10 +135,15 @@ def chosen(src):
     """Fiche de téléchargement d'une vidéo choisie : « p:<id> » Pexels, « c:<id> » Coverr, « m:<id> » Mixkit."""
     kind, iid = src.split(':', 1)
     if kind == 'p':
-        idx = json.loads((ROOT / 'build' / 'reel' / 'pexels' / 'index.json').read_text())
-        v = idx.get(iid)
-        if not v:
-            return None
+        idx_path = ROOT / 'build' / 'reel' / 'pexels' / 'index.json'
+        v = (json.loads(idx_path.read_text()) if idx_path.exists() else {}).get(iid)
+        if not v:  # index absent (clone neuf) : on retrouve les fichiers directement
+            sys.path.insert(0, str(Path(__file__).parent))
+            from pexels import resolve
+            r = resolve(iid)
+            if not r:
+                return None
+            v = {'files': r['files'], 'page': f'https://www.pexels.com/video/{iid}/', 'slug': iid}
         # le plus grand fichier jusqu'au 4K (net en recadrage vertical)
         files = sorted(((int(k.split('x')[0]) * int(k.split('x')[1]), u) for k, u in v['files'].items()
                         if max(map(int, k.split('x'))) <= 4096))

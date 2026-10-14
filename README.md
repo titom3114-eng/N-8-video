@@ -40,22 +40,42 @@ liserées d'or, fumée, bokeh, profondeur de champ, grain argentique, cadre 2.39
 villes ; silence net, puis accord final sur le logo. Bruitages synchronisés : allumette, verre,
 glaçon, briquet, pas sur la pierre, chaîne de l'encensoir, braises, goutte.
 
-## « Nuits » en images réelles — prêt à lancer
+## « Nuits » en images réelles
 
-Même film, monté plus vite (120 BPM, une coupe toutes les 0,5 à 1,5 s, 52 plans) avec de vraies vidéos
-libres de droits, étalonnées or / noir / gris / blanc, grain et format cinéma, titres et logo par-dessus.
+Même film, monté plus vite (120 BPM, une coupe toutes les 0,5 à 2 s, 51 plans en 52 s, puis 8 s de finale)
+avec de vraies vidéos de nuit, étalonnées or / noir / gris / blanc, grain et format cinéma, titres et logo
+par-dessus : allumette dans le noir, tour Eiffel dorée, Arc de Triomphe, whisky versé, silhouette qui fume,
+saxophone, cigare dans la fumée ; Colisée illuminé, reflets de pluie, encensoir, citrons, cierges, buste
+antique, pont Saint-Ange ; ciel étoilé, lustre de la mosquée Sultan Qaboos, encensoir à oud, rose, goutte
+d'ambre, caravane de chameau, Dubaï ; puis Londres, Madrid, Berlin, Lisbonne, Amsterdam, Stockholm,
+Bucarest, Athènes en éclair.
 
-- Découpage plan par plan et mots-clés de recherche : `footage/edl.json`
-- Récupération des vidéos : `scripts/footage/fetch.py` (Pexels avec clé `PEXELS_API_KEY`, ou Mixkit sans clé)
+| Fichier | Format | Usage |
+|---|---|---|
+| `output/N8_Nuits-Reel_16x9.mp4` | 1920×1080, 30 i/s, cadre cinéma 2.39:1 | site, YouTube, présentation, écran boutique |
+| `output/N8_Nuits-Reel_9x16.mp4` | 1080×1920, 30 i/s | Instagram Reels, Stories, TikTok |
+| `output/apercu/N8_Nuits-Reel_*_apercu-720p.mp4` | 720p, < 30 Mo | envoi rapide, validation |
+
+**Droits** : uniquement des vidéos dont la licence autorise l'usage commercial et publicitaire sans
+attribution — Pexels License (47 plans) et Mixkit Stock Video Free License (4 plans). Aucune vidéo payante,
+générée par IA ou sous licence restreinte. Liste plan par plan avec liens : `footage/CREDITS.md`.
+Comme pour toute banque d'images, les marques ou monuments visibles ne sont pas « libérés » par la licence ;
+aucun logo de marque n'apparaît dans les plans retenus.
+
+- Découpage plan par plan : `footage/edl.json` — durée en temps, vidéo choisie (`"src"` : `p:<id>` Pexels,
+  `c:<id>` Coverr, `m:<id>` Mixkit), point d'entrée (`"in"`, en secondes), mouvement, étalonnage,
+  cadrage vertical (`"focus_v"`), notes olfactives affichées, cartes des villes.
+- Recherche et choix des vidéos : `scripts/footage/pexels.py` (fichiers Pexels sans clé d'API à partir
+  des identifiants listés dans `footage/pexels/*.json`), `scripts/footage/coverr_index.py`,
+  `scripts/footage/mixkit_index.py`, puis `scripts/footage/shortlist.py` (planches de vignettes par plan).
+- Téléchargement : `scripts/footage/fetch.py` (4K quand elle existe, pour un recadrage vertical net).
 - Calque des titres : `src/reel.html` / `src/reel.js`
 - Montage, étalonnage, recadrage 16:9 et 9:16 : `scripts/footage/assemble.py`
 - Musique 120 BPM et bruitages : `scripts/soundtrack_reel.py`
 - Tout d'un coup : `./scripts/build_reel.sh` → `output/N8_Nuits-Reel_16x9.mp4`, `output/N8_Nuits-Reel_9x16.mp4`
 
-Accès réseau nécessaire dans l'environnement : `mixkit.co` et `assets.mixkit.co` (sans clé),
-et/ou `api.pexels.com`, `videos.pexels.com`, `images.pexels.com` avec une clé gratuite Pexels
-dans la variable `PEXELS_API_KEY`. Vos propres images peuvent remplacer n'importe quel plan :
-`footage/override/<id>.mp4`. Les crédits des vidéos utilisées sont écrits dans `footage/CREDITS.md`.
+Accès réseau nécessaire : `videos.pexels.com` et `assets.mixkit.co`. Vos propres images peuvent remplacer
+n'importe quel plan : déposez `footage/override/<id>.mp4` (prioritaire sur la vidéo choisie).
 
 ## « La nuit » — première version
 
