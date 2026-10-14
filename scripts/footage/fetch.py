@@ -20,6 +20,7 @@ import re
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -28,6 +29,8 @@ ROOT = Path(__file__).resolve().parents[2]
 EDL = ROOT / 'footage' / 'edl.json'
 CLIPS = ROOT / 'footage' / 'clips'
 OVERRIDE = ROOT / 'footage' / 'override'
+HOSTS = {'pexels': ['https://api.pexels.com/', 'https://videos.pexels.com/'],
+         'mixkit': ['https://mixkit.co/', 'https://assets.mixkit.co/']}
 UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
 
 
@@ -35,6 +38,17 @@ def http(url, headers=None, timeout=60):
     req = urllib.request.Request(url, headers={'User-Agent': UA, **(headers or {})})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read()
+
+
+def reachable(url):
+    """Vrai si le serveur répond (même par une erreur HTTP) ; faux si le réseau ou le proxy refuse la connexion."""
+    try:
+        http(url, timeout=20)
+    except urllib.error.HTTPError:
+        pass
+    except OSError:
+        return False
+    return True
 
 
 def download(url, dst):
@@ -138,6 +152,13 @@ def main():
     if 'pexels' in providers and not key:
         providers = [p for p in providers if p != 'pexels']
         print('PEXELS_API_KEY absente : Pexels ignoré.')
+    blocked = []
+    for p in list(providers):
+        down = [urllib.parse.urlsplit(u).netloc for u in HOSTS[p] if not reachable(u)]
+        if down:
+            providers.remove(p)
+            blocked += down
+            print(f"{p} injoignable depuis cet environnement ({', '.join(down)}) : source ignorée.")
     only = set(filter(None, args.only.split(','))) | set(filter(None, args.redo.split(',')))
     redo = set(filter(None, args.redo.split(',')))
     used = set()
@@ -160,6 +181,9 @@ def main():
             print(f'{sid}: vos images (footage/override) seront utilisées')
             continue
         if dst.exists() and sid not in redo:
+            continue
+        if not providers:
+            failures.append(sid)
             continue
         need = sh['beats'] * 60 / bpm / sh.get('speed', 1.0) + 0.6
         got = None
@@ -207,6 +231,10 @@ def main():
     write_credits(edl)
     if failures:
         print('Plans sans vidéo :', ', '.join(failures))
+        if not providers:
+            print('Aucune banque de vidéos accessible. Autorisez ces domaines dans l\'accès réseau de l\'environnement'
+                  f" (Allowed domains) : {', '.join(blocked) or 'mixkit.co, assets.mixkit.co'}"
+                  ' — ou déposez vos images dans footage/override/<id>.mp4.')
         sys.exit(1)
 
 
