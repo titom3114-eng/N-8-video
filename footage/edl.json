@@ -7,18 +7,18 @@
   "map": [
    [
     0,
-    34
+    36
    ],
    [
-    8,
+    6,
     42
    ],
    [
-    52,
-    102
+    42,
+    106
    ],
    [
-    78,
+    64,
     128
    ]
   ],
@@ -35,9 +35,9 @@
    "shots": [
     {
      "id": "i01",
-     "beats": 2.5,
+     "beats": 2,
      "src": "p:6769792",
-     "in": 0.4,
+     "in": 0.6,
      "move": "push",
      "focus_v": [
       0.42,
@@ -46,13 +46,13 @@
      "sfx": [
       {
        "n": "match",
-       "at": 0.75
+       "at": 0.45
       }
      ]
     },
     {
      "id": "i02",
-     "beats": 1.5,
+     "beats": 1,
      "src": "p:8226144",
      "in": 6.3,
      "move": "push",
@@ -63,14 +63,13 @@
      "sfx": [
       {
        "n": "crackle",
-       "at": 0.1
+       "at": 0.0
       }
      ]
     },
     {
      "id": "i04",
      "beats": 1,
-     "use": "p06",
      "in": 15.0,
      "phrase": "Chaque nuit a son parfum.",
      "sfx": [
@@ -79,11 +78,12 @@
        "at": 0.0,
        "db": 2
       }
-     ]
+     ],
+     "src": "p:5197737"
     },
     {
      "id": "i03",
-     "beats": 3,
+     "beats": 2,
      "src": "p:9694807",
      "in": 10,
      "grade": "mono",
@@ -102,7 +102,7 @@
    "shots": [
     {
      "id": "p01",
-     "beats": 2,
+     "beats": 1.5,
      "src": "p:3521396",
      "in": 3,
      "move": "push",
@@ -119,7 +119,7 @@
         4
        ]
       },
-      "beats": 4
+      "beats": 5
      },
      "sfx": [
       "hit"
@@ -145,8 +145,23 @@
      "vf": "eq=gamma=1.2"
     },
     {
+     "id": "px3",
+     "beats": 1,
+     "src": "p:8995575",
+     "in": 3.0,
+     "focus_v": [
+      0.62,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "bar"
+      }
+     ]
+    },
+    {
      "id": "p10",
-     "beats": 2,
+     "beats": 0.5,
      "src": "p:11792115",
      "in": 5.5,
      "move": "push",
@@ -162,35 +177,22 @@
      ]
     },
     {
-     "id": "px3",
+     "id": "pt1",
      "beats": 1.5,
-     "src": "p:8995575",
+     "src": "pp:27793718",
+     "move": "push",
+     "focus": [
+      0.45,
+      0.5
+     ],
      "focus_v": [
-      0.62,
+      0.6,
       0.5
      ],
      "sfx": [
       {
-       "n": "bar"
-      }
-     ],
-     "in": 3.0
-    },
-    {
-     "id": "p03",
-     "beats": 1,
-     "src": "p:7265901",
-     "in": 5.4,
-     "move": "right",
-     "focus_v": [
-      0.55,
-      0.5
-     ],
-     "sfx": [
-      {
-       "n": "glass",
-       "at": 0.25,
-       "db": -4
+       "n": "inhale",
+       "at": 0.0
       }
      ]
     },
@@ -209,7 +211,7 @@
     },
     {
      "id": "p15",
-     "beats": 2,
+     "beats": 1,
      "src": "p:19212503",
      "in": 8,
      "move": "push",
@@ -226,7 +228,7 @@
     },
     {
      "id": "p05",
-     "beats": 2,
+     "beats": 1,
      "src": "p:5544553",
      "in": 15.2,
      "move": "push",
@@ -237,38 +239,33 @@
      "sfx": [
       {
        "n": "exhale",
-       "at": 0.45
+       "at": 0.15
       }
      ]
     },
     {
      "id": "px1",
-     "beats": 1,
-     "src": "p:6533032",
-     "sfx": [
-      {
-       "n": "ash",
-       "at": 0.1
-      }
-     ],
-     "in": 4.0
-    },
-    {
-     "id": "p06",
      "beats": 0.5,
-     "src": "p:5197737",
-     "move": "push",
+     "src": "p:6533032",
+     "in": 4.0,
      "sfx": [
       {
        "n": "ash",
-       "at": 0.0,
-       "db": -3
+       "at": 0.05
       }
      ]
     },
     {
+     "id": "p11",
+     "beats": 0.5,
+     "src": "p:9694810",
+     "in": 20,
+     "move": "push",
+     "vf": "eq=gamma=1.15"
+    },
+    {
      "id": "p04",
-     "beats": 2.5,
+     "beats": 1,
      "src": "p:6769786",
      "in": 30,
      "move": "push",
@@ -284,8 +281,43 @@
      ]
     },
     {
-     "id": "p08",
+     "id": "pc2",
      "beats": 1,
+     "src": "p:10823241",
+     "sfx": [
+      {
+       "n": "glass",
+       "at": 0.2,
+       "db": -6
+      }
+     ],
+     "in": 2.0
+    },
+    {
+     "id": "pn1",
+     "beats": 1.5,
+     "src": "pp:15776250",
+     "move": "push",
+     "focus": [
+      0.62,
+      0.45
+     ],
+     "focus_v": [
+      0.66,
+      0.45
+     ],
+     "grade": "gold",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "inhale",
+       "at": 0.1
+      }
+     ]
+    },
+    {
+     "id": "p08",
+     "beats": 0.5,
      "src": "p:7255095",
      "in": 2,
      "move": "push",
@@ -296,35 +328,38 @@
      "sfx": [
       {
        "n": "glass",
-       "at": 0.3
+       "at": 0.1
       }
      ]
     },
     {
-     "id": "px2",
+     "id": "p03",
      "beats": 1,
-     "src": "p:9418692",
+     "src": "p:7265901",
+     "in": 5.4,
+     "move": "right",
      "focus_v": [
-      0.45,
-      0.5
-     ],
-     "in": 8.0
-    },
-    {
-     "id": "p14",
-     "beats": 1.5,
-     "src": "p:4691257",
-     "in": 3.8,
-     "move": "none",
-     "focus_v": [
-      0.35,
+      0.55,
       0.5
      ],
      "sfx": [
       {
        "n": "ice",
        "at": 0.2,
-       "db": -6
+       "db": -4
+      }
+     ]
+    },
+    {
+     "id": "pl1",
+     "beats": 1,
+     "src": "pp:6045051",
+     "move": "push",
+     "sfx": [
+      {
+       "n": "swoosh",
+       "at": 0.0,
+       "db": -8
       }
      ]
     },
@@ -335,39 +370,25 @@
      "move": "left"
     },
     {
-     "id": "p07",
-     "beats": 1,
-     "src": "p:7586604",
-     "in": 10.8,
-     "move": "right",
-     "grade": "gold",
+     "id": "px2",
+     "beats": 0.5,
+     "src": "p:9418692",
+     "in": 8.0,
      "focus_v": [
-      0.55,
+      0.45,
       0.5
-     ],
-     "vf": "eq=gamma=1.35:brightness=0.02"
-    },
-    {
-     "id": "p11",
-     "beats": 1,
-     "src": "p:9694810",
-     "in": 20,
-     "move": "push",
-     "vf": "eq=gamma=1.15",
-     "sfx": [
-      {
-       "n": "swoosh",
-       "at": 0.0
-      }
      ]
     },
     {
-     "id": "p16",
+     "id": "p14",
      "beats": 1,
-     "use": "p01",
-     "src": "p:3521396",
-     "in": 12.0,
-     "move": "push"
+     "src": "p:4691257",
+     "in": 3.8,
+     "move": "none",
+     "focus_v": [
+      0.35,
+      0.5
+     ]
     }
    ]
   },
@@ -376,7 +397,7 @@
    "shots": [
     {
      "id": "r01",
-     "beats": 2.5,
+     "beats": 1.5,
      "src": "p:4840456",
      "in": 2,
      "move": "push",
@@ -398,7 +419,7 @@
         4
        ]
       },
-      "beats": 4
+      "beats": 5
      },
      "sfx": [
       "hit",
@@ -422,7 +443,7 @@
     },
     {
      "id": "r09",
-     "beats": 1.5,
+     "beats": 1,
      "src": "p:13118329",
      "in": 3.5,
      "move": "left"
@@ -431,46 +452,41 @@
      "id": "rx3",
      "beats": 1,
      "src": "p:10395311",
+     "in": 4.0,
      "sfx": [
       {
        "n": "drops",
        "at": 0.0,
        "db": -6
       }
-     ],
-     "in": 4.0
+     ]
     },
     {
      "id": "r02",
-     "beats": 1,
+     "beats": 0.5,
      "src": "p:13689954",
      "in": 4,
      "move": "left"
     },
     {
-     "id": "rx2",
+     "id": "rl1",
      "beats": 1,
-     "src": "p:9468768",
+     "src": "p:7568880",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
      "sfx": [
       {
-       "n": "drops",
-       "at": 0.0
+       "n": "inhale",
+       "at": 0.0,
+       "db": -3
       }
      ],
-     "in": 6.0,
-     "vf": "curves=all='0/0 0.5/0.33 1/0.8'"
-    },
-    {
-     "id": "r08",
-     "beats": 1,
-     "src": "p:4323328",
-     "move": "none",
-     "in": 20.0
+     "in": 2.0
     },
     {
      "id": "rx1",
-     "beats": 1.5,
+     "beats": 1,
      "src": "p:10628377",
+     "in": 2.0,
      "focus_v": [
       0.42,
       0.5
@@ -480,12 +496,11 @@
        "n": "choir",
        "end": true
       }
-     ],
-     "in": 2.0
+     ]
     },
     {
      "id": "r04",
-     "beats": 1.5,
+     "beats": 1,
      "src": "p:10628779",
      "in": 14,
      "move": "push",
@@ -497,14 +512,14 @@
      "sfx": [
       {
        "n": "swoosh",
-       "at": 0.2,
+       "at": 0.1,
        "db": -4
       }
      ]
     },
     {
      "id": "r10",
-     "beats": 1,
+     "beats": 0.5,
      "src": "p:6894947",
      "in": 3,
      "move": "push",
@@ -512,7 +527,7 @@
     },
     {
      "id": "r06",
-     "beats": 1,
+     "beats": 0.5,
      "src": "p:1543735",
      "in": 5,
      "move": "push",
@@ -546,6 +561,44 @@
      ]
     },
     {
+     "id": "ra1",
+     "beats": 1,
+     "src": "pp:2592576",
+     "move": "push",
+     "focus": [
+      0.5,
+      0.62
+     ],
+     "focus_v": [
+      0.5,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "inhale",
+       "at": 0.0
+      }
+     ]
+    },
+    {
+     "id": "ra2",
+     "beats": 1,
+     "src": "p:9020874",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "squeeze",
+       "at": 0.15
+      }
+     ],
+     "in": 9.0
+    },
+    {
+     "id": "ra3",
+     "beats": 0.5,
+     "src": "p:3752503"
+    },
+    {
      "id": "r05",
      "beats": 1,
      "src": "p:2583472",
@@ -559,16 +612,49 @@
      ]
     },
     {
-     "id": "r05b",
+     "id": "ra4",
      "beats": 0.5,
-     "use": "r05",
+     "src": "p:7686982",
+     "sfx": [
+      {
+       "n": "splash",
+       "at": 0.05,
+       "db": -6
+      }
+     ],
+     "in": 3.5
+    },
+    {
+     "id": "r05b",
+     "beats": 1,
      "src": "p:2583472",
+     "use": "r05",
      "in": 5.5,
      "move": "right"
     },
     {
-     "id": "r03",
+     "id": "rx2",
      "beats": 1,
+     "src": "p:9468768",
+     "in": 6.0,
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "drops",
+       "at": 0.0
+      }
+     ]
+    },
+    {
+     "id": "r08",
+     "beats": 0.5,
+     "src": "p:4323328",
+     "in": 20.0,
+     "move": "none"
+    },
+    {
+     "id": "r03",
+     "beats": 0.5,
      "src": "p:856062",
      "in": 3,
      "move": "push",
@@ -580,7 +666,7 @@
     },
     {
      "id": "r12",
-     "beats": 2.5,
+     "beats": 1,
      "src": "m:22715",
      "in": 2,
      "move": "push",
@@ -593,7 +679,7 @@
    "shots": [
     {
      "id": "o01",
-     "beats": 2.5,
+     "beats": 1.5,
      "src": "p:857136",
      "in": 13.5,
      "move": "push",
@@ -602,7 +688,7 @@
       "name": "OMAN",
       "coords": "MASCATE  ·  23°35′ N  ·  58°23′ E",
       "arabic": "ليل",
-      "beats": 4
+      "beats": 5
      },
      "sfx": [
       "hit"
@@ -610,7 +696,7 @@
     },
     {
      "id": "o02",
-     "beats": 1.5,
+     "beats": 1,
      "src": "p:9308037",
      "in": 1.5,
      "move": "push",
@@ -631,8 +717,64 @@
      "vf": "eq=gamma=1.35:brightness=0.02"
     },
     {
+     "id": "o08",
+     "beats": 1,
+     "src": "p:12119036",
+     "in": 8,
+     "move": "left",
+     "sfx": [
+      {
+       "n": "gust",
+       "at": 0.1
+      }
+     ]
+    },
+    {
+     "id": "o12",
+     "beats": 0.5,
+     "src": "m:4149",
+     "in": 4,
+     "move": "left",
+     "vf": "curves=all='0/0 0.45/0.16 1/0.55',colorbalance=bs=0.04:bm=0.02",
+     "sfx": [
+      {
+       "n": "sand",
+       "at": 0.05
+      }
+     ]
+    },
+    {
+     "id": "oc1",
+     "beats": 1,
+     "src": "p:4310188",
+     "sfx": [
+      {
+       "n": "coals"
+      }
+     ],
+     "in": 5.0
+    },
+    {
+     "id": "ow1",
+     "beats": 1.5,
+     "src": "p:6448156",
+     "sfx": [
+      {
+       "n": "inhale",
+       "at": 0.2
+      },
+      {
+       "n": "swoosh",
+       "at": 0.5,
+       "db": -8
+      }
+     ],
+     "in": 0.8,
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'"
+    },
+    {
      "id": "o03",
-     "beats": 2,
+     "beats": 1,
      "src": "p:17928486",
      "in": 6,
      "move": "push",
@@ -643,18 +785,15 @@
      "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
      "sfx": [
       {
-       "n": "coals"
-      },
-      {
        "n": "swoosh",
-       "at": 0.6,
+       "at": 0.3,
        "db": -6
       }
      ]
     },
     {
      "id": "o04",
-     "beats": 1,
+     "beats": 0.5,
      "src": "p:8319108",
      "in": 2,
      "move": "push",
@@ -673,26 +812,43 @@
      "src": "p:5155376",
      "in": 3,
      "move": "none",
+     "vf": "eq=gamma=1.25,curves=all='0/0 0.12/0.02 1/1'",
      "sfx": [
       {
        "n": "coals",
        "db": 2
       }
+     ]
+    },
+    {
+     "id": "os1",
+     "beats": 1.5,
+     "src": "p:8091551",
+     "sfx": [
+      {
+       "n": "inhale",
+       "at": 0.15
+      }
      ],
-     "vf": "eq=gamma=1.25,curves=all='0/0 0.12/0.02 1/1'"
+     "in": 3.6,
+     "vf": "curves=all='0/0 0.5/0.25 1/0.7'"
+    },
+    {
+     "id": "o05",
+     "beats": 0.5,
+     "src": "p:7809631",
+     "in": 3,
+     "move": "none",
+     "focus_v": [
+      0.35,
+      0.5
+     ]
     },
     {
      "id": "ox1",
-     "beats": 1.5,
+     "beats": 1,
      "src": "p:6637443",
-     "sfx": [
-      {
-       "n": "fire",
-       "at": 0.1
-      }
-     ],
      "in": 1.6,
-     "zoom": 1.7,
      "focus": [
       0.5,
       0.3
@@ -700,29 +856,25 @@
      "focus_v": [
       0.5,
       0.3
-     ]
-    },
-    {
-     "id": "o05",
-     "beats": 1,
-     "src": "p:7809631",
-     "in": 3,
-     "move": "none",
-     "focus_v": [
-      0.35,
-      0.5
      ],
+     "zoom": 1.7,
      "sfx": [
       {
-       "n": "gust",
-       "at": 0.0,
-       "db": -8
+       "n": "fire",
+       "at": 0.05
       }
      ]
     },
     {
+     "id": "op1",
+     "beats": 1,
+     "src": "p:15358364",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "in": 4.5
+    },
+    {
      "id": "o07",
-     "beats": 2,
+     "beats": 1,
      "src": "p:4132712",
      "in": 7,
      "move": "push",
@@ -733,9 +885,16 @@
      "sfx": [
       {
        "n": "drop",
-       "at": 0.75
+       "at": 0.45
       }
      ]
+    },
+    {
+     "id": "oh1",
+     "beats": 1,
+     "src": "p:7281326",
+     "in": 3.0,
+     "vf": "curves=all='0/0 0.5/0.25 1/0.7'"
     },
     {
      "id": "o09",
@@ -755,54 +914,27 @@
      ]
     },
     {
-     "id": "o08",
-     "beats": 2,
-     "src": "p:12119036",
-     "in": 8,
-     "move": "left",
-     "sfx": [
-      {
-       "n": "gust",
-       "at": 0.1
-      }
-     ]
-    },
-    {
-     "id": "o12",
-     "beats": 1,
-     "src": "m:4149",
-     "in": 4,
-     "move": "left",
-     "vf": "curves=all='0/0 0.45/0.16 1/0.55',colorbalance=bs=0.04:bm=0.02",
-     "sfx": [
-      {
-       "n": "sand",
-       "at": 0.1
-      }
-     ]
-    },
-    {
-     "id": "o10",
-     "beats": 1.5,
-     "src": "p:11284796",
-     "in": 1,
-     "move": "right",
-     "sfx": [
-      {
-       "n": "rumble",
-       "at": 0.0
-      }
-     ]
-    },
-    {
      "id": "o13",
-     "beats": 1.5,
+     "beats": 0.5,
      "src": "p:5561389",
      "in": 5,
      "move": "push",
      "sfx": [
       {
        "n": "glitter",
+       "at": 0.0
+      }
+     ]
+    },
+    {
+     "id": "o10",
+     "beats": 1,
+     "src": "p:11284796",
+     "in": 1,
+     "move": "right",
+     "sfx": [
+      {
+       "n": "rumble",
        "at": 0.0
       }
      ]
@@ -814,7 +946,7 @@
    "shots": [
     {
      "id": "v01",
-     "beats": 0.75,
+     "beats": 0.5,
      "src": "p:5823377",
      "in": 5,
      "city": "LONDON",
@@ -825,29 +957,29 @@
     },
     {
      "id": "v02",
-     "beats": 0.75,
+     "beats": 0.5,
      "src": "pp:22922098",
-     "city": "MADRID",
-     "word": "noche",
-     "sfx": [
-      "whoosh"
-     ],
-     "zoom": 1.45,
+     "in": 0.5,
+     "move": "push",
      "focus": [
       1.0,
       0.2
      ],
-     "zoom_v": 1.15,
      "focus_v": [
       0.68,
       0.3
      ],
-     "move": "push",
-     "in": 0.5
+     "zoom": 1.45,
+     "zoom_v": 1.15,
+     "city": "MADRID",
+     "word": "noche",
+     "sfx": [
+      "whoosh"
+     ]
     },
     {
      "id": "v03",
-     "beats": 0.75,
+     "beats": 0.5,
      "src": "p:18999814",
      "city": "BERLIN",
      "word": "Nacht",
@@ -857,7 +989,7 @@
     },
     {
      "id": "v04",
-     "beats": 0.75,
+     "beats": 0.5,
      "src": "p:12564020",
      "city": "LISBOA",
      "word": "noite",
@@ -867,7 +999,7 @@
     },
     {
      "id": "v05",
-     "beats": 0.75,
+     "beats": 0.5,
      "src": "p:12653059",
      "city": "AMSTERDAM",
      "word": "nacht",
@@ -877,7 +1009,7 @@
     },
     {
      "id": "v06",
-     "beats": 0.75,
+     "beats": 0.5,
      "src": "p:852395",
      "in": 40,
      "city": "STOCKHOLM",
@@ -888,7 +1020,7 @@
     },
     {
      "id": "v07",
-     "beats": 0.75,
+     "beats": 0.5,
      "src": "p:3175515",
      "in": 30,
      "city": "BUCUREȘTI",
@@ -899,7 +1031,7 @@
     },
     {
      "id": "v08",
-     "beats": 0.75,
+     "beats": 0.5,
      "src": "p:15171884",
      "in": 20,
      "vf": "curves=all='0/0 0.45/0.16 1/0.55',colorbalance=bs=0.04:bm=0.02",

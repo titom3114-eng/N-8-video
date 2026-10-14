@@ -1,0 +1,302 @@
+[
+{
+"shot": "tabac1",
+"id": "6973187",
+"slug": "close-up-view-of-person-lighting-up-a-cigar",
+"note": "FALLBACK: no tobacco-leaf video found; cigar tobacco close-up"
+},
+{
+"shot": "tabac1",
+"id": "19212503",
+"slug": "a-man-smoking-a-cigar-in-the-dark",
+"note": "FALLBACK: hand with cigar, low light, 16:9"
+},
+{
+"shot": "tabac1",
+"id": "6654033",
+"slug": "close-up-video-of-a-cutting-leather",
+"note": "FALLBACK texture idea only; brown material cut by hands"
+},
+{
+"shot": "tabac2",
+"id": "6973187",
+"slug": "close-up-view-of-person-lighting-up-a-cigar",
+"note": "lighter igniting cigar, close-up; darkness unconfirmed"
+},
+{
+"shot": "tabac2",
+"id": "19212503",
+"slug": "a-man-smoking-a-cigar-in-the-dark",
+"note": "dark, hand holding lit cigar, 1080p 29s"
+},
+{
+"shot": "tabac2",
+"id": "5409492",
+"slug": "man-lighting-cigarette-in-a-dark-room",
+"note": "dark room flame; cigarette not cigar"
+},
+{
+"shot": "tabac2",
+"id": "8226144",
+"slug": "a-man-lighting-a-cigarette",
+"note": "low light flame; cigarette; face visible"
+},
+{
+"shot": "tabac2",
+"id": "13686563",
+"slug": "close-up-view-of-a-woman-lighting-a-cigarette-with-a-match",
+"note": "match flame close-up; cigarette, woman"
+},
+{
+"shot": "tabac3",
+"id": "19212503",
+"slug": "a-man-smoking-a-cigar-in-the-dark",
+"note": "best: lit cigar smoke in low light, horizontal"
+},
+{
+"shot": "tabac3",
+"id": "1721313",
+"slug": "cigarette-burning",
+"note": "macro burning ember and ash in ashtray; cigarette"
+},
+{
+"shot": "tabac3",
+"id": "6533032",
+"slug": "close-up-video-of-burning-cigarette",
+"note": "close-up ember/ash, 15s 1080p; cigarette"
+},
+{
+"shot": "tabac3",
+"id": "5544553",
+"slug": "silhouette-of-a-man-smoking",
+"note": "silhouette exhaling smoke at night, profile"
+},
+{
+"shot": "tabac3",
+"id": "7740162",
+"slug": "man-smoking-a-cigarette",
+"note": "B&W, exhaling smoke in darkness; cigarette"
+},
+{
+"shot": "tabac3",
+"id": "5320209",
+"slug": "man-smoking-a-cigarette-in-the-dark",
+"note": "dark, dimly lit; cigarette; inked man"
+},
+{
+"shot": "tabac3",
+"id": "7192622",
+"slug": "smoke-from-a-burning-incense-stick",
+"note": "smoke curling close-up; incense, usable as smoke insert"
+},
+{
+"shot": "tabac3",
+"id": "5949221",
+"slug": "embers-of-a-burning-fire-woods",
+"note": "glowing ember macro; wood fire, not cigar"
+},
+{
+"shot": "cognac1",
+"id": "11590175",
+"slug": "pouring-alcohol-into-glass",
+"note": "slow motion whiskey pour close-up, amber"
+},
+{
+"shot": "cognac1",
+"id": "34292842",
+"slug": "pouring-whiskey-in-glass-with-elegant-bokeh",
+"note": "dark moody pour, bokeh background"
+},
+{
+"shot": "cognac1",
+"id": "4457027",
+"slug": "a-person-pouring-a-drink-into-a-glass",
+"note": "dark background, ice; vertical 1080x1920"
+},
+{
+"shot": "cognac1",
+"id": "13610011",
+"slug": "pouring-whiskey-into-glass",
+"note": "close-up pour, rich amber; darkness unconfirmed"
+},
+{
+"shot": "cognac1",
+"id": "5928847",
+"slug": "person-pouring-whiskey",
+"note": "pouring whiskey; lighting unconfirmed"
+},
+{
+"shot": "cognac1",
+"id": "5921006",
+"slug": "a-person-pouring-whiskey-on-a-glass-while-throwing-money",
+"note": "dark moody pour; money in frame, check"
+},
+{
+"shot": "cognac1",
+"id": "10317805",
+"slug": "a-person-pouring-whiskey-on-a-drinking-glass-with-ice-cubes",
+"note": "pour over ice cubes; lighting unconfirmed"
+},
+{
+"shot": "cognac2",
+"id": "7255223",
+"slug": "close-up-of-a-glass-of-whiskey",
+"note": "best: amber whiskey swirling close-up (Eva Bronzini)"
+},
+{
+"shot": "cognac2",
+"id": "6270171",
+"slug": "close-up-video-of-a-whiskey-in-the-glass",
+"note": "amber swirling in vintage glass, close-up"
+},
+{
+"shot": "cognac2",
+"id": "7255095",
+"slug": "glass-with-liquor-rolling-back-and-forth",
+"note": "liquor rocking in glass, amber motion"
+},
+{
+"shot": "cognac2",
+"id": "7255133",
+"slug": "glass-of-wiskey",
+"note": "static glass on textured surface"
+},
+{
+"shot": "cognac2",
+"id": "8945910",
+"slug": "a-person-stirring-whiskey-on-the-rocks",
+"note": "stirring whiskey with ice, hands"
+},
+{
+"shot": "cognac2",
+"id": "10823241",
+"slug": "close-up-view-of-stirring-drink",
+"note": "spoon stirring amber drink close-up"
+},
+{
+"shot": "cognac2",
+"id": "7254961",
+"slug": "close-up-video-of-a-bottle-of-alcohol",
+"note": "bottle close-up; check for labels"
+},
+{
+"shot": "cognac3",
+"id": "8764593",
+"slug": "a-man-tasting-and-smelling-a-red-wine",
+"note": "BEST nosing gesture; red wine, indoors, tagged smelling"
+},
+{
+"shot": "cognac3",
+"id": "8764787",
+"slug": "man-swirling-a-glass-of-wine",
+"note": "sommelier swirling before nosing, 4K 16:9, 12s"
+},
+{
+"shot": "cognac3",
+"id": "8945911",
+"slug": "a-man-drinking-whiskey",
+"note": "man savoring whiskey; vertical 4K 20s"
+},
+{
+"shot": "cognac3",
+"id": "9208704",
+"slug": "man-drinking-whiskey",
+"note": "moody retro bar, man with whiskey"
+},
+{
+"shot": "cognac3",
+"id": "7944546",
+"slug": "a-man-drinking-liquor",
+"note": "dim, contemplative, cognac-tagged; drinking not smelling"
+},
+{
+"shot": "cognac3",
+"id": "4691257",
+"slug": "a-man-holding-a-glass-of-whiskey-at-a-bar",
+"note": "hand holding whiskey at bar, atmospheric"
+},
+{
+"shot": "cognac3",
+"id": "5095331",
+"slug": "man-drinking-from-a-glass",
+"note": "shadowy indoor, man drinking from glass"
+},
+{
+"shot": "cuir1",
+"id": "6654033",
+"slug": "close-up-video-of-a-cutting-leather",
+"note": "hands cutting leather close-up, workshop (cottonbro)"
+},
+{
+"shot": "cuir1",
+"id": "6847107",
+"slug": "man-in-a-brown-leather-jacket-walking",
+"note": "wide shot, desert; bright/day; weak fit"
+},
+{
+"shot": "cuir1",
+"id": "8155689",
+"slug": "close-up-of-a-person-putting-on-gloves",
+"note": "putting on gloves close-up; white gloves, not leather"
+},
+{
+"shot": "sentir",
+"id": "6290473",
+"slug": "man-deep-breathing-while-meditating",
+"note": "eyes-closed deep breath indoors, 4K 12s; lighting unconfirmed"
+},
+{
+"shot": "sentir",
+"id": "5832683",
+"slug": "a-person-blowing-smoke",
+"note": "B&W slow-mo, eyes closed, breathing; vertical"
+},
+{
+"shot": "sentir",
+"id": "13375816",
+"slug": "man-silhouette-in-darkness",
+"note": "dark silhouette on black background"
+},
+{
+"shot": "sentir",
+"id": "5544553",
+"slug": "silhouette-of-a-man-smoking",
+"note": "night silhouette profile exhaling; cigarette"
+},
+{
+"shot": "sentir",
+"id": "8165639",
+"slug": "a-sad-man-deep-breathing",
+"note": "man deep breathing; mood/lighting unconfirmed"
+},
+{
+"shot": "sentir",
+"id": "5309653",
+"slug": "a-man-opening-his-eyes",
+"note": "closed eyes opening; face toward camera likely"
+},
+{
+"shot": "sentir",
+"id": "8179973",
+"slug": "a-man-praying-with-eyes-closed",
+"note": "eyes closed, contemplative; check lighting"
+},
+{
+"shot": "sentir",
+"id": "13925714",
+"slug": "a-man-doing-inhale-exhale",
+"note": "inhale/exhale, eyes closed; outdoors, bright/day"
+},
+{
+"shot": "sentir",
+"id": "7673610",
+"slug": "a-man-breathing-heavily",
+"note": "heavy breathing; may read as exertion"
+},
+{
+"shot": "sentir",
+"id": "1705055",
+"slug": "man-doing-an-ad-of-a-perfume",
+"note": "man in suit with perfume; well-lit, bright"
+}
+]

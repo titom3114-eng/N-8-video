@@ -39,6 +39,7 @@ FX = {
     'exhale':  [dict(f=2661, db=-8, len=1.0, onset=True, lp=2600, rev=0.3), dict(f=1458, db=-15, len=1.0, onset=True, delay=0.05)],
     # inspiration (on « sent ») : montée lente, coupure nette, un peu plus grave
     'inhale':  [dict(f=2237, db=-9, start=0.08, len=0.5, rate=0.86, lp=7000, rev=0.3)],
+    'squeeze': [dict(f=3215, db=-6, len=1.2, onset=True, rev=0.2)],
     'steps':   [dict(f=1270, db=-11, len='dur', start=2.0, rev=0.3)],
     'glass':   [dict(f=2936, db=-7, len=1.4, onset=True, rev=0.3)],
     'pour':    [dict(f=142, db=-4, len='dur', onset=True, rev=0.2)],
@@ -74,7 +75,7 @@ BEDS = {
 }
 BAR = dict(f=444, db=-27, start=30.0, lp=2400)        # rumeur du bar, à partir du plan marqué "bar"
 ROOMS = {'intro': (2.6, 2.0), 'paris': (1.1, 0.8), 'roma': (3.2, 2.0), 'oman': (2.2, 1.4), 'villes': (1.4, 1.0), 'finale': (4.0, 2.4)}
-REF = -9.0           # niveau (dBFS, fenêtre la plus forte de 0,3 s) d'un bruitage à 0 dB
+REF = -10.5          # niveau (dBFS, fenêtre la plus forte de 0,3 s) d'un bruitage à 0 dB
 MUSIC_RMS = -21.0    # niveau moyen de la musique sur la partie rythmée
 STEMS = ROOT / 'build' / 'reel' / 'stems' if '--stems' in sys.argv else None
 

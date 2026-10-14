@@ -42,25 +42,29 @@ glaçon, briquet, pas sur la pierre, chaîne de l'encensoir, braises, goutte.
 
 ## « Nuits » en images réelles
 
-Le film principal en vraies vidéos de nuit : 62 plans en 63 s, coupés sur le tempo de la musique
-(85,3 BPM : plans d'un demi-temps à deux temps, soit 0,35 à 1,8 s), étalonnés or / noir / gris / blanc,
-grain et format cinéma. Aucun ingrédient n'est écrit : les odeurs passent par des gestes en gros plan et leur son.
+Le film principal en vraies vidéos de nuit : 73 plans en 53 s, coupés sur le tempo de la musique
+(85,3 BPM : surtout des demi-temps de 0,35 s, quelques plans d'un temps et demi), étalonnés or / noir / gris /
+blanc, grain et format cinéma. Aucun ingrédient n'est écrit : chaque ville déroule trois matières, chacune avec
+un plan « héros » un peu plus long et, quand c'est possible, le geste de sentir, souligné par une inspiration.
+La carte de chaque ville (*N + huit → nuit*) reste 3,5 s, le temps de lire le jeu de lettres.
 
 - **Ouverture** — une allumette craque dans le noir, une braise, *« Chaque nuit a son parfum. »*
-- **Paris** — tour Eiffel dorée, Arc de Triomphe, un homme dans le brouillard ; dans le bar : saxophone,
-  verre posé, briquet, cigare, fumée soufflée en contre-jour, cendre, braises, cognac versé, glaçon, cuir.
-- **Rome** — Colisée, pont Saint-Ange, réverbère sous la pluie, pavés mouillés, encensoir et chœur,
-  cierges, buste antique et cloche, citrons qui plongent, fontaine dorée, coupole.
-- **Oman** — ciel étoilé, lustre de la mosquée Sultan Qaboos, encensoir à oud, braises, rose en flammes,
-  goutte d'ambre, bijoux d'or, chameau au crépuscule, dunes, Dubaï, poussière d'or.
-- **Les capitales** en éclair (London *night*, Madrid *noche*, Berlin *Nacht*…), puis le logo doré.
+- **Paris** — tour Eiffel, Arc de Triomphe, le bar. *Tabac* : feuilles dorées, briquet, cigare, fumée soufflée,
+  cendre. *Cognac* : versé, tourné dans le verre, humé les yeux fermés. *Cuir* : capitonné noir, saxophone.
+- **Rome** — Colisée, pont Saint-Ange, pluie. *Encens* : rayons dans l'église, encensoir, chœur, cierges, cloche.
+  *Agrumes* : écorce en spirale, orange pressée, citrons qui plongent. *Pierre mouillée* : pluie sur le pavé, fontaine.
+- **Oman** — ciel étoilé, lustre de la mosquée Sultan Qaboos, mosquée, chameau, dunes. *Oud* : copeaux qui
+  brûlent, bois fumant tenu à la main, encensoir, braises. *Rose* : silhouette qui respire une fleur, rose en
+  flammes, coupe de pétales. *Ambre* : goutte d'huile, miel, or.
+- **Les capitales** en éclair (London *night*, Madrid *noche*, Berlin *Nacht*…), puis le logo doré et
+  *« Dans toutes les langues, la nuit s'écrit N+8. »*
 
 **Son** : musique « Disturbing Night » (Coverr) montée sur la grille du film — raccords sur les mesures,
 passage dans sa partie calme à l'arrivée du logo ; ambiances réelles par lieu (rue de Paris puis rumeur du bar,
 pluie et cloches de Rome, vent du désert et grillons à Oman) ; bruitages réels synchronisés plan par plan
-(allumette, molette du briquet, braise et cendre, souffle, verre, versement, glaçon, gouttes, chœur, cloche,
-plongeon des citrons, eau, braises, flamme, goutte, vent et sable) ; impacts graves aux entrées de ville ;
-réverbération propre à chaque lieu ; la musique s'efface légèrement sous chaque bruitage.
+(allumette, molette du briquet, braise et cendre, souffle, inspiration, verre, versement, glaçon, gouttes, chœur,
+cloche, jus d'orange pressé, plongeon des citrons, eau, braises, flamme, goutte, vent et sable) ; impacts graves
+aux entrées de ville ; réverbération propre à chaque lieu ; la musique s'efface légèrement sous chaque bruitage.
 
 | Fichier | Format | Usage |
 |---|---|---|
@@ -68,7 +72,7 @@ réverbération propre à chaque lieu ; la musique s'efface légèrement sous ch
 | `output/N8_Nuits-Reel_9x16.mp4` | 1080×1920, 30 i/s | Instagram Reels, Stories, TikTok |
 | `output/apercu/N8_Nuits-Reel_*_apercu-720p.mp4` | 720p, < 30 Mo | envoi rapide, validation |
 
-**Droits** — images : Pexels License (54 vidéos et 1 photo) et Mixkit Stock Video Free License (3 vidéos) ;
+**Droits** — images : Pexels License (vidéos et photos) et Mixkit Stock Video Free License ;
 musique : Coverr License ; bruitages : Mixkit Sound Effects Free License. Toutes autorisent l'usage commercial
 et publicitaire sans attribution (les bruitages aussi en télévision et radio). Aucune vidéo payante, générée par IA
 ou sous licence restreinte. Détail : `footage/CREDITS.md` (images) et `footage/CREDITS_SON.md` (son).
