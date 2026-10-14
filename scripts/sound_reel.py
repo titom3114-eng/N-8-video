@@ -62,7 +62,7 @@ FX = {
     'rumble':  [dict(f=2297, db=-6, len=3.0, onset=True, rev=0.1)],
     'whoosh':  [dict(f=(1490, 1462, 2607), db=-12, len=0.8, onset=True, rev=0.15)],
     'hit':     [dict(f=549, db=-2, len=4.0, onset=True, rev=0.3), dict(f=2297, db=-10, len=2.5, onset=True)],
-    'riser':   [dict(f=784, db=-5, peak=True, tail=1.2, rev=0.2)],
+    'riser':   [dict(f=784, db=-5, peak=True, pre=1.1, tail=1.2, rev=0.2)],
     'logo':    [dict(f=2897, db=-2, len=6.0, onset=True, rev=0.35), dict(f=619, db=-14, len=6.0, onset=True, delay=0.25, rev=0.5)],
 }
 # ambiances par section : fichier, niveau moyen (dBFS), départ dans le fichier, filtres
@@ -72,7 +72,7 @@ BEDS = {
     'roma':   [dict(f=1251, db=-27, start=2.0), dict(f=370, db=-31, start=18.0)],
     'oman':   [dict(f=1158, db=-27, start=6.0), dict(f=2475, db=-38, start=10.0, hp=1500)],
     'villes': [dict(f=2678, db=-30, start=60.0)],
-    'finale': [dict(f=1177, db=-33, start=20.0)],
+    'finale': [dict(f=1177, db=-33, start=20.0, delay=2.1)],   # après le silence
 }
 BAR = dict(f=444, db=-27, start=30.0, lp=2400)        # rumeur du bar, à partir du plan marqué "bar"
 ROOMS = {'intro': (2.6, 2.0), 'paris': (1.1, 0.8), 'roma': (3.2, 2.0), 'oman': (2.2, 1.4), 'villes': (1.4, 1.0), 'finale': (4.0, 2.4)}
@@ -173,6 +173,9 @@ def render_fx(spec, ev, k):
         x = np.stack([np.interp(xi, np.arange(x.shape[1]), c) for c in x])
     if spec.get('peak') and spec.get('tail'):  # on coupe peu après le point culminant
         x = x[:, :int(np.argmax(envelope(x, 0.02))) + int(spec['tail'] * SR)]
+    if spec.get('peak') and spec.get('pre'):   # et la montée ne commence que peu avant
+        pk = int(np.argmax(envelope(x, 0.02)))
+        x = shape(x[:, max(0, pk - int(spec['pre'] * SR)):], fade_in=0.35, fade_out=0.0)
     x = fft_filter(x, spec.get('hp'), spec.get('lp'))
     x = shape(x, fade_out=min(0.6, 0.3 * x.shape[1] / SR))
     x = x * db(REF + spec['db'] + ev.get('db', 0)) / peak_window_rms(x)
@@ -248,7 +251,8 @@ def build(cues, edl):
     for s in secs_:
         a, b = s['start'], s['end']
         for spec in BEDS.get(s['name'], []):
-            place(beds, bed(spec, int((b - a + 0.4) * SR), a), a - 0.2)
+            a2 = a + spec.get('delay', 0)
+            place(beds, bed(spec, int((b - a2 + 0.4) * SR), a2), a2 - 0.2)
     bar = [e for e in cues['events'] if e['type'] == 'bar']
     for e in bar:
         sec = next(s for s in secs_ if s['name'] == e['section'])
