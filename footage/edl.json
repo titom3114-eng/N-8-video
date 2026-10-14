@@ -108,7 +108,8 @@
      "mk": "paris|street.*night|night.*street|rain.*night|rainy",
      "src": "p:852352",
      "speed": 1.0,
-     "in": 10.6
+     "in": 7.2,
+     "vf": "eq=gamma=1.2"
     },
     {
      "id": "p03",
@@ -163,7 +164,7 @@
      ],
      "caption": "tabac",
      "sfx": [
-      "lighter"
+      "puff"
      ],
      "move": "push",
      "mk": "cigar|smok.*man|man.*smok|lighting",
@@ -186,7 +187,10 @@
      "move": "push",
      "mk": "cigar|smoke|ash",
      "src": "p:5197737",
-     "speed": 1.0
+     "speed": 1.0,
+     "sfx": [
+      "coals"
+     ]
     },
     {
      "id": "p07",
@@ -196,16 +200,17 @@
       "saxophone player dark",
       "piano bar night"
      ],
-     "grade": "mono",
+     "grade": "gold",
      "move": "right",
      "mk": "jazz|saxophon|piano|trumpet|bass",
      "src": "p:7586604",
      "speed": 1.0,
-     "in": 7.5,
+     "in": 10.8,
      "focus_v": [
       0.55,
       0.5
-     ]
+     ],
+     "vf": "eq=gamma=1.35:brightness=0.02"
     },
     {
      "id": "p08",
@@ -217,7 +222,7 @@
      ],
      "speed": 1.0,
      "sfx": [
-      "ice"
+      "clink"
      ],
      "move": "push",
      "mk": "ice|rocks|whisk",
@@ -255,7 +260,11 @@
      "mk": "suit|silhouette|man-in|gentleman|tuxedo",
      "src": "p:11792115",
      "speed": 1.0,
-     "in": 5.5
+     "in": 5.5,
+     "focus_v": [
+      0.75,
+      0.5
+     ]
     },
     {
      "id": "p11",
@@ -269,7 +278,8 @@
      "mk": "smoke",
      "src": "p:9694810",
      "speed": 1.0,
-     "in": 20
+     "in": 20,
+     "vf": "eq=gamma=1.15"
     },
     {
      "id": "p12",
@@ -342,7 +352,7 @@
      "speed": 1.0,
      "in": 8,
      "focus_v": [
-      0.45,
+      0.55,
       0.5
      ]
     }
@@ -396,9 +406,6 @@
       "rome alley night"
      ],
      "caption": "pierre mouillée",
-     "sfx": [
-      "steps"
-     ],
      "move": "left",
      "mk": "rome|roman|alley|cobble|street.*night|old-town",
      "src": "p:13689954",
@@ -455,7 +462,7 @@
      "mk": "lemon|citrus|orange",
      "src": "p:2583472",
      "speed": 1.0,
-     "in": 1.4
+     "in": 2.4
     },
     {
      "id": "r06",
@@ -595,7 +602,8 @@
      "mk": "desert|dune|starry|moon|night-sky",
      "src": "p:857136",
      "speed": 1.0,
-     "in": 13.5
+     "in": 13.5,
+     "vf": "eq=gamma=1.35:brightness=0.02"
     },
     {
      "id": "o02",
@@ -647,7 +655,10 @@
      "src": "p:8319108",
      "speed": 1.0,
      "in": 2,
-     "vf": "curves=all='0/0 0.5/0.33 1/0.8'"
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      "coals"
+     ]
     },
     {
      "id": "o05",
@@ -680,7 +691,8 @@
      "mk": "lantern|lamp",
      "src": "p:6010694",
      "speed": 1.0,
-     "in": 2
+     "in": 2,
+     "vf": "eq=gamma=1.35:brightness=0.02"
     },
     {
      "id": "o07",
@@ -762,7 +774,10 @@
      "move": "none",
      "mk": "horse",
      "src": "p:5155376",
-     "in": 3
+     "in": 3,
+     "sfx": [
+      "coals"
+     ]
     },
     {
      "id": "o12",
