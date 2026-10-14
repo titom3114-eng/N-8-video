@@ -68,7 +68,7 @@ réverbération propre à chaque lieu ; la musique s'efface légèrement sous ch
 | `output/N8_Nuits-Reel_9x16.mp4` | 1080×1920, 30 i/s | Instagram Reels, Stories, TikTok |
 | `output/apercu/N8_Nuits-Reel_*_apercu-720p.mp4` | 720p, < 30 Mo | envoi rapide, validation |
 
-**Droits** — images : Pexels License (54 vidéos) et Mixkit Stock Video Free License (4 vidéos) ;
+**Droits** — images : Pexels License (54 vidéos et 1 photo) et Mixkit Stock Video Free License (3 vidéos) ;
 musique : Coverr License ; bruitages : Mixkit Sound Effects Free License. Toutes autorisent l'usage commercial
 et publicitaire sans attribution (les bruitages aussi en télévision et radio). Aucune vidéo payante, générée par IA
 ou sous licence restreinte. Détail : `footage/CREDITS.md` (images) et `footage/CREDITS_SON.md` (son).
