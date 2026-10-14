@@ -114,6 +114,23 @@ def mixkit_candidates(query, min_dur):
     return out
 
 
+def mixkit_item(iid):
+    idx = ROOT / 'build' / 'reel' / 'mixkit' / 'index.json'
+    if idx.exists():
+        d = json.loads(idx.read_text())
+        if iid in d:
+            return d[iid]
+    html = http(f'https://mixkit.co/free-stock-video/discover/?q={iid}').decode('utf-8', 'ignore')
+    m = re.search(r'href="/free-stock-video/([a-z0-9-]+)-' + iid + r'/"', html)
+    if not m:
+        return None
+    page = f'https://mixkit.co/free-stock-video/{m.group(1)}-{iid}/'
+    html = http(page).decode('utf-8', 'ignore')
+    hi = [u for u in sorted(set(MIX_RE.findall(html))) if re.search(r'-720\.mp4$', u) or 'video-720' in u]
+    lic = 'free' if 'data-license="videoFree"' in html else 'restricted'
+    return {'id': iid, 'slug': m.group(1), 'license': lic, 'hi': hi[-1] if hi else None, 'page': page}
+
+
 # ------------------------------------------------------------------ sélection
 def shots(edl):
     for sec in edl['sections']:
@@ -163,6 +180,19 @@ def main():
             continue
         need = sh['beats'] * 60 / bpm / sh.get('speed', 1.0) + 0.6
         got = None
+        if sh.get('mixkit'):
+            # vidéo choisie à l'œil sur les planches (licence libre vérifiée)
+            info_mk = mixkit_item(str(sh['mixkit']))
+            if info_mk and info_mk['license'] == 'free' and info_mk.get('hi'):
+                download(info_mk['hi'], dst)
+                meta = {'provider': 'mixkit', 'uid': f"mixkit:{info_mk['id']}", 'link': info_mk['hi'], 'page': info_mk['page'],
+                        'author': 'Mixkit', 'license': 'Mixkit Stock Video Free License (https://mixkit.co/license/#videoFree)',
+                        **probe(dst), 'shot': sid, 'section': sec, 'query': info_mk['slug']}
+                (CLIPS / f'{sid}.json').write_text(json.dumps(meta, indent=1, ensure_ascii=False))
+                used.add(meta['uid'])
+                print(f"{sid}: mixkit {meta['width']}x{meta['height']} {meta['duration']:.1f}s « {info_mk['slug']} »")
+                continue
+            print(f"{sid}: la vidéo Mixkit {sh['mixkit']} n'est pas en licence libre ou introuvable — recherche automatique")
         for q in sh['q']:
             for prov in providers:
                 try:

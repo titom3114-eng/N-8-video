@@ -86,21 +86,23 @@ def shot_filter(sh, info, W, H, d, portrait):
     if move in ('push', 'pull'):
         z0, z1 = (1.0, 1.08) if move == 'push' else (1.08, 1.0)
         sw = even(info['w'] * k0)
-        scale = f"scale=w='trunc({sw}*({z0}+({z1 - z0})*min(t/{D},1))/2)*2':h=-2:eval=frame"
+        scale = f"scale=w='trunc({sw}*({z0}+({z1 - z0})*min(t/{D},1))/2)*2':h=-2:eval=frame:flags=lanczos"
         crop = f"crop={W}:{H}:x='(iw-{W})*{fx}':y='(ih-{H})*{fy}'"
     elif move in ('left', 'right'):
         sgn = -1 if move == 'left' else 1
         sw = even(info['w'] * k0 * 1.12)
-        scale = f"scale={sw}:-2"
+        scale = f"scale={sw}:-2:flags=lanczos"
         crop = f"crop={W}:{H}:x='(iw-{W})*({fx}+{sgn}*0.42*(min(t/{D},1)-0.5))':y='(ih-{H})*{fy}'"
     else:
         sw = even(info['w'] * k0)
-        scale = f"scale={sw}:-2"
+        scale = f"scale={sw}:-2:flags=lanczos"
         crop = f"crop={W}:{H}:x='(iw-{W})*{fx}':y='(ih-{H})*{fy}'"
     grade = GRADES[sh.get('grade', 'gold')]
     extra = sh.get('vf', '')
     chain = [f"trim=start={ss:.3f}:duration={need + 0.2:.3f}", f"setpts=(PTS-STARTPTS)/{speed:.4f}", f"fps={FPS}",
              scale, crop, grade]
+    if k0 > 1.2:  # source agrandie (720p) : léger renforcement de netteté
+        chain.append('unsharp=5:5:0.55:5:5:0')
     if extra:
         chain.append(extra)
     chain += ["tpad=stop_mode=clone:stop_duration=1", "setsar=1", "format=yuv420p"]
