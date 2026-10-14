@@ -42,13 +42,25 @@ glaçon, briquet, pas sur la pierre, chaîne de l'encensoir, braises, goutte.
 
 ## « Nuits » en images réelles
 
-Même film, monté plus vite (120 BPM, une coupe toutes les 0,5 à 2 s, 51 plans en 52 s, puis 8 s de finale)
-avec de vraies vidéos de nuit, étalonnées or / noir / gris / blanc, grain et format cinéma, titres et logo
-par-dessus : allumette dans le noir, tour Eiffel dorée, Arc de Triomphe, whisky versé, silhouette qui fume,
-saxophone, cigare dans la fumée ; Colisée illuminé, reflets de pluie, encensoir, citrons, cierges, buste
-antique, pont Saint-Ange ; ciel étoilé, lustre de la mosquée Sultan Qaboos, encensoir à oud, rose, goutte
-d'ambre, caravane de chameau, Dubaï ; puis Londres, Madrid, Berlin, Lisbonne, Amsterdam, Stockholm,
-Bucarest, Athènes en éclair.
+Le film principal en vraies vidéos de nuit : 62 plans en 63 s, coupés sur le tempo de la musique
+(85,3 BPM : plans d'un demi-temps à deux temps, soit 0,35 à 1,8 s), étalonnés or / noir / gris / blanc,
+grain et format cinéma. Aucun ingrédient n'est écrit : les odeurs passent par des gestes en gros plan et leur son.
+
+- **Ouverture** — une allumette craque dans le noir, une braise, *« Chaque nuit a son parfum. »*
+- **Paris** — tour Eiffel dorée, Arc de Triomphe, un homme dans le brouillard ; dans le bar : saxophone,
+  verre posé, briquet, cigare, fumée soufflée en contre-jour, cendre, braises, cognac versé, glaçon, cuir.
+- **Rome** — Colisée, pont Saint-Ange, réverbère sous la pluie, pavés mouillés, encensoir et chœur,
+  cierges, buste antique et cloche, citrons qui plongent, fontaine dorée, coupole.
+- **Oman** — ciel étoilé, lustre de la mosquée Sultan Qaboos, encensoir à oud, braises, rose en flammes,
+  goutte d'ambre, bijoux d'or, chameau au crépuscule, dunes, Dubaï, poussière d'or.
+- **Les capitales** en éclair (London *night*, Madrid *noche*, Berlin *Nacht*…), puis le logo doré.
+
+**Son** : musique « Disturbing Night » (Coverr) montée sur la grille du film — raccords sur les mesures,
+passage dans sa partie calme à l'arrivée du logo ; ambiances réelles par lieu (rue de Paris puis rumeur du bar,
+pluie et cloches de Rome, vent du désert et grillons à Oman) ; bruitages réels synchronisés plan par plan
+(allumette, molette du briquet, braise et cendre, souffle, verre, versement, glaçon, gouttes, chœur, cloche,
+plongeon des citrons, eau, braises, flamme, goutte, vent et sable) ; impacts graves aux entrées de ville ;
+réverbération propre à chaque lieu ; la musique s'efface légèrement sous chaque bruitage.
 
 | Fichier | Format | Usage |
 |---|---|---|
@@ -56,26 +68,32 @@ Bucarest, Athènes en éclair.
 | `output/N8_Nuits-Reel_9x16.mp4` | 1080×1920, 30 i/s | Instagram Reels, Stories, TikTok |
 | `output/apercu/N8_Nuits-Reel_*_apercu-720p.mp4` | 720p, < 30 Mo | envoi rapide, validation |
 
-**Droits** : uniquement des vidéos dont la licence autorise l'usage commercial et publicitaire sans
-attribution — Pexels License (47 plans) et Mixkit Stock Video Free License (4 plans). Aucune vidéo payante,
-générée par IA ou sous licence restreinte. Liste plan par plan avec liens : `footage/CREDITS.md`.
+**Droits** — images : Pexels License (54 vidéos) et Mixkit Stock Video Free License (4 vidéos) ;
+musique : Coverr License ; bruitages : Mixkit Sound Effects Free License. Toutes autorisent l'usage commercial
+et publicitaire sans attribution (les bruitages aussi en télévision et radio). Aucune vidéo payante, générée par IA
+ou sous licence restreinte. Détail : `footage/CREDITS.md` (images) et `footage/CREDITS_SON.md` (son).
+Les fichiers de musique et de bruitages ne sont pas versionnés (redistribution seule interdite) : le script
+les retélécharge. La musique utilisée est la version MP3 publique de Coverr ; si vous téléchargez l'original
+WAV depuis coverr.co, déposez-le en `footage/music/disturbing-night.wav`, il sera pris automatiquement.
 Comme pour toute banque d'images, les marques ou monuments visibles ne sont pas « libérés » par la licence ;
 aucun logo de marque n'apparaît dans les plans retenus.
 
-- Découpage plan par plan : `footage/edl.json` — durée en temps, vidéo choisie (`"src"` : `p:<id>` Pexels,
-  `c:<id>` Coverr, `m:<id>` Mixkit), point d'entrée (`"in"`, en secondes), mouvement, étalonnage,
-  cadrage vertical (`"focus_v"`), notes olfactives affichées, cartes des villes.
+- Découpage plan par plan : `footage/edl.json` — durée en temps, vidéo (`"src"` : `p:<id>` Pexels, `c:<id>` Coverr,
+  `m:<id>` Mixkit, ou `"use"` : même vidéo qu'un autre plan), point d'entrée (`"in"`, en secondes), mouvement,
+  cadrage serré (`"zoom"`), étalonnage, cadrage vertical (`"focus_v"`), bruitages (`"sfx"`), cartes des villes ;
+  `"music"` : piste, temps de départ et raccords.
 - Recherche et choix des vidéos : `scripts/footage/pexels.py` (fichiers Pexels sans clé d'API à partir
   des identifiants listés dans `footage/pexels/*.json`), `scripts/footage/coverr_index.py`,
   `scripts/footage/mixkit_index.py`, puis `scripts/footage/shortlist.py` (planches de vignettes par plan).
-- Téléchargement : `scripts/footage/fetch.py` (4K quand elle existe, pour un recadrage vertical net).
+- Téléchargement des vidéos : `scripts/footage/fetch.py` (4K quand elle existe, pour un recadrage vertical net).
+- Effets sonores : `scripts/footage/mixkit_sfx.py` (index et téléchargement).
 - Calque des titres : `src/reel.html` / `src/reel.js`
 - Montage, étalonnage, recadrage 16:9 et 9:16 : `scripts/footage/assemble.py`
-- Musique 120 BPM et bruitages : `scripts/soundtrack_reel.py`
+- Bande-son (musique, ambiances, bruitages, réverbérations, mixage) : `scripts/sound_reel.py`
 - Tout d'un coup : `./scripts/build_reel.sh` → `output/N8_Nuits-Reel_16x9.mp4`, `output/N8_Nuits-Reel_9x16.mp4`
 
-Accès réseau nécessaire : `videos.pexels.com` et `assets.mixkit.co`. Vos propres images peuvent remplacer
-n'importe quel plan : déposez `footage/override/<id>.mp4` (prioritaire sur la vidéo choisie).
+Accès réseau nécessaire : `videos.pexels.com`, `assets.mixkit.co`, `cdn.coverr.co`. Vos propres images peuvent
+remplacer n'importe quel plan : déposez `footage/override/<id>.mp4` (prioritaire sur la vidéo choisie).
 
 ## « La nuit » — première version
 

@@ -223,17 +223,10 @@
         const d = sh.beats * BEAT;
         SHOTS.push({ ...sh, section: sec.name, start: t, dur: d });
         for (const fx of sh.sfx || []) {
-          const add = (dt, extra = {}) => EV.push({ type: fx, t: +(t + dt).toFixed(3), shot: sh.id, ...extra });
-          if (fx === 'pour' || fx === 'coals') add(0, { dur: d });
-          else if (fx === 'ice') add(d * 0.35);
-          else if (fx === 'drop') add(d * 0.45);
-          else if (fx === 'steps') for (let k = 0; k < 4; k++) EV.push({ type: 'step', t: +(t + 0.08 + k * d / 4).toFixed(3) });
-          else if (fx === 'chain') { add(0.2); add(0.85); }
-          else if (fx === 'reveal') add(1.35);
-          else if (fx === 'logo') add(2.1);
-          else if (fx === 'strike') add(0.15);
-          else if (fx === 'puff' || fx === 'clink') add(0.3);
-          else add(0.04);
+          // bruitage : nom seul, ou { n, at (s depuis le début du plan), db, end (aligné sur la fin du plan) }
+          const o = typeof fx === 'string' ? { n: fx } : fx;
+          EV.push({ type: o.n, t: +(t + (o.end ? d : (o.at ?? 0.04))).toFixed(3), dur: +d.toFixed(3), db: o.db || 0,
+                    end: !!o.end, shot: sh.id, section: sec.name });
         }
         t += d;
       }
@@ -254,7 +247,9 @@
       const span = SHOTS[lastIdx].start + SHOTS[lastIdx].dur - first.start;
       phrase(t - first.start, span, s.phrase, true);
     }
-    if (s.card) cityCard(u, { ...s.card, end: s.dur });
+    // la carte de ville peut courir sur plusieurs plans (card.beats)
+    const cs = SHOTS.filter(sh => sh.card && t >= sh.start && t < sh.start + (sh.card.beats ? sh.card.beats * BEAT : sh.dur)).pop();
+    if (cs) cityCard(t - cs.start, { ...cs.card, end: cs.card.beats ? cs.card.beats * BEAT : cs.dur });
     if (s.caption) caption(u, s.dur, s.caption);
     if (s.word) cityWord(u, s.dur, s.city, s.word);
     // ouverture au noir et éclat doré à l'entrée de chaque ville

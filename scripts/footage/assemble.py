@@ -54,7 +54,9 @@ def even(v):
     return max(2, int(round(v / 2)) * 2)
 
 
-def source_for(sh, placeholders):
+def source_for(sh, placeholders, by_id=None):
+    if sh.get('use') and by_id:  # même vidéo qu'un autre plan, autre moment
+        return source_for({**by_id[sh['use']], 'id': sh['use']}, placeholders)
     if (OVERRIDE / f"{sh['id']}.mp4").exists():
         return OVERRIDE / f"{sh['id']}.mp4"
     if placeholders:
@@ -81,7 +83,7 @@ def shot_filter(sh, info, W, H, d, portrait):
     ss = sh.get('in', max(0.0, (info['dur'] - need) * 0.45))
     move = sh.get('move', 'push')
     fx, fy = sh.get('focus_v' if portrait else 'focus', [0.5, 0.5])
-    k0 = max(W / info['w'], H / info['h'])
+    k0 = max(W / info['w'], H / info['h']) * sh.get('zoom_v' if portrait else 'zoom', 1.0)  # cadrage plus serré
     D = f'{d:.4f}'
     if move in ('push', 'pull'):
         z0, z1 = (1.0, 1.08) if move == 'push' else (1.08, 1.0)
@@ -114,6 +116,7 @@ def main():
     ap.add_argument('--format', default='16x9', choices=sorted(FORMATS))
     ap.add_argument('--placeholders', action='store_true')
     ap.add_argument('--skip-overlay', action='store_true')
+    ap.add_argument('--redo', default='', help='ne refaire que ces plans (les autres segments existants sont gardés)')
     args = ap.parse_args()
     W, H = FORMATS[args.format]
     portrait = H > W
@@ -123,15 +126,22 @@ def main():
     seg_dir.mkdir(parents=True, exist_ok=True)
     listing = []
     shots = [sh for sec in edl['sections'] for sh in sec['shots']]
+    by_id = {sh['id']: sh for sh in shots}
+    t_cum = 0.0
     for i, sh in enumerate(shots):
         d = sh['beats'] * beat
-        frames = round(d * FPS)
+        # bornes en images calculées sur le temps cumulé : aucune dérive sur des dizaines de coupes
+        frames = round((t_cum + d) * FPS) - round(t_cum * FPS)
+        t_cum += d
         seg = seg_dir / f"{i:03d}_{sh['id']}.mp4"
+        if args.redo and sh['id'] not in args.redo.split(',') and seg.exists():
+            listing.append(f"file '{seg.as_posix()}'")
+            continue
         if sh.get('render'):
             run(['ffmpeg', '-y', '-v', 'error', '-f', 'lavfi', '-i', f'color=c=black:s={W}x{H}:r={FPS}',
                  '-frames:v', str(frames), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '12', '-pix_fmt', 'yuv420p', str(seg)])
         else:
-            src = source_for(sh, args.placeholders)
+            src = source_for(sh, args.placeholders, by_id)
             info = probe(src)
             vf = shot_filter(sh, info, W, H, d, portrait)
             run(['ffmpeg', '-y', '-v', 'error', '-i', str(src), '-an', '-vf', vf, '-frames:v', str(frames), '-r', str(FPS),

@@ -4,3 +4,5 @@ __pycache__/
 *.log
 footage/clips/
 footage/override/*.mp4
+footage/sfx/
+footage/music/

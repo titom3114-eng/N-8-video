@@ -134,6 +134,11 @@ def mixkit_item(iid):
 def chosen(src):
     """Fiche de téléchargement d'une vidéo choisie : « p:<id> » Pexels, « c:<id> » Coverr, « m:<id> » Mixkit."""
     kind, iid = src.split(':', 1)
+    if kind == 'pp':  # photo Pexels (même licence) : transformée en plan fixe de 4 s, animé au montage
+        return {'provider': 'pexels', 'uid': f'pexels-photo:{iid}', 'photo': True,
+                'link': f'https://images.pexels.com/photos/{iid}/pexels-photo-{iid}.jpeg?w=3840',
+                'page': f'https://www.pexels.com/photo/{iid}/', 'author': '—',
+                'license': 'Pexels License (https://www.pexels.com/license/)', 'query': f'photo {iid}'}
     if kind == 'p':
         idx_path = ROOT / 'build' / 'reel' / 'pexels' / 'index.json'
         v = (json.loads(idx_path.read_text()) if idx_path.exists() else {}).get(iid)
@@ -167,7 +172,7 @@ def chosen(src):
 def shots(edl):
     for sec in edl['sections']:
         for sh in sec['shots']:
-            if sh.get('render'):
+            if sh.get('render') or sh.get('use'):
                 continue
             yield sec['name'], sh
 
@@ -216,8 +221,16 @@ def main():
         if src:
             # vidéo choisie à l'œil sur les planches (licence vérifiée)
             meta = chosen(src)
-            if meta:
+            if meta and meta.pop('photo', False):
+                jpg = dst.with_suffix('.jpg')
+                download(meta['link'], jpg)
+                subprocess.run(['ffmpeg', '-y', '-v', 'error', '-loop', '1', '-framerate', '30', '-i', str(jpg), '-t', '4',
+                                '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2', '-c:v', 'libx264', '-crf', '10', '-pix_fmt', 'yuv420p',
+                                str(dst)], check=True)
+                jpg.unlink()
+            elif meta:
                 download(meta['link'], dst)
+            if meta:
                 meta.update(probe(dst), shot=sid, section=sec)
                 (CLIPS / f'{sid}.json').write_text(json.dumps(meta, indent=1, ensure_ascii=False))
                 used.add(meta['uid'])
