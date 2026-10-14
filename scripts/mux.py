@@ -4,6 +4,7 @@ encodage H.264 deux passes (~10 Mb/s) prêt pour la diffusion, plus un aperçu 7
 
     python3 scripts/mux.py                     # film « La nuit »  (build/ → output/N8_La-Nuit_*)
     python3 scripts/mux.py --film nuits        # film « Nuits »    (build/nuits/ → output/N8_Nuits_*)
+    python3 scripts/mux.py --film reel         # « Nuits » en images réelles (build/reel/ → output/N8_Nuits-Reel_*)
 """
 import argparse
 import json
@@ -17,6 +18,7 @@ TARGET = dict(I=-14, TP=-1.5, LRA=11)
 FILMS = {
     'la-nuit': (ROOT / 'build', 'N8_La-Nuit'),
     'nuits': (ROOT / 'build' / 'nuits', 'N8_Nuits'),
+    'reel': (ROOT / 'build' / 'reel', 'N8_Nuits-Reel'),
 }
 BUILD = FILMS['la-nuit'][0]
 

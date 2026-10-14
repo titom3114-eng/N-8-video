@@ -40,6 +40,23 @@ liserées d'or, fumée, bokeh, profondeur de champ, grain argentique, cadre 2.39
 villes ; silence net, puis accord final sur le logo. Bruitages synchronisés : allumette, verre,
 glaçon, briquet, pas sur la pierre, chaîne de l'encensoir, braises, goutte.
 
+## « Nuits » en images réelles — prêt à lancer
+
+Même film, monté plus vite (120 BPM, une coupe toutes les 0,5 à 1,5 s, 52 plans) avec de vraies vidéos
+libres de droits, étalonnées or / noir / gris / blanc, grain et format cinéma, titres et logo par-dessus.
+
+- Découpage plan par plan et mots-clés de recherche : `footage/edl.json`
+- Récupération des vidéos : `scripts/footage/fetch.py` (Pexels avec clé `PEXELS_API_KEY`, ou Mixkit sans clé)
+- Calque des titres : `src/reel.html` / `src/reel.js`
+- Montage, étalonnage, recadrage 16:9 et 9:16 : `scripts/footage/assemble.py`
+- Musique 120 BPM et bruitages : `scripts/soundtrack_reel.py`
+- Tout d'un coup : `./scripts/build_reel.sh` → `output/N8_Nuits-Reel_16x9.mp4`, `output/N8_Nuits-Reel_9x16.mp4`
+
+Accès réseau nécessaire dans l'environnement : `mixkit.co` et `assets.mixkit.co` (sans clé),
+et/ou `api.pexels.com`, `videos.pexels.com`, `images.pexels.com` avec une clé gratuite Pexels
+dans la variable `PEXELS_API_KEY`. Vos propres images peuvent remplacer n'importe quel plan :
+`footage/override/<id>.mp4`. Les crédits des vidéos utilisées sont écrits dans `footage/CREDITS.md`.
+
 ## « La nuit » — première version
 
 Néons bleu nuit sous la pluie : l'enseigne « N+8 » se transforme en *nuit, noche, night, notte…*

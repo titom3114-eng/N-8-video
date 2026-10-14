@@ -6,6 +6,7 @@
  *   node scripts/render.cjs --format 9x16 --out output/video_9x16.mp4
  *   node scripts/render.cjs --format 16x9 --snap 2,15,40 --out output/snaps   (captures PNG)
  *   node scripts/render.cjs --cues build/cues.json                           (exporte la chronologie sonore)
+ *   node scripts/render.cjs --page reel.html --format 16x9 --alpha --frames-dir build/reel/ov_16x9   (calque titres)
  */
 const path = require('path');
 const fs = require('fs');
@@ -75,6 +76,8 @@ function launch() {
   }
 
   const cdp = await page.context().newCDPSession(page);
+  // --alpha : fond transparent (calques de titres à superposer aux images réelles)
+  if (args.alpha) await cdp.send('Emulation.setDefaultBackgroundColorOverride', { color: { r: 0, g: 0, b: 0, a: 0 } });
   const shot = async () => {
     const { data } = await cdp.send('Page.captureScreenshot', { format: 'png', optimizeForSpeed: true, captureBeyondViewport: false });
     return Buffer.from(data, 'base64');
@@ -91,6 +94,21 @@ function launch() {
       console.log('snap', file);
     }
     await browser.close(); srv.close();
+    return;
+  }
+
+  // --frames-dir DIR : images PNG numérotées (avec transparence si --alpha) au lieu d'une vidéo
+  if (args['frames-dir']) {
+    const dir = path.resolve(args['frames-dir']);
+    fs.mkdirSync(dir, { recursive: true });
+    const total = Math.round(info.duration * fps), t0 = Date.now();
+    for (let f = 0; f < total; f++) {
+      await page.evaluate(t => window.N8.renderAt(t), f / fps);
+      fs.writeFileSync(path.join(dir, `${String(f).padStart(5, '0')}.png`), await shot());
+      if (f % (fps * 10) === 0) process.stdout.write(`[${args.format || '16x9'} calque] ${f}/${total} images — ${((Date.now() - t0) / 1000).toFixed(0)} s\n`);
+    }
+    await browser.close(); srv.close();
+    console.log(`Images écrites : ${dir} (${total})`);
     return;
   }
 

@@ -1,0 +1,71 @@
+{
+  "title": "N+8 — Nuits (images réelles)",
+  "bpm": 120,
+  "fps": 30,
+  "sections": [
+    { "name": "intro", "shots": [
+      { "id": "i01", "beats": 3, "q": ["match strike slow motion", "match lighting dark", "matchstick fire"], "speed": 0.6, "sfx": ["strike"], "move": "push" },
+      { "id": "i02", "beats": 3, "q": ["lighting cigar close up", "cigar lighter flame", "cigar smoke dark"], "sfx": ["puff"], "phrase": "Chaque nuit a son parfum.", "move": "push" },
+      { "id": "i03", "beats": 2, "q": ["smoke black background slow motion", "smoke swirl dark"], "phrase": "Chaque nuit a son parfum.", "grade": "mono" }
+    ]},
+    { "name": "paris", "shots": [
+      { "id": "p01", "beats": 4, "q": ["eiffel tower night sparkle", "eiffel tower night lights", "paris night eiffel"], "card": { "name": "PARIS", "coords": "48°51′ N  ·  2°21′ E", "formula": { "eight": "huit", "night": "nuit", "map": [0, 2, 3, 4] } }, "move": "push" },
+      { "id": "p02", "beats": 2, "q": ["paris street night rain", "paris night street", "paris cafe night"], "move": "left" },
+      { "id": "p03", "beats": 2, "q": ["bar bottles shelf dark", "whiskey bottles bar backlit", "bar shelf bottles night"], "sfx": ["clink"], "move": "right" },
+      { "id": "p04", "beats": 2, "q": ["pouring whiskey glass slow motion", "pouring cognac glass", "whiskey pour dark"], "speed": 0.7, "caption": "cognac", "sfx": ["pour"], "move": "push" },
+      { "id": "p05", "beats": 3, "q": ["man lighting cigar dark", "man smoking cigar silhouette", "cigar smoking man suit"], "caption": "tabac", "sfx": ["lighter"], "move": "push" },
+      { "id": "p06", "beats": 2, "q": ["cigar smoke close up", "cigar ash burning", "cigar smoke macro"], "move": "push" },
+      { "id": "p07", "beats": 2, "q": ["jazz bar night", "saxophone player dark", "piano bar night"], "grade": "mono", "move": "right" },
+      { "id": "p08", "beats": 2, "q": ["ice cube whiskey glass slow motion", "ice falling glass whiskey", "whiskey glass ice"], "speed": 0.6, "sfx": ["ice"], "move": "push" },
+      { "id": "p09", "beats": 2, "q": ["leather armchair dark", "leather texture close up", "vintage leather chair"], "caption": "cuir", "move": "left" },
+      { "id": "p10", "beats": 2, "q": ["man in suit silhouette night", "elegant man night city", "man hat silhouette"], "grade": "mono", "move": "push" },
+      { "id": "p11", "beats": 2, "q": ["smoke swirl black background", "smoke dark slow motion", "smoke light beam"], "move": "push" },
+      { "id": "p12", "beats": 1, "q": ["lighter flame close up", "zippo lighter flame", "lighter flame dark"], "sfx": ["lighter"], "move": "none" },
+      { "id": "p13", "beats": 2, "q": ["paris rooftops night", "paris night aerial", "paris skyline night"], "move": "right" },
+      { "id": "p14", "beats": 1, "q": ["glasses toast whiskey", "cheers whiskey glasses", "clinking glasses dark"], "sfx": ["clink"], "move": "none" },
+      { "id": "p15", "beats": 3, "q": ["cigar burning ember macro", "cigar ash macro", "burning cigar close up"], "caption": "bois fumé", "move": "push" }
+    ]},
+    { "name": "roma", "shots": [
+      { "id": "r01", "beats": 4, "q": ["colosseum night", "rome colosseum night lights", "colosseum rome evening"], "card": { "name": "ROMA", "coords": "41°54′ N  ·  12°30′ E", "formula": { "eight": "otto", "night": "notte", "map": [0, 1, 2, 3, 4] } }, "sfx": ["bell"], "move": "push" },
+      { "id": "r02", "beats": 2, "q": ["rome street night cobblestone", "cobblestone wet night", "rome alley night"], "caption": "pierre mouillée", "sfx": ["steps"], "move": "left" },
+      { "id": "r03", "beats": 2, "q": ["trevi fountain night", "fountain rome night", "fountain water night"], "move": "push" },
+      { "id": "r04", "beats": 3, "q": ["incense smoke church", "incense burning smoke dark", "censer smoke"], "caption": "encens", "sfx": ["chain"], "move": "push" },
+      { "id": "r05", "beats": 2, "q": ["lemon tree close up", "citrus fruit tree", "bergamot lemons"], "caption": "bergamote", "move": "right" },
+      { "id": "r06", "beats": 2, "q": ["church candles dark", "candles burning dark", "candle flame church"], "move": "push" },
+      { "id": "r07", "beats": 2, "q": ["marble statue rome", "roman statue close up", "marble sculpture dark"], "grade": "mono", "move": "push" },
+      { "id": "r08", "beats": 2, "q": ["rain on stone pavement night", "rain puddle night street", "rain drops street lights"], "move": "none" },
+      { "id": "r09", "beats": 2, "q": ["rome night vespa", "rome street night scooter", "rome night city"], "move": "left" },
+      { "id": "r10", "beats": 2, "q": ["smoke dark background", "smoke rising black", "white smoke black"], "caption": "fumée", "grade": "mono", "move": "push" },
+      { "id": "r11", "beats": 2, "q": ["roman forum night", "roman ruins night", "rome ruins evening"], "move": "right" },
+      { "id": "r12", "beats": 3, "q": ["st peters basilica night", "rome dome night", "vatican night"], "sfx": ["bell"], "move": "push" }
+    ]},
+    { "name": "oman", "shots": [
+      { "id": "o01", "beats": 4, "q": ["desert dunes night moon", "desert night stars dunes", "sand dunes night"], "card": { "name": "OMAN", "coords": "MASCATE  ·  23°35′ N  ·  58°23′ E", "arabic": "ليل" }, "move": "push" },
+      { "id": "o02", "beats": 2, "q": ["mosque night lights", "grand mosque night", "sultan qaboos mosque"], "move": "push" },
+      { "id": "o03", "beats": 3, "q": ["bakhoor incense burner smoke", "arabic incense burner", "oud incense smoke"], "caption": "oud", "sfx": ["coals"], "move": "push" },
+      { "id": "o04", "beats": 2, "q": ["oud wood burning", "agarwood burning", "incense coal burning"], "move": "push" },
+      { "id": "o05", "beats": 2, "q": ["rose petals falling slow motion", "rose petals dark", "red rose dark"], "speed": 0.6, "caption": "rose", "move": "none" },
+      { "id": "o06", "beats": 2, "q": ["arabic lantern night", "moroccan lantern light", "oriental lamp dark"], "move": "push" },
+      { "id": "o07", "beats": 2, "q": ["perfume oil drop gold", "golden liquid drop slow motion", "honey drop slow motion"], "speed": 0.6, "caption": "ambre", "sfx": ["drop"], "move": "push" },
+      { "id": "o08", "beats": 2, "q": ["camel silhouette desert night", "camels desert sunset silhouette", "desert caravan"], "move": "left" },
+      { "id": "o09", "beats": 1, "q": ["gold jewelry dark", "gold necklace close up", "golden jewelry"], "move": "none" },
+      { "id": "o10", "beats": 2, "q": ["dubai skyline night", "abu dhabi night city", "muscat night"], "move": "right" },
+      { "id": "o11", "beats": 2, "q": ["arabian horse slow motion", "black horse running slow motion", "horse silhouette"], "speed": 0.7, "move": "none" },
+      { "id": "o12", "beats": 2, "q": ["sand blowing dunes wind", "sand blowing desert", "sand dunes wind"], "move": "left" },
+      { "id": "o13", "beats": 2, "q": ["golden smoke light", "smoke golden light dark", "gold particles dark"], "move": "push" }
+    ]},
+    { "name": "villes", "shots": [
+      { "id": "v01", "beats": 1, "q": ["big ben night", "london night"], "city": "LONDON", "word": "night", "sfx": ["flash"] },
+      { "id": "v02", "beats": 1, "q": ["madrid night", "madrid gran via night"], "city": "MADRID", "word": "noche", "sfx": ["flash"] },
+      { "id": "v03", "beats": 1, "q": ["berlin night", "brandenburg gate night"], "city": "BERLIN", "word": "Nacht", "sfx": ["flash"] },
+      { "id": "v04", "beats": 1, "q": ["lisbon night tram", "lisbon night"], "city": "LISBOA", "word": "noite", "sfx": ["flash"] },
+      { "id": "v05", "beats": 1, "q": ["amsterdam canal night", "amsterdam night"], "city": "AMSTERDAM", "word": "nacht", "sfx": ["flash"] },
+      { "id": "v06", "beats": 1, "q": ["stockholm night", "stockholm old town night"], "city": "STOCKHOLM", "word": "natt", "sfx": ["flash"] },
+      { "id": "v07", "beats": 1, "q": ["bucharest night", "romania night city"], "city": "BUCUREȘTI", "word": "noapte", "sfx": ["flash"] },
+      { "id": "v08", "beats": 1, "q": ["acropolis night", "athens night"], "city": "ΑΘΗΝΑ", "word": "νύχτα", "sfx": ["flash"] }
+    ]},
+    { "name": "finale", "shots": [
+      { "id": "fin", "beats": 16, "render": "finale", "sfx": ["silence", "reveal", "logo"] }
+    ]}
+  ]
+}
