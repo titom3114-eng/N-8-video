@@ -1233,6 +1233,74 @@ sup {
   }
 }
 
+/* Réalisation primée (photo de chantier) */
+.realisation {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 2rem + 3vw, 64px);
+  align-items: center;
+  margin-top: clamp(44px, 2rem + 3vw, 80px);
+}
+.realisation__photo {
+  position: relative;
+  margin: 0;
+}
+.realisation__photo::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -12px;
+  left: 32px;
+  width: 112px;
+  height: 28px;
+  border-radius: 3px;
+  background: rgba(245, 208, 18, 0.92);
+  transform: rotate(-6deg);
+}
+.realisation__photo img {
+  width: 100%;
+  aspect-ratio: 1166 / 1284;
+  object-fit: cover;
+  border-radius: var(--rayon-l);
+  box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.65);
+}
+.realisation__photo figcaption {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+.realisation__photo figcaption .icone {
+  color: var(--jaune);
+}
+.realisation__texte h3 {
+  font-size: clamp(1.45rem, 1.2rem + 1vw, 2rem);
+  margin-bottom: 14px;
+}
+.realisation .citation {
+  margin: 28px 0 0;
+  max-width: none;
+  text-align: left;
+  padding-left: 22px;
+  border-left: 4px solid var(--jaune);
+}
+.realisation .citation blockquote {
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+}
+.realisation .presse {
+  justify-content: flex-start;
+}
+@media (max-width: 899px) {
+  .realisation {
+    grid-template-columns: 1fr;
+  }
+  .realisation__photo {
+    max-width: 480px;
+  }
+}
+
 /* Version claire des prix (pages intérieures) */
 .grille-prix--claire .prix {
   background: var(--blanc);
@@ -1666,6 +1734,9 @@ sup {
   align-items: flex-start;
   line-height: 1.45;
 }
+.pied__contact a {
+  overflow-wrap: anywhere;
+}
 .pied__contact .icone {
   color: var(--jaune);
   margin-top: 2px;
@@ -1762,6 +1833,24 @@ sup {
   border-radius: var(--rayon-l);
   box-shadow: var(--ombre-2);
 }
+.heros-page__visuel--portrait img {
+  aspect-ratio: 1166 / 1284;
+  max-height: 640px;
+}
+.badge-prix--gauche {
+  right: auto;
+  left: -18px;
+  bottom: 28px;
+}
+@media (max-width: 699px) {
+  .badge-prix--gauche {
+    left: 10px;
+    right: auto;
+    top: auto;
+    bottom: 12px;
+  }
+}
+
 .heros-page__visuel::before {
   content: "";
   position: absolute;
@@ -2645,6 +2734,7 @@ sup {
 }
 .coordonnees a {
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
 .mini-etapes {
   list-style: none;

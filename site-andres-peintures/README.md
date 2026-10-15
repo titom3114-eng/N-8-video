@@ -24,33 +24,38 @@ Points techniques : responsive (mobile, tablette, ordinateur), accessible (navig
 textes alternatifs), référencement local (balises, données structurées `HousePainter`, plan du site),
 polices hébergées sur le site (aucun appel à Google), aucun cookie ni traceur, en-têtes de sécurité.
 
-## Compléter les coordonnées
+## Coordonnées et réglages
 
-Le numéro de téléphone et l'adresse e-mail de l'entreprise ne sont pas publiés en ligne : ils sont à
-renseigner dans `site.json`. Tant qu'un champ est vide, l'élément correspondant est masqué proprement.
+Toutes les coordonnées sont dans `site.json` :
 
 ```json
-"telephone": "05 61 12 34 56",
-"telephone_mobile": "06 12 34 56 78",
-"email": "contact@votre-domaine.fr",
+"telephone": "06 07 08 38 23",
+"telephone_2": "07 85 53 97 07",
+"email": "andres.peinture@wanadoo.fr",
+"email_2": "andrestom.pro@gmail.com",
+"horaires": ""
+```
+
+Le premier numéro est mis en avant (en-tête, boutons « Appeler », menu mobile) ; le second figure sur la
+page contact, dans le pied de page et les mentions légales. Les numéros peuvent être saisis avec ou
+sans espaces. Un champ laissé vide (`""`) est masqué proprement, par exemple les horaires :
+
+```json
 "horaires": "Du lundi au vendredi, 8 h – 12 h et 14 h – 18 h"
 ```
 
-et, une fois le nom de domaine choisi :
+Une fois le nom de domaine choisi, renseignez-le pour activer le plan du site (`sitemap.xml`),
+les adresses canoniques et l'image d'aperçu pour les réseaux sociaux :
 
 ```json
 "url": "https://www.votre-domaine.fr"
 ```
 
-Puis régénérez le site :
+Après chaque modification, régénérez le site :
 
 ```bash
 python3 build.py
 ```
-
-Le téléphone apparaît alors dans l'en-tête, le menu mobile, chaque page métier, le pied de page et la
-page contact ; l'adresse du site active le plan du site (`sitemap.xml`), les adresses canoniques et
-l'image d'aperçu pour les réseaux sociaux.
 
 La liste des communes de la zone d'intervention se modifie aussi dans `site.json`.
 
@@ -62,32 +67,36 @@ La liste des communes de la zone d'intervention se modifie aussi dans `site.json
 2. Glissez-déposez le dossier `public/` sur [app.netlify.com/drop](https://app.netlify.com/drop).
 3. Dans **Domain management**, reliez votre nom de domaine.
 4. Les demandes de devis arrivent dans l'onglet **Forms** ; activez l'envoi par e-mail dans
-   **Site configuration > Forms > Form notifications**.
+   **Site configuration > Forms > Form notifications** (ajoutez une notification pour
+   andres.peinture@wanadoo.fr et une pour andrestom.pro@gmail.com).
 
 Pour publier automatiquement depuis ce dépôt Git, indiquez `site-andres-peintures` comme
 **Base directory** : le fichier `netlify.toml` fait le reste.
 
 ### Autre hébergeur (OVH, o2switch…)
 
-1. Dans `site.json`, renseignez `"email"` et passez `"formulaire"` à `"courriel"` : le formulaire
-   prépare alors la demande dans la messagerie du visiteur, sans serveur.
+1. Dans `site.json`, passez `"formulaire"` à `"courriel"` : le formulaire prépare alors la demande
+   dans la messagerie du visiteur, adressée au premier e-mail (`"email"`), sans serveur.
 2. Remplacez les champs `hebergeur_nom`, `hebergeur_adresse` et `hebergeur_site` par ceux de votre
    hébergeur (ils apparaissent dans les mentions légales).
 3. Lancez `python3 build.py`, puis envoyez le contenu de `public/` dans le dossier `www` de l'hébergement.
 
 ## Ajouter vos photos de chantiers
 
-Les photos actuelles sont des illustrations libres de droits. Vos propres photos (avant/après, façades
-primées, équipe au travail) renforceront encore la confiance :
+La façade primée du 11 rue des Lois (`facade-rue-des-lois`) est une photo de l'entreprise ; elle
+illustre la carte « Façade » de l'accueil, la section des prix et le haut de la page Façade. Les autres
+photos sont des illustrations libres de droits. D'autres photos de vos chantiers (rue Pargaminières,
+place Schuman, avant/après, équipe au travail) renforceront encore la confiance :
 
 ```bash
 pip install pillow
-python3 outils/ajouter-photo.py photo-pargaminieres.jpg facade-ravalement
+python3 outils/ajouter-photo.py photo-pargaminieres.jpg peinture-rouleau
 python3 build.py
 ```
 
-Réutiliser un nom existant remplace la photo partout où elle apparaît. Pensez à adapter la mention
-« Crédits photographiques » de `src/pages/mentions-legales.html` si toutes les photos deviennent les vôtres.
+Réutiliser un nom existant remplace la photo partout où elle apparaît ; une photo de moins de 1600 px
+de large n'est pas agrandie. Pensez à adapter la mention « Crédits photographiques » de
+`src/pages/mentions-legales.html` quand vous remplacez des photos d'illustration par les vôtres.
 
 ## Modifier les textes
 
@@ -109,6 +118,8 @@ Après chaque modification : `python3 build.py`. Ne modifiez pas `public/` direc
 
 ## Crédits photographiques
 
+`facade-rue-des-lois` : photo de la SARL ANDRES PASCAL (façade rénovée par l'entreprise).
+
 Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sans attribution obligatoire) :
 
 | Fichier | Photo Pexels |
@@ -117,7 +128,6 @@ Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sa
 | `peinture-rouleau` | [7218683](https://www.pexels.com/photo/7218683/) |
 | `peinture-conseil-couleurs` | [8293669](https://www.pexels.com/photo/8293669/) |
 | `peinture-papier-peint` | [5641766](https://www.pexels.com/photo/5641766/) |
-| `facade-ravalement` | [38326993](https://www.pexels.com/photo/38326993/) |
 | `toulouse-rue-briques` | [30753234](https://www.pexels.com/photo/30753234/) |
 | `toulouse-capitole` | [30753238](https://www.pexels.com/photo/30753238/) |
 | `toulouse-dome-grave` | [30753243](https://www.pexels.com/photo/30753243/) |

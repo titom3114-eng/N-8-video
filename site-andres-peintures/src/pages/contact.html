@@ -92,9 +92,8 @@ fil: Contact et devis
           <h2>Nos coordonnées</h2>
           <ul class="coordonnees">
             <li><span class="coordonnees__icone">{{i:pin}}</span><span><strong>{{raison_sociale}}</strong>{{adresse_rue}}<br>{{code_postal}} {{ville}} ({{quartier}})<br><a href="{{lien_itineraire}}" rel="noopener" target="_blank">Itinéraire<span class="sr-only"> (nouvel onglet)</span></a></span></li>
-            {{#tel}}<li><span class="coordonnees__icone">{{i:tel}}</span><span><strong>Téléphone</strong><a href="{{tel_lien}}">{{tel}}</a></span></li>
-            {{/tel}}{{#tel_mobile}}<li><span class="coordonnees__icone">{{i:tel}}</span><span><strong>Mobile</strong><a href="{{tel_mobile_lien}}">{{tel_mobile}}</a></span></li>
-            {{/tel_mobile}}{{#email}}<li><span class="coordonnees__icone">{{i:mail}}</span><span><strong>Courriel</strong><a href="{{email_lien}}">{{email}}</a></span></li>
+            {{#tel}}<li><span class="coordonnees__icone">{{i:tel}}</span><span><strong>Téléphone</strong><a href="{{tel_lien}}">{{tel}}</a>{{#tel_2}}<br><a href="{{tel_2_lien}}">{{tel_2}}</a>{{/tel_2}}</span></li>
+            {{/tel}}{{#email}}<li><span class="coordonnees__icone">{{i:mail}}</span><span><strong>Courriel</strong><a href="{{email_lien}}">{{email}}</a>{{#email_2}}<br><a href="{{email_2_lien}}">{{email_2}}</a>{{/email_2}}</span></li>
             {{/email}}{{#horaires}}<li><span class="coordonnees__icone">{{i:horloge}}</span><span><strong>Horaires</strong>{{horaires}}</span></li>
             {{/horaires}}<li><span class="coordonnees__icone">{{i:carte}}</span><span><strong>Zone d'intervention</strong>{{zone_resume}}</span></li>
           </ul>

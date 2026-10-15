@@ -22,8 +22,8 @@ fil: Mentions légales
         <dt>SIRET</dt><dd>{{siret}}</dd>
         <dt>N° de TVA</dt><dd>{{tva}}</dd>
         <dt>Code NAF</dt><dd>{{naf}}</dd>
-        {{#tel}}<dt>Téléphone</dt><dd><a href="{{tel_lien}}">{{tel}}</a></dd>
-        {{/tel}}{{#email}}<dt>Courriel</dt><dd><a href="{{email_lien}}">{{email}}</a></dd>
+        {{#tel}}<dt>Téléphone</dt><dd><a href="{{tel_lien}}">{{tel}}</a>{{#tel_2}} · <a href="{{tel_2_lien}}">{{tel_2}}</a>{{/tel_2}}</dd>
+        {{/tel}}{{#email}}<dt>Courriel</dt><dd><a href="{{email_lien}}">{{email}}</a>{{#email_2}} · <a href="{{email_2_lien}}">{{email_2}}</a>{{/email_2}}</dd>
         {{/email}}<dt>Directeur de la publication</dt><dd>{{gerant}}, gérant</dd>
       </dl>
 
@@ -39,7 +39,8 @@ fil: Mentions légales
       <p>Les extraits d'articles de <cite>La Dépêche du Midi</cite> sont cités avec mention de leur source.</p>
 
       <h2 id="credits">Crédits photographiques</h2>
-      <p>Les photographies d'illustration proviennent de la banque d'images <a href="https://www.pexels.com" rel="noopener" target="_blank">Pexels<span class="sr-only"> (nouvel onglet)</span></a> et sont utilisées conformément à sa licence (usage commercial autorisé). Elles illustrent nos métiers et la ville de Toulouse&nbsp;; elles ne représentent pas des chantiers réalisés par l'entreprise.</p>
+      <p>La photographie de la façade du 11 rue des Lois, à l'angle de la rue du Collège-de-Foix, montre un chantier réalisé par l'entreprise et appartient à la {{raison_sociale}}.</p>
+      <p>Les autres photographies d'illustration proviennent de la banque d'images <a href="https://www.pexels.com" rel="noopener" target="_blank">Pexels<span class="sr-only"> (nouvel onglet)</span></a> et sont utilisées conformément à sa licence (usage commercial autorisé). Elles illustrent nos métiers et la ville de Toulouse&nbsp;; elles ne représentent pas des chantiers réalisés par l'entreprise.</p>
 
       <h2 id="confidentialite">Protection des données personnelles</h2>
       <h3>Responsable du traitement</h3>

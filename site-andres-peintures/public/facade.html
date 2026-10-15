@@ -19,9 +19,9 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="fonts/Fraunces-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/NunitoSans-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=d90f6932ec">
+<link rel="stylesheet" href="css/style.css?v=52475656d7">
 <script>document.documentElement.classList.add("js")</script>
-<script src="js/main.js?v=d90f6932ec" defer></script>
+<script src="js/main.js?v=52475656d7" defer></script>
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
@@ -85,7 +85,7 @@
     <a href="index.html#prix"><svg class="icone" aria-hidden="true"><use href="#i-prix"/></svg><span class="bandeau-info__long">3 premiers prix de la Ville de Toulouse pour nos rénovations de façades (2025 et 2026)</span><span class="bandeau-info__court">3 premiers prix de la Ville de Toulouse</span></a>
     <div class="bandeau-info__droite">
       <span>Entreprise familiale depuis 1994</span>
-      
+      <a href="tel:+33607083823"><svg class="icone" aria-hidden="true"><use href="#i-tel"/></svg>06 07 08 38 23</a>
     </div>
   </div>
 </div>
@@ -104,6 +104,7 @@
       </ul>
     </nav>
     <div class="entete__actions">
+      <a class="entete__tel" href="tel:+33607083823"><svg class="icone" aria-hidden="true"><use href="#i-tel"/></svg>06 07 08 38 23</a>
       <a class="btn btn--jaune btn--petit" href="contact.html">Devis gratuit</a>
     </div>
     <button class="burger" type="button" aria-expanded="false" aria-controls="panneau-mobile">
@@ -129,7 +130,7 @@
   </ul>
   <div class="groupe-boutons">
     <a class="btn btn--jaune" href="contact.html"><svg class="icone" aria-hidden="true"><use href="#i-devis"/></svg>Demander un devis gratuit</a>
-    
+    <a class="btn btn--contour" href="tel:+33607083823"><svg class="icone" aria-hidden="true"><use href="#i-tel"/></svg>Appeler le 06 07 08 38 23</a>
   </div>
 </div>
 <main id="contenu">
@@ -143,7 +144,7 @@
         <p class="chapo">Brique foraine, enduit à la chaux, crépi, pierre&nbsp;: chaque façade a son histoire. Nous la nettoyons, la réparons et la protégeons dans le respect du patrimoine toulousain. Un savoir-faire récompensé trois fois par la Ville de Toulouse.</p>
         <div class="groupe-boutons">
           <a class="btn btn--jaune" href="contact.html?metier=facade#devis"><svg class="icone" aria-hidden="true"><use href="#i-devis"/></svg>Devis façade gratuit</a>
-          
+          <a class="btn btn--contour" href="tel:+33607083823"><svg class="icone" aria-hidden="true"><use href="#i-tel"/></svg>06 07 08 38 23</a>
         </div>
         <ul class="puces" aria-label="En bref">
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Maisons et immeubles</li>
@@ -152,8 +153,12 @@
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Devantures</li>
         </ul>
       </div>
-      <div class="heros-page__visuel">
-        <img src="img/facade-ravalement-1600.webp" srcset="img/facade-ravalement-800.webp 800w, img/facade-ravalement-1600.webp 1600w" sizes="(max-width: 899px) 100vw, 540px" width="1600" height="1067" alt="Deux façadiers sur échelles repeignant une façade ocre aux balcons en fer forgé" fetchpriority="high" decoding="async">
+      <div class="heros-page__visuel heros-page__visuel--portrait">
+        <img src="img/facade-rue-des-lois-1600.webp" srcset="img/facade-rue-des-lois-800.webp 800w, img/facade-rue-des-lois-1600.webp 1166w" sizes="(max-width: 899px) 100vw, 500px" width="1166" height="1284" alt="Immeuble d&#x27;angle en brique, rue des Lois à Toulouse : façade rénovée par l&#x27;entreprise et récompensée par un 1er prix de la Ville en 2026" fetchpriority="high" decoding="async">
+        <a class="badge-prix badge-prix--gauche" href="#prix-facade">
+          <span class="badge-prix__medaille"><svg class="icone" aria-hidden="true"><use href="#i-prix"/></svg></span>
+          <span><strong>1<sup>er</sup> prix 2026</strong><span>Notre façade du 11 rue des Lois</span></span>
+        </a>
       </div>
     </div>
   </div>
@@ -229,7 +234,7 @@
         <p class="cas__source">Source&nbsp;: <a href="https://www.ladepeche.fr/2025/06/17/plus-belle-renovation-12766794.php" rel="noopener" target="_blank">La Dépêche du Midi, 17 juin 2025<span class="sr-only"> (nouvel onglet)</span></a></p>
       </div>
     </article>
-    <h2 class="sr-only">Nos trois premiers prix de la Ville de Toulouse</h2>
+    <h2 class="sr-only" id="prix-facade">Nos trois premiers prix de la Ville de Toulouse</h2>
     <ul class="grille-prix grille-prix--claire revele-groupe">
       <li class="prix">
   <div class="prix__entete"><span class="prix__medaille"><svg class="icone" aria-hidden="true"><use href="#i-prix"/></svg></span><span class="prix__annee">2026</span></div>
@@ -364,7 +369,7 @@
       </div>
       <div class="groupe-boutons">
         <a class="btn btn--bleu" href="contact.html?metier=facade#devis"><svg class="icone" aria-hidden="true"><use href="#i-devis"/></svg>Demander mon devis</a>
-        
+        <a class="btn btn--contour" href="tel:+33607083823"><svg class="icone" aria-hidden="true"><use href="#i-tel"/></svg>06 07 08 38 23</a>
       </div>
     </div>
   </div>
@@ -401,6 +406,10 @@
         <p class="pied__titre">Nous trouver</p>
         <ul class="pied__contact">
           <li><svg class="icone" aria-hidden="true"><use href="#i-pin"/></svg><span>SARL ANDRES PASCAL<br>14 avenue des Avions<br>31400 Toulouse</span></li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-tel"/></svg><a href="tel:+33607083823">06 07 08 38 23</a></li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-tel"/></svg><a href="tel:+33785539707">07 85 53 97 07</a></li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:andres.peinture@wanadoo.fr">andres.peinture@wanadoo.fr</a></li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:andrestom.pro@gmail.com">andrestom.pro@gmail.com</a></li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-carte"/></svg><span>Intervention : Toulouse et son agglomération</span></li>
         </ul>
       </div>

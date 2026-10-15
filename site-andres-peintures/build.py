@@ -47,6 +47,14 @@ class ErreurGabarit(Exception):
 
 
 # --------------------------------------------------------------------------- outils
+def telephone_affiche(numero):
+    """« 0607083823 » devient « 06 07 08 38 23 » ; les autres formats sont laissés tels quels."""
+    chiffres = re.sub(r"\D", "", numero or "")
+    if len(chiffres) == 10 and chiffres.startswith("0"):
+        return " ".join(chiffres[i : i + 2] for i in range(0, 10, 2))
+    return (numero or "").strip()
+
+
 def telephone_lien(numero):
     chiffres = re.sub(r"[^\d+]", "", numero or "")
     if not chiffres:
@@ -106,7 +114,8 @@ class Gabarits:
         self.sprite = sprite.strip()
         self.images = {}
         for p in (SRC / "static" / "img").glob("*-1600.webp"):
-            self.images[p.name[: -len("-1600.webp")]] = dimensions_webp(p)
+            petite = p.with_name(p.name.replace("-1600.webp", "-800.webp"))
+            self.images[p.name[: -len("-1600.webp")]] = (dimensions_webp(p), dimensions_webp(petite)[0])
 
     def icone(self, nom):
         if nom not in self.icones:
@@ -121,10 +130,10 @@ class Gabarits:
         prioritaire = len(parties) > 3 and parties[3].strip() == "eager"
         if nom not in self.images:
             raise ErreurGabarit(f"image inconnue : {nom} (attendu : src/static/img/{nom}-1600.webp)")
-        largeur, hauteur = self.images[nom]
+        (largeur, hauteur), largeur_petite = self.images[nom]
         chargement = 'fetchpriority="high"' if prioritaire else 'loading="lazy"'
         return (
-            f'<img src="img/{nom}-1600.webp" srcset="img/{nom}-800.webp 800w, img/{nom}-1600.webp 1600w" '
+            f'<img src="img/{nom}-1600.webp" srcset="img/{nom}-800.webp {largeur_petite}w, img/{nom}-1600.webp {largeur}w" '
             f'sizes="{html.escape(sizes)}" width="{largeur}" height="{hauteur}" alt="{html.escape(alt)}" '
             f'{chargement} decoding="async">'
         )
@@ -207,12 +216,14 @@ def contexte_global(config):
         "ville": coord["ville"],
         "quartier": coord["quartier"],
         "adresse_complete": adresse_complete,
-        "tel": coord.get("telephone", "").strip(),
+        "tel": telephone_affiche(coord.get("telephone", "")),
         "tel_lien": telephone_lien(coord.get("telephone", "")),
-        "tel_mobile": coord.get("telephone_mobile", "").strip(),
-        "tel_mobile_lien": telephone_lien(coord.get("telephone_mobile", "")),
+        "tel_2": telephone_affiche(coord.get("telephone_2", "")),
+        "tel_2_lien": telephone_lien(coord.get("telephone_2", "")),
         "email": email,
         "email_lien": f"mailto:{email}" if email else "",
+        "email_2": coord.get("email_2", "").strip(),
+        "email_2_lien": f'mailto:{coord["email_2"].strip()}' if coord.get("email_2", "").strip() else "",
         "horaires": coord.get("horaires", "").strip(),
         "zone_resume": zone["resume"],
         "communes_li": "\n        ".join(f"<li>{html.escape(c)}</li>" for c in zone["communes"]),
