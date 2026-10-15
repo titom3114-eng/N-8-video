@@ -123,7 +123,7 @@ Après chaque modification : `python3 build.py`. Ne modifiez pas `public/` direc
 
 ## Crédits photographiques
 
-`facade-rue-des-lois`, `facade-place-schuman` et `chantier-peinture-sols` : photos de la SARL ANDRES
+`facade-rue-des-lois`, `facade-place-schuman`, `chantier-peinture-sols` et `equipe-facade` (Calum, Yoan et Bilal) : photos de la SARL ANDRES
 PASCAL (chantiers réalisés par l'entreprise).
 
 Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sans attribution obligatoire) :

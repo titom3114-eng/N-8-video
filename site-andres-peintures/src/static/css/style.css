@@ -2296,6 +2296,12 @@ sup {
 .duo--inverse .duo__visuel {
   order: 2;
 }
+.duo__visuel.equipe {
+  margin: 0;
+}
+.duo__visuel.equipe img {
+  aspect-ratio: 1206 / 904;
+}
 @media (max-width: 899px) {
   .duo {
     grid-template-columns: 1fr;
