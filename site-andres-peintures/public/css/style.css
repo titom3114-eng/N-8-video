@@ -2596,6 +2596,69 @@ sup {
   margin: 0;
 }
 
+/* Références (ils nous ont fait confiance) */
+.references {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+.reference {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+  align-items: center;
+  padding: 22px 24px;
+  border-radius: var(--rayon-l);
+  background: var(--blanc);
+  border: 1px solid var(--ligne);
+  box-shadow: var(--ombre-1);
+}
+.section--blanc .reference {
+  background: var(--creme);
+}
+.reference__icone {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: var(--bleu);
+  color: var(--jaune);
+}
+.reference__icone .icone {
+  width: 28px;
+  height: 28px;
+}
+.reference__nom {
+  font-family: var(--police-titre);
+  font-size: 1.45rem;
+  font-weight: 650;
+  color: var(--bleu-900);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.reference__detail {
+  font-size: 0.92rem;
+  color: var(--encre-2);
+  line-height: 1.35;
+  margin-top: 4px;
+}
+.references__titre {
+  text-align: center;
+  margin: clamp(36px, 2rem + 2vw, 56px) 0 20px;
+}
+@media (max-width: 899px) {
+  .references {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+}
+
 /* ---------- Page entreprise ---------- */
 .chiffres {
   list-style: none;
