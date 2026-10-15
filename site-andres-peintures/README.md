@@ -1,6 +1,6 @@
 # Site internet — Andres Peintures (SARL ANDRES PASCAL)
 
-Site vitrine de l'entreprise familiale de peinture, façade, plâtrerie et sols à Toulouse, fondée en 1994.
+Site vitrine de l'entreprise familiale de peinture, façade, plâtrerie et sols à Toulouse, fondée en 1988.
 Chaleureux, rassurant et organisé autour des quatre métiers.
 
 **Le site prêt à mettre en ligne se trouve dans `public/`.** Pour le voir tout de suite, ouvrez
@@ -112,7 +112,8 @@ Après chaque modification : `python3 build.py`. Ne modifiez pas `public/` direc
 
 ## Sources des informations
 
-- Identité légale (SIREN 397 838 426, siège, création en 1994, gérant, capital, TVA) :
+- Activité depuis 1988 (information de l'entreprise ; la SARL elle-même a été immatriculée en 1994).
+- Identité légale (SIREN 397 838 426, siège, immatriculation de la SARL en 1994, gérant, capital, TVA) :
   [annuaire-entreprises.data.gouv.fr](https://annuaire-entreprises.data.gouv.fr/entreprise/397838426)
   et registre du commerce.
 - Prix 2025 (plus belle rénovation de devanture commerciale 2024, 59 rue Pargaminières) :
