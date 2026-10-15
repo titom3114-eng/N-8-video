@@ -35,7 +35,7 @@ METIERS = [
     {"id": "peinture", "nom": "Peinture", "detail": "Murs, plafonds, boiseries, volets", "icone": "rouleau"},
     {"id": "facade", "nom": "Façade", "detail": "Ravalement, enduits, brique, patrimoine", "icone": "facade"},
     {"id": "platrerie", "nom": "Plâtrerie", "detail": "Cloisons, doublages, faux plafonds", "icone": "cloison"},
-    {"id": "sols", "nom": "Sols", "detail": "Parquet, stratifié, PVC, moquette", "icone": "sol"},
+    {"id": "sols", "nom": "Sols", "detail": "Parquets, PVC, linoléum, moquette", "icone": "sol"},
 ]
 PAGES_NAV = ["peinture", "facade", "platrerie", "sols", "entreprise", "contact"]
 SCRIPT_JS = 'document.documentElement.classList.add("js")'
@@ -271,7 +271,17 @@ def jsonld_entreprise(config, ctx):
         "geo": {"@type": "GeoCoordinates", "latitude": coord["latitude"], "longitude": coord["longitude"]},
         "areaServed": [{"@type": "City", "name": c} for c in zone["communes"]],
         "vatID": ent["tva"],
-        "knowsAbout": ["Peinture intérieure", "Peinture extérieure", "Ravalement de façade", "Plâtrerie", "Revêtements de sols"],
+        "knowsAbout": [
+            "Peinture intérieure",
+            "Peinture extérieure",
+            "Ravalement de façade",
+            "Plâtrerie",
+            "Revêtements de sols",
+            "Parquet point de Hongrie",
+            "Parquet bâtons rompus",
+            "Sols PVC",
+            "Linoléum",
+        ],
         "award": [
             "1er Prix Restauration du Patrimoine Remarquable, Ville de Toulouse (2026)",
             "1er Prix Restauration du Patrimoine Domestique, Ville de Toulouse (2026)",

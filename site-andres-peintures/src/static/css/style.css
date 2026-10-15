@@ -2087,17 +2087,162 @@ sup {
 .nuancier--satin {
   background: linear-gradient(135deg, #6d86c0 0%, #b7c6e8 42%, #6a83bd 70%, #7f96cc 100%);
 }
+.nuancier--pvc {
+  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.18) 0 2px, transparent 2px 26px),
+    linear-gradient(135deg, #c9c2b6, #ddd6ca 55%, #c4bcae);
+}
+.nuancier--lvt {
+  background: repeating-linear-gradient(0deg, transparent 0 17px, rgba(70, 40, 10, 0.35) 17px 18px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 3px, transparent 3px 9px),
+    linear-gradient(90deg, #b9875a, #c99a6b 40%, #b07d50 70%, #c39264);
+}
+.nuancier--lino {
+  background: radial-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1.4px) 0 0 / 7px 7px,
+    radial-gradient(rgba(90, 30, 10, 0.2) 1px, transparent 1.4px) 3px 4px / 9px 9px, #c56a49;
+}
+.nuancier--marmoleum {
+  background: linear-gradient(118deg, transparent 30%, rgba(255, 255, 255, 0.35) 33%, transparent 37%),
+    linear-gradient(64deg, transparent 52%, rgba(20, 50, 80, 0.25) 55%, transparent 60%),
+    linear-gradient(140deg, transparent 62%, rgba(255, 255, 255, 0.25) 64%, transparent 68%),
+    radial-gradient(ellipse at 20% 70%, rgba(255, 255, 255, 0.3), transparent 45%),
+    linear-gradient(135deg, #3f78a0, #5b93b8 50%, #3a6f96);
+}
+.nuancier--moquette {
+  background: radial-gradient(rgba(0, 0, 0, 0.16) 1px, transparent 1.3px) 0 0 / 4px 4px,
+    radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1.3px) 2px 2px / 4px 4px, #8b8e9b;
+}
+.choix--5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.note-illustration {
+  margin: 14px 0 0;
+  font-size: 0.86rem;
+  color: var(--encre-2);
+}
 .nuancier--laque {
   background: linear-gradient(135deg, #2f4ea4 0%, #ffffff 30%, #3a59b0 48%, #2a4797 72%, #9fb3e6 100%);
 }
+@media (max-width: 1099px) {
+  .choix--5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 @media (max-width: 999px) {
-  .choix {
+  .choix,
+  .choix--5 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 559px) {
-  .choix {
+  .choix,
+  .choix--5 {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Parquets à motifs */
+.motifs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.motif {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--rayon-l);
+  background: var(--blanc);
+  border: 1px solid var(--ligne);
+  box-shadow: var(--ombre-1);
+  overflow: hidden;
+}
+.motif__visuel {
+  position: relative;
+}
+.motif__visuel img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.motif__schema {
+  position: absolute;
+  right: 18px;
+  bottom: -40px;
+  width: 104px;
+  height: 104px;
+  border-radius: 20px;
+  border: 5px solid var(--blanc);
+  background: var(--blanc);
+  box-shadow: 0 12px 24px -10px rgba(48, 34, 10, 0.45);
+}
+.motif__corps {
+  padding: 26px 26px 28px;
+}
+.motif__corps .choix__usage {
+  margin-right: 120px;
+}
+.motif__corps h3 {
+  font-size: 1.55rem;
+  margin-bottom: 10px;
+}
+.motif__corps p {
+  color: var(--encre-2);
+}
+.encadre {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin: 24px 0 0;
+  padding: 18px 22px;
+  border-radius: var(--rayon);
+  background: var(--teinte-clair, var(--jaune-50));
+  color: var(--encre);
+}
+.encadre .icone {
+  color: var(--teinte, var(--bleu));
+  margin-top: 3px;
+}
+.galerie__titre {
+  margin: clamp(40px, 2rem + 2vw, 64px) 0 18px;
+}
+.galerie {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.galerie figure {
+  margin: 0;
+}
+.galerie img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre-1);
+}
+.galerie figcaption {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--bleu-900);
+}
+@media (max-width: 899px) {
+  .motifs {
+    grid-template-columns: 1fr;
+  }
+  .galerie {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 499px) {
+  .motif__schema {
+    width: 84px;
+    height: 84px;
+    bottom: -32px;
+    right: 14px;
+  }
+  .motif__corps .choix__usage {
+    margin-right: 96px;
   }
 }
 

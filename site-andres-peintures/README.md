@@ -14,7 +14,7 @@ Chaleureux, rassurant et organisé autour des quatre métiers.
 | `peinture.html` | Peinture intérieure et extérieure : prestations, méthode, choix des finitions, conseil couleurs, FAQ |
 | `facade.html` | Ravalement et patrimoine : prestations, chantier primé du 59 rue Pargaminières, méthode, réglementation toulousaine, FAQ |
 | `platrerie.html` | Cloisons, doublages, plafonds : prestations, méthode, tableau des plaques, FAQ |
-| `sols.html` | Parquet, stratifié, PVC, moquette : prestations, méthode, tableau « quel sol pour quelle pièce », FAQ |
+| `sols.html` | Parquets en point de Hongrie et bâtons rompus (photos et schémas de pose), parquet et stratifié, sols souples (PVC, vinyle, linoléum, Marmoleum, moquette), méthode, tableau « quel sol pour quelle pièce », FAQ |
 | `entreprise.html` | Histoire familiale, chiffres clés, distinctions, valeurs, types de clients |
 | `contact.html` | Formulaire de devis (le métier est pré-coché depuis chaque page), coordonnées, plan |
 | `mentions-legales.html` | Mentions légales, données personnelles (RGPD), crédits photos |
@@ -137,6 +137,12 @@ Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sa
 | `platrerie-cloison` | [5493675](https://www.pexels.com/photo/5493675/) |
 | `platrerie-plafond` | [6474129](https://www.pexels.com/photo/6474129/) |
 | `sols-pose` | [4263067](https://www.pexels.com/photo/4263067/) |
-| `sols-piece-lumineuse` | [7027997](https://www.pexels.com/photo/7027997/) |
+| `sols-point-de-hongrie` | [7587872](https://www.pexels.com/photo/7587872/) |
+| `sols-point-de-hongrie-salle` | [8143700](https://www.pexels.com/photo/8143700/) |
+| `sols-point-de-hongrie-detail` | [6856821](https://www.pexels.com/photo/6856821/) |
+| `sols-point-de-hongrie-sejour` | [16922964](https://www.pexels.com/photo/16922964/) |
+| `sols-batons-rompus` | [4409365](https://www.pexels.com/photo/4409365/) |
+| `sols-batons-rompus-detail` | [15066939](https://www.pexels.com/photo/15066939/) |
+| `sols-batons-rompus-ancien` | [35822328](https://www.pexels.com/photo/35822328/) |
 
 Polices : Fraunces et Nunito Sans (licence SIL Open Font License), hébergées dans `src/static/fonts/`.
