@@ -131,7 +131,7 @@ Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sa
 | Fichier | Photo Pexels |
 |---|---|
 | `peinture-rouleau`, `peinture-rouleau-carte` | photomontage : [5493655](https://www.pexels.com/photo/5493655/) + rouleau de [1669754](https://www.pexels.com/photo/1669754/) + logo Andres |
-| `peinture-conseil-couleurs` | [8293669](https://www.pexels.com/photo/8293669/) |
+| `peinture-echantillons` | [10202726](https://www.pexels.com/photo/10202726/) |
 | `peinture-protection` | [4981797](https://www.pexels.com/photo/4981797/) |
 | `toulouse-rue-briques` | [30753234](https://www.pexels.com/photo/30753234/) |
 | `toulouse-capitole` | [30753238](https://www.pexels.com/photo/30753238/) |
@@ -141,7 +141,7 @@ Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sa
 | `sols-pose` | [4263067](https://www.pexels.com/photo/4263067/) |
 | `sols-point-de-hongrie` | [7587872](https://www.pexels.com/photo/7587872/) |
 | `sols-point-de-hongrie-salle` | [8143700](https://www.pexels.com/photo/8143700/) |
-| `sols-point-de-hongrie-detail` | [6856821](https://www.pexels.com/photo/6856821/) |
+| `sols-point-de-hongrie-detail` | [7587883](https://www.pexels.com/photo/7587883/) |
 | `sols-point-de-hongrie-sejour` | [16922964](https://www.pexels.com/photo/16922964/) |
 | `sols-batons-rompus` | [4409365](https://www.pexels.com/photo/4409365/) |
 | `sols-batons-rompus-detail` | [15066939](https://www.pexels.com/photo/15066939/) |
