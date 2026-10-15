@@ -86,7 +86,9 @@ Pour publier automatiquement depuis ce dépôt Git, indiquez `site-andres-peintu
 Les façades primées du 11 rue des Lois (`facade-rue-des-lois`) et du 3 place Robert-Schuman
 (`facade-place-schuman`) sont des photos de l'entreprise : la première illustre la carte « Façade » de
 l'accueil et le haut de la page Façade, la seconde le haut de la page Entreprise et l'encadré du prix
-sur la page Façade ; les deux figurent côte à côte dans la section des prix de l'accueil. Les autres
+sur la page Façade ; les deux figurent côte à côte dans la section des prix de l'accueil. Le séjour
+rénové (`chantier-peinture-sols`, peinture et parquet en bâtons rompus) illustre le haut de l'accueil
+et l'encadré « Chantier terminé » des pages Peinture et Sols. Les autres
 photos sont des illustrations libres de droits. D'autres photos de vos chantiers (rue Pargaminières,
 avant/après, parquets posés, équipe au travail) renforceront encore la confiance :
 
@@ -120,14 +122,13 @@ Après chaque modification : `python3 build.py`. Ne modifiez pas `public/` direc
 
 ## Crédits photographiques
 
-`facade-rue-des-lois` et `facade-place-schuman` : photos de la SARL ANDRES PASCAL (façades rénovées
-par l'entreprise).
+`facade-rue-des-lois`, `facade-place-schuman` et `chantier-peinture-sols` : photos de la SARL ANDRES
+PASCAL (chantiers réalisés par l'entreprise).
 
 Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sans attribution obligatoire) :
 
 | Fichier | Photo Pexels |
 |---|---|
-| `salon-renove` | [36777534](https://www.pexels.com/photo/36777534/) |
 | `peinture-rouleau` | [7218683](https://www.pexels.com/photo/7218683/) |
 | `peinture-conseil-couleurs` | [8293669](https://www.pexels.com/photo/8293669/) |
 | `peinture-papier-peint` | [5641766](https://www.pexels.com/photo/5641766/) |
