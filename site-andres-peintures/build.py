@@ -115,7 +115,9 @@ class Gabarits:
         self.images = {}
         for p in (SRC / "static" / "img").glob("*-1600.webp"):
             petite = p.with_name(p.name.replace("-1600.webp", "-800.webp"))
-            self.images[p.name[: -len("-1600.webp")]] = (dimensions_webp(p), dimensions_webp(petite)[0])
+            # Empreinte du contenu : une photo remplacée change d'adresse, le navigateur ne ressert pas l'ancienne.
+            empreinte = hashlib.sha256(p.read_bytes() + petite.read_bytes()).hexdigest()[:8]
+            self.images[p.name[: -len("-1600.webp")]] = (dimensions_webp(p), dimensions_webp(petite)[0], empreinte)
 
     def icone(self, nom):
         if nom not in self.icones:
@@ -130,10 +132,10 @@ class Gabarits:
         prioritaire = len(parties) > 3 and parties[3].strip() == "eager"
         if nom not in self.images:
             raise ErreurGabarit(f"image inconnue : {nom} (attendu : src/static/img/{nom}-1600.webp)")
-        (largeur, hauteur), largeur_petite = self.images[nom]
+        (largeur, hauteur), largeur_petite, v = self.images[nom]
         chargement = 'fetchpriority="high"' if prioritaire else 'loading="lazy"'
         return (
-            f'<img src="img/{nom}-1600.webp" srcset="img/{nom}-800.webp {largeur_petite}w, img/{nom}-1600.webp {largeur}w" '
+            f'<img src="img/{nom}-1600.webp?v={v}" srcset="img/{nom}-800.webp?v={v} {largeur_petite}w, img/{nom}-1600.webp?v={v} {largeur}w" '
             f'sizes="{html.escape(sizes)}" width="{largeur}" height="{hauteur}" alt="{html.escape(alt)}" '
             f'{chargement} decoding="async">'
         )
@@ -447,7 +449,7 @@ def construire():
         "/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n"
         "/css/*\n  Cache-Control: public, max-age=31536000, immutable\n"
         "/js/*\n  Cache-Control: public, max-age=31536000, immutable\n"
-        "/img/*\n  Cache-Control: public, max-age=2592000\n",
+        "/img/*\n  Cache-Control: public, max-age=86400, must-revalidate\n",
         encoding="utf-8",
     )
 
