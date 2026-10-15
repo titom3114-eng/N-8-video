@@ -129,9 +129,9 @@ Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sa
 
 | Fichier | Photo Pexels |
 |---|---|
-| `peinture-rouleau` | [7218683](https://www.pexels.com/photo/7218683/) |
+| `peinture-rouleau` | [6474471](https://www.pexels.com/photo/6474471/) |
 | `peinture-conseil-couleurs` | [8293669](https://www.pexels.com/photo/8293669/) |
-| `peinture-papier-peint` | [5641766](https://www.pexels.com/photo/5641766/) |
+| `peinture-preparation` | [5493653](https://www.pexels.com/photo/5493653/) |
 | `toulouse-rue-briques` | [30753234](https://www.pexels.com/photo/30753234/) |
 | `toulouse-capitole` | [30753238](https://www.pexels.com/photo/30753238/) |
 | `toulouse-dome-grave` | [30753243](https://www.pexels.com/photo/30753243/) |
