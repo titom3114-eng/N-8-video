@@ -1,0 +1,5 @@
+# Déploiement Netlify depuis le dépôt Git.
+# Dans Netlify : Site configuration > Build & deploy > Base directory = site-andres-peintures
+[build]
+  command = "python3 build.py"
+  publish = "public"

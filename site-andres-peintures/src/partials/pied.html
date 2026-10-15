@@ -1,0 +1,49 @@
+<footer class="pied">
+  <div class="conteneur">
+    <div class="pied__grille">
+      <div>
+        <a class="pied__logo" href="index.html"><img src="img/logo-andres-peintures-320.webp" width="320" height="111" alt="Pascal Andres Peintures" loading="lazy"></a>
+        <p>Entreprise familiale de peinture, façade, plâtrerie et sols à Toulouse depuis {{annee_creation}}.</p>
+        <a class="pied__prix" href="index.html#prix">{{i:prix}}3 premiers prix de la Ville de Toulouse</a>
+      </div>
+      <div>
+        <p class="pied__titre">Nos métiers</p>
+        <ul>
+          <li><a href="peinture.html">Peinture intérieure et extérieure</a></li>
+          <li><a href="facade.html">Ravalement de façades</a></li>
+          <li><a href="platrerie.html">Plâtrerie, cloisons, plafonds</a></li>
+          <li><a href="sols.html">Revêtements de sols</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="pied__titre">L'entreprise</p>
+        <ul>
+          <li><a href="entreprise.html">Qui sommes-nous ?</a></li>
+          <li><a href="index.html#prix">Nos distinctions</a></li>
+          <li><a href="contact.html">Demande de devis</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+          <li><a href="mentions-legales.html#confidentialite">Confidentialité</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="pied__titre">Nous trouver</p>
+        <ul class="pied__contact">
+          <li>{{i:pin}}<span>{{raison_sociale}}<br>{{adresse_rue}}<br>{{code_postal}} {{ville}}</span></li>
+          {{#tel}}<li>{{i:tel}}<a href="{{tel_lien}}">{{tel}}</a></li>
+          {{/tel}}{{#tel_mobile}}<li>{{i:tel}}<a href="{{tel_mobile_lien}}">{{tel_mobile}}</a></li>
+          {{/tel_mobile}}{{#email}}<li>{{i:mail}}<a href="{{email_lien}}">{{email}}</a></li>
+          {{/email}}{{#horaires}}<li>{{i:horloge}}<span>{{horaires}}</span></li>
+          {{/horaires}}<li>{{i:carte}}<span>Intervention : {{zone_resume}}</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pied__bas">
+      <p>© {{annee}} {{raison_sociale}} · <span class="insecable">SIRET {{siret}}</span></p>
+      <ul>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="mentions-legales.html#confidentialite">Données personnelles</a></li>
+        <li><a href="mentions-legales.html#credits">Crédits photos</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,142 @@
+<!--
+titre: L'entreprise familiale Andres, à Toulouse depuis 1994 | Andres Peintures
+description: Fondée en 1994 par Pascal Andres, l'entreprise familiale réunit peinture, façade, plâtrerie et sols à Toulouse. Une équipe d'artisans récompensée par 3 premiers prix de la Ville de Toulouse.
+page: entreprise
+fil: L'entreprise
+appel_titre: Faisons connaissance autour de votre projet
+-->
+<section class="heros-page" aria-labelledby="titre-page">
+  <div class="conteneur">
+    {{{fil_ariane}}}
+    <div class="heros-page__grille">
+      <div>
+        <p class="surtitre">Qui sommes-nous&nbsp;?</p>
+        <h1 id="titre-page">Une entreprise familiale toulousaine <span class="surligne">depuis {{annee_creation}}</span></h1>
+        <p class="chapo">Derrière le nom Andres, il y a une famille, une équipe d'artisans fidèles et une façon de travailler&nbsp;: écouter, conseiller, puis soigner chaque détail comme si c'était chez nous.</p>
+        <div class="groupe-boutons">
+          <a class="btn btn--jaune" href="contact.html">{{i:devis}}Demander un devis</a>
+          <a class="btn btn--contour" href="#prix-entreprise">Nos distinctions{{i:fleche}}</a>
+        </div>
+      </div>
+      <div class="heros-page__visuel">
+        {{img:toulouse-balcon|Façade toulousaine en brique avec volets bois et balcon en fer forgé|(max-width: 899px) 100vw, 540px|eager}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sable section--serree" aria-label="L'entreprise en chiffres">
+  <div class="conteneur">
+    <ul class="chiffres revele-groupe">
+      <li class="chiffre"><span class="chiffre__valeur"><span>{{annee_creation}}</span></span><span class="chiffre__libelle">Année de création de l'entreprise</span></li>
+      <li class="chiffre"><span class="chiffre__valeur"><span>3</span></span><span class="chiffre__libelle">Premiers prix décernés par la Ville de Toulouse</span></li>
+      <li class="chiffre"><span class="chiffre__valeur"><span>4</span></span><span class="chiffre__libelle">Métiers réunis&nbsp;: peinture, façade, plâtrerie, sols</span></li>
+      <li class="chiffre"><span class="chiffre__valeur"><span>10</span></span><span class="chiffre__libelle">Artisans environ dans l'équipe, autour de la famille</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="titre-histoire">
+  <div class="conteneur duo">
+    <div class="duo__visuel revele">
+      {{img:toulouse-capitole|La place du Capitole à Toulouse, façade de brique rose et de pierre|(max-width: 899px) 100vw, 580px}}
+    </div>
+    <div class="texte-long revele">
+      <p class="surtitre">Notre histoire</p>
+      <h2 id="titre-histoire">{{annees_experience_titre}} de chantiers à Toulouse</h2>
+      <p>Tout commence en {{annee_creation}}, quand Pascal Andres crée son entreprise de peinture à Toulouse. Depuis, la société est restée à taille humaine et profondément familiale&nbsp;: Pascal la dirige entouré de son épouse et de son fils, avec une équipe d'une dizaine d'artisans.</p>
+      <p>Installés dans le quartier {{quartier}}, nous avons réuni quatre métiers complémentaires, la peinture, la façade, la plâtrerie et les sols, pour accompagner un projet de rénovation du mur brut jusqu'à la dernière couche de finition.</p>
+      <p>Au fil des années, notre équipe s'est forgé une solide expérience du bâti ancien toulousain&nbsp;: brique foraine, enduits à la chaux, corniches et modénatures. Un savoir-faire salué par la Ville de Toulouse en 2025 puis en 2026.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--blanc" id="prix-entreprise" aria-labelledby="titre-prix">
+  <div class="conteneur">
+    <div class="entete-section revele">
+      <p class="surtitre">Nos distinctions</p>
+      <h2 id="titre-prix">Trois premiers prix de la Ville de Toulouse</h2>
+      <p class="chapo">Décernés lors du prix des plus belles rénovations de façades de Toulouse, ils récompensent le travail de toute l'équipe.</p>
+    </div>
+    <ul class="grille-prix grille-prix--claire revele-groupe">
+      {{> prix}}
+    </ul>
+    <div class="presse presse--claire">
+      <a href="https://www.ladepeche.fr/2025/06/17/plus-belle-renovation-12766794.php" rel="noopener" target="_blank">{{i:journal}}Lire l'article de La Dépêche du Midi (juin 2025){{i:externe}}<span class="sr-only"> (nouvel onglet)</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="titre-valeurs">
+  <div class="conteneur">
+    <div class="entete-section revele">
+      <p class="surtitre">Notre façon de travailler</p>
+      <h2 id="titre-valeurs">Ce à quoi nous tenons</h2>
+    </div>
+    <ul class="engagements revele-groupe">
+      <li class="engagement">
+        <span class="engagement__icone">{{i:coeur}}</span>
+        <h3>Le respect</h3>
+        <p>De votre maison, de votre temps et de votre budget, mais aussi des bâtiments anciens qui font l'âme de Toulouse.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:devis}}</span>
+        <h3>La transparence</h3>
+        <p>Un devis détaillé, des explications claires sur les solutions possibles, et un interlocuteur joignable tout au long du chantier.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:loupe}}</span>
+        <h3>L'exigence</h3>
+        <p>Une préparation soignée et des finitions contrôlées&nbsp;: ce qui ne se voit pas fait la durée de ce qui se voit.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:equipe}}</span>
+        <h3>L'esprit d'équipe</h3>
+        <p>Des compagnons soudés, encadrés par la famille Andres, dont le travail a été salué par les architectes du Patrimoine de la Ville.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:pin}}</span>
+        <h3>La proximité</h3>
+        <p>Une entreprise de quartier, à Toulouse, qui intervient dans toute l'agglomération et connaît son territoire.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:feuille}}</span>
+        <h3>Des choix durables</h3>
+        <p>Chaux naturelle, briques de terre cuite, peintures adaptées&nbsp;: des matériaux choisis pour durer et respecter le bâti.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--sable" aria-labelledby="titre-clients">
+  <div class="conteneur">
+    <div class="entete-section entete-section--centre revele">
+      <p class="surtitre">Pour qui travaillons-nous&nbsp;?</p>
+      <h2 id="titre-clients">Particuliers comme professionnels</h2>
+    </div>
+    <ul class="clients revele-groupe">
+      <li class="client">
+        <span class="client__icone">{{i:maison}}</span>
+        <h3>Particuliers</h3>
+        <p>Maisons et appartements, de la chambre à rafraîchir à la rénovation complète.</p>
+      </li>
+      <li class="client">
+        <span class="client__icone">{{i:immeuble}}</span>
+        <h3>Copropriétés et syndics</h3>
+        <p>Façades, cages d'escalier et parties communes, avec des devis prêts pour l'assemblée générale.</p>
+      </li>
+      <li class="client">
+        <span class="client__icone">{{i:architecte}}</span>
+        <h3>Architectes</h3>
+        <p>Des chantiers menés en lien étroit avec la maîtrise d'œuvre, y compris en secteur protégé.</p>
+      </li>
+      <li class="client">
+        <span class="client__icone">{{i:boutique}}</span>
+        <h3>Commerces et bureaux</h3>
+        <p>Devantures, boutiques et locaux professionnels, avec un planning adapté à votre activité.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+{{> appel}}

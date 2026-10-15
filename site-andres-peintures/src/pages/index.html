@@ -1,0 +1,273 @@
+<!--
+titre: Andres Peintures – Peinture, façade, plâtrerie et sols à Toulouse
+description: Entreprise familiale toulousaine depuis 1994 : peinture intérieure et extérieure, ravalement de façades, plâtrerie et revêtements de sols. 3 premiers prix de la Ville de Toulouse. Devis gratuit.
+page: accueil
+jsonld_entreprise: oui
+-->
+<section class="heros" aria-labelledby="titre-accueil">
+  <div class="conteneur heros__grille">
+    <div class="heros__texte">
+      <p class="surtitre">Entreprise familiale à Toulouse depuis {{annee_creation}}</p>
+      <h1 id="titre-accueil">Peinture, façade, plâtrerie, sols&nbsp;: votre maison entre <span class="surligne">de bonnes mains</span>.</h1>
+      <p class="chapo">Depuis {{annee_creation}}, la famille Andres et son équipe d'artisans rénovent maisons, appartements, immeubles et commerces à Toulouse et dans son agglomération. Un seul interlocuteur pour vos travaux, un devis clair et gratuit, un travail soigné et reconnu.</p>
+      <div class="groupe-boutons">
+        <a class="btn btn--jaune" href="contact.html">{{i:devis}}Demander mon devis gratuit</a>
+        {{#tel}}<a class="btn btn--contour" href="{{tel_lien}}">{{i:tel}}{{tel}}</a>{{/tel}}{{^tel}}<a class="btn btn--contour" href="#metiers">Découvrir nos métiers{{i:fleche}}</a>{{/tel}}
+      </div>
+      <ul class="preuves">
+        <li><span class="preuves__icone">{{i:prix}}</span><span><strong>3 premiers prix</strong>de la Ville de Toulouse pour nos façades</span></li>
+        <li><span class="preuves__icone">{{i:famille}}</span><span><strong>Entreprise familiale</strong>{{annees_experience}} d'expérience</span></li>
+        <li><span class="preuves__icone">{{i:devis}}</span><span><strong>Devis gratuit</strong>détaillé, après visite sur place</span></li>
+      </ul>
+    </div>
+    <div class="heros__visuel">
+      <svg class="heros__tache" viewBox="0 0 400 400" aria-hidden="true"><path fill="currentColor" d="M318 58c44 34 70 96 58 152-12 57-60 108-118 128-57 21-123 10-170-27C41 274 13 213 25 154 37 95 89 39 150 22c60-16 124 2 168 36z"/></svg>
+      <div class="heros__photo">
+        {{img:salon-renove|Salon lumineux aux murs clairs, canapé bleu et coussins jaunes|(max-width: 999px) 100vw, 560px|eager}}
+      </div>
+      <div class="heros__vignette">
+        {{img:peinture-rouleau|Mur intérieur repeint au rouleau|(max-width: 699px) 45vw, 260px|eager}}
+      </div>
+      <a class="badge-prix" href="#prix">
+        <span class="badge-prix__medaille">{{i:prix}}</span>
+        <span><strong>1<sup>er</sup> prix 2026</strong><span>Ville de Toulouse · rénovation de façades</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sable" id="metiers" aria-labelledby="titre-metiers">
+  <div class="conteneur">
+    <div class="entete-section entete-section--centre revele">
+      <p class="surtitre">Nos 4 métiers</p>
+      <h2 id="titre-metiers">Que souhaitez-vous rénover&nbsp;?</h2>
+      <p class="chapo">Choisissez votre projet&nbsp;: chaque métier a sa page, avec nos prestations, notre méthode et les réponses à vos questions.</p>
+    </div>
+    <ul class="cartes-metiers revele-groupe">
+      <li class="carte-metier teinte-peinture">
+        <div class="carte-metier__image">
+          {{img:peinture-rouleau|Peintre appliquant une peinture blanche au rouleau|(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 290px}}
+        </div>
+        <div class="carte-metier__corps">
+          <span class="carte-metier__icone">{{i:rouleau}}</span>
+          <p class="carte-metier__type">Intérieure &amp; extérieure</p>
+          <h3><a href="peinture.html">Peinture</a></h3>
+          <p>Murs, plafonds, boiseries, volets&nbsp;: des finitions nettes et durables, dans la teinte qui vous ressemble.</p>
+          <ul class="liste-coches">
+            <li>{{i:check}}Murs et plafonds</li>
+            <li>{{i:check}}Boiseries, portes, volets</li>
+            <li>{{i:check}}Papiers peints, toiles de verre</li>
+          </ul>
+          <span class="carte-metier__lien" aria-hidden="true">Découvrir{{i:fleche}}</span>
+        </div>
+      </li>
+      <li class="carte-metier teinte-facade">
+        <div class="carte-metier__image">
+          {{img:facade-ravalement|Façadiers sur échelles repeignant une façade ocre|(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 290px}}
+        </div>
+        <div class="carte-metier__corps">
+          <span class="carte-metier__icone">{{i:facade}}</span>
+          <p class="carte-metier__type">Ravalement &amp; patrimoine</p>
+          <h3><a href="facade.html">Façade</a></h3>
+          <p>Nettoyage, réparation et mise en peinture, jusqu'à la restauration à la chaux des immeubles anciens.</p>
+          <ul class="liste-coches">
+            <li>{{i:check}}Ravalement complet</li>
+            <li>{{i:check}}Fissures, enduits, peinture</li>
+            <li>{{i:check}}Brique et chaux toulousaines</li>
+          </ul>
+          <span class="carte-metier__lien" aria-hidden="true">Découvrir{{i:fleche}}</span>
+        </div>
+      </li>
+      <li class="carte-metier teinte-platrerie">
+        <div class="carte-metier__image">
+          {{img:platrerie-cloison|Plâtrier vérifiant l'aplomb d'une cloison en plaques de plâtre|(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 290px}}
+        </div>
+        <div class="carte-metier__corps">
+          <span class="carte-metier__icone">{{i:cloison}}</span>
+          <p class="carte-metier__type">Cloisons &amp; plafonds</p>
+          <h3><a href="platrerie.html">Plâtrerie</a></h3>
+          <p>Créer une pièce, isoler un mur, refaire un plafond&nbsp;: des ouvrages droits et solides, prêts à peindre.</p>
+          <ul class="liste-coches">
+            <li>{{i:check}}Cloisons et doublages</li>
+            <li>{{i:check}}Faux plafonds, coffrages</li>
+            <li>{{i:check}}Bandes, enduits, réparations</li>
+          </ul>
+          <span class="carte-metier__lien" aria-hidden="true">Découvrir{{i:fleche}}</span>
+        </div>
+      </li>
+      <li class="carte-metier teinte-sols">
+        <div class="carte-metier__image">
+          {{img:sols-pose|Pose de lames de parquet stratifié|(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 290px}}
+        </div>
+        <div class="carte-metier__corps">
+          <span class="carte-metier__icone">{{i:sol}}</span>
+          <p class="carte-metier__type">Revêtements de sols</p>
+          <h3><a href="sols.html">Sols</a></h3>
+          <p>Parquet, stratifié, PVC, moquette&nbsp;: un sol bien préparé et bien posé, pour longtemps.</p>
+          <ul class="liste-coches">
+            <li>{{i:check}}Ragréage et préparation</li>
+            <li>{{i:check}}Parquet flottant, stratifié</li>
+            <li>{{i:check}}Sols PVC, vinyles, moquette</li>
+          </ul>
+          <span class="carte-metier__lien" aria-hidden="true">Découvrir{{i:fleche}}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section-prix" id="prix" aria-labelledby="titre-prix">
+  <div class="section-prix__fond" aria-hidden="true">
+    {{img:toulouse-capitole||100vw}}
+  </div>
+  <div class="conteneur">
+    <div class="entete-section entete-section--centre revele">
+      <p class="surtitre">Un savoir-faire reconnu</p>
+      <h2 id="titre-prix">Trois premiers prix décernés par la Ville de Toulouse</h2>
+      <p class="chapo">Chaque année, la Ville de Toulouse récompense les plus belles rénovations de façades de la ville. Notre équipe a été distinguée deux années de suite, en 2025 puis en 2026.</p>
+    </div>
+    <ul class="grille-prix revele-groupe">
+      {{> prix}}
+    </ul>
+    <figure class="citation revele">
+      <blockquote>
+        <p>Fiers aussi des efforts fournis et de la détermination de nos équipiers Thierry, Yoan, Calum et Bilal, entre autres, qui ont effectué un travail de qualité remarqué et apprécié par les architectes du Patrimoine de la ville de Toulouse.</p>
+      </blockquote>
+      <figcaption><strong>Pascal et Tom Andres</strong>, cités par <cite>La Dépêche du Midi</cite> (2026)</figcaption>
+    </figure>
+    <div class="presse">
+      <a href="https://www.ladepeche.fr/2025/06/17/plus-belle-renovation-12766794.php" rel="noopener" target="_blank">{{i:journal}}Lire l'article de La Dépêche du Midi (juin 2025){{i:externe}}<span class="sr-only"> (nouvel onglet)</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="titre-engagements">
+  <div class="conteneur">
+    <div class="entete-section revele">
+      <p class="surtitre">Pourquoi nous choisir</p>
+      <h2 id="titre-engagements">Ce qui nous engage auprès de vous</h2>
+      <p class="chapo">Une entreprise de quartier, des artisans qui aiment le travail bien fait et des règles simples, tenues sur chaque chantier.</p>
+    </div>
+    <ul class="engagements revele-groupe">
+      <li class="engagement">
+        <span class="engagement__icone">{{i:famille}}</span>
+        <h3>Une entreprise familiale</h3>
+        <p>Fondée en {{annee_creation}} par Pascal Andres, l'entreprise est toujours menée en famille. Vous savez à qui vous parlez, du premier rendez-vous à la fin du chantier.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:devis}}</span>
+        <h3>Un devis clair et gratuit</h3>
+        <p>Nous venons voir les lieux, prenons les mesures, vous conseillons, puis détaillons chaque poste. Pas de mauvaise surprise à l'arrivée.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:interlocuteur}}</span>
+        <h3>Un seul interlocuteur, quatre métiers</h3>
+        <p>Plâtrerie, peinture, sols, façade&nbsp;: une même équipe enchaîne les travaux dans le bon ordre. Moins de délais, moins de coordination pour vous.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:propre}}</span>
+        <h3>Un chantier propre et protégé</h3>
+        <p>Sols, meubles et menuiseries sont protégés avant de commencer, et le chantier est rangé chaque soir. Vous retrouvez une maison nette.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:patrimoine}}</span>
+        <h3>Le savoir-faire du patrimoine</h3>
+        <p>Brique, chaux, corniches, menuiseries anciennes&nbsp;: nous connaissons les exigences du centre historique toulousain et des architectes du patrimoine.</p>
+      </li>
+      <li class="engagement">
+        <span class="engagement__icone">{{i:feuille}}</span>
+        <h3>Des matériaux bien choisis</h3>
+        <p>Peintures professionnelles, enduits à la chaux naturelle, briques de terre cuite&nbsp;: le bon produit pour chaque support, pour un résultat qui dure.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--blanc" aria-labelledby="titre-etapes">
+  <div class="conteneur">
+    <div class="entete-section entete-section--centre revele">
+      <p class="surtitre">Simple et sans surprise</p>
+      <h2 id="titre-etapes">Votre projet en 4 étapes</h2>
+    </div>
+    <ol class="etapes revele-groupe">
+      <li class="etape">
+        <h3>Vous nous contactez</h3>
+        <p>{{#tel}}Par téléphone ou via{{/tel}}{{^tel}}Via{{/tel}} le formulaire de devis, décrivez votre projet en quelques mots. Nous revenons vers vous pour fixer un rendez-vous.</p>
+      </li>
+      <li class="etape">
+        <h3>Nous venons sur place</h3>
+        <p>Visite gratuite&nbsp;: nous regardons l'état des supports, prenons les mesures et vous conseillons sur les teintes et les matériaux.</p>
+      </li>
+      <li class="etape">
+        <h3>Vous recevez le devis</h3>
+        <p>Chaque poste est décrit et chiffré&nbsp;: préparation, fournitures, finitions. Vous prenez le temps de décider.</p>
+      </li>
+      <li class="etape">
+        <h3>Nous réalisons, vous profitez</h3>
+        <p>Les travaux suivent le planning convenu. À la fin, nous faisons le tour du chantier ensemble.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="titre-zone">
+  <div class="conteneur zone">
+    <div class="revele">
+      <p class="surtitre">Votre artisan de quartier</p>
+      <h2 id="titre-zone">À Toulouse et dans toute l'agglomération</h2>
+      <p class="chapo">Notre entreprise est installée dans le quartier {{quartier}}, au sud-est de Toulouse. Nous intervenons chez les particuliers, les copropriétés, les commerçants et aux côtés des syndics et des architectes, du centre historique aux communes voisines.</p>
+      <ul class="communes" aria-label="Communes où nous intervenons">
+        {{{communes_li}}}
+      </ul>
+      <a class="btn btn--bleu" href="contact.html">{{i:devis}}Demander un devis</a>
+    </div>
+    <div class="zone__visuel revele">
+      {{img:toulouse-dome-grave|Le dôme de la Grave et le pont Saint-Pierre sur la Garonne, à Toulouse|(max-width: 899px) 100vw, 580px}}
+      <div class="carte-adresse">
+        <span class="carte-adresse__icone">{{i:pin}}</span>
+        <div>
+          <strong>{{raison_sociale}}</strong>
+          {{adresse_rue}}, {{code_postal}} {{ville}}<br>
+          <a href="{{lien_itineraire}}" rel="noopener" target="_blank">Voir l'itinéraire<span class="sr-only"> (nouvel onglet)</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sable" aria-labelledby="titre-faq">
+  <div class="conteneur">
+    <div class="entete-section entete-section--centre revele">
+      <p class="surtitre">Vos questions</p>
+      <h2 id="titre-faq">Questions fréquentes</h2>
+    </div>
+    <div class="faq revele">
+      <details>
+        <summary>Le devis est-il vraiment gratuit&nbsp;?</summary>
+        <div class="faq__reponse"><p>Oui. Nous nous déplaçons gratuitement pour étudier votre projet, puis nous vous remettons un devis détaillé, sans engagement de votre part.</p></div>
+      </details>
+      <details>
+        <summary>Travaillez-vous pour les particuliers comme pour les professionnels&nbsp;?</summary>
+        <div class="faq__reponse"><p>Oui&nbsp;: maisons et appartements de particuliers, parties communes et façades de copropriétés, commerces et bureaux. Nous travaillons aussi aux côtés des syndics et des architectes, comme sur les façades primées par la Ville de Toulouse.</p></div>
+      </details>
+      <details>
+        <summary>Peut-on bénéficier d'une TVA réduite&nbsp;?</summary>
+        <div class="faq__reponse"><p>Pour des travaux d'amélioration, de transformation ou d'entretien dans un logement achevé depuis plus de deux ans, la TVA est en principe de 10&nbsp;% au lieu de 20&nbsp;%. Nous appliquons sur le devis le taux auquel votre projet a droit et vous expliquons les justificatifs à fournir.</p></div>
+      </details>
+      <details>
+        <summary>Faut-il une autorisation pour ravaler une façade&nbsp;?</summary>
+        <div class="faq__reponse"><p>Selon l'adresse et la nature des travaux, une déclaration préalable peut être nécessaire, notamment dans le centre historique de Toulouse, classé Site Patrimonial Remarquable, où l'Architecte des Bâtiments de France donne son avis. Nous vous aidons à préparer le dossier.</p></div>
+      </details>
+      <details>
+        <summary>Peut-on rester chez soi pendant les travaux&nbsp;?</summary>
+        <div class="faq__reponse"><p>Oui, la plupart du temps. Nous organisons le chantier pièce par pièce, protégeons votre mobilier et laissons les passages dégagés chaque soir.</p></div>
+      </details>
+      <details>
+        <summary>Êtes-vous assurés&nbsp;?</summary>
+        <div class="faq__reponse"><p>Oui. L'entreprise est assurée en responsabilité civile professionnelle et en garantie décennale. Les références de nos assurances figurent sur chaque devis.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+{{> appel}}

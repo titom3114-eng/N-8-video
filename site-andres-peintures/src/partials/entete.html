@@ -1,0 +1,54 @@
+<a class="lien-evitement" href="#contenu">Aller au contenu</a>
+<div class="bandeau-info">
+  <div class="conteneur">
+    <a href="index.html#prix">{{i:prix}}<span class="bandeau-info__long">3 premiers prix de la Ville de Toulouse pour nos rénovations de façades (2025 et 2026)</span><span class="bandeau-info__court">3 premiers prix de la Ville de Toulouse</span></a>
+    <div class="bandeau-info__droite">
+      <span>Entreprise familiale depuis {{annee_creation}}</span>
+      {{#tel}}<a href="{{tel_lien}}">{{i:tel}}{{tel}}</a>{{/tel}}{{^tel}}{{#email}}<a href="{{email_lien}}">{{i:mail}}{{email}}</a>{{/email}}{{/tel}}
+    </div>
+  </div>
+</div>
+<header class="entete">
+  <div class="conteneur entete__barre">
+    <a class="entete__logo" href="index.html" aria-label="Andres Peintures : retour à l'accueil">
+      <img src="img/logo-andres-peintures.webp" width="640" height="221" alt="Pascal Andres Peintures" fetchpriority="high">
+    </a>
+    <nav class="menu" aria-label="Navigation principale">
+      <ul class="menu__liste">
+        <li class="teinte-peinture"><a class="menu__lien" href="peinture.html"{{{actif_peinture}}}>{{i:rouleau}}Peinture</a></li>
+        <li class="teinte-facade"><a class="menu__lien" href="facade.html"{{{actif_facade}}}>{{i:facade}}Façade</a></li>
+        <li class="teinte-platrerie"><a class="menu__lien" href="platrerie.html"{{{actif_platrerie}}}>{{i:cloison}}Plâtrerie</a></li>
+        <li class="teinte-sols"><a class="menu__lien" href="sols.html"{{{actif_sols}}}>{{i:sol}}Sols</a></li>
+        <li><a class="menu__lien" href="entreprise.html"{{{actif_entreprise}}}>L'entreprise</a></li>
+      </ul>
+    </nav>
+    <div class="entete__actions">
+      {{#tel}}<a class="entete__tel" href="{{tel_lien}}">{{i:tel}}{{tel}}</a>
+      {{/tel}}<a class="btn btn--jaune btn--petit" href="contact.html"{{{actif_contact}}}>Devis gratuit</a>
+    </div>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="panneau-mobile">
+      <svg class="icone icone--menu" aria-hidden="true"><use href="#i-menu"/></svg>
+      <svg class="icone icone--fermer" aria-hidden="true"><use href="#i-fermer"/></svg>
+      <span class="burger__texte">Menu</span>
+    </button>
+  </div>
+</header>
+<div class="panneau-mobile" id="panneau-mobile" aria-hidden="true">
+  <p class="panneau-mobile__titre">Que souhaitez-vous rénover ?</p>
+  <ul class="panneau-mobile__metiers">
+    <li class="teinte-peinture"><a class="tuile" href="peinture.html"><span class="tuile__icone">{{i:rouleau}}</span><span class="tuile__nom">Peinture</span><span class="tuile__detail">Murs, plafonds, boiseries</span></a></li>
+    <li class="teinte-facade"><a class="tuile" href="facade.html"><span class="tuile__icone">{{i:facade}}</span><span class="tuile__nom">Façade</span><span class="tuile__detail">Ravalement, enduits, brique</span></a></li>
+    <li class="teinte-platrerie"><a class="tuile" href="platrerie.html"><span class="tuile__icone">{{i:cloison}}</span><span class="tuile__nom">Plâtrerie</span><span class="tuile__detail">Cloisons, doublages, plafonds</span></a></li>
+    <li class="teinte-sols"><a class="tuile" href="sols.html"><span class="tuile__icone">{{i:sol}}</span><span class="tuile__nom">Sols</span><span class="tuile__detail">Parquet, stratifié, PVC</span></a></li>
+  </ul>
+  <ul class="panneau-mobile__liens">
+    <li><a href="index.html">Accueil {{i:chevron}}</a></li>
+    <li><a href="entreprise.html">L'entreprise familiale {{i:chevron}}</a></li>
+    <li><a href="index.html#prix">Nos prix de la Ville de Toulouse {{i:chevron}}</a></li>
+    <li><a href="contact.html">Contact et devis {{i:chevron}}</a></li>
+  </ul>
+  <div class="groupe-boutons">
+    <a class="btn btn--jaune" href="contact.html">{{i:devis}}Demander un devis gratuit</a>
+    {{#tel}}<a class="btn btn--contour" href="{{tel_lien}}">{{i:tel}}Appeler le {{tel}}</a>{{/tel}}
+  </div>
+</div>

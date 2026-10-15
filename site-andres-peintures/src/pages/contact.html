@@ -1,0 +1,120 @@
+<!--
+titre: Devis gratuit et contact | Andres Peintures, Toulouse
+description: Demandez votre devis gratuit pour vos travaux de peinture, façade, plâtrerie ou sols à Toulouse et dans l'agglomération. Visite sur place et devis détaillé, sans engagement.
+page: contact
+fil: Contact et devis
+-->
+<section class="heros-page" aria-labelledby="titre-page">
+  <div class="conteneur">
+    {{{fil_ariane}}}
+    <div class="entete-section">
+      <p class="surtitre">Devis gratuit et sans engagement</p>
+      <h1 id="titre-page">Parlons de <span class="surligne">votre projet</span></h1>
+      <p class="chapo">Décrivez vos travaux en quelques lignes&nbsp;: nous revenons vers vous pour convenir d'une visite sur place, puis nous vous remettons un devis détaillé.</p>
+    </div>
+
+    <div class="contact" id="devis">
+      <form class="formulaire" id="form-devis" {{{form_attributs}}}>
+        {{#form_netlify}}<input type="hidden" name="form-name" value="devis">
+        {{/form_netlify}}<p class="piege"><label>Ne remplissez pas ce champ : <input name="site_web" tabindex="-1" autocomplete="off"></label></p>
+        <h2>Votre demande de devis</h2>
+        <p class="formulaire__erreur" role="alert"></p>
+
+        <fieldset>
+          <legend>Vos travaux concernent&nbsp;* <span>(plusieurs choix possibles)</span></legend>
+          <div class="choix-travaux">
+            <label class="teinte-peinture"><input type="checkbox" name="travaux[]" value="peinture" data-libelle="Peinture"><span class="choix-travaux__coche">{{i:check}}</span><span class="choix-travaux__icone">{{i:rouleau}}</span>Peinture</label>
+            <label class="teinte-facade"><input type="checkbox" name="travaux[]" value="facade" data-libelle="Façade"><span class="choix-travaux__coche">{{i:check}}</span><span class="choix-travaux__icone">{{i:facade}}</span>Façade</label>
+            <label class="teinte-platrerie"><input type="checkbox" name="travaux[]" value="platrerie" data-libelle="Plâtrerie"><span class="choix-travaux__coche">{{i:check}}</span><span class="choix-travaux__icone">{{i:cloison}}</span>Plâtrerie</label>
+            <label class="teinte-sols"><input type="checkbox" name="travaux[]" value="sols" data-libelle="Sols"><span class="choix-travaux__coche">{{i:check}}</span><span class="choix-travaux__icone">{{i:sol}}</span>Sols</label>
+          </div>
+        </fieldset>
+
+        <div class="champs">
+          <div class="champ">
+            <label for="bien">Type de bien</label>
+            <select id="bien" name="bien">
+              <option value="">Choisir</option>
+              <option>Maison</option>
+              <option>Appartement</option>
+              <option>Immeuble ou copropriété</option>
+              <option>Commerce ou bureaux</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="champ">
+            <label for="commune">Commune des travaux</label>
+            <input id="commune" name="commune" type="text" list="liste-communes" autocomplete="address-level2" placeholder="Ex. : Toulouse">
+            <datalist id="liste-communes">
+              {{{communes_options}}}
+            </datalist>
+          </div>
+          <div class="champ champ--large">
+            <label for="message">Votre projet&nbsp;* <span>(pièces, surfaces approximatives, délai souhaité)</span></label>
+            <textarea id="message" name="message" required minlength="10" placeholder="Ex. : repeindre un séjour de 25 m² et deux chambres, plafonds compris, idéalement au printemps."></textarea>
+          </div>
+        </div>
+
+        <div class="champs">
+          <div class="champ champ--large">
+            <label for="nom">Nom et prénom&nbsp;*</label>
+            <input id="nom" name="nom" type="text" required autocomplete="name">
+          </div>
+          <div class="champ">
+            <label for="telephone">Téléphone&nbsp;*</label>
+            <input id="telephone" name="telephone" type="tel" required autocomplete="tel" inputmode="tel" pattern="[0-9 .+\-\(\)]{10,20}" title="Un numéro de téléphone, par exemple 06 12 34 56 78">
+          </div>
+          <div class="champ">
+            <label for="email">Courriel <span>(facultatif)</span></label>
+            <input id="email" name="email" type="email" autocomplete="email">
+          </div>
+          <div class="champ champ--large">
+            <label for="disponibilite">Quand vous joindre&nbsp;?</label>
+            <select id="disponibilite" name="disponibilite">
+              <option value="">Peu importe</option>
+              <option>Le matin</option>
+              <option>En début d'après-midi</option>
+              <option>En fin de journée</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="consentement"><input type="checkbox" name="consentement" value="oui" required><span>J'accepte que les informations saisies soient utilisées pour être recontacté(e) au sujet de ma demande. Elles ne sont jamais cédées à des tiers. <a href="mentions-legales.html#confidentialite">En savoir plus</a>&nbsp;*</span></label>
+
+        <div class="formulaire__bas">
+          <button class="btn btn--jaune" type="submit">{{i:envoyer}}<span class="btn__texte">Envoyer ma demande</span></button>
+          <p class="formulaire__note">* Champs obligatoires. Réponse gratuite et sans engagement.</p>
+        </div>
+      </form>
+
+      <aside class="aside-contact" aria-label="Nos coordonnées">
+        <div class="encart">
+          <h2>Nos coordonnées</h2>
+          <ul class="coordonnees">
+            <li><span class="coordonnees__icone">{{i:pin}}</span><span><strong>{{raison_sociale}}</strong>{{adresse_rue}}<br>{{code_postal}} {{ville}} ({{quartier}})<br><a href="{{lien_itineraire}}" rel="noopener" target="_blank">Itinéraire<span class="sr-only"> (nouvel onglet)</span></a></span></li>
+            {{#tel}}<li><span class="coordonnees__icone">{{i:tel}}</span><span><strong>Téléphone</strong><a href="{{tel_lien}}">{{tel}}</a></span></li>
+            {{/tel}}{{#tel_mobile}}<li><span class="coordonnees__icone">{{i:tel}}</span><span><strong>Mobile</strong><a href="{{tel_mobile_lien}}">{{tel_mobile}}</a></span></li>
+            {{/tel_mobile}}{{#email}}<li><span class="coordonnees__icone">{{i:mail}}</span><span><strong>Courriel</strong><a href="{{email_lien}}">{{email}}</a></span></li>
+            {{/email}}{{#horaires}}<li><span class="coordonnees__icone">{{i:horloge}}</span><span><strong>Horaires</strong>{{horaires}}</span></li>
+            {{/horaires}}<li><span class="coordonnees__icone">{{i:carte}}</span><span><strong>Zone d'intervention</strong>{{zone_resume}}</span></li>
+          </ul>
+        </div>
+        <div class="encart encart--bleu">
+          <h2>Et ensuite&nbsp;?</h2>
+          <ol class="mini-etapes">
+            <li>Nous lisons votre demande et vous recontactons.</li>
+            <li>Nous convenons d'une visite gratuite sur place.</li>
+            <li>Vous recevez un devis détaillé, poste par poste.</li>
+          </ol>
+        </div>
+        <div class="carte-osm" data-adresse="{{adresse_complete}}">
+          <div class="carte-osm__apercu">
+            <span class="coordonnees__icone">{{i:carte}}</span>
+            <button class="btn btn--bleu btn--petit" type="button" data-charger-carte="{{osm_embed}}">Afficher le plan</button>
+            <p>Le plan est fourni par OpenStreetMap et ne se charge que si vous cliquez.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{titre}}</title>
+<meta name="description" content="{{description}}">
+{{#robots}}<meta name="robots" content="{{robots}}">
+{{/robots}}{{#canonique}}<link rel="canonical" href="{{canonique}}">
+{{/canonique}}<meta name="theme-color" content="#16214f">
+<meta name="format-detection" content="telephone=no">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="{{nom_commercial}}">
+<meta property="og:title" content="{{titre}}">
+<meta property="og:description" content="{{description}}">
+{{#canonique}}<meta property="og:url" content="{{canonique}}">
+{{/canonique}}{{#url}}<meta property="og:image" content="{{url}}/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo Pascal Andres Peintures, entreprise familiale à Toulouse">
+{{/url}}<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="fonts/Fraunces-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/NunitoSans-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css?v={{version}}">
+<script>{{{script_js}}}</script>
+<script src="js/main.js?v={{version}}" defer></script>
+{{{jsonld}}}

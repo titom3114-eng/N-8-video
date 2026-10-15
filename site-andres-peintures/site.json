@@ -1,0 +1,57 @@
+{
+  "_aide": "Coordonnées et réglages du site. Modifiez une valeur puis lancez « python3 build.py » : toutes les pages sont régénérées dans public/. Une valeur laissée vide (\"\") masque proprement l'élément correspondant sur tout le site.",
+
+  "entreprise": {
+    "raison_sociale": "SARL ANDRES PASCAL",
+    "nom_commercial": "Andres Peintures",
+    "gerant": "Pascal Andres",
+    "annee_creation": 1994,
+    "forme_juridique": "Société à responsabilité limitée (SARL)",
+    "capital": "7 622,45 €",
+    "siren": "397 838 426",
+    "siret": "397 838 426 00021",
+    "rcs": "RCS Toulouse 397 838 426",
+    "tva": "FR33397838426",
+    "naf": "43.34Z – Travaux de peinture et vitrerie"
+  },
+
+  "coordonnees": {
+    "adresse_rue": "14 avenue des Avions",
+    "code_postal": "31400",
+    "ville": "Toulouse",
+    "quartier": "Saouzelong",
+    "latitude": 43.576442,
+    "longitude": 1.456038,
+    "telephone": "",
+    "telephone_mobile": "",
+    "email": "",
+    "horaires": ""
+  },
+
+  "zone_intervention": {
+    "resume": "Toulouse et son agglomération",
+    "communes": [
+      "Toulouse",
+      "Ramonville-Saint-Agne",
+      "Castanet-Tolosan",
+      "Labège",
+      "Saint-Orens-de-Gameville",
+      "Balma",
+      "L'Union",
+      "Blagnac",
+      "Colomiers",
+      "Tournefeuille",
+      "Cugnaux",
+      "Portet-sur-Garonne",
+      "Muret"
+    ]
+  },
+
+  "site": {
+    "url": "",
+    "formulaire": "netlify",
+    "hebergeur_nom": "Netlify, Inc.",
+    "hebergeur_adresse": "101 2nd Street, San Francisco, CA 94105, États-Unis",
+    "hebergeur_site": "https://www.netlify.com"
+  }
+}
