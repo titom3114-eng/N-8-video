@@ -83,10 +83,12 @@ Pour publier automatiquement depuis ce dépôt Git, indiquez `site-andres-peintu
 
 ## Ajouter vos photos de chantiers
 
-La façade primée du 11 rue des Lois (`facade-rue-des-lois`) est une photo de l'entreprise ; elle
-illustre la carte « Façade » de l'accueil, la section des prix et le haut de la page Façade. Les autres
+Les façades primées du 11 rue des Lois (`facade-rue-des-lois`) et du 3 place Robert-Schuman
+(`facade-place-schuman`) sont des photos de l'entreprise : la première illustre la carte « Façade » de
+l'accueil et le haut de la page Façade, la seconde le haut de la page Entreprise et l'encadré du prix
+sur la page Façade ; les deux figurent côte à côte dans la section des prix de l'accueil. Les autres
 photos sont des illustrations libres de droits. D'autres photos de vos chantiers (rue Pargaminières,
-place Schuman, avant/après, équipe au travail) renforceront encore la confiance :
+avant/après, parquets posés, équipe au travail) renforceront encore la confiance :
 
 ```bash
 pip install pillow
@@ -113,12 +115,13 @@ Après chaque modification : `python3 build.py`. Ne modifiez pas `public/` direc
   et registre du commerce.
 - Prix 2025 (plus belle rénovation de devanture commerciale 2024, 59 rue Pargaminières) :
   [La Dépêche du Midi, 17 juin 2025](https://www.ladepeche.fr/2025/06/17/plus-belle-renovation-12766794.php).
-- Prix 2026 (Patrimoine Remarquable, 3 place Schuman ; Patrimoine Domestique, 11 rue des Lois) :
+- Prix 2026 (Patrimoine Remarquable, 3 place Robert-Schuman ; Patrimoine Domestique, 11 rue des Lois) :
   La Dépêche du Midi, édition papier, article « Une société doublement primée pour ses façades ».
 
 ## Crédits photographiques
 
-`facade-rue-des-lois` : photo de la SARL ANDRES PASCAL (façade rénovée par l'entreprise).
+`facade-rue-des-lois` et `facade-place-schuman` : photos de la SARL ANDRES PASCAL (façades rénovées
+par l'entreprise).
 
 Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sans attribution obligatoire) :
 
@@ -131,7 +134,6 @@ Photos [Pexels](https://www.pexels.com/license/) (usage commercial autorisé, sa
 | `toulouse-rue-briques` | [30753234](https://www.pexels.com/photo/30753234/) |
 | `toulouse-capitole` | [30753238](https://www.pexels.com/photo/30753238/) |
 | `toulouse-dome-grave` | [30753243](https://www.pexels.com/photo/30753243/) |
-| `toulouse-balcon` | [30753239](https://www.pexels.com/photo/30753239/) |
 | `platrerie-cloison` | [5493675](https://www.pexels.com/photo/5493675/) |
 | `platrerie-plafond` | [6474129](https://www.pexels.com/photo/6474129/) |
 | `sols-pose` | [4263067](https://www.pexels.com/photo/4263067/) |
