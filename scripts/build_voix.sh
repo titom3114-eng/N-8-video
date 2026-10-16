@@ -22,6 +22,6 @@ python3 scripts/mux.py --film voix
 
 # affiches : dernière image pleine du logo
 for f in 16x9 9x16; do
-  ffmpeg -y -v error -sseof -1.8 -i "output/N8_Huit-Voix_$f.mp4" -frames:v 1 "output/N8_Huit-Voix_affiche_$f.png"
+  ffmpeg -y -v error -sseof -1.45 -i "output/N8_Huit-Voix_$f.mp4" -frames:v 1 "output/N8_Huit-Voix_affiche_$f.png"
 done
 echo "Terminé : output/N8_Huit-Voix_*"

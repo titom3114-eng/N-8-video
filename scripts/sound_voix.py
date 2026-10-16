@@ -5,10 +5,10 @@ La nuit chuchote son nom dans huit langues. Chaque chapitre : un battement de c�
 chuchoté au moment où N + huit devient « nuit », puis la ville s'ouvre (son ambiance arrive avec l'image) et son
 odeur a un bruit (souffle de cigare, versement, encensoir, orange pressée, talons sous la pluie, métro, feu, eau).
 Le chœur : les huit voix se superposent en nuée, le cœur accélère, montée — coupure nette, silence.
-Dans le silence, une voix grave : « Dans toutes les langues, la nuit s'écrit… N plus huit. » Sur « huit »,
+Dans le silence, la voix, tout près : « Dans toutes les langues, la nuit s'écrit… N plus huit. » Sur « huit »,
 le logo frappe et la musique revient. « Maison de parfums nocturne. »
 
-- Voix : scripts/voices.py (synthèse Piper hors ligne + chuchotement), build/voices/out/*.wav.
+- Voix : scripts/voices.py (synthèse Kokoro hors ligne + chuchotement), build/voices/out/*.wav.
 - Musique : « Cinematic Visions » (Coverr, licence Coverr), montée sur la grille du film (110 BPM).
 - Bruitages et ambiances : Mixkit (Sound Effects Free License).
 
@@ -41,11 +41,13 @@ FX.update({
     # la lettre s'ouvre : souffle qui culmine sur la coupe
     'thru':   [dict(f=(1490, 1462, 2607), db=-15, peak=True, pre=0.45, tail=0.2, rev=0.2)],
     'swoosh': [dict(f=2604, db=-9, len=1.2, onset=True, rev=0.3)],
+    # le logo : la montée culmine exactement sur « huit », doublée d'un dernier battement de cœur, très grave
+    'logo':   [dict(f=2897, db=-4, peak=True, pre=1.5, tail=2.8, rev=0.35), dict(f=498, db=-7, len=3.0, onset=True, lp=900, rev=0.2)],
 })
 # ambiance de chaque ville : elle s'ouvre avec la fenêtre (plan "window") et s'arrête à la fin de la ville
 BEDS = {
     'intro':     [dict(f=1177, db=-40)],
-    'paris':     [dict(f=444, db=-31, start=30.0, lp=2600)],              # rumeur feutrée d'un bar
+    'paris':     [dict(f=444, db=-35, start=30.0, lp=1400)],              # rumeur très feutrée d'un bar
     'roma':      [dict(f=1251, db=-31, start=2.0)],                       # pluie fine sur la pierre
     'madrid':    [dict(f=1789, db=-32, start=3.0, hp=1500)],              # grillons d'une nuit d'été
     'london':    [dict(f=2393, db=-31, start=1.0)],                       # pluie
@@ -158,6 +160,7 @@ def build(cues, edl):
     send = {n: np.zeros((2, N)) for n in names}
     voices_bus = np.zeros((2, N))
     vsend = np.zeros((2, N))
+    vsend_cloud = np.zeros((2, N))
     beds = np.zeros((2, N))
     edl_shots = {sh['id']: sh for sec in edl['sections'] for sh in sec['shots']}
 
@@ -182,7 +185,7 @@ def build(cues, edl):
         if ev['type'] == 'vo':
             st = render_voice(ev)
             R.place(voices_bus, st, ev['t'])
-            R.place(vsend, st * ev.get('rev', 0.12), ev['t'])
+            R.place(vsend, st * ev.get('rev', 0.05), ev['t'] + 0.03)    # pré-délai : la voix reste devant
             continue
         if ev['type'] not in FX:
             continue
@@ -196,7 +199,7 @@ def build(cues, edl):
     ch = next(s for s in secs_ if s['name'] == 'choeur')
     cloud = chorus_cloud(ch['start'], ch['end'])
     R.place(voices_bus, cloud, ch['start'])
-    R.place(vsend, cloud * 0.55, ch['start'])
+    R.place(vsend_cloud, cloud * 0.55, ch['start'])
 
     fx_dry = sum(dry.values())
     wet = np.zeros((2, N))
@@ -204,16 +207,20 @@ def build(cues, edl):
         if np.any(bus):
             rt_lo, rt_hi = ROOMS.get(name, (2.0, 1.2))
             wet += convolve(bus, reverb_ir(sec=min(4.5, rt_lo * 1.3), seed=11 + len(name), rt_low=rt_lo, rt_high=rt_hi)) * 0.9
-    wet += convolve(vsend, reverb_ir(sec=3.0, seed=5, rt_low=2.2, rt_high=1.3)) * 0.8
+    wet += convolve(vsend, reverb_ir(sec=1.6, seed=5, rt_low=1.1, rt_high=0.7)) * 0.8        # pièce intime
+    wet += convolve(vsend_cloud, reverb_ir(sec=3.0, seed=4, rt_low=2.4, rt_high=1.3)) * 0.8   # la nuée : vaste
 
-    # musique : sous les voix (−8 dB) et sous les bruitages (−5 dB)
+    # musique : sous les voix (−11 dB) et sous les bruitages (−5 dB)
     music = music_bus(edl, N)
     ev_v = R.envelope(voices_bus, 0.03)
     ev_f = R.envelope(fx_dry, 0.03)
-    duck = (1 - 0.6 * np.clip(ev_v / db(VOICE_REF - 12), 0, 1)) * (1 - 0.45 * np.clip(ev_f / db(R.REF - 10), 0, 1))
-    music *= R.smooth(duck, int(0.2 * SR))
+    duck = (1 - 0.72 * np.clip(ev_v / db(VOICE_REF - 12), 0, 1)) * (1 - 0.45 * np.clip(ev_f / db(R.REF - 10), 0, 1))
+    duck = R.smooth(duck, int(0.2 * SR))
+    la = int(0.1 * SR)                       # anticipation : la musique s'efface juste avant la voix
+    duck = np.concatenate([duck[la:], np.full(la, duck[-1])])
+    music *= duck
 
-    # coupure nette à la fin du chœur : tout s'arrête, réverbérations comprises ; puis la finale (voix grave, logo)
+    # coupure nette à la fin du chœur : tout s'arrête, réverbérations comprises ; puis la finale (la voix, le logo)
     t_cut = ch['end']
     gate = np.ones(N)
     i0 = int(t_cut * SR)
@@ -228,7 +235,7 @@ def build(cues, edl):
         if ev['type'] == 'vo':
             st = render_voice(ev)
             R.place(fin_v, st, ev['t'])
-            R.place(fin_vs, st * ev.get('rev', 0.14), ev['t'])
+            R.place(fin_vs, st * ev.get('rev', 0.08), ev['t'] + 0.03)
         elif ev['type'] in FX:
             for spec in FX[ev['type']]:
                 x, t0 = R.render_fx(spec, ev, 0)
@@ -237,7 +244,7 @@ def build(cues, edl):
     for spec in BEDS['finale']:
         a2 = fin['start'] + spec.get('delay', 0)
         R.place(fin_bed, R.bed(spec, int((fin['end'] - a2 + 0.3) * SR), a2), a2)
-    fin_wet = convolve(fin_vs, reverb_ir(sec=3.0, seed=6, rt_low=2.4, rt_high=1.4)) * 0.7 \
+    fin_wet = convolve(fin_vs, reverb_ir(sec=2.0, seed=6, rt_low=1.4, rt_high=0.9)) * 0.7 \
         + convolve(fin_send, reverb_ir(sec=4.0, seed=9, rt_low=3.0, rt_high=1.8)) * 0.9
     music_fin = music.copy()
     music_fin[:, :i0] = 0

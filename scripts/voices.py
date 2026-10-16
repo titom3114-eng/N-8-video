@@ -37,7 +37,7 @@ KOKORO = 'https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-fi
 W = (70, 0.3, True, 0.07)
 LINES = {
     'intro':  ('ff_siwis', 'fr-fr', 'La nuit a une odeur.', 0.9, 'whisper', (70, 0.55, True, 0.0)),
-    'w_fr':   ('ff_siwis', 'fr-fr', 'Nuit.', 1.0, 'whisper', W),
+    'w_fr':   ('ff_siwis', 'fr-fr', 'Nuit.', 1.0, 'whisper', (70, 0.45, True, 0.07)),
     'w_it':   ('im_nicola', 'it', 'Notte !', 0.8, 'whisper', W),
     'w_es':   ('ef_dora', 'es', '¡Noche!', 1.0, 'whisper', W),
     'w_en':   ('bm_lewis', 'en-gb', 'Night.', 0.8, 'whisper', W),
@@ -45,7 +45,7 @@ LINES = {
     'w_ro':   ('if_sara', None, 'nwˈapte.', 1.0, 'whisper', W),      # noapte
     'w_de':   ('em_alex', None, 'nˈaxt.', 0.8, 'whisper', W),        # Nacht
     'w_nl':   ('af_heart', None, 'nˈaxt.', 0.8, 'whisper', W),       # nacht
-    'vo_fin': ('ff_siwis', 'fr-fr', "Dans toutes les langues, la nuit s'écrit ène plus huit.", 0.85, 'breathy', (90, 0.3, True)),
+    'vo_fin': ('ff_siwis', 'fr-fr', "Dans toutes les langues, la nuit s'écrit… ène plus huit.", 0.85, 'breathy', (90, 0.3, True)),
     'vo_tag': ('ff_siwis', 'fr-fr', 'Maison de parfums nocturne.', 0.85, 'breathy', (90, 0.25, True)),
 }
 

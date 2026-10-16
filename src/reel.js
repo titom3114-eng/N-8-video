@@ -261,7 +261,7 @@
     ctx.fillStyle = `rgba(2,2,2,${veil.toFixed(4)})`; ctx.fillRect(0, 0, W, H);
     const N = 'N', eight = [...f.eight], night = [...f.night];
     const r1 = rowX([N, '+', ...eight]), r2 = rowX(night);
-    const sizeF = fitSize([N, '+', ...eight], (LAND ? 15 : 17) * U), sizeW = winSize(f.night);
+    const sizeF = fitSize([N, '+', ...eight], (LAND ? 17 : 24) * U, LAND ? 0.6 : 0.8), sizeW = winSize(f.night);
     const pG = prog(u, d - 0.3, 0.3, E.inOut), size = lerp(sizeF, sizeW, pG);
     const cx = W / 2, fy = BASE_Y();
     const aN = prog(u, 0.02, Math.min(0.3, 0.15 * d), E.out), aE = prog(u, 0.12 * d, 0.15 * d, E.out);

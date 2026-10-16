@@ -19,7 +19,7 @@ Aucune voix de personne réelle n’est imitée ; usage commercial autorisé.
 | w_ro | nwˈapte. | if_sara |
 | w_de | nˈaxt. | em_alex |
 | w_nl | nˈaxt. | af_heart |
-| vo_fin | Dans toutes les langues, la nuit s'écrit ène plus huit. | ff_siwis |
+| vo_fin | Dans toutes les langues, la nuit s'écrit… ène plus huit. | ff_siwis |
 | vo_tag | Maison de parfums nocturne. | ff_siwis |
 
 Attribution (CC BY 4.0) : la voix française « ff_siwis » de Kokoro est issue du corpus SIWIS
@@ -33,8 +33,8 @@ usage commercial, publicité en ligne, télévision et radio autorisés, sans at
 | 142 | Pouring a small drink |
 | 444 | Restaurant crowd talking ambience |
 | 490 | Human single heart beat |
+| 498 | Deep heartbeat impact |
 | 542 | Footsteps on heels on the pavement |
-| 619 | Cinematic church bell hit |
 | 784 | Reverse cinematic impact trailer |
 | 1177 | Deep cinematic wind hum |
 | 1203 | Water flowing soft |
