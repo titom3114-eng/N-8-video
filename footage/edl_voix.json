@@ -1,0 +1,1104 @@
+{
+ "title": "« Huit voix »",
+ "bpm": 110,
+ "fps": 30,
+ "music": {
+  "file": "footage/music/cinematic-visions.mp3",
+  "beat0": 0.477,
+  "map": [
+   [
+    0,
+    null
+   ],
+   [
+    2,
+    2
+   ],
+   [
+    48,
+    64
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    62.582,
+    96,
+    -7
+   ]
+  ],
+  "end_fade": 2.6,
+  "title": "Cinematic Visions",
+  "source": "Coverr",
+  "page": "https://coverr.co/free-stock-music",
+  "url": "https://cdn.coverr.co/audios/coverr-08-cinematic-visions-wdPqT9/preview.mp3",
+  "license": "Coverr License (https://coverr.co/license)"
+ },
+ "sections": [
+  {
+   "name": "intro",
+   "shots": [
+    {
+     "id": "x00",
+     "beats": 2,
+     "render": "black",
+     "sfx": [
+      {
+       "n": "inhale",
+       "at": 0.25,
+       "db": -2
+      },
+      {
+       "n": "spray",
+       "end": true
+      }
+     ]
+    },
+    {
+     "id": "o13",
+     "beats": 5,
+     "src": "p:5561389",
+     "in": 3,
+     "move": "push",
+     "grade": "gold",
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "intro",
+       "at": 0.45,
+       "pan": 0.0,
+       "db": 1
+      }
+     ],
+     "vf": "eq=gamma=1.15"
+    }
+   ]
+  },
+  {
+   "name": "paris",
+   "shots": [
+    {
+     "id": "i03",
+     "beats": 4,
+     "src": "p:9694807",
+     "in": 4,
+     "move": "none",
+     "grade": "mono",
+     "vf": "eq=brightness=-0.05:contrast=1.1",
+     "formula": {
+      "eight": "huit",
+      "night": "nuit",
+      "map": [
+       0,
+       2,
+       3,
+       4
+      ]
+     },
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0
+      },
+      {
+       "n": "vo",
+       "file": "w_fr",
+       "at": 1.265,
+       "pan": -0.12
+      }
+     ]
+    },
+    {
+     "id": "p01",
+     "beats": 2,
+     "src": "p:3521396",
+     "in": 3,
+     "move": "push",
+     "window": {
+      "word": "nuit",
+      "city": "PARIS",
+      "coords": "48°51′ N  ·  2°21′ E"
+     },
+     "sfx": [
+      {
+       "n": "thru",
+       "end": true
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "p15",
+     "beats": 1,
+     "src": "p:19212503",
+     "in": 8,
+     "move": "push",
+     "focus_v": [
+      0.55,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "exhale",
+       "at": 0.05
+      }
+     ]
+    },
+    {
+     "id": "p04",
+     "beats": 1,
+     "src": "p:6769786",
+     "in": 30,
+     "move": "push",
+     "focus_v": [
+      0.45,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "pour",
+       "at": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "roma",
+   "shots": [
+    {
+     "id": "fr2",
+     "beats": 3,
+     "use": "i03",
+     "in": 12,
+     "move": "none",
+     "grade": "mono",
+     "vf": "eq=brightness=-0.05:contrast=1.1",
+     "formula": {
+      "eight": "otto",
+      "night": "notte",
+      "map": [
+       0,
+       1,
+       2,
+       3,
+       4
+      ]
+     },
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0
+      },
+      {
+       "n": "vo",
+       "file": "w_it",
+       "at": 0.949,
+       "pan": 0.18
+      }
+     ]
+    },
+    {
+     "id": "r01",
+     "beats": 1.5,
+     "src": "p:4840456",
+     "in": 2,
+     "move": "push",
+     "focus_v": [
+      0.4,
+      0.5
+     ],
+     "window": {
+      "word": "notte",
+      "city": "ROMA",
+      "coords": "41°54′ N  ·  12°30′ E"
+     },
+     "sfx": [
+      {
+       "n": "thru",
+       "end": true
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "r04",
+     "beats": 1,
+     "src": "p:10628779",
+     "in": 14,
+     "move": "push",
+     "focus_v": [
+      0.42,
+      0.5
+     ],
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "swoosh",
+       "at": 0.1,
+       "db": -6
+      }
+     ]
+    },
+    {
+     "id": "r06",
+     "beats": 1,
+     "src": "p:1543735",
+     "in": 4.6,
+     "move": "push",
+     "focus_v": [
+      0.55,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "match",
+       "at": 0.12,
+       "db": -6
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "madrid",
+   "shots": [
+    {
+     "id": "fr3",
+     "beats": 3,
+     "use": "i03",
+     "in": 18,
+     "move": "none",
+     "grade": "mono",
+     "vf": "eq=brightness=-0.05:contrast=1.1",
+     "formula": {
+      "eight": "ocho",
+      "night": "noche",
+      "map": [
+       0,
+       1,
+       2,
+       3,
+       4
+      ]
+     },
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0
+      },
+      {
+       "n": "vo",
+       "file": "w_es",
+       "at": 0.949,
+       "pan": -0.22
+      }
+     ]
+    },
+    {
+     "id": "v02",
+     "beats": 1.5,
+     "src": "pp:22922098",
+     "in": 0.5,
+     "move": "push",
+     "focus": [
+      1.0,
+      0.2
+     ],
+     "focus_v": [
+      0.68,
+      0.3
+     ],
+     "zoom": 1.45,
+     "zoom_v": 1.15,
+     "window": {
+      "word": "noche",
+      "city": "MADRID",
+      "coords": "40°25′ N  ·  3°42′ O"
+     },
+     "sfx": [
+      {
+       "n": "thru",
+       "end": true
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "ra2",
+     "beats": 1,
+     "src": "p:9020874",
+     "in": 9.0,
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "squish",
+       "at": 0.12
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "london",
+   "shots": [
+    {
+     "id": "fr4",
+     "beats": 2.5,
+     "use": "i03",
+     "in": 24,
+     "move": "none",
+     "grade": "mono",
+     "vf": "eq=brightness=-0.05:contrast=1.1",
+     "formula": {
+      "eight": "eight",
+      "night": "night",
+      "map": [
+       0,
+       2,
+       3,
+       4,
+       5
+      ]
+     },
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0
+      },
+      {
+       "n": "vo",
+       "file": "w_en",
+       "at": 0.791,
+       "pan": 0.22
+      }
+     ]
+    },
+    {
+     "id": "hl1",
+     "beats": 1.5,
+     "src": "pp:34275916",
+     "move": "push",
+     "focus": [
+      0.5,
+      0.3
+     ],
+     "focus_v": [
+      0.5,
+      0.35
+     ],
+     "window": {
+      "word": "night",
+      "city": "LONDON",
+      "coords": "51°30′ N  ·  0°07′ O"
+     },
+     "sfx": [
+      {
+       "n": "thru",
+       "end": true
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "rx2",
+     "beats": 1,
+     "src": "p:9468768",
+     "in": 6.0,
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "heels",
+       "at": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "lisboa",
+   "shots": [
+    {
+     "id": "fr5",
+     "beats": 2.5,
+     "use": "i03",
+     "in": 30,
+     "move": "none",
+     "grade": "mono",
+     "vf": "eq=brightness=-0.05:contrast=1.1",
+     "formula": {
+      "eight": "oito",
+      "night": "noite",
+      "map": [
+       0,
+       1,
+       2,
+       3,
+       4
+      ]
+     },
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0
+      },
+      {
+       "n": "vo",
+       "file": "w_pt",
+       "at": 0.791,
+       "pan": -0.25
+      }
+     ]
+    },
+    {
+     "id": "v04",
+     "beats": 1,
+     "src": "p:12564020",
+     "in": 3,
+     "window": {
+      "word": "noite",
+      "city": "LISBOA",
+      "coords": "38°43′ N  ·  9°08′ O"
+     },
+     "sfx": [
+      {
+       "n": "thru",
+       "end": true
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "v05",
+     "beats": 1,
+     "src": "p:12653059",
+     "in": 12,
+     "move": "push"
+    }
+   ]
+  },
+  {
+   "name": "bucuresti",
+   "shots": [
+    {
+     "id": "fr6",
+     "beats": 2.5,
+     "use": "i03",
+     "in": 6,
+     "move": "none",
+     "grade": "mono",
+     "vf": "eq=brightness=-0.05:contrast=1.1",
+     "formula": {
+      "eight": "opt",
+      "night": "noapte",
+      "map": [
+       0,
+       1,
+       -1,
+       2,
+       3,
+       -1
+      ]
+     },
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0
+      },
+      {
+       "n": "vo",
+       "file": "w_ro",
+       "at": 0.791,
+       "pan": 0.25
+      }
+     ]
+    },
+    {
+     "id": "hb1",
+     "beats": 1,
+     "src": "pp:30210641",
+     "move": "push",
+     "focus": [
+      0.5,
+      0.45
+     ],
+     "focus_v": [
+      0.5,
+      0.45
+     ],
+     "window": {
+      "word": "noapte",
+      "city": "BUCUREȘTI",
+      "coords": "44°26′ N  ·  26°06′ E"
+     },
+     "sfx": [
+      {
+       "n": "thru",
+       "end": true
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "ox1",
+     "beats": 1,
+     "src": "p:6637443",
+     "in": 1.6,
+     "focus": [
+      0.5,
+      0.3
+     ],
+     "focus_v": [
+      0.5,
+      0.3
+     ],
+     "zoom": 1.7,
+     "sfx": [
+      {
+       "n": "fire",
+       "at": 0.05,
+       "db": -4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "berlin",
+   "shots": [
+    {
+     "id": "fr7",
+     "beats": 2,
+     "use": "i03",
+     "in": 15,
+     "move": "none",
+     "grade": "mono",
+     "vf": "eq=brightness=-0.05:contrast=1.1",
+     "formula": {
+      "eight": "acht",
+      "night": "Nacht",
+      "map": [
+       0,
+       1,
+       2,
+       3,
+       4
+      ]
+     },
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0
+      },
+      {
+       "n": "vo",
+       "file": "w_de",
+       "at": 0.633,
+       "pan": -0.2
+      }
+     ]
+    },
+    {
+     "id": "v03",
+     "beats": 1,
+     "src": "p:18999814",
+     "in": 2,
+     "window": {
+      "word": "Nacht",
+      "city": "BERLIN",
+      "coords": "52°31′ N  ·  13°24′ E"
+     },
+     "sfx": [
+      {
+       "n": "thru",
+       "end": true
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "p11",
+     "beats": 0.5,
+     "src": "p:9694810",
+     "in": 20,
+     "move": "push",
+     "vf": "eq=gamma=1.15"
+    }
+   ]
+  },
+  {
+   "name": "amsterdam",
+   "shots": [
+    {
+     "id": "fr8",
+     "beats": 2,
+     "use": "i03",
+     "in": 33,
+     "move": "none",
+     "grade": "mono",
+     "vf": "eq=brightness=-0.05:contrast=1.1",
+     "formula": {
+      "eight": "acht",
+      "night": "nacht",
+      "map": [
+       0,
+       1,
+       2,
+       3,
+       4
+      ]
+     },
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0
+      },
+      {
+       "n": "vo",
+       "file": "w_nl",
+       "at": 0.633,
+       "pan": 0.2
+      }
+     ]
+    },
+    {
+     "id": "ha1",
+     "beats": 1,
+     "src": "pp:29899928",
+     "move": "push",
+     "focus": [
+      0.5,
+      0.55
+     ],
+     "focus_v": [
+      0.5,
+      0.55
+     ],
+     "window": {
+      "word": "nacht",
+      "city": "AMSTERDAM",
+      "coords": "52°22′ N  ·  4°54′ E"
+     },
+     "sfx": [
+      {
+       "n": "thru",
+       "end": true
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "op1",
+     "beats": 0.5,
+     "src": "p:15358364",
+     "in": 4.5,
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "drop",
+       "at": 0.0,
+       "db": -8
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "choeur",
+   "shots": [
+    {
+     "id": "p13",
+     "beats": 0.5,
+     "src": "p:8827066",
+     "in": 4,
+     "move": "right",
+     "focus_v": [
+      0.47,
+      0.5
+     ],
+     "window": {
+      "word": "nuit",
+      "fast": true
+     },
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "w_fr",
+       "at": 0.0,
+       "pan": -0.55,
+       "db": -3,
+       "rev": 0.35
+      },
+      {
+       "n": "heart",
+       "at": 0.0,
+       "db": 2
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "r11",
+     "beats": 0.5,
+     "src": "p:4840455",
+     "in": 1,
+     "move": "right",
+     "focus_v": [
+      0.38,
+      0.5
+     ],
+     "window": {
+      "word": "notte",
+      "fast": true
+     },
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "w_it",
+       "at": 0.0,
+       "pan": 0.55,
+       "db": -3,
+       "rev": 0.35
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "c3",
+     "beats": 0.5,
+     "use": "v02",
+     "in": 2.5,
+     "move": "push",
+     "focus": [
+      1.0,
+      0.2
+     ],
+     "focus_v": [
+      0.68,
+      0.3
+     ],
+     "zoom": 1.45,
+     "zoom_v": 1.15,
+     "window": {
+      "word": "noche",
+      "fast": true
+     },
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "w_es",
+       "at": 0.0,
+       "pan": -0.55,
+       "db": -3,
+       "rev": 0.35
+      },
+      {
+       "n": "heart",
+       "at": 0.0,
+       "db": 2
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "v01",
+     "beats": 0.5,
+     "src": "p:5823377",
+     "in": 5,
+     "window": {
+      "word": "night",
+      "fast": true
+     },
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "w_en",
+       "at": 0.0,
+       "pan": 0.55,
+       "db": -3,
+       "rev": 0.35
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "c5",
+     "beats": 0.5,
+     "use": "v04",
+     "in": 9,
+     "window": {
+      "word": "noite",
+      "fast": true
+     },
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "w_pt",
+       "at": 0.0,
+       "pan": -0.55,
+       "db": -3,
+       "rev": 0.35
+      },
+      {
+       "n": "heart",
+       "at": 0.0,
+       "db": 2
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "c6",
+     "beats": 0.5,
+     "use": "hb1",
+     "in": 2,
+     "move": "push",
+     "focus": [
+      0.5,
+      0.45
+     ],
+     "focus_v": [
+      0.5,
+      0.45
+     ],
+     "window": {
+      "word": "noapte",
+      "fast": true
+     },
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "w_ro",
+       "at": 0.0,
+       "pan": 0.55,
+       "db": -3,
+       "rev": 0.35
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "c7",
+     "beats": 0.5,
+     "use": "v03",
+     "in": 7,
+     "window": {
+      "word": "Nacht",
+      "fast": true
+     },
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "w_de",
+       "at": 0.0,
+       "pan": -0.55,
+       "db": -3,
+       "rev": 0.35
+      },
+      {
+       "n": "heart",
+       "at": 0.0,
+       "db": 2
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "c8",
+     "beats": 0.5,
+     "use": "ha1",
+     "in": 2,
+     "move": "push",
+     "focus": [
+      0.5,
+      0.55
+     ],
+     "focus_v": [
+      0.5,
+      0.55
+     ],
+     "window": {
+      "word": "nacht",
+      "fast": true
+     },
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "w_nl",
+       "at": 0.0,
+       "pan": 0.55,
+       "db": -3,
+       "rev": 0.35
+      }
+     ],
+     "vf": "eq=gamma=1.45:brightness=0.03:contrast=1.06"
+    },
+    {
+     "id": "i01",
+     "beats": 0.25,
+     "src": "p:6769792",
+     "in": 2.5,
+     "move": "push",
+     "focus_v": [
+      0.487,
+      0.85
+     ],
+     "zoom": 2.4,
+     "focus": [
+      0.483,
+      0.72
+     ],
+     "zoom_v": 1.6,
+     "vf": "eq=gamma=1.2",
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0,
+       "db": 3
+      }
+     ]
+    },
+    {
+     "id": "p05",
+     "beats": 0.25,
+     "src": "p:5544553",
+     "in": 15.4,
+     "move": "push",
+     "focus_v": [
+      0.4,
+      0.5
+     ]
+    },
+    {
+     "id": "f3",
+     "beats": 0.25,
+     "use": "r04",
+     "in": 22,
+     "move": "push",
+     "focus_v": [
+      0.42,
+      0.5
+     ],
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0,
+       "db": 3
+      }
+     ]
+    },
+    {
+     "id": "ra3",
+     "beats": 0.25,
+     "src": "p:3752503",
+     "in": 2
+    },
+    {
+     "id": "r08",
+     "beats": 0.25,
+     "src": "p:4323328",
+     "in": 20.0,
+     "move": "none",
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0,
+       "db": 3
+      }
+     ]
+    },
+    {
+     "id": "oh1",
+     "beats": 0.25,
+     "src": "p:7281326",
+     "in": 2,
+     "focus_v": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "id": "o05",
+     "beats": 0.25,
+     "src": "p:7809631",
+     "in": 3,
+     "move": "none",
+     "focus_v": [
+      0.35,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "heart",
+       "at": 0.0,
+       "db": 3
+      }
+     ]
+    },
+    {
+     "id": "o04",
+     "beats": 0.25,
+     "src": "p:8319108",
+     "in": 2,
+     "move": "push",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'"
+    },
+    {
+     "id": "gat",
+     "beats": 2,
+     "render": "gather",
+     "sfx": [
+      {
+       "n": "riser",
+       "end": true,
+       "db": -2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "finale",
+   "shots": [
+    {
+     "id": "fin",
+     "beats": 16,
+     "render": "logo",
+     "vo": {
+      "at": 0.3,
+      "end": 3.84,
+      "n": 2.87,
+      "plus": 3.13,
+      "huit": 3.59,
+      "tag": 5.4,
+      "tag_end": 7.32
+     },
+     "sfx": [
+      {
+       "n": "vo",
+       "file": "vo_fin",
+       "at": 0.3,
+       "split": 2.23,
+       "gap": 0.3,
+       "pan": 0.0,
+       "db": 3
+      },
+      {
+       "n": "logo",
+       "at": 3.59
+      },
+      {
+       "n": "vo",
+       "file": "vo_tag",
+       "at": 5.4,
+       "pan": 0.0,
+       "db": 2
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

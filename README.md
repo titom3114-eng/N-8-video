@@ -2,6 +2,68 @@
 
 Courts-métrages pour **N+8, Maison de parfums nocturne**.
 
+## « Huit voix » — la nuit chuchote son nom
+
+Un film tout autre : typographique, sonore, intime. Dans huit langues, la nuit s'écrit N + huit — et chaque langue a
+sa voix, qui chuchote le mot à l'oreille au moment où il s'écrit.
+
+- **Ouverture** — noir, une inspiration, le « pschit » d'un vaporisateur : une brume d'or apparaît.
+  Une voix de femme, tout bas : *« La nuit a une odeur. »*
+- **Huit chapitres**, de plus en plus courts (le cœur accélère) : sur un fond de fumée, un battement de cœur, le N
+  en or ; *N + huit* glisse et devient *nuit* — au même instant, la voix chuchote « Nuit ». Puis le mot devient une
+  fenêtre : la ville apparaît à travers ses lettres, la caméra traverse la première lettre et l'on entre dans la nuit
+  de la ville, son ambiance et son odeur, qui a un bruit.
+  1. **Paris** — *nuit* : la tour scintille ; fumée d'un cigare dans le noir (souffle), cognac versé. Rumeur feutrée d'un bar.
+  2. **Roma** — *notte* : le Colisée ; un encensoir qui se balance, un cierge qu'on allume. Pluie fine sur la pierre.
+  3. **Madrid** — *noche* : la Gran Vía ; une orange pressée. Grillons d'une nuit d'été.
+  4. **London** — *night* : Big Ben ; la pluie sur le pavé, des talons qui passent.
+  5. **Lisboa** — *noite* : le pont sur le Tage, les reflets du fleuve. Un tram, le fleuve.
+  6. **București** — *noapte* (N + opt) : l'Arc de triomphe ; une rose qui brûle. Vent sourd.
+  7. **Berlin** — *Nacht* : N + acht = Nacht, lettre pour lettre ; la tour de télévision, fumée froide. Une rame de U-Bahn entre en station.
+  8. **Amsterdam** — *nacht* : les maisons sur le canal ; pétales sur l'eau. Un vélo, l'eau des canaux.
+- **Le chœur** — les huit mots s'enchaînent en fenêtres sur leurs villes, puis huit odeurs en éclairs (allumette,
+  fumée, encens, orange, pluie, miel, rose, braises). Les huit voix se superposent en nuée, de partout, le cœur
+  s'emballe, tous les N se rassemblent en un seul… coupure nette : **silence**.
+- **La révélation** — dans le silence, la voix : *« Dans toutes les langues, la nuit s'écrit… N plus huit. »*
+  Sur « plus », le + apparaît ; sur « huit », le 8 — le logo frappe, l'arche se trace, la musique revient.
+  *« Maison de parfums nocturne. »* — les deux lignes du logo s'écrivent avec la voix.
+
+Durée : 39 s. Tempo 110 BPM. Son stéréo AAC normalisé à −14 LUFS (crête −1,5 dBTP). Sans le son (réseaux sociaux),
+le film se comprend aussi : la formule s'écrit à l'écran et la dernière phrase apparaît en sous-titre.
+
+| Fichier | Format | Usage |
+|---|---|---|
+| `output/N8_Huit-Voix_16x9.mp4` | 1920×1080, 30 i/s, cadre cinéma 2.39:1 | site, YouTube, présentation, écran boutique |
+| `output/N8_Huit-Voix_9x16.mp4` | 1080×1920, 30 i/s | Instagram Reels, Stories, TikTok |
+| `output/N8_Huit-Voix_affiche_*.png` | image du logo final | miniature, couverture |
+| `output/apercu/N8_Huit-Voix_*_apercu-720p.mp4` | 720p | envoi rapide, validation |
+
+**Voix** — synthèse vocale neuronale hors ligne **Kokoro-82M** (poids Apache 2.0, entraîné uniquement sur des données
+libres ou sans droits), huit timbres différents (femmes et hommes), puis chuchotées par traitement du signal : on garde
+les formants de la voix et on remplace la vibration des cordes vocales par un souffle, en laissant le N voisé pour qu'il
+reste net. L'allemand, le néerlandais et le roumain sont dictés à Kokoro en alphabet phonétique. Chaque mot et chaque
+phrase ont été vérifiés par reconnaissance vocale automatique, à l'aveugle : tous sont compris. Aucune voix de personne
+réelle n'est imitée. Les voix « Piper » essayées en route ont été écartées : la plupart sont dérivées de modèles entraînés
+sur des données à usage non commercial. Pour une diffusion télévisée, des comédiens peuvent remplacer ces voix en
+gardant exactement le même montage (`build/voices/out/<nom>.wav`, mêmes noms de fichiers).
+
+**Musique** — « Cinematic Visions » (Coverr) : sa partie dépouillée sous les chuchotements, l'entrée de la basse sur le
+chœur, silence, puis la partie pleine qui revient sur le logo. **Bruitages et ambiances** — Mixkit.
+
+**Droits** — images : Pexels License (vidéos et photos) ; musique : Coverr License ; bruitages : Mixkit Sound Effects
+Free License ; voix : Kokoro (Apache 2.0) ; la voix française provient du corpus SIWIS (CC BY 4.0 : attribution dans
+`footage/CREDITS_SON_VOIX.md`). Détail : `footage/CREDITS_VOIX.md` (images) et `footage/CREDITS_SON_VOIX.md` (son).
+
+Fabrication : `./scripts/build_voix.sh` (voix → vidéos → chronologie → bande-son → calque → montage → films).
+
+- Voix : `scripts/voices.py` (textes, timbres, dosage du chuchotement) — `pip install kokoro-onnx` ; les modèles sont
+  téléchargés au premier lancement.
+- Montage : `footage/edl_voix.json` (même syntaxe que le film principal ; `"formula"` : la nuit qui s'écrit,
+  `"window"` : le mot-fenêtre et le zoom à travers la lettre, `"render": "gather"` puis `"logo"` : la révélation ;
+  bruitages `"vo"` : la voix, son fichier, son panoramique).
+- Calque typographique : `src/reel.js` (fonctions `formulaCard`, `windowWord`, `gather`, `logoVoice`).
+- Bande-son : `scripts/sound_voix.py` (voix, nuée du chœur, cœur, ambiances par ville, coupure, musique).
+
 ## « Nuits » — film principal
 
 La nuit, et surtout son odeur, à travers les villes. Une allumette s'enflamme, un cigare rougeoie :
@@ -144,6 +206,9 @@ src/index.html, film.js       film « La nuit »
 src/logo/                     calques du logo (arche, N, +, 8, textes) + positions
 src/fonts/                    polices (licence SIL Open Font License)
 scripts/render.cjs            rendu image par image → vidéo master (build/)
+scripts/voices.py             voix de « Huit voix » (synthèse + chuchotement)
+scripts/sound_voix.py         bande-son de « Huit voix »
+scripts/build_voix.sh         « Huit voix » de bout en bout
 scripts/soundtrack_nuits.py   bande-son de « Nuits »
 scripts/soundtrack.py         bande-son de « La nuit » (et fonctions partagées)
 scripts/mux.py                normalisation du son, encodage final et aperçus

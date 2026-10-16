@@ -214,6 +214,212 @@
     if (fade > 0) { ctx.fillStyle = `rgba(0,0,0,${fade.toFixed(4)})`; ctx.fillRect(0, 0, W, H); }
   }
 
+  // ---- « Huit voix » : la nuit s'écrit au centre, puis le mot devient une fenêtre sur la ville
+  const WORDS8 = ['nuit', 'notte', 'noche', 'night', 'noite', 'noapte', 'Nacht', 'nacht'];
+  const fitSize = (chars, base, frac = 0.84) => {
+    const em = chars.reduce((a, c) => a + (c === '+' ? 0.55 : adv(c)), 0) + 0.03 * (chars.length - 1);
+    return Math.min(base, frac * W / em);
+  };
+  const winSize = word => fitSize([...word], (LAND ? 30 : 40) * U, LAND ? 0.6 : 0.84);
+  const BASE_Y = () => H / 2 + (LAND ? 9 : 10) * U;        // ligne de base des mots, un peu sous le centre
+  // point d'ancrage du zoom : au cœur du jambage le plus épais de la première lettre (le zoom « traverse » la lettre)
+  const anchorCache = new Map();
+  function zoomAnchor(word) {
+    if (anchorCache.has(word)) return anchorCache.get(word);
+    const S = 200, chars = [...word], xs = rowX(chars);
+    const c = mk(S * 6, S * 1.6), x = c.getContext('2d');
+    x.font = `400 ${S}px ${F.serif}`; x.textAlign = 'center'; x.textBaseline = 'alphabetic'; x.fillStyle = '#fff';
+    const ox = S * 3, oy = S * 1.2;
+    x.fillText(chars[0], ox + xs[0] * S, oy);
+    const img = x.getImageData(0, 0, c.width, c.height).data, w = c.width, h = c.height;
+    const on = (i, j) => img[(j * w + i) * 4 + 3] > 128;
+    let best = [ox + xs[0] * S, oy - 0.3 * S], score = -1;
+    for (let j = 0; j < h; j += 2) for (let i = 0; i < w; i += 2) {
+      if (!on(i, j)) continue;
+      let l = 0, r = 0, u2 = 0, d2 = 0;
+      while (i - l > 0 && on(i - l, j)) l++;
+      while (i + r < w - 1 && on(i + r, j)) r++;
+      while (j - u2 > 0 && on(i, j - u2)) u2++;
+      while (j + d2 < h - 1 && on(i, j + d2)) d2++;
+      const sc = Math.min(Math.min(l, r), Math.min(u2, d2) * 0.8);
+      if (sc > score) { score = sc; best = [i, j]; }
+    }
+    const a = [(best[0] - ox) / S, (best[1] - oy) / S];   // en em, relatif au centre du mot et à la ligne de base
+    anchorCache.set(word, a);
+    return a;
+  }
+  function drawChars(chars, xs, cx, cy, size, mode, col, a) {
+    ctx.font = `400 ${size}px ${F.serif}`; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    chars.forEach((ch, k) => {
+      if (mode === 'fill') { ctx.fillStyle = rgb(col, a); ctx.fillText(ch, cx + xs[k] * size, cy); }
+      else { ctx.strokeText(ch, cx + xs[k] * size, cy); }
+    });
+  }
+  function formulaCard(u, d, f) {
+    reset(ctx);
+    const veil = lerp(f.veil ?? 0.8, 1, prog(u, d - 0.3, 0.3, E.inOut));
+    ctx.fillStyle = `rgba(2,2,2,${veil.toFixed(4)})`; ctx.fillRect(0, 0, W, H);
+    const N = 'N', eight = [...f.eight], night = [...f.night];
+    const r1 = rowX([N, '+', ...eight]), r2 = rowX(night);
+    const sizeF = fitSize([N, '+', ...eight], (LAND ? 15 : 17) * U), sizeW = winSize(f.night);
+    const pG = prog(u, d - 0.3, 0.3, E.inOut), size = lerp(sizeF, sizeW, pG);
+    const cx = W / 2, fy = BASE_Y();
+    const aN = prog(u, 0.02, Math.min(0.3, 0.15 * d), E.out), aE = prog(u, 0.12 * d, 0.15 * d, E.out);
+    const pS = prog(u, 0.42 * d, 0.26 * d, E.inOut), pSw = prog(u, 0.5 * d, 0.18 * d, E.inOut), pOff = prog(u, 0.38 * d, 0.12 * d, E.out);
+    shade(cx, fy - 0.3 * size, size * 2.6, size * 0.9, 0.6 * aN);
+    ctx.font = `400 ${size}px ${F.serif}`; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    ctx.shadowColor = rgb(C.gold, 0.45 * aN); ctx.shadowBlur = 1.4 * U;
+    const put = (ch, xEm, a, col = C.gold) => { if (a <= 0.003) return; ctx.fillStyle = rgb(col, a); ctx.fillText(ch, cx + xEm * size, fy); };
+    const jN = f.map.indexOf(0), xN = lerp(r1[0], r2[jN], pS);
+    if (N === night[jN]) put(N, xN, aN, C.goldHi);
+    else { put(N, xN, aN * (1 - pSw), C.goldHi); put(night[jN], xN, aN * pSw, C.goldHi); }
+    const pa = aE * (1 - pOff);
+    if (pa > 0.003) {
+      ctx.fillStyle = rgb(C.gold, pa);
+      const px = cx + r1[1] * size, py = fy - 0.27 * size, hh = 0.13 * size, lw = Math.max(1, 0.02 * size);
+      ctx.fillRect(px - hh, py - lw / 2, 2 * hh, lw); ctx.fillRect(px - lw / 2, py - hh, lw, 2 * hh);
+    }
+    eight.forEach((ch, k) => {
+      const j = f.map.indexOf(k + 1);
+      if (j < 0) { put(ch, r1[k + 2], aE * (1 - pOff), C.white); return; }
+      const x = lerp(r1[k + 2], r2[j], pS), col = mixC(C.white, C.gold, pS);
+      if (ch === night[j]) put(ch, x, aE, col);
+      else { put(ch, x, aE * (1 - pSw), col); put(night[j], x, aE * pSw, col); }
+    });
+    f.map.forEach((m, j) => { if (m === -1) put(night[j], r2[j], aE * pSw, C.gold); });
+    reset(ctx);
+  }
+  function windowWord(u, d, w) {
+    reset(ctx);
+    const chars = [...w.word], xs = rowX(chars), size0 = winSize(w.word);
+    const cx = W / 2, fy = BASE_Y();
+    // zoom à travers la première lettre : exponentiel (vitesse perçue constante), accéléré
+    const zd = w.fast ? 0 : Math.min(0.42, 0.62 * d);
+    const p = w.fast ? 0 : prog(u, d - zd - 0.05, zd);      // la lettre a tout recouvert juste avant la coupe
+    const S = w.fast ? 1 + 0.07 * (u / d) : Math.pow(240, p * p);
+    const [axE, ayE] = zoomAnchor(w.word);
+    const a0x = cx + axE * size0, a0y = fy + ayE * size0;
+    const k = E.inOut(clamp(p * 1.15));
+    const px = lerp(a0x, W / 2, k), py = lerp(a0y, H / 2, k);
+    // noir partout, sauf dans les lettres : la ville apparaît à travers le mot
+    ctx.fillStyle = '#020202'; ctx.fillRect(0, 0, W, H);
+    ctx.setTransform(S, 0, 0, S, px - S * a0x, py - S * a0y);
+    ctx.globalCompositeOperation = 'destination-out';
+    drawChars(chars, xs, cx, fy, size0, 'fill', [0, 0, 0], 1);
+    ctx.globalCompositeOperation = 'source-over';
+    // voile d'or très léger dans les lettres : le mot reste lisible même sur une image très sombre
+    const tint = (w.fast ? 0.2 : 0.16) * (1 - prog(p, 0, 0.35));
+    if (tint > 0.003) drawChars(chars, xs, cx, fy, size0, 'fill', C.gold, tint);
+    // liseré doré sur le bord des lettres, puis l'or qui se dissout en image au début du plan
+    const rimA = (w.fast ? 0.8 : 0.85) * (1 - prog(p, 0, 0.25));
+    if (rimA > 0.003) {
+      ctx.strokeStyle = rgb(C.goldHi, rimA); ctx.lineWidth = Math.max(1.2, 0.014 * size0);
+      drawChars(chars, xs, cx, fy, size0, 'stroke');
+    }
+    const goldA = w.fast ? 0 : 1 - prog(u, 0, Math.min(0.32, 0.4 * d), E.inOut);
+    if (goldA > 0.003) {
+      ctx.shadowColor = rgb(C.gold, 0.45 * goldA); ctx.shadowBlur = 1.4 * U;
+      drawChars([chars[0]], [xs[0]], cx, fy, size0, 'fill', C.goldHi, goldA);
+      drawChars(chars.slice(1), xs.slice(1), cx, fy, size0, 'fill', C.gold, goldA);
+    }
+    reset(ctx);
+    if (w.city) {
+      const la = prog(u, 0.08, 0.25, E.out) * (1 - prog(u, d - zd - 0.05, 0.15));
+      if (la > 0.003) {
+        const top = fy - 0.86 * size0, cs = (LAND ? 2.2 : 2.7) * U, ks = (LAND ? 1.35 : 1.75) * U;
+        shade(cx, top - 3 * U, 22 * U, 5 * U, 0.8 * la);
+        tracked(ctx, w.city, cx, top - 2.6 * U, cs, 0.62, `300 ${cs}px ${F.sans}`, rgb(C.goldHi, la));
+        tracked(ctx, w.coords, cx, fy + (LAND ? 6.5 : 8) * U, ks, 0.35, `300 ${ks}px ${F.sans}`, rgb(C.white, 0.75 * la));
+      }
+    }
+  }
+  function gather(u, d) {
+    reset(ctx);
+    ctx.fillStyle = '#020202'; ctx.fillRect(0, 0, W, H);
+    const M = logoM(), parts = LOGO.meta.parts;
+    const toS = (x, y) => [M.ox + x * M.s, M.oy + y * M.s];
+    const [nx, ny] = toS(parts.n.x + parts.n.w / 2, parts.n.y + parts.n.h / 2);
+    const nT = [nx, ny + 0.5 * parts.n.h * M.s];             // ligne de base du N du logo
+    const sizeN = parts.n.h * M.s / 0.68;                     // hauteur de capitale de Bodoni ≈ 0,68 em
+    const lineA = prog(u, 0, 0.14, E.out), restOff = prog(u, 0.28 * d, 0.25 * d, E.inOut), g = prog(u, 0.38 * d, 0.42 * d, E.inOut);
+    const size = (LAND ? 4.4 : 5.6) * U;
+    ctx.font = `italic 400 ${size}px ${F.serif}`; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+    const rows = LAND ? [WORDS8] : [WORDS8.slice(0, 4), WORDS8.slice(4)];
+    const logoN = prog(u, 0.78 * d, 0.2 * d, E.inOut);
+    rows.forEach((row, ri) => {
+      const ws = row.map(wd => ctx.measureText(wd).width), gap = 2.2 * U;
+      const tot = ws.reduce((a, b) => a + b, 0) + gap * (row.length - 1);
+      let x0 = W / 2 - tot / 2;
+      const y0 = (LAND ? H / 2 : H / 2 - 4 * U + ri * 8 * U) + size * 0.3;
+      row.forEach((wd, k) => {
+        const first = [...wd][0], rest = [...wd].slice(1).join(''), w1 = ctx.measureText(first).width;
+        if (lineA * (1 - restOff) > 0.003) { ctx.fillStyle = rgb(C.white, 0.8 * lineA * (1 - restOff)); ctx.fillText(rest, x0 + w1, y0); }
+        const sz = lerp(size, sizeN, E.inOut(g)), cap = prog(g, 0.15, 0.5);
+        const fx = lerp(x0 + w1 / 2, nT[0], g), fy = lerp(y0, nT[1], g);
+        const nA = lineA * (1 - logoN) * (g > 0.98 && k + ri > 0 ? 0 : 1);
+        ctx.font = `${g > 0.02 ? '' : 'italic '}400 ${sz}px ${F.serif}`; ctx.textAlign = 'center';
+        if (nA * (1 - cap) > 0.003 && first !== 'N') { ctx.fillStyle = rgb(C.goldHi, nA * (1 - cap)); ctx.fillText(first, fx, fy); }
+        if (nA * (first === 'N' ? 1 : cap) > 0.003) { ctx.fillStyle = rgb(C.goldHi, nA * (first === 'N' ? 1 : cap)); ctx.fillText('N', fx, fy); }
+        ctx.font = `italic 400 ${size}px ${F.serif}`; ctx.textAlign = 'left';
+        x0 += ws[k] + gap;
+      });
+    });
+    if (logoN > 0.003) {
+      ctx.setTransform(M.s, 0, 0, M.s, M.ox, M.oy);
+      ctx.globalAlpha = logoN; ctx.shadowColor = rgb(C.gold, 0.55); ctx.shadowBlur = 1.6 * U;
+      ctx.drawImage(LOGO.gold.n, parts.n.x, parts.n.y);
+    }
+    reset(ctx);
+  }
+  // logo sur la voix : « … la nuit s'écrit N plus huit » — le +, puis le 8, puis l'arche ; « Maison de parfums nocturne »
+  function logoVoice(u, d, vo) {
+    reset(ctx);
+    ctx.fillStyle = '#020202'; ctx.fillRect(0, 0, W, H);
+    const M = logoM(), parts = LOGO.meta.parts;
+    const toS = (x, y) => [M.ox + x * M.s, M.oy + y * M.s];
+    const hit = Math.sin(Math.PI * clamp((u - vo.huit) / 0.9)) * (u > vo.huit ? 1 : 0);
+    if (hit > 0.003) {   // éclat doré derrière le logo au moment où il se forme
+      const [cx, cy] = toS(767, 520);
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 60 * U);
+      g.addColorStop(0, rgb([255, 214, 150], 0.13 * hit)); g.addColorStop(1, rgb([255, 214, 150], 0));
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    const sub = prog(u, vo.at + 0.15, 0.5, E.out) * (1 - prog(u, vo.huit + 0.9, 0.5, E.in));
+    if (sub > 0.003) {
+      ctx.font = `italic 400 ${(LAND ? 3.0 : 3.8) * U}px ${F.serif}`; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = rgb(C.white, 0.8 * sub);
+      ctx.fillText('Dans toutes les langues, la nuit s’écrit N+8.', W / 2, toS(0, 905)[1]);
+    }
+    const nGlow = 1 + 1.6 * Math.sin(Math.PI * clamp((u - vo.n + 0.05) / 0.5)) * (u > vo.n - 0.05 ? 1 : 0);
+    const arch = prog(u, vo.huit + 0.12, 1.3, E.inOut);
+    const l1 = prog(u, vo.tag - 0.05, 0.7, E.inOut), l2 = prog(u, vo.tag + 0.85, 0.6, E.inOut);
+    ctx.setTransform(M.s, 0, 0, M.s, M.ox, M.oy);
+    const drawPart = (name, a, clipFn, glow = 1) => {
+      if (a <= 0.003) return;
+      const p = parts[name];
+      ctx.save();
+      if (clipFn) { ctx.beginPath(); clipFn(ctx, p); ctx.clip(); }
+      ctx.globalAlpha = a; ctx.shadowColor = rgb(C.gold, Math.min(1, 0.55 * glow)); ctx.shadowBlur = 1.6 * U * glow;
+      ctx.drawImage(LOGO.gold[name], p.x, p.y);
+      ctx.restore();
+    };
+    drawPart('n', 1, null, nGlow);
+    drawPart('plus', prog(u, vo.plus - 0.04, 0.3, E.out));
+    drawPart('eight', prog(u, vo.huit - 0.04, 0.32, E.out), null, 1 + 1.2 * hit);
+    const CX = 767.5, CY = 456, R = 310, SIDE = 246, HALF = SIDE + Math.PI / 2 * R;
+    drawPart('arch', arch > 0 ? 1 : 0, arch >= 1 ? null : x => {
+      const dd = arch * HALF, hh = dd > SIDE ? 712 - CY + 10 : dd;
+      x.rect(440, 712 - hh, 60, hh); x.rect(1036, 712 - hh, 60, hh);
+      if (dd > SIDE) { const a = Math.min(Math.PI / 2, (dd - SIDE) / R); x.moveTo(CX, CY); x.arc(CX, CY, R + 40, Math.PI, Math.PI + a); x.closePath(); x.moveTo(CX, CY); x.arc(CX, CY, R + 40, -a, 0); x.closePath(); }
+    });
+    const wipe = p => (x, q) => { const cx = q.x + q.w / 2, hw = (q.w / 2 + 10) * p; x.rect(cx - hw, q.y - 5, 2 * hw, q.h + 10); };
+    drawPart('line1', l1 > 0 ? 1 : 0, wipe(l1));
+    drawPart('line2', l2 > 0 ? 1 : 0, wipe(l2));
+    reset(ctx);
+    const fade = prog(u, d - 1.2, 1.2, E.inOut);
+    if (fade > 0) { ctx.fillStyle = `rgba(0,0,0,${fade.toFixed(4)})`; ctx.fillRect(0, 0, W, H); }
+  }
+
   // ---- chronologie (depuis footage/edl.json)
   let EDL = null, SHOTS = [], SECTIONS = [], EV = [], DURATION = 0, BEAT = 0.5;
   function build() {
@@ -228,7 +434,8 @@
         for (const fx of sh.sfx || []) {
           // bruitage : nom seul, ou { n, at (s depuis le début du plan), db, end (aligné sur la fin du plan) }
           const o = typeof fx === 'string' ? { n: fx } : fx;
-          EV.push({ type: o.n, t: +(t + (o.end ? d : (o.at ?? 0.04))).toFixed(3), dur: +d.toFixed(3), db: o.db || 0,
+          const { n, at, ...rest } = o;   // autres champs (voix : fichier, panoramique, coupure…) transmis tels quels
+          EV.push({ ...rest, type: n, t: +(t + (o.end ? d : (at ?? 0.04))).toFixed(3), dur: +d.toFixed(3), db: o.db || 0,
                     end: !!o.end, shot: sh.id, section: sec.name });
         }
         t += d;
@@ -243,6 +450,10 @@
     const s = SHOTS.find(sh => t >= sh.start && t < sh.start + sh.dur) || SHOTS[SHOTS.length - 1];
     const u = t - s.start;
     if (s.render === 'finale') { const k = s.speed || 1; finale(u * k, s.dur * k); return; }
+    if (s.render === 'gather') { gather(u, s.dur); return; }
+    if (s.render === 'logo') { logoVoice(u, s.dur, s.vo); return; }
+    if (s.formula) { formulaCard(u, s.dur, s.formula); return; }
+    if (s.window) { windowWord(u, s.dur, s.window); return; }
     if (s.render) return;  // plan noir
     if (s.phrase) {
       // la phrase court sur plusieurs plans consécutifs

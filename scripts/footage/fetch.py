@@ -9,6 +9,7 @@ Sources (libres de droits, usage commercial et publicitaire autorisé, sans attr
     python3 scripts/footage/fetch.py                 # tous les plans manquants
     python3 scripts/footage/fetch.py --only p04,r01  # certains plans
     python3 scripts/footage/fetch.py --redo p04      # remplace un plan (exclut la vidéo précédente)
+    python3 scripts/footage/fetch.py --edl footage/edl_voix.json   # autre montage (crédits : footage/CREDITS_VOIX.md)
 
 Un fichier déposé dans footage/override/<id>.mp4 (vos propres images) est toujours prioritaire.
 Les vidéos vont dans footage/clips/<id>.mp4 avec leur fiche <id>.json ; les crédits dans footage/CREDITS.md.
@@ -182,8 +183,10 @@ def main():
     ap.add_argument('--only', default='')
     ap.add_argument('--redo', default='')
     ap.add_argument('--provider', default='auto', choices=['auto', 'pexels', 'mixkit'])
+    ap.add_argument('--edl', default=str(EDL), help='autre montage (ex. footage/edl_voix.json)')
     args = ap.parse_args()
-    edl = json.loads(EDL.read_text())
+    edl_path = Path(args.edl)
+    edl = json.loads(edl_path.read_text())
     bpm = edl['bpm']
     CLIPS.mkdir(parents=True, exist_ok=True)
     OVERRIDE.mkdir(parents=True, exist_ok=True)
@@ -278,14 +281,17 @@ def main():
         else:
             failures.append(sid)
             print(f'{sid}: AUCUNE vidéo trouvée')
-    write_credits(edl)
+    write_credits(edl, edl_path)
     if failures:
         print('Plans sans vidéo :', ', '.join(failures))
         sys.exit(1)
 
 
-def write_credits(edl):
-    lines = ['# Crédits des images', '', 'Vidéos libres de droits utilisées dans « Nuits » (images réelles).', '',
+def write_credits(edl, edl_path=EDL):
+    # un fichier de crédits par montage : CREDITS.md (film principal), CREDITS_VOIX.md (footage/edl_voix.json)…
+    tag = '' if edl_path.stem == 'edl' else '_' + edl_path.stem.replace('edl_', '').upper()
+    film = edl.get('title', '« Nuits » (images réelles)')
+    lines = ['# Crédits des images', '', f'Vidéos et photos libres de droits utilisées dans {film}.', '',
              '| Plan | Source | Auteur | Licence | Lien |', '|---|---|---|---|---|']
     for _, sh in shots(edl):
         j = CLIPS / f"{sh['id']}.json"
@@ -294,7 +300,7 @@ def write_credits(edl):
         elif j.exists():
             m = json.loads(j.read_text())
             lines.append(f"| {sh['id']} | {m['provider']} | {m.get('author') or '—'} | {m['license']} | {m.get('page') or m['link']} |")
-    (ROOT / 'footage' / 'CREDITS.md').write_text('\n'.join(lines) + '\n')
+    (ROOT / 'footage' / f'CREDITS{tag}.md').write_text('\n'.join(lines) + '\n')
 
 
 if __name__ == '__main__':
