@@ -2,6 +2,35 @@
 
 Courts-métrages pour **N+8, Maison de parfums nocturne**.
 
+## « Nuits » avec la voix — version actuelle
+
+Le film « Nuits » en images réelles (même montage, mêmes images, même musique), avec **une seule voix**, naturelle et
+posée, qui dit « la nuit » dans la langue de chaque ville au moment où le mot s'écrit à l'écran :
+
+- **Paris** — *« Nuit. »* quand N + huit devient nuit ; **Roma** — *« Notte. »* ; **Oman** — *« Layl. »* (ليل).
+- **Les capitales** — un mot par ville, sur chaque plan : *night, noche, Nacht, noite, nacht, natt, noapte, νύχτα*.
+  Ces plans durent un peu plus que dans « Nuits » (0,53 s au lieu de 0,35 s) pour que chaque mot soit dit en entier.
+- **La fin** — dans le silence : *« La nuit s'écrit… N. Plus. Huit. »* — « huit » tombe sur l'impact du logo,
+  et la musique revient.
+
+La voix vient de **Chatterbox Multilingual** (Resemble AI, licence MIT), avec la voix intégrée du modèle : aucune voix
+de personne réelle n'est clonée. Pour chaque mot, plusieurs prises sont générées, puis la meilleure est gardée
+automatiquement après vérification par reconnaissance vocale. Tous les mots sont compris, dans le mixage comme sur
+la voix seule. La musique s'efface de 9 dB sous chaque mot. Aucun traitement de « chuchotement » : la voix est simplement
+posée près du micro, dans une petite pièce.
+
+| Fichier | Format |
+|---|---|
+| `output/N8_Nuits-Voix_16x9.mp4` | 1920×1080, 30 i/s, cadre 2.39:1, 55 s |
+| `output/N8_Nuits-Voix_9x16.mp4` | 1080×1920, 30 i/s, 55 s |
+| `output/N8_Nuits-Voix_affiche_*.png` | image du logo final |
+| `output/apercu/N8_Nuits-Voix_*_apercu-720p.mp4` | aperçus 720p |
+
+Fabrication : `footage/edl_nuits_voix.json` (le montage), `footage/voix_nuits.json` (quel mot sur quel plan, à quel
+instant), `scripts/voice_words.py` (prises de voix, environnement Python 3.11 à part, voir l'en-tête du script),
+`scripts/voice_pick.py` (choix des prises), puis `scripts/sound_reel.py … --voices footage/voix_nuits.json`.
+Crédits : `footage/CREDITS.md` (images) et `footage/CREDITS_SON_NUITS_VOIX.md` (son et voix).
+
 ## « Huit voix » — la nuit chuchote son nom
 
 Un film tout autre : typographique, sonore, intime. Dans huit langues, la nuit s'écrit N + huit — et chaque langue a

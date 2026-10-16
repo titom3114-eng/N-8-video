@@ -1,0 +1,103 @@
+{
+ "about": "« Nuits » avec une voix : la même voix dit « la nuit » dans la langue de chaque ville, au moment où le mot s'écrit à l'écran ; dans le silence final : « La nuit s'écrit… N. Plus. Huit. » — « huit » tombe sur l'impact du logo. Fichiers : build/voices/nuits/<mot>.wav (scripts/voice_words.py puis scripts/voice_pick.py). at = secondes depuis le début du plan ; max = durée maximale. tempo = débit légèrement accéléré (hauteur intacte).",
+ "dir": "build/voices/nuits",
+ "cut_at": [
+  "fin",
+  0.0
+ ],
+ "cues": [
+  {
+   "shot": "p01",
+   "file": "nuit",
+   "at": 1.42
+  },
+  {
+   "shot": "r01",
+   "file": "notte",
+   "at": 1.42
+  },
+  {
+   "shot": "o01",
+   "file": "layl",
+   "at": 0.85
+  },
+  {
+   "shot": "v01",
+   "file": "night",
+   "at": 0.0,
+   "max": 0.52,
+   "pan": -0.2,
+   "db": -1
+  },
+  {
+   "shot": "v02",
+   "file": "noche",
+   "at": 0.0,
+   "max": 0.52,
+   "pan": 0.2,
+   "db": -1
+  },
+  {
+   "shot": "v03",
+   "file": "nacht",
+   "at": 0.0,
+   "max": 0.52,
+   "pan": -0.2,
+   "db": -1
+  },
+  {
+   "shot": "v04",
+   "file": "noite",
+   "at": 0.0,
+   "max": 0.52,
+   "pan": 0.2,
+   "db": -1
+  },
+  {
+   "shot": "v05",
+   "file": "nacht_nl",
+   "at": 0.0,
+   "max": 0.52,
+   "pan": -0.2,
+   "db": -1
+  },
+  {
+   "shot": "v06",
+   "file": "natt",
+   "at": 0.0,
+   "max": 0.52,
+   "pan": 0.2,
+   "db": -1
+  },
+  {
+   "shot": "v07",
+   "file": "noapte",
+   "at": 0.0,
+   "max": 0.56,
+   "pan": -0.2,
+   "db": -1,
+   "tempo": 1.15
+  },
+  {
+   "shot": "v08",
+   "file": "nychta",
+   "at": 0.0,
+   "max": 0.52,
+   "pan": 0.2,
+   "db": -1
+  },
+  {
+   "shot": "fin",
+   "file": "fin_court",
+   "at": 0.16,
+   "after_cut": true,
+   "db": 1
+  }
+ ],
+ "mute": [
+  {
+   "shot": "fin",
+   "n": "inhale"
+  }
+ ]
+}

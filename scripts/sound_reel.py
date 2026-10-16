@@ -14,6 +14,8 @@ Bande-son de « Nuits » en images réelles.
 
     python3 scripts/sound_reel.py build/reel/cues.json build/reel/soundtrack.wav
     python3 scripts/sound_reel.py build/teaser/cues.json build/teaser/soundtrack.wav footage/edl_teaser.json
+    python3 scripts/sound_reel.py build/reel/cues.json build/reel/soundtrack_voix.wav --voices footage/voix_nuits.json
+      (même film, avec la voix qui dit « la nuit » dans chaque langue : scripts/voice_words.py, voice_pick.py)
 """
 import json
 import subprocess
@@ -239,7 +241,59 @@ def bed(spec, n, start_s):
     return shape(x * db(spec['db']) / rms, fade_in=0.35, fade_out=0.35)
 
 
-def build(cues, edl):
+VOICE_REF = -12.0     # niveau (fenêtre la plus forte de 0,3 s) d'un mot dit à 0 dB
+
+
+def R_smooth_env(x):
+    """Enveloppe de la voix, lissée et anticipée de 0,1 s (la musique s'efface juste avant le mot)."""
+    e = smooth(envelope(x, 0.03), int(0.18 * SR))
+    la = int(0.1 * SR)
+    return np.concatenate([e[la:], np.full(la, e[-1])])
+
+
+def voice_bus(spec, cues, N):
+    """Une seule voix, posée près du micro : chaque mot sur son plan (footage/voix_nuits.json)."""
+    vdir = ROOT / spec['dir']
+    start = {sc['id']: sc['start'] for sc in cues['scenes']}
+    out, send = np.zeros((2, N)), np.zeros((2, N))
+    for c in spec['cues']:
+        x = load(vdir / f"{c['file']}.wav")[0]
+        if c.get('tempo'):                     # débit légèrement accéléré, hauteur intacte (mots enchaînés sur les plans éclairs)
+            raw = subprocess.run(['ffmpeg', '-v', 'error', '-f', 'f64le', '-ar', str(SR), '-ac', '1', '-i', '-',
+                                  '-af', f"atempo={c['tempo']}", '-f', 'f64le', '-'],
+                                 input=x.astype(np.float64).tobytes(), capture_output=True, check=True).stdout
+            x = np.frombuffer(raw, np.float64)
+        if c.get('max'):                       # mots enchaînés très vite : on borne la durée, avec un fondu
+            n = int(c['max'] * SR)
+            if len(x) > n:
+                x = x[:n] * np.concatenate([np.ones(n - int(0.08 * SR)), np.linspace(1, 0, int(0.08 * SR)) ** 1.5])
+        x = fft_filter(x[None, :], hp=85)[0]
+        a = (c.get('pan', 0.0) + 1) * np.pi / 4
+        st = np.stack([x * np.cos(a), x * np.sin(a)]) * np.sqrt(2)
+        st *= db(VOICE_REF + c.get('db', 0)) / peak_window_rms(st)
+        t0 = start[c['shot']] + c['at']
+        if c.get('align') == 'end':             # le mot finit à cet instant (ex. « huit » sur l'impact du logo)
+            t0 -= x.shape[0] / SR - c.get('tail', 0.0)
+        place(out, st, t0)
+        place(send, st * c.get('rev', 0.12), t0 + 0.02)
+    if spec.get('cut_at'):                      # silence net : rien ne déborde
+        i0 = int((start[spec['cut_at'][0]] + spec['cut_at'][1]) * SR)
+        f = int(0.03 * SR)
+        g = np.ones(N)
+        g[i0 - f:i0] = np.linspace(1, 0, f)
+        g[i0:] = 0
+        keep = np.zeros(N)
+        for c in spec['cues']:
+            if c.get('after_cut'):
+                keep[int((start[c['shot']] + c['at'] - (2.5 if c.get('align') == 'end' else 0.05)) * SR):] = 1
+        g = np.maximum(g, keep)
+        out *= g
+        send *= g
+    wet = convolve(send, reverb_ir(sec=1.4, seed=21, rt_low=0.9, rt_high=0.55)) * 0.8   # petite pièce, voix intime
+    return out, wet
+
+
+def build(cues, edl, voices=None):
     dur = cues['duration']
     N = int(np.ceil((dur + 0.05) * SR))
     secs_ = cues['music']['sections']
@@ -258,10 +312,11 @@ def build(cues, edl):
         sec = next(s for s in secs_ if s['name'] == e['section'])
         place(beds, bed(BAR, int((sec['end'] - e['t'] + 0.3) * SR), e['t']), e['t'])
 
-    # bruitages
+    # bruitages (la version avec voix peut en taire quelques-uns : la voix prend leur place)
+    muted = {(m['shot'], m['n']) for m in (voices or {}).get('mute', [])}
     count = {}
     for ev in cues['events']:
-        if ev['type'] not in FX:
+        if ev['type'] not in FX or (ev['shot'], ev['type']) in muted:
             continue
         k = count[ev['type']] = count.get(ev['type'], -1) + 1
         for spec in FX[ev['type']]:
@@ -286,10 +341,18 @@ def build(cues, edl):
     music *= duck
 
     mix = music + beds + fx_dry + wet
+    if voices:
+        vo, vwet = voice_bus(voices, cues, N)
+        # la voix passe devant : musique −9 dB, ambiances et bruitages −3 dB pendant qu'elle parle
+        ev = R_smooth_env(vo)
+        g = np.clip(ev / db(VOICE_REF - 14), 0, 1)
+        mix = music * (1 - 0.65 * g) + (beds + fx_dry + wet) * (1 - 0.3 * g) + vo + vwet
     if STEMS:
         STEMS.mkdir(parents=True, exist_ok=True)
         for name, x in (('musique', music), ('ambiances', beds), ('bruitages', fx_dry), ('reverb', wet)):
             write_wav(str(STEMS / f'{name}.wav'), np.clip(x, -1, 1))
+        if voices:
+            write_wav(str(STEMS / 'voix.wav'), np.clip(vo + vwet, -1, 1))
     return limit(mix)
 
 
@@ -329,6 +392,13 @@ def credits(edl):
              '| N° Mixkit | Titre |', '|---|---|']
     lines += [f"| {i} | {idx.get(str(i), {}).get('title', '—')} |" for i in ids]
     (ROOT / 'footage' / 'CREDITS_SON.md').write_text('\n'.join(lines) + '\n')
+    # version avec la voix : mêmes crédits, plus la voix
+    lines[0] = '# Crédits du son — « Nuits » avec la voix'
+    lines[4:4] = ['', 'Voix : synthèse vocale Chatterbox Multilingual (Resemble AI, https://github.com/resemble-ai/chatterbox,',
+                  'licence MIT, usage commercial autorisé), voix intégrée du modèle — aucune voix de personne réelle n’est',
+                  'clonée. Exécutée hors ligne (scripts/voice_words.py), meilleures prises choisies par reconnaissance vocale',
+                  '(scripts/voice_pick.py). Les fichiers portent le filigrane audio inaudible « Perth » de Resemble AI.']
+    (ROOT / 'footage' / 'CREDITS_SON_NUITS_VOIX.md').write_text('\n'.join(lines) + '\n')
 
 
 def main():
@@ -336,9 +406,12 @@ def main():
     edl_path = Path(sys.argv[3]) if len(sys.argv) > 3 and not sys.argv[3].startswith('--') else ROOT / 'footage' / 'edl.json'
     cues = json.load(open(src))
     edl = json.loads(edl_path.read_text())
-    if edl_path.stem == 'edl':
-        credits(edl)
-    st = build(cues, edl)
+    if edl_path.stem in ('edl', 'edl_nuits_voix'):
+        credits(json.loads((ROOT / 'footage' / 'edl.json').read_text()))
+    voices = None
+    if '--voices' in sys.argv:
+        voices = json.loads((ROOT / sys.argv[sys.argv.index('--voices') + 1]).read_text())
+    st = build(cues, edl, voices)
     write_wav(dst, st)
     print(f'Bande-son écrite : {dst} ({st.shape[1] / SR:.2f} s)')
 

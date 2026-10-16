@@ -1,0 +1,916 @@
+{
+ "title": "« Nuits » (avec la voix)",
+ "bpm": 85.32,
+ "fps": 30,
+ "music": {
+  "file": "footage/music/disturbing-night.mp3",
+  "beat0": 0.215,
+  "map": [
+   [
+    0,
+    36
+   ],
+   [
+    6,
+    42
+   ],
+   [
+    42,
+    106
+   ],
+   [
+    66,
+    null
+   ],
+   [
+    69,
+    128
+   ]
+  ],
+  "end_fade": 2.0,
+  "title": "Disturbing Night",
+  "source": "Coverr",
+  "page": "https://coverr.co/free-stock-music",
+  "url": "https://cdn.coverr.co/audios/23-disturbing-night-99YEKG/preview.mp3",
+  "license": "Coverr License (https://coverr.co/license)"
+ },
+ "sections": [
+  {
+   "name": "intro",
+   "shots": [
+    {
+     "id": "i00",
+     "beats": 0.5,
+     "render": "black",
+     "sfx": [
+      {
+       "n": "inhale",
+       "at": 0.02,
+       "db": 2
+      }
+     ]
+    },
+    {
+     "id": "i01",
+     "beats": 1.5,
+     "src": "p:6769792",
+     "in": 1.0,
+     "move": "push",
+     "focus_v": [
+      0.487,
+      0.85
+     ],
+     "sfx": [
+      {
+       "n": "match",
+       "at": 0.0
+      }
+     ],
+     "zoom": 2.4,
+     "focus": [
+      0.483,
+      0.72
+     ],
+     "zoom_v": 1.6,
+     "vf": "eq=gamma=1.2"
+    },
+    {
+     "id": "i02",
+     "beats": 1,
+     "src": "p:8226144",
+     "in": 6.3,
+     "move": "push",
+     "focus_v": [
+      0.45,
+      0.5
+     ]
+    },
+    {
+     "id": "i04",
+     "beats": 1,
+     "in": 15.0,
+     "phrase": "Chaque nuit a son parfum.",
+     "sfx": [
+      {
+       "n": "crackle",
+       "at": 0.0
+      }
+     ],
+     "src": "p:5197737"
+    },
+    {
+     "id": "i03",
+     "beats": 2,
+     "src": "p:9694807",
+     "in": 10,
+     "grade": "mono",
+     "phrase": "Chaque nuit a son parfum.",
+     "sfx": [
+      {
+       "n": "riser",
+       "end": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "paris",
+   "shots": [
+    {
+     "id": "p01",
+     "beats": 1.5,
+     "src": "p:3521396",
+     "in": 3,
+     "move": "push",
+     "card": {
+      "name": "PARIS",
+      "coords": "48°51′ N  ·  2°21′ E",
+      "formula": {
+       "eight": "huit",
+       "night": "nuit",
+       "map": [
+        0,
+        2,
+        3,
+        4
+       ]
+      },
+      "beats": 5
+     },
+     "sfx": [
+      "hit"
+     ]
+    },
+    {
+     "id": "p13",
+     "beats": 1,
+     "src": "p:8827066",
+     "in": 4,
+     "move": "right",
+     "focus_v": [
+      0.47,
+      0.5
+     ]
+    },
+    {
+     "id": "p02",
+     "beats": 1,
+     "src": "p:852352",
+     "in": 7.2,
+     "move": "left",
+     "vf": "eq=gamma=1.2"
+    },
+    {
+     "id": "px3",
+     "beats": 1,
+     "src": "p:8995575",
+     "in": 3.0,
+     "focus_v": [
+      0.62,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "bar"
+      }
+     ]
+    },
+    {
+     "id": "p10",
+     "beats": 0.5,
+     "src": "p:11792115",
+     "in": 5.5,
+     "move": "push",
+     "grade": "gold",
+     "focus_v": [
+      0.75,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "steps"
+      }
+     ]
+    },
+    {
+     "id": "pt1",
+     "beats": 1.5,
+     "src": "pp:27793718",
+     "move": "push",
+     "focus": [
+      0.45,
+      0.5
+     ],
+     "focus_v": [
+      0.6,
+      0.5
+     ],
+     "haze": 0.32
+    },
+    {
+     "id": "p12",
+     "beats": 0.5,
+     "src": "p:2548406",
+     "in": 27.8,
+     "move": "none",
+     "sfx": [
+      {
+       "n": "zippo",
+       "at": 0.0
+      }
+     ]
+    },
+    {
+     "id": "p15",
+     "beats": 1.5,
+     "src": "p:19212503",
+     "in": 8,
+     "move": "push",
+     "focus_v": [
+      0.55,
+      0.5
+     ]
+    },
+    {
+     "id": "p05",
+     "beats": 1.5,
+     "src": "p:5544553",
+     "in": 15.2,
+     "move": "push",
+     "focus_v": [
+      0.4,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "exhale",
+       "at": 0.15
+      }
+     ]
+    },
+    {
+     "id": "px1",
+     "beats": 0.5,
+     "src": "p:6533032",
+     "in": 4.0,
+     "sfx": [
+      {
+       "n": "ash",
+       "at": 0.05
+      }
+     ]
+    },
+    {
+     "id": "p11",
+     "beats": 0.5,
+     "src": "p:9694810",
+     "in": 20,
+     "move": "push",
+     "vf": "eq=gamma=1.15"
+    },
+    {
+     "id": "p04",
+     "beats": 1.5,
+     "src": "p:6769786",
+     "in": 30,
+     "move": "push",
+     "focus_v": [
+      0.45,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "pour",
+       "at": 0.0
+      }
+     ]
+    },
+    {
+     "id": "pc2",
+     "beats": 1,
+     "src": "p:10823241",
+     "in": 2.0
+    },
+    {
+     "id": "p08",
+     "beats": 0.5,
+     "src": "p:7255095",
+     "in": 2,
+     "move": "push",
+     "focus_v": [
+      0.32,
+      0.5
+     ]
+    },
+    {
+     "id": "p03",
+     "beats": 1,
+     "src": "p:7265901",
+     "in": 5.4,
+     "move": "right",
+     "focus_v": [
+      0.55,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "ice",
+       "at": 0.2,
+       "db": -4
+      }
+     ]
+    },
+    {
+     "id": "pl1",
+     "beats": 1.5,
+     "src": "pp:6045051",
+     "move": "push"
+    },
+    {
+     "id": "px2",
+     "beats": 0.5,
+     "src": "p:9418692",
+     "in": 8.0,
+     "focus_v": [
+      0.45,
+      0.5
+     ]
+    },
+    {
+     "id": "p07",
+     "beats": 1,
+     "src": "p:7586604",
+     "in": 10.8,
+     "move": "right",
+     "grade": "gold",
+     "focus_v": [
+      0.55,
+      0.5
+     ],
+     "vf": "eq=gamma=1.35:brightness=0.02",
+     "dip_out": 5
+    }
+   ]
+  },
+  {
+   "name": "roma",
+   "shots": [
+    {
+     "id": "r01",
+     "beats": 1.5,
+     "src": "p:4840456",
+     "in": 2,
+     "move": "push",
+     "focus_v": [
+      0.4,
+      0.5
+     ],
+     "card": {
+      "name": "ROMA",
+      "coords": "41°54′ N  ·  12°30′ E",
+      "formula": {
+       "eight": "otto",
+       "night": "notte",
+       "map": [
+        0,
+        1,
+        2,
+        3,
+        4
+       ]
+      },
+      "beats": 5
+     },
+     "sfx": [
+      "hit",
+      {
+       "n": "bell",
+       "at": 0.3,
+       "db": -6
+      }
+     ]
+    },
+    {
+     "id": "r11",
+     "beats": 1,
+     "src": "p:4840455",
+     "in": 1,
+     "move": "right",
+     "focus_v": [
+      0.38,
+      0.5
+     ]
+    },
+    {
+     "id": "r09",
+     "beats": 1,
+     "src": "p:13118329",
+     "in": 3.5,
+     "move": "left"
+    },
+    {
+     "id": "rx3",
+     "beats": 1,
+     "src": "p:10395311",
+     "in": 4.0
+    },
+    {
+     "id": "r02",
+     "beats": 0.5,
+     "src": "p:13689954",
+     "in": 4,
+     "move": "left"
+    },
+    {
+     "id": "rl1",
+     "beats": 1,
+     "src": "p:7568880",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "in": 2.0
+    },
+    {
+     "id": "rx1",
+     "beats": 1,
+     "src": "p:10628377",
+     "in": 2.0,
+     "focus_v": [
+      0.42,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "choir",
+       "end": true
+      }
+     ]
+    },
+    {
+     "id": "r04",
+     "beats": 1,
+     "src": "p:10628779",
+     "in": 14,
+     "move": "push",
+     "focus_v": [
+      0.42,
+      0.5
+     ],
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'"
+    },
+    {
+     "id": "r10",
+     "beats": 0.5,
+     "src": "p:6894947",
+     "in": 3,
+     "move": "push",
+     "grade": "mono"
+    },
+    {
+     "id": "r06",
+     "beats": 0.5,
+     "src": "p:1543735",
+     "in": 5,
+     "move": "push",
+     "focus_v": [
+      0.55,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "candle",
+       "at": 0.0
+      }
+     ]
+    },
+    {
+     "id": "r07",
+     "beats": 1,
+     "src": "p:7534448",
+     "in": 1,
+     "move": "push",
+     "grade": "gold",
+     "focus_v": [
+      0.4,
+      0.5
+     ]
+    },
+    {
+     "id": "ra1",
+     "beats": 1,
+     "src": "pp:2592576",
+     "move": "push",
+     "focus": [
+      0.5,
+      0.62
+     ],
+     "focus_v": [
+      0.5,
+      0.5
+     ],
+     "haze": 0.3
+    },
+    {
+     "id": "ra2",
+     "beats": 1,
+     "src": "p:9020874",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "squeeze",
+       "at": 0.15
+      }
+     ],
+     "in": 9.0
+    },
+    {
+     "id": "ra3",
+     "beats": 0.5,
+     "src": "p:3752503"
+    },
+    {
+     "id": "r05",
+     "beats": 1,
+     "src": "p:2583472",
+     "in": 2.4,
+     "move": "right",
+     "sfx": [
+      {
+       "n": "splash",
+       "at": 0.05
+      }
+     ]
+    },
+    {
+     "id": "ra4",
+     "beats": 0.5,
+     "src": "p:7686982",
+     "in": 3.5
+    },
+    {
+     "id": "r05b",
+     "beats": 1,
+     "src": "p:2583472",
+     "use": "r05",
+     "in": 5.5,
+     "move": "right"
+    },
+    {
+     "id": "rx2",
+     "beats": 1,
+     "src": "p:9468768",
+     "in": 6.0,
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "drops",
+       "at": 0.0
+      }
+     ]
+    },
+    {
+     "id": "r08",
+     "beats": 0.5,
+     "src": "p:4323328",
+     "in": 20.0,
+     "move": "none"
+    },
+    {
+     "id": "r03",
+     "beats": 0.5,
+     "src": "p:856062",
+     "in": 3,
+     "move": "push",
+     "sfx": [
+      {
+       "n": "water"
+      }
+     ]
+    },
+    {
+     "id": "r12",
+     "beats": 1,
+     "src": "m:22715",
+     "in": 2,
+     "move": "push",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "dip_out": 5
+    }
+   ]
+  },
+  {
+   "name": "oman",
+   "shots": [
+    {
+     "id": "o01",
+     "beats": 1.5,
+     "src": "p:857136",
+     "in": 13.5,
+     "move": "push",
+     "vf": "eq=gamma=1.35:brightness=0.02",
+     "card": {
+      "name": "OMAN",
+      "coords": "MASCATE  ·  23°35′ N  ·  58°23′ E",
+      "arabic": "ليل",
+      "beats": 5
+     },
+     "sfx": [
+      "hit"
+     ]
+    },
+    {
+     "id": "o02",
+     "beats": 1,
+     "src": "p:9308037",
+     "in": 1.5,
+     "move": "push"
+    },
+    {
+     "id": "o06",
+     "beats": 1,
+     "src": "p:6010694",
+     "in": 2,
+     "move": "push",
+     "vf": "eq=gamma=1.35:brightness=0.02"
+    },
+    {
+     "id": "o08",
+     "beats": 1,
+     "src": "p:12119036",
+     "in": 8,
+     "move": "left",
+     "sfx": [
+      {
+       "n": "gust",
+       "at": 0.1
+      }
+     ]
+    },
+    {
+     "id": "o12",
+     "beats": 0.5,
+     "src": "m:4149",
+     "in": 4,
+     "move": "left",
+     "vf": "curves=all='0/0 0.45/0.16 1/0.55',colorbalance=bs=0.04:bm=0.02"
+    },
+    {
+     "id": "oc1",
+     "beats": 1,
+     "src": "p:4310188",
+     "sfx": [
+      {
+       "n": "coals"
+      }
+     ],
+     "in": 5.0
+    },
+    {
+     "id": "ow1",
+     "beats": 1.5,
+     "src": "p:6448156",
+     "in": 0.8,
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'"
+    },
+    {
+     "id": "o03",
+     "beats": 1,
+     "src": "p:17928486",
+     "in": 6,
+     "move": "push",
+     "focus_v": [
+      0.47,
+      0.5
+     ],
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "sfx": [
+      {
+       "n": "swoosh",
+       "at": 0.3,
+       "db": -8
+      }
+     ]
+    },
+    {
+     "id": "o04",
+     "beats": 0.5,
+     "src": "p:8319108",
+     "in": 2,
+     "move": "push",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'"
+    },
+    {
+     "id": "o11",
+     "beats": 1,
+     "src": "p:5155376",
+     "in": 3,
+     "move": "none",
+     "vf": "eq=gamma=1.25,curves=all='0/0 0.12/0.02 1/1'"
+    },
+    {
+     "id": "os1",
+     "beats": 1.5,
+     "src": "p:8091551",
+     "in": 3.6,
+     "vf": "curves=all='0/0 0.5/0.25 1/0.7'"
+    },
+    {
+     "id": "o05",
+     "beats": 0.5,
+     "src": "p:7809631",
+     "in": 3,
+     "move": "none",
+     "focus_v": [
+      0.35,
+      0.5
+     ]
+    },
+    {
+     "id": "ox1",
+     "beats": 1,
+     "src": "p:6637443",
+     "in": 1.6,
+     "focus": [
+      0.5,
+      0.3
+     ],
+     "focus_v": [
+      0.5,
+      0.3
+     ],
+     "zoom": 1.7,
+     "sfx": [
+      {
+       "n": "fire",
+       "at": 0.05
+      }
+     ]
+    },
+    {
+     "id": "op1",
+     "beats": 1,
+     "src": "p:15358364",
+     "vf": "curves=all='0/0 0.5/0.33 1/0.8'",
+     "in": 4.5,
+     "haze": 0.22
+    },
+    {
+     "id": "o07",
+     "beats": 1.5,
+     "src": "p:4132712",
+     "in": 7,
+     "move": "push",
+     "focus_v": [
+      0.4,
+      0.5
+     ],
+     "sfx": [
+      {
+       "n": "drop",
+       "at": 0.45
+      }
+     ]
+    },
+    {
+     "id": "o09",
+     "beats": 0.5,
+     "src": "p:5815082",
+     "in": 2.9,
+     "move": "none",
+     "focus_v": [
+      0.4,
+      0.5
+     ]
+    },
+    {
+     "id": "o13",
+     "beats": 1,
+     "src": "p:5561389",
+     "in": 5,
+     "move": "push"
+    },
+    {
+     "id": "o10",
+     "beats": 1,
+     "src": "p:11284796",
+     "in": 1,
+     "move": "right",
+     "sfx": [
+      {
+       "n": "rumble",
+       "at": 0.0,
+       "db": -3
+      }
+     ],
+     "dip_out": 5
+    }
+   ]
+  },
+  {
+   "name": "villes",
+   "shots": [
+    {
+     "id": "v01",
+     "beats": 0.75,
+     "src": "p:5823377",
+     "in": 5,
+     "city": "LONDON",
+     "word": "night",
+     "sfx": [
+      "whoosh"
+     ]
+    },
+    {
+     "id": "v02",
+     "beats": 0.75,
+     "src": "pp:22922098",
+     "in": 0.5,
+     "move": "push",
+     "focus": [
+      1.0,
+      0.2
+     ],
+     "focus_v": [
+      0.68,
+      0.3
+     ],
+     "zoom": 1.45,
+     "zoom_v": 1.15,
+     "city": "MADRID",
+     "word": "noche"
+    },
+    {
+     "id": "v03",
+     "beats": 0.75,
+     "src": "p:18999814",
+     "city": "BERLIN",
+     "word": "Nacht"
+    },
+    {
+     "id": "v04",
+     "beats": 0.75,
+     "src": "p:12564020",
+     "city": "LISBOA",
+     "word": "noite"
+    },
+    {
+     "id": "v05",
+     "beats": 0.75,
+     "src": "p:12653059",
+     "city": "AMSTERDAM",
+     "word": "nacht"
+    },
+    {
+     "id": "v06",
+     "beats": 0.75,
+     "src": "p:852395",
+     "in": 40,
+     "city": "STOCKHOLM",
+     "word": "natt"
+    },
+    {
+     "id": "v07",
+     "beats": 0.75,
+     "src": "p:3175515",
+     "in": 30,
+     "city": "BUCUREȘTI",
+     "word": "noapte"
+    },
+    {
+     "id": "v08",
+     "beats": 0.75,
+     "src": "p:15171884",
+     "in": 20,
+     "vf": "curves=all='0/0 0.45/0.16 1/0.55',colorbalance=bs=0.04:bm=0.02",
+     "city": "ΑΘΗΝΑ",
+     "word": "νύχτα"
+    }
+   ]
+  },
+  {
+   "name": "finale",
+   "shots": [
+    {
+     "id": "fin",
+     "beats": 12,
+     "render": "finale",
+     "sfx": [
+      {
+       "n": "inhale",
+       "at": 0.25,
+       "db": -10
+      },
+      {
+       "n": "riser",
+       "at": 2.1,
+       "db": -6
+      },
+      {
+       "n": "logo",
+       "at": 2.1
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
