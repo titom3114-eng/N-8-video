@@ -15,7 +15,7 @@ Bande-son de « Nuits » en images réelles.
     python3 scripts/sound_reel.py build/reel/cues.json build/reel/soundtrack.wav
     python3 scripts/sound_reel.py build/teaser/cues.json build/teaser/soundtrack.wav footage/edl_teaser.json
     python3 scripts/sound_reel.py build/reel/cues.json build/reel/soundtrack_voix.wav --voices footage/voix_nuits.json
-      (même film, avec la voix qui dit « la nuit » dans chaque langue : scripts/voice_words.py, voice_pick.py)
+      (même film, avec la voix chuchotée qui dit « la nuit » dans chaque langue : scripts/voice_chuchote.py)
 """
 import json
 import subprocess
@@ -394,10 +394,12 @@ def credits(edl):
     (ROOT / 'footage' / 'CREDITS_SON.md').write_text('\n'.join(lines) + '\n')
     # version avec la voix : mêmes crédits, plus la voix
     lines[0] = '# Crédits du son — « Nuits » avec la voix'
-    lines[4:4] = ['', 'Voix : synthèse vocale Chatterbox Multilingual (Resemble AI, https://github.com/resemble-ai/chatterbox,',
-                  'licence MIT, usage commercial autorisé), voix intégrée du modèle — aucune voix de personne réelle n’est',
-                  'clonée. Exécutée hors ligne (scripts/voice_words.py), meilleures prises choisies par reconnaissance vocale',
-                  '(scripts/voice_pick.py). Les fichiers portent le filigrane audio inaudible « Perth » de Resemble AI.']
+    lines[4:4] = ['', 'Voix : synthèse vocale neuronale hors ligne Kokoro-82M (https://huggingface.co/hexgrad/Kokoro-82M,',
+                  'poids sous licence Apache 2.0, entraîné uniquement sur des données libres ou sans droits), voix « ff_siwis »,',
+                  'chuchotée par traitement du signal (scripts/voices.py, scripts/voice_chuchote.py). Aucune voix de personne',
+                  'réelle n’est imitée ; usage commercial autorisé.',
+                  'Attribution (CC BY 4.0) : la voix « ff_siwis » de Kokoro est issue du corpus SIWIS (SIWIS French Speech',
+                  'Synthesis Database, https://datashare.ed.ac.uk/handle/10283/2353, CC BY 4.0).']
     (ROOT / 'footage' / 'CREDITS_SON_NUITS_VOIX.md').write_text('\n'.join(lines) + '\n')
 
 

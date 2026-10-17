@@ -3,10 +3,12 @@
 Musique : « Disturbing Night » — Coverr (https://coverr.co/free-stock-music) — Coverr License (https://coverr.co/license).
 Montée sur le tempo du film (raccords sur les mesures), sans autre modification.
 
-Voix : synthèse vocale Chatterbox Multilingual (Resemble AI, https://github.com/resemble-ai/chatterbox,
-licence MIT, usage commercial autorisé), voix intégrée du modèle — aucune voix de personne réelle n’est
-clonée. Exécutée hors ligne (scripts/voice_words.py), meilleures prises choisies par reconnaissance vocale
-(scripts/voice_pick.py). Les fichiers portent le filigrane audio inaudible « Perth » de Resemble AI.
+Voix : synthèse vocale neuronale hors ligne Kokoro-82M (https://huggingface.co/hexgrad/Kokoro-82M,
+poids sous licence Apache 2.0, entraîné uniquement sur des données libres ou sans droits), voix « ff_siwis »,
+chuchotée par traitement du signal (scripts/voices.py, scripts/voice_chuchote.py). Aucune voix de personne
+réelle n’est imitée ; usage commercial autorisé.
+Attribution (CC BY 4.0) : la voix « ff_siwis » de Kokoro est issue du corpus SIWIS (SIWIS French Speech
+Synthesis Database, https://datashare.ed.ac.uk/handle/10283/2353, CC BY 4.0).
 
 Effets sonores : Mixkit — Mixkit Sound Effects Free License (https://mixkit.co/license/#sfxFree) :
 usage commercial, publicité en ligne, télévision et radio autorisés, sans attribution.
