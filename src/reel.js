@@ -39,11 +39,21 @@
     chars.forEach((ch, i) => { x.fillText(ch, px, cy); px += ws[i] + track * sizePx; });
   }
   // ombre portée douce sous le texte, pour rester lisible sur l'image
+  // mode « lisible » (montage avec "text": "lisible") : textes plus grands, affichés plus longtemps, détachés de l'image
+  let BIG = false;
+  const big = (a, b) => (BIG ? b : a);
+  // ombre portée sombre sous le texte : il se détache même sur une image claire (tour illuminée, lumières de la ville)
+  function darkShadow(on = BIG) {
+    if (!on) return;
+    ctx.shadowColor = 'rgba(0,0,0,0.92)'; ctx.shadowBlur = 1.3 * U; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0.18 * U;
+  }
+  function noShadow() { ctx.shadowColor = 'rgba(0,0,0,0)'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0; }
+  const fitFont = (str, font, size, maxW) => { ctx.font = font(size); const w = ctx.measureText(str).width; return w > maxW ? size * maxW / w : size; };
   function shade(cx, cy, rx, ry, a) {
     if (a <= 0.003) return;
     ctx.save(); ctx.translate(cx, cy); ctx.scale(rx / ry, 1);
     const g = ctx.createRadialGradient(0, 0, 0, 0, 0, ry);
-    g.addColorStop(0, `rgba(0,0,0,${(0.55 * a).toFixed(3)})`); g.addColorStop(1, 'rgba(0,0,0,0)');
+    g.addColorStop(0, `rgba(0,0,0,${(big(0.55, 0.7) * a).toFixed(3)})`); g.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = g; ctx.fillRect(-ry, -ry, 2 * ry, 2 * ry);
     ctx.restore();
   }
@@ -77,17 +87,30 @@
     const out = 1 - prog(u, o.end - 0.3, 0.3, E.in);
     if (out <= 0) return;
     reset(ctx);
-    const ax = LAND ? SX(-VX * 0.5) : W / 2, ay = LAND ? SY(-3) : SY(VY * 0.38);
-    const aName = prog(u, 0.05, 0.4, E.out) * out, aCo = prog(u, 0.2, 0.4, E.out) * out;
-    shade(ax, ay + 7 * U, 34 * U, 20 * U, aName * 1.1);
-    tracked(ctx, o.name, ax, ay, 2.3 * U, 0.62, `300 ${2.3 * U}px ${F.sans}`, rgb(C.goldHi, aName));
-    tracked(ctx, o.coords, ax, ay + 3.6 * U, 1.35 * U, 0.35, `300 ${1.35 * U}px ${F.sans}`, rgb(C.white, aCo * 0.75));
-    ctx.fillStyle = rgb(C.gold, aCo * 0.7); ctx.fillRect(ax - 3 * U, ay + 5.6 * U, 6 * U, Math.max(1, 0.1 * U));
-    const fy = ay + 15 * U, size = (LAND ? 9 : 11) * U;
+    const ax = LAND ? SX(-VX * 0.5) : W / 2, ay = LAND ? SY(big(-3, -9)) : SY(VY * big(0.38, 0.2));
+    const aName = prog(u, 0.05, big(0.4, 0.3), E.out) * out, aCo = prog(u, big(0.2, 0.15), 0.4, E.out) * out;
+    const nS = big(2.3, LAND ? 3.4 : 4.4) * U, cS = big(1.35, LAND ? 1.9 : 2.4) * U, k = BIG ? nS / (2.3 * U) : 1;
+    if (BIG) {
+      const va = 0.5 * prog(u, 0, 0.35, E.out) * out;
+      const g = LAND ? ctx.createLinearGradient(0, 0, 0.62 * W, 0) : ctx.createLinearGradient(0, ay - 18 * U, 0, ay + 44 * U);
+      g.addColorStop(0, `rgba(0,0,0,${LAND ? va : 0})`);
+      if (!LAND) { g.addColorStop(0.25, `rgba(0,0,0,${va})`); g.addColorStop(0.8, `rgba(0,0,0,${va})`); }
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    shade(ax, ay + big(7, 11) * U, big(34, LAND ? 48 : 56) * U, big(20, 30) * U, aName * big(1.1, 1.35));
+    darkShadow();
+    tracked(ctx, o.name, ax, ay, nS, 0.62, `${big(300, 400)} ${nS}px ${F.sans}`, rgb(C.goldHi, aName));
+    tracked(ctx, o.coords, ax, ay + 3.6 * U * k, cS, 0.35, `${big(300, 400)} ${cS}px ${F.sans}`, rgb(C.white, aCo * big(0.75, 0.9)));
+    noShadow();
+    ctx.fillStyle = rgb(C.gold, aCo * 0.7); ctx.fillRect(ax - 3 * U * k, ay + 5.6 * U * k, 6 * U * k, Math.max(1, 0.1 * U * k));
+    const fy = ay + big(15, LAND ? 22 : 26) * U;
+    let size = big(LAND ? 9 : 11, LAND ? 13.5 : 18) * U;
     if (o.arabic) {
-      const a = prog(u, 0.45, 0.5, E.out) * out;
+      const a = prog(u, big(0.45, 0.3), 0.5, E.out) * out;
       ctx.font = `400 ${size * 1.25}px ${F.arabic}`; ctx.textAlign = 'center'; ctx.direction = 'rtl';
-      ctx.shadowColor = rgb(C.gold, 0.5 * a); ctx.shadowBlur = 1.6 * U;
+      if (BIG) { darkShadow(); ctx.fillStyle = rgb(C.gold, a); ctx.fillText(o.arabic, ax, fy + 1.5 * U); }
+      ctx.shadowColor = rgb(C.gold, 0.5 * a); ctx.shadowBlur = 1.6 * U; ctx.shadowOffsetY = 0;
       ctx.fillStyle = rgb(C.gold, a); ctx.fillText(o.arabic, ax, fy + 1.5 * U);
       ctx.direction = 'ltr';
       reset(ctx);
@@ -95,52 +118,68 @@
     }
     const f = o.formula, N = 'N', eight = [...f.eight], night = [...f.night];
     const r1 = rowX([N, '+', ...eight]), r2 = rowX(night);
-    // N + huit, puis les lettres glissent : nuit (un peu plus lent, pour que l'idée se lise)
-    const aIn = prog(u, 0.35, 0.3, E.out) * out, pS = prog(u, 1.15, 0.6, E.inOut), pSw = prog(u, 1.4, 0.35, E.inOut);
-    const pOff = prog(u, 1.0, 0.3, E.out);
-    ctx.font = `400 ${size}px ${F.serif}`; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-    ctx.shadowColor = rgb(C.gold, 0.45 * aIn); ctx.shadowBlur = 1.4 * U;
-    const put = (ch, xEm, a, col = C.gold) => { if (a <= 0.003) return; ctx.fillStyle = rgb(col, a); ctx.fillText(ch, ax + xEm * size, fy); };
-    const jN = f.map.indexOf(0), xN = lerp(r1[0], r2[jN], pS);
-    if (N === night[jN]) put(N, xN, aIn, C.goldHi);
-    else { put(N, xN, aIn * (1 - pSw), C.goldHi); put(night[jN], xN, aIn * pSw, C.goldHi); }
-    const pa = aIn * (1 - pOff);
-    if (pa > 0) { ctx.fillStyle = rgb(C.gold, pa); const px = ax + r1[1] * size, py = fy - 0.27 * size, h = 0.13 * size, lw = Math.max(1, 0.02 * size); ctx.fillRect(px - h, py - lw / 2, 2 * h, lw); ctx.fillRect(px - lw / 2, py - h, lw, 2 * h); }
-    eight.forEach((ch, k) => {
-      const j = f.map.indexOf(k + 1);
-      if (j < 0) { put(ch, r1[k + 2], aIn * (1 - pOff), C.white); return; }
-      const x = lerp(r1[k + 2], r2[j], pS), col = mixC(C.white, C.gold, pS);
-      if (ch === night[j]) put(ch, x, aIn, col);
-      else { put(ch, x, aIn * (1 - pSw), col); put(night[j], x, aIn * pSw, col); }
-    });
-    f.map.forEach((m, j) => { if (m === -1) put(night[j], r2[j], aIn * pSw, C.gold); });
+    if (BIG) {   // la formule tient toujours dans sa moitié d'écran (paysage) ou dans la largeur (vertical)
+      const span = Math.max(r1[r1.length - 1] - r1[0], r2[r2.length - 1] - r2[0]) + 0.8;
+      size = Math.min(size, (LAND ? 0.46 : 0.86) * W / span);
+    }
+    // N + huit, puis les lettres glissent : nuit (plus lent en mode lisible, pour que l'idée se lise)
+    const T = BIG ? { a: 0.25, s: 1.5, sd: 0.7, w: 1.75, wd: 0.4, o: 1.35 } : { a: 0.35, s: 1.15, sd: 0.6, w: 1.4, wd: 0.35, o: 1.0 };
+    const aIn = prog(u, T.a, 0.3, E.out) * out, pS = prog(u, T.s, T.sd, E.inOut), pSw = prog(u, T.w, T.wd, E.inOut);
+    const pOff = prog(u, T.o, 0.3, E.out);
+    ctx.font = `${big(400, 500)} ${size}px ${F.serif}`; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    const letters = () => {
+      const put = (ch, xEm, a, col = C.gold) => { if (a <= 0.003) return; ctx.fillStyle = rgb(col, a); ctx.fillText(ch, ax + xEm * size, fy); };
+      const jN = f.map.indexOf(0), xN = lerp(r1[0], r2[jN], pS);
+      if (N === night[jN]) put(N, xN, aIn, C.goldHi);
+      else { put(N, xN, aIn * (1 - pSw), C.goldHi); put(night[jN], xN, aIn * pSw, C.goldHi); }
+      const pa = aIn * (1 - pOff);
+      if (pa > 0) { ctx.fillStyle = rgb(C.gold, pa); const px = ax + r1[1] * size, py = fy - 0.27 * size, h = 0.13 * size, lw = Math.max(1, big(0.02, 0.028) * size); ctx.fillRect(px - h, py - lw / 2, 2 * h, lw); ctx.fillRect(px - lw / 2, py - h, lw, 2 * h); }
+      eight.forEach((ch, kk) => {
+        const j = f.map.indexOf(kk + 1);
+        if (j < 0) { put(ch, r1[kk + 2], aIn * (1 - pOff), C.white); return; }
+        const x = lerp(r1[kk + 2], r2[j], pS), col = mixC(C.white, C.gold, pS);
+        if (ch === night[j]) put(ch, x, aIn, col);
+        else { put(ch, x, aIn * (1 - pSw), col); put(night[j], x, aIn * pSw, col); }
+      });
+      f.map.forEach((m, j) => { if (m === -1) put(night[j], r2[j], aIn * pSw, C.gold); });
+    };
+    if (BIG) { darkShadow(); letters(); }
+    ctx.shadowColor = rgb(C.gold, 0.45 * aIn); ctx.shadowBlur = 1.4 * U; ctx.shadowOffsetY = 0;
+    letters();
     reset(ctx);
   }
   function phrase(u, d, str, fadeOut) {
-    const a = prog(u, 0.2, 0.5, E.out) * (fadeOut ? 1 - prog(u, d - 0.35, 0.35, E.in) : 1);
+    const a = prog(u, big(0.2, 0.1), big(0.5, 0.35), E.out) * (fadeOut ? 1 - prog(u, d - 0.35, 0.35, E.in) : 1);
     if (a <= 0) return;
     reset(ctx);
-    const size = (LAND ? 3.7 : 5.0) * U, y = SY(LAND ? 25 : 40);
-    shade(W / 2, y - size * 0.3, 60 * U, 6 * U, a);
-    ctx.font = `italic 400 ${size}px ${F.serif}`; ctx.textAlign = 'center';
-    ctx.fillStyle = rgb(C.white, 0.92 * a);
+    const font = sz => `italic ${big(400, 500)} ${sz}px ${F.serif}`;
+    const size = BIG ? fitFont(str, font, (LAND ? 6.4 : 7.6) * U, 0.9 * W) : (LAND ? 3.7 : 5.0) * U;
+    const y = SY(LAND ? big(25, 24) : big(40, 30));
+    shade(W / 2, y - size * 0.3, big(60, 80) * U, big(6, 9) * U, a);
+    ctx.font = font(size); ctx.textAlign = 'center';
+    darkShadow();
+    ctx.fillStyle = rgb(C.white, big(0.92, 0.97) * a);
     ctx.fillText(str, W / 2, y);
     reset(ctx);
   }
   function cityWord(u, d, city, word) {
     const a = prog(u, 0, 0.06);
     reset(ctx);
-    const size = (LAND ? 11 : 15) * U;
-    shade(W / 2, H / 2 - size * 0.1, size * 3, size * 0.9, a);
-    ctx.font = `400 ${size}px ${F.serif}`; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    const font = sz => `${big(400, 500)} ${sz}px ${F.serif}`;
+    const size = BIG ? fitFont(word, font, (LAND ? 16 : 22) * U, (LAND ? 0.62 : 0.86) * W) : (LAND ? 11 : 15) * U;
+    shade(W / 2, H / 2 - size * 0.1, size * big(3, 3.6), size * big(0.9, 1.15), a * big(1, 1.3));
+    ctx.font = font(size); ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
     const first = [...word][0], rest = [...word].slice(1).join('');
     const w1 = ctx.measureText(first).width, w2 = ctx.measureText(rest).width;
     const x0 = W / 2 - (w1 + w2) / 2, y0 = H / 2 + size * 0.3;
+    if (BIG) { darkShadow(); ctx.fillStyle = rgb(C.goldHi, a); ctx.fillText(first, x0, y0); ctx.fillStyle = rgb(C.white, a); ctx.fillText(rest, x0 + w1, y0); noShadow(); }
     ctx.shadowColor = rgb(C.gold, 0.6 * a); ctx.shadowBlur = 1.6 * U;
     ctx.fillStyle = rgb(C.goldHi, a); ctx.fillText(first, x0, y0);
     ctx.shadowBlur = 0;
-    ctx.fillStyle = rgb(C.white, 0.92 * a); ctx.fillText(rest, x0 + w1, y0);
-    tracked(ctx, city, W / 2, H / 2 - size * 0.75, 1.8 * U, 0.6, `300 ${1.8 * U}px ${F.sans}`, rgb(C.gold, 0.9 * a));
+    ctx.fillStyle = rgb(C.white, big(0.92, 1) * a); ctx.fillText(rest, x0 + w1, y0);
+    const cS = big(1.8, LAND ? 2.8 : 3.6) * U;
+    darkShadow();
+    tracked(ctx, city, W / 2, H / 2 - size * big(0.75, 0.8), cS, 0.6, `${big(300, 400)} ${cS}px ${F.sans}`, rgb(C.gold, big(0.9, 1) * a));
     reset(ctx);
   }
 
@@ -158,20 +197,21 @@
     const toS = (x, y) => [M.ox + x * M.s, M.oy + y * M.s];
     const pc = n => [parts[n].x + parts[n].w / 2, parts[n].y + parts[n].h / 2];
     const lineA = prog(u, 0.3, 0.45, E.out), restOff = prog(u, 1.15, 0.5, E.inOut), gather = prog(u, 1.35, 0.8, E.inOut);
-    const size = (LAND ? 4.4 : 5.2) * U;
-    ctx.font = `italic 400 ${size}px ${F.serif}`; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
     const rows = LAND ? [NIGHTS] : [NIGHTS.slice(0, 4), NIGHTS.slice(4)];
+    let size = big(LAND ? 4.4 : 5.2, LAND ? 5.8 : 7.2) * U;
+    if (BIG) size = fitFont(rows[0].join('   '), sz => `italic 500 ${sz}px ${F.serif}`, size, 0.9 * W);
+    ctx.font = `italic ${big(400, 500)} ${size}px ${F.serif}`; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
     const [nx, ny] = toS(...pc('n'));
     const nTarget = [nx, ny + 0.36 * parts.n.h * M.s];
     rows.forEach((row, ri) => {
       const ws = row.map(wd => ctx.measureText(wd).width), gap = 2.4 * U;
       const tot = ws.reduce((a, b) => a + b, 0) + gap * (row.length - 1);
       let x0 = W / 2 - tot / 2;
-      const y0 = (LAND ? H / 2 : H / 2 - 4 * U + ri * 8 * U) + size * 0.3;
+      const y0 = (LAND ? H / 2 : H / 2 - big(4, 5.5) * U + ri * big(8, 11) * U) + size * 0.3;
       row.forEach((wd, k) => {
         const first = [...wd][0], rest = [...wd].slice(1).join('');
         const w1 = ctx.measureText(first).width;
-        if (lineA * (1 - restOff) > 0.003) { ctx.fillStyle = rgb(C.white, 0.78 * lineA * (1 - restOff)); ctx.fillText(rest, x0 + w1, y0); }
+        if (lineA * (1 - restOff) > 0.003) { ctx.fillStyle = rgb(C.white, big(0.78, 0.92) * lineA * (1 - restOff)); ctx.fillText(rest, x0 + w1, y0); }
         const fx = lerp(x0, nTarget[0] - w1 / 2, gather), fy = lerp(y0, nTarget[1], gather);
         const nA = lineA * (1 - prog(u, 2.15, 0.3)) * (gather > 0.98 && k + ri > 0 ? 0 : 1);
         if (nA > 0.003) { ctx.fillStyle = rgb(C.goldHi, nA); ctx.fillText(first, fx, fy); }
@@ -179,10 +219,21 @@
       });
     });
     const pA = prog(u, 1.6, 0.5, E.out) * (1 - prog(u, 5.0, 0.5, E.in));
-    if (pA > 0) {
+    if (pA > 0 && !BIG) {
       ctx.font = `italic 400 ${(LAND ? 3.0 : 3.8) * U}px ${F.serif}`; ctx.textAlign = 'center';
       ctx.fillStyle = rgb(C.white, 0.8 * pA);
       ctx.fillText('Dans toutes les langues, la nuit s’écrit N+8.', W / 2, toS(0, 905)[1]);
+    }
+    if (pA > 0 && BIG) {   // plus grande ; en vertical, sur deux lignes sous le logo
+      const font = sz => `italic 500 ${sz}px ${F.serif}`;
+      ctx.textAlign = 'center'; ctx.fillStyle = rgb(C.white, 0.95 * pA);
+      if (LAND) {
+        const str = 'Dans toutes les langues, la nuit s’écrit N+8.';
+        ctx.font = font(fitFont(str, font, 4.5 * U, 0.86 * W)); ctx.fillText(str, W / 2, toS(0, 905)[1]);
+      } else {
+        const sz = fitFont('Dans toutes les langues,', font, 5.6 * U, 0.86 * W), y = toS(0, 960)[1];
+        ctx.font = font(sz); ctx.fillText('Dans toutes les langues,', W / 2, y); ctx.fillText('la nuit s’écrit N+8.', W / 2, y + sz * 1.3);
+      }
     }
     const logoA = prog(u, 2.1, 0.45, E.out), arch = prog(u, 2.45, 1.2, E.inOut);
     const l1 = prog(u, 3.4, 0.8, E.inOut), l2 = prog(u, 3.7, 0.8, E.inOut);
@@ -495,6 +546,7 @@
     // montage : footage/edl.json (film) ou footage/<edl>.json (ex. ?edl=edl_teaser)
     const EDL_NAME = new URLSearchParams(location.search).get('edl') || 'edl';
     EDL = await (await fetch(`../footage/${EDL_NAME}.json`)).json();
+    BIG = EDL.text === 'lisible';
     LOGO.meta = await (await fetch('logo/parts.json')).json();
     for (const name of Object.keys(LOGO.meta.parts)) {
       const img = await loadImage(`logo/${name}.png`);

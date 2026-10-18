@@ -2,7 +2,35 @@
 
 Courts-métrages pour **N+8, Maison de parfums nocturne**.
 
-## « Nuits » avec la voix — version actuelle
+## « Nuits » v6 — version actuelle : textes lisibles
+
+Le film « Nuits » v5 (mêmes images, même musique, mêmes bruitages, sans voix), avec des écritures faites pour être lues,
+en 16:9 comme en vertical :
+
+- **Plus grandes et plus épaisses** — la formule des villes (*N + huit → nuit*) est 1,5 fois plus grande, les noms de
+  ville et les coordonnées aussi ; les mots des capitales passent de 11 à 16 (paysage) et de 15 à 22 (vertical) ; la phrase
+  d'ouverture et la phrase finale sont agrandies (en vertical, la phrase finale passe sur deux lignes). Le Bodoni est pris
+  en graisse 500 : ses déliés, très fins, ne disparaissent plus dans l'image.
+- **Détachées de l'image** — ombre portée sombre sous chaque texte, voile sombre derrière la carte de ville (moitié gauche
+  en paysage, bande horizontale en vertical) : le texte reste net sur la tour Eiffel illuminée ou le lustre de Mascate.
+- **Plus longtemps à l'écran** — la carte de ville reste 4,2 s au lieu de 3,5 s, *N + huit* reste lisible 1,1 s avant de
+  glisser, et *nuit* tient ensuite 2 s ; « Chaque nuit a son parfum. » apparaît plus tôt (2,8 s au lieu de 2,1 s) ; chaque
+  capitale reste 0,53 s au lieu de 0,35 s (le film passe de 53 à 55 s).
+- **Plus haut en vertical** — la carte de ville est remontée, hors de la zone couverte par l'interface des réseaux sociaux.
+
+| Fichier | Format |
+|---|---|
+| `output/N8_Nuits-V6_16x9.mp4` | 1920×1080, 30 i/s, cadre 2.39:1, 55 s |
+| `output/N8_Nuits-V6_9x16.mp4` | 1080×1920, 30 i/s, 55 s |
+| `output/N8_Nuits-V6_affiche_*.png` | image du logo final |
+| `output/apercu/N8_Nuits-V6_*_apercu-720p.mp4` | aperçus 720p |
+
+Fabrication : `footage/edl_lisible.json` (le montage, avec `"text": "lisible"` qui active ces réglages dans `src/reel.js`),
+puis `scripts/sound_reel.py build/lisible/cues.json build/lisible/soundtrack.wav footage/edl_lisible.json`,
+`scripts/footage/assemble.py --edl footage/edl_lisible.json` et `scripts/mux.py --film v6`. Crédits : ceux de « Nuits »
+(`footage/CREDITS.md`, `footage/CREDITS_SON.md`).
+
+## « Nuits » avec la voix
 
 Le film « Nuits » en images réelles (même montage, mêmes images, même musique), avec **une seule voix de femme, chuchotée** —
 celle de « Huit voix » qui souffle *« La nuit a une odeur »* — qui dit « la nuit » dans la langue de chaque ville au moment
