@@ -11,7 +11,9 @@ FAMILIES = [
     "Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700",
     "GFS+Didot",
     "Montserrat:wght@300..500",
-    "Amiri",
+    "Amiri:wght@400;700",
+    "Cinzel:wght@400..900",
+    "Noto+Serif+Display:wght@400..900",
 ]
 KEEP = {"latin", "latin-ext", "greek", "arabic"}
 OUT = Path(__file__).resolve().parent.parent / "src" / "fonts"

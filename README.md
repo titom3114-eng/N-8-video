@@ -2,7 +2,26 @@
 
 Courts-métrages pour **N+8, Maison de parfums nocturne**.
 
-## « Nuits » v6 — version actuelle : textes lisibles
+## « Nuits » v7 — version actuelle : titrage Cinzel
+
+La v6 (mêmes images, même son, mêmes durées, mêmes tailles et ombres), avec une police de titrage plus marquante :
+**Cinzel**, des capitales romaines gravées — l'esthétique d'une affiche de cinéma, sombre et mystérieuse, qui rappelle
+les inscriptions de Rome, l'encens, la nuit. Tout passe en capitales : *N + HUIT → NUIT*, *NIGHT*, *NACHT*, *ΝΥΧΤΑ*,
+« CHAQUE NUIT A SON PARFUM. », « DANS TOUTES LES LANGUES, LA NUIT S'ÉCRIT N+8. ». Les grands mots sont en or dégradé
+(clair en haut, profond en bas), le grec en Noto Serif Display, l'arabe (ليل) en Amiri gras. Polices sous licence
+SIL Open Font License (usage commercial autorisé).
+
+| Fichier | Format |
+|---|---|
+| `output/N8_Nuits-V7_16x9.mp4` | 1920×1080, 30 i/s, cadre 2.39:1, 55 s |
+| `output/N8_Nuits-V7_9x16.mp4` | 1080×1920, 30 i/s, 55 s |
+| `output/N8_Nuits-V7_affiche_*.png` | image du logo final |
+| `output/apercu/N8_Nuits-V7_*_apercu-720p.mp4` | aperçus 720p |
+
+Fabrication : `footage/edl_v7.json` (`"font": "cinzel"` active ce titrage dans `src/reel.js`), puis comme la v6 avec
+`build/v7/` et `scripts/mux.py --film v7`.
+
+## « Nuits » v6 : textes lisibles
 
 Le film « Nuits » v5 (mêmes images, même musique, mêmes bruitages, sans voix), avec des écritures faites pour être lues,
 en 16:9 comme en vertical :
