@@ -1,0 +1,68 @@
+{
+  "pseudo": "@gta6zap",
+  "dossier_sortie": "a_publier",
+  "dossier_vod": "a_traiter",
+  "max_clips_par_lancement": 5,
+  "clips_par_vod": 4,
+  "compilation_du_jour": true,
+  "accroche_titre_twitch": true,
+  "twitch": {
+    "client_id": "",
+    "client_secret": "",
+    "jeu": "Grand Theft Auto VI",
+    "heures": 24,
+    "vues_min": 300,
+    "clips_par_streamer": 3,
+    "langue": "fr"
+  },
+  "createurs": [],
+  "montage": {
+    "cadre": "flou",
+    "zoom": 1.25,
+    "style": "contour",
+    "cta": "ABONNE-TOI POUR LA SUITE",
+    "sous_titres": false,
+    "langue": "fr",
+    "modele_whisper": "small"
+  },
+  "publication": {
+    "horaires": [
+      "12:00",
+      "14:00",
+      "17:00",
+      "18:30",
+      "20:30",
+      "22:30"
+    ],
+    "hashtags": [
+      [
+        "#gta6",
+        "#gtavi",
+        "#gta6clips",
+        "#twitchfr",
+        "#gaming"
+      ],
+      [
+        "#gta6",
+        "#leonida",
+        "#vicecity",
+        "#clipsfr",
+        "#jeuxvideo"
+      ],
+      [
+        "#gta6",
+        "#gtavi",
+        "#gta6fr",
+        "#streamerfr",
+        "#fyp"
+      ],
+      [
+        "#gta6",
+        "#gta6funny",
+        "#gamingfr",
+        "#twitchclips",
+        "#rockstargames"
+      ]
+    ]
+  }
+}

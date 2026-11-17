@@ -1,0 +1,1282 @@
+<title>QG GTA 6 Zap</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mise en page : une salle de contrôle sobre aux couleurs d'un coucher de soleil de Vice City ; onglets en haut, contenu en colonnes qui s'empilent sur téléphone. */
+:root{
+  --bg:#FAF6F8; --surface:#FFFFFF; --surface-2:#F4EEF2; --ink:#1B1524; --ink-2:#574D63; --ink-3:#7F7589; --line:#E7DEE6; --grid:#EEE7ED;
+  --accent:#C8255F; --accent-soft:#FBE4ED; --on-accent:#FFFFFF; --sun:#D9770F; --teal:#0F7F79;
+  --good:#1D7F45; --warn:#9A6400; --bad:#C0323A;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100;
+  --f-display:"Anton","Impact","Arial Narrow Bold",sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#120E19; --surface:#1A1523; --surface-2:#231D2F; --ink:#F2ECF5; --ink-2:#BFB5C9; --ink-3:#958BA0; --line:#302839; --grid:#2A2333;
+  --accent:#FF4D8F; --accent-soft:#3A1828; --on-accent:#1A0710; --sun:#FFA33D; --teal:#3CC4BA;
+  --good:#45C47E; --warn:#E3AA3A; --bad:#F2696F;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#120E19; --surface:#1A1523; --surface-2:#231D2F; --ink:#F2ECF5; --ink-2:#BFB5C9; --ink-3:#958BA0; --line:#302839; --grid:#2A2333;
+  --accent:#FF4D8F; --accent-soft:#3A1828; --on-accent:#1A0710; --sun:#FFA33D; --teal:#3CC4BA;
+  --good:#45C47E; --warn:#E3AA3A; --bad:#F2696F;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+a{color:var(--accent)}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0}
+h2{font-family:var(--f-display);font-weight:400;font-size:1.65rem;letter-spacing:.01em;line-height:1.15;text-transform:uppercase}
+h3{font-size:1rem;font-weight:700}
+p{margin:0}
+.muted{color:var(--ink-2)}
+.small{font-size:.86rem}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+
+/* En-tête */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:18px;padding-block:10px}
+.marque{font-family:var(--f-display);font-size:1.25rem;letter-spacing:.02em;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.marque i{display:inline-block;width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--accent),var(--sun))}
+nav.onglets{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0}
+nav.onglets::-webkit-scrollbar{display:none}
+nav.onglets a{flex:none;text-decoration:none;color:var(--ink-2);font-weight:600;font-size:.92rem;padding:8px 12px;border-radius:999px}
+nav.onglets a:hover{background:var(--surface-2);color:var(--ink)}
+nav.onglets a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,label.tache:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+
+main{padding-block:28px 64px}
+.vue{display:grid;gap:28px}
+.section{display:grid;gap:14px}
+.tete{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+
+/* Héros */
+.heros{display:grid;gap:14px;padding-block:6px 4px}
+.heros h1{font-family:var(--f-display);font-weight:400;font-size:clamp(3rem,9vw,5.6rem);line-height:.92;letter-spacing:.01em}
+.raie{height:6px;width:min(320px,60%);border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--sun))}
+.heros .lead{font-size:1.12rem;max-width:62ch;color:var(--ink-2)}
+.puces{display:flex;flex-wrap:wrap;gap:8px}
+.puce{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:.86rem;font-weight:600}
+.puce.forte{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.point{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+
+.grille{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.carte{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.carte.plate{background:var(--surface-2);border-color:transparent}
+.carte h3{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.gros{font-family:var(--f-display);font-size:2rem;line-height:1;letter-spacing:.01em}
+ul.liste{margin:0;padding-left:1.1em;display:grid;gap:6px}
+ul.liste li::marker{color:var(--accent)}
+
+/* Chaîne de production */
+.flux{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:10px;counter-reset:etape}
+.etape{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 16px;display:grid;gap:6px;counter-increment:etape;min-width:0}
+.etape::before{content:counter(etape);font-family:var(--f-display);font-size:1.6rem;line-height:1;color:var(--accent)}
+.etape .qui{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--ink-3)}
+
+/* Tableaux */
+.tableau{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:700;background:var(--surface-2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr.cliquable{cursor:pointer}
+tbody tr.cliquable:hover{background:var(--surface-2)}
+
+/* Pastilles d'état */
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:700;padding:2px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.pill.bon{color:var(--good)} .pill.moyen{color:var(--warn)} .pill.faible{color:var(--bad)} .pill.ex{color:var(--ink-3)} .pill.acc{color:var(--accent)}
+
+/* Calendrier */
+.cal{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,265px),1fr));gap:12px}
+.jour{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:8px;align-content:start;min-width:0}
+.jour.aujourdhui{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.jour.passe{opacity:.72}
+.jour .ent{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.jour .date{font-weight:700;font-size:.9rem}
+.jour .jn{font-family:var(--f-display);font-size:1.5rem;line-height:1}
+.jour .theme{font-size:.9rem;color:var(--ink-2)}
+label.tache{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:start;font-size:.88rem;cursor:pointer;padding:3px 0;border-radius:6px}
+label.tache input{width:17px;height:17px;margin:2px 0 0;accent-color:var(--accent)}
+label.tache.fait span{color:var(--ink-3);text-decoration:line-through}
+.barre{height:8px;border-radius:4px;background:var(--accent-soft);overflow:hidden}
+.barre > span{display:block;height:100%;background:var(--accent);border-radius:4px}
+
+/* Formulaires */
+form.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;align-items:end}
+.champ{display:grid;gap:4px;min-width:0}
+.champ.large{grid-column:1/-1}
+.champ label{font-size:.78rem;font-weight:600;color:var(--ink-2)}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:120px;font-size:.9rem;line-height:1.5}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{font:inherit;font-weight:600;font-size:.9rem;border-radius:8px;padding:8px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+button:hover{background:var(--surface-2)}
+button.primaire{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+button.primaire:hover{filter:brightness(1.06)}
+button.lien{border:0;background:none;padding:4px 6px;color:var(--accent)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.segment{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface);gap:2px;flex-wrap:wrap}
+.segment button{border:0;border-radius:999px;padding:6px 12px;background:none;color:var(--ink-2)}
+.segment button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+/* Bandeaux */
+.bandeau{border-radius:var(--r);padding:12px 14px;background:var(--surface-2);border:1px solid var(--line);font-size:.9rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.bandeau.alerte{border-color:var(--warn)}
+
+/* KPI */
+.kpi{display:grid;gap:4px}
+.kpi .lab{font-size:.8rem;color:var(--ink-2);font-weight:600}
+.kpi .val{font-size:1.7rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi .sous{font-size:.8rem;color:var(--ink-3)}
+.jauge{display:grid;gap:6px}
+.jauge .piste{height:10px;border-radius:5px;background:var(--accent-soft);overflow:hidden}
+.jauge .piste span{display:block;height:100%;border-radius:5px;background:var(--accent)}
+.jauge .piste.ok span{background:var(--good)}
+.jauge .lig{display:flex;justify-content:space-between;gap:8px;font-size:.85rem}
+
+/* Graphiques */
+.graph{width:100%;min-height:200px;position:relative}
+.graph svg{display:block;width:100%;height:auto;overflow:visible}
+.graph text{font-family:var(--f-body);font-size:11px;fill:var(--ink-3)}
+.graph .axe{stroke:var(--grid);stroke-width:1}
+.graph .vide{fill:var(--ink-3);font-size:13px}
+.legende{display:flex;flex-wrap:wrap;gap:14px;font-size:.84rem;color:var(--ink-2)}
+.legende span{display:inline-flex;align-items:center;gap:6px}
+.legende i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.tip{position:fixed;z-index:20;pointer-events:none;background:var(--ink);color:var(--bg);font-size:.8rem;padding:6px 9px;border-radius:6px;max-width:240px;line-height:1.4;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+
+/* Simulateur */
+.reglages{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px 20px}
+.curseur{display:grid;gap:4px;min-width:0}
+.curseur .lig{display:flex;justify-content:space-between;gap:8px;font-size:.85rem}
+.curseur .lig b{font-variant-numeric:tabular-nums}
+.curseur .aide{font-size:.76rem;color:var(--ink-3)}
+input[type=range]{padding:0;border:0;background:none;accent-color:var(--accent)}
+
+/* Kit */
+.accroches{display:flex;flex-wrap:wrap;gap:8px}
+.accroches button{font-family:var(--f-display);font-weight:400;font-size:1rem;letter-spacing:.02em;padding:7px 12px;text-transform:uppercase}
+.accroches button em{font-style:normal;color:var(--sun)}
+.copie{display:grid;gap:8px}
+pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0;background:var(--surface-2);border-radius:8px;padding:12px;line-height:1.55}
+.ok-copie{font-size:.8rem;color:var(--good);font-weight:600}
+.sources{font-size:.8rem;color:var(--ink-3);display:grid;gap:4px}
+.sources a{color:var(--ink-2)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:640px){
+  .top .wrap{flex-direction:column;align-items:stretch;gap:6px}
+  h2{font-size:1.4rem}
+  th,td{padding:8px 9px}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="marque"><i aria-hidden="true"></i>GTA 6 ZAP · QG</div>
+    <nav class="onglets" aria-label="Sections">
+      <a href="#plan" data-vue="plan">Plan</a>
+      <a href="#calendrier" data-vue="calendrier">Calendrier</a>
+      <a href="#stats" data-vue="stats">Stats</a>
+      <a href="#revenus" data-vue="revenus">Revenus</a>
+      <a href="#kit" data-vue="kit">Kit</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============================================================ PLAN -->
+<section class="vue" id="v-plan">
+  <div class="heros">
+    <span class="eyebrow">Chaîne TikTok FR · clips GTA VI</span>
+    <h1>GTA 6 ZAP</h1>
+    <div class="raie" aria-hidden="true"></div>
+    <p class="lead">Le pilote automatique récupère chaque matin les clips des streamers qui t'ont dit oui, les monte en vertical et prépare chaque publication. Toi, tu programmes les vidéos et tu encaisses les campagnes.</p>
+    <div class="puces">
+      <span class="puce forte" id="compteur">Sortie le jeudi 19 novembre 2026</span>
+      <span class="puce">PS5 · Xbox Series X|S</span>
+      <span class="puce">6 vidéos par jour</span>
+      <span class="puce">≈ 12 min de travail par jour</span>
+    </div>
+  </div>
+
+  <div class="grille g2">
+    <div class="carte">
+      <h3>Aujourd'hui <span class="small muted" id="aujourdhui-date"></span></h3>
+      <div id="aujourdhui-taches" class="section" style="gap:4px"></div>
+      <div class="small muted" id="aujourdhui-note"></div>
+      <div><a href="#calendrier">Voir les 32 jours</a></div>
+    </div>
+    <div class="carte">
+      <h3>Ton temps</h3>
+      <div class="tableau" style="border:0">
+        <table>
+          <tbody>
+            <tr><td><b>Une fois</b></td><td class="n">1 h</td><td class="muted">Compte, installation, clés Twitch, 15 messages aux streamers</td></tr>
+            <tr><td><b>Chaque matin</b></td><td class="n">0 min</td><td class="muted">Le PC lance le pilote à 6 h : récolte, montage, légendes</td></tr>
+            <tr><td><b>Chaque jour</b></td><td class="n">12 min</td><td class="muted">Programmer les 6 vidéos, coller les liens dans les campagnes</td></tr>
+            <tr><td><b>Le dimanche</b></td><td class="n">20 min</td><td class="muted">Stats de la semaine, 5 nouveaux streamers contactés</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">La publication reste manuelle : TikTok ne laisse publier automatiquement que les outils partenaires validés. Un robot qui poste à ta place fait bannir le compte.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>La chaîne de production</h2>
+    <div class="flux">
+      <div class="etape"><span class="qui">Sources autorisées</span><b>Streamers et campagnes</b><span class="small muted">Streamers FR qui ont dit oui, rushs fournis par les campagnes de clipping, clips de ta communauté.</span></div>
+      <div class="etape"><span class="qui">automate.py · 6 h</span><b>Récolte et montage</b><span class="small muted">Clips Twitch les plus vus des 24 h, moments forts des VOD, accroche, crédit, sous-titres, TOP 5 du jour.</span></div>
+      <div class="etape"><span class="qui">a_publier/date/</span><b>6 vidéos prêtes</b><span class="small muted">publications.txt donne l'heure, la légende et les hashtags de chaque vidéo.</span></div>
+      <div class="etape"><span class="qui">TikTok Studio</span><b>Programmation</b><span class="small muted">Téléverser, coller, programmer. Les meilleurs clips partent le soir.</span></div>
+      <div class="etape"><span class="qui">Campagnes · Stats</span><b>Encaisser et ajuster</b><span class="small muted">Liens soumis aux campagnes, chiffres du dimanche dans l'onglet Stats.</span></div>
+    </div>
+    <p class="small muted">Outil et notice complète : dossier <span class="mono">gta-tiktok/</span> du dépôt, fichier <span class="mono">LISEZMOI.md</span>.</p>
+  </div>
+
+  <div class="section">
+    <h2>D'où vient l'argent</h2>
+    <div class="tableau">
+      <table>
+        <thead><tr><th>Source</th><th>Quand</th><th>Combien (ordre de grandeur)</th><th>Condition</th></tr></thead>
+        <tbody>
+          <tr><td><b>Campagnes de clipping</b></td><td>Dès la 1re vidéo</td><td class="num">≈ 1 $ pour 1 000 vues (médiane), de 0,05 à 3 $ selon la campagne</td><td class="muted">Poster les clips de la campagne et soumettre les liens. Budget plafonné par campagne, commission de 7 à 10 %.</td></tr>
+          <tr><td><b>Creator Rewards (TikTok)</b></td><td>À partir de 10 000 abonnés</td><td class="num">≈ 0,40 à 1 $ pour 1 000 vues qualifiées</td><td class="muted">18 ans, 100 000 vues sur 30 jours, vidéos de plus d'1 min, contenu jugé original : vise-le avec les TOP du jour montés, jamais avec un clip brut.</td></tr>
+          <tr><td><b>Partenariats</b></td><td>Vers 10 000 abonnés</td><td class="num">15 à 30 € pour 1 000 vues moyennes par vidéo sponsorisée</td><td class="muted">Marques gaming, boutiques de clés, accessoires. Mention « Collaboration commerciale » obligatoire en France.</td></tr>
+          <tr><td><b>Affiliation</b></td><td>À partir de 1 000 abonnés</td><td class="num">Quelques euros pour 100 000 vues</td><td class="muted">Lien en bio (débloqué à 1 000 abonnés) vers des produits liés à GTA VI.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grille g2">
+    <div class="carte">
+      <h3>Identité du compte</h3>
+      <div class="tableau" style="border:0">
+        <table><tbody>
+          <tr><td class="muted">Nom affiché</td><td><b>GTA 6 ZAP</b></td></tr>
+          <tr><td class="muted">Pseudo</td><td><b>@gta6zap</b> <span class="small muted">(si pris : @gta6zap.fr, @gta6.zap)</span></td></tr>
+          <tr><td class="muted">Type</td><td>Compte <b>personnel</b> : un compte Entreprise n'a pas accès à Creator Rewards</td></tr>
+          <tr><td class="muted">Photo</td><td><span class="mono">gta-tiktok/identite/avatar.png</span>, sans logo officiel</td></tr>
+          <tr><td class="muted">Bio</td><td>Dans l'onglet Kit, à copier</td></tr>
+          <tr><td class="muted">Épinglé</td><td>Le meilleur TOP du jour, remplacé chaque semaine</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+    <div class="carte">
+      <h3>Trois phases</h3>
+      <div class="tableau" style="border:0">
+        <table><tbody>
+          <tr><td><span class="pill acc">J1 → J14</span></td><td><b>Ruée.</b> Le jeu sort, tout le monde cherche « GTA 6 ». 6 vidéos par jour, la vitesse compte plus que la perfection : le premier qui poste un moment viral prend les vues.</td></tr>
+          <tr><td><span class="pill acc">J15 → J30</span></td><td><b>Consolidation.</b> On garde les créateurs et les accroches qui marchent, on active les sous-titres, on ajoute des campagnes.</td></tr>
+          <tr><td><span class="pill acc">J31 et après</span></td><td><b>Monétisation.</b> Creator Rewards si les seuils sont atteints, premiers partenariats, mêmes vidéos sur YouTube Shorts et Instagram Reels quand les campagnes paient ces vues.</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="grille g2">
+    <div class="carte">
+      <h3>Où trouver le contenu</h3>
+      <ul class="liste">
+        <li><b>Campagnes de clipping</b> (Whop Content Rewards et plateformes équivalentes) : les créateurs fournissent leurs rushs, fixent les règles et paient au millier de vues. Filtre sur « GTA », « gaming », « Twitch ».</li>
+        <li><b>Streamers FR qui lancent GTA VI</b> : vise les chaînes de 500 à 5 000 spectateurs, plus enclines à dire oui. Message type dans l'onglet Kit. Garde chaque accord en capture d'écran.</li>
+        <li><b>Ta communauté</b> : « Envoie ton clip » en vidéo épinglée à partir de J10. Un envoi en DM vaut accord, dépose le fichier dans <span class="mono">a_traiter/</span>.</li>
+      </ul>
+    </div>
+    <div class="carte">
+      <h3>Ce qui fait décoller une vidéo</h3>
+      <ul class="liste">
+        <li>L'accroche se lit en moins d'une seconde, un mot en jaune. Le pilote s'en charge.</li>
+        <li>15 à 30 s pour un clip : une vidéo regardée deux fois en boucle pousse plus qu'une longue vue à moitié.</li>
+        <li>Publier dans les 24 h qui suivent le stream : un moment viral s'use en deux jours.</li>
+        <li>Les meilleurs clips le soir (18 h 30 → 22 h 30), quand l'audience gaming FR est en ligne.</li>
+        <li>3 à 5 hashtags, toujours #gta6, jamais 30.</li>
+        <li>Répondre aux 3 premiers commentaires quand tu programmes : facultatif, mais ça relance la vidéo.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="carte plate">
+    <h3>Lignes rouges</h3>
+    <ul class="liste">
+      <li>Jamais de clip d'un créateur qui n'a pas dit oui : signalements pour droits d'auteur, vidéos supprimées, puis compte banni. Le pilote refuse tout créateur sans autorisation notée.</li>
+      <li>Musique des radios du jeu sous licence : si TikTok coupe le son, refais la vidéo sans le son du jeu, avec un son libre de droits.</li>
+      <li>Rien d'avant la sortie, aucune fuite : Take-Two les fait retirer systématiquement.</li>
+      <li>Pas de nudité, de gore poussé ni de gros plans de drogue, même en jeu : TikTok retire ou cesse de recommander.</li>
+      <li>Pas d'apparence officielle : pas de logo Rockstar, « compte fan non officiel » en bio.</li>
+      <li>Campagne payée par une marque ou par le créateur : active « Contenu de marque » dans TikTok et écris « Collaboration commerciale » (loi française de 2023 sur l'influence commerciale).</li>
+    </ul>
+  </div>
+
+  <div class="sources">
+    <span>Sources consultées le 17/11/2026 :</span>
+    <a href="https://contentrewards.com/articles/clipping-data" target="_blank" rel="noopener">Content Rewards, données de 707 campagnes de clipping (10/11/2026)</a>
+    <a href="https://openclip.app/clipping/clipper-pay-rates" target="_blank" rel="noopener">OpenClip, tarifs des clippers 2026</a>
+    <a href="https://ttcalculator.net/learn/creator-rewards-program/" target="_blank" rel="noopener">Conditions du programme Creator Rewards</a>
+    <a href="https://findclout.com/blog/tiktok-creator-rewards-reposted-clips" target="_blank" rel="noopener">Creator Rewards et contenus republiés</a>
+    <a href="https://www.gtaboom.com/gta-6-release-date-and-delay-history-9f6b" target="_blank" rel="noopener">Date de sortie de GTA VI et plateformes</a>
+  </div>
+</section>
+
+<!-- ============================================================ CALENDRIER -->
+<section class="vue" id="v-calendrier" hidden>
+  <div class="tete">
+    <div class="section" style="gap:6px">
+      <span class="eyebrow">Du 17 novembre au 18 décembre 2026</span>
+      <h2>Calendrier des 32 jours</h2>
+      <p class="muted small">Le thème du jour dit quels clips mettre en avant si tu choisis à la main. Coche au fur et à mesure : c'est enregistré.</p>
+    </div>
+    <div class="kpi" style="min-width:200px">
+      <span class="lab">Tâches faites</span>
+      <span class="val" id="cal-progres-txt">0 / 0</span>
+      <div class="barre"><span id="cal-progres" style="width:0%"></span></div>
+    </div>
+  </div>
+  <div class="bandeau" id="cal-etat" hidden></div>
+  <div class="cal" id="cal"></div>
+</section>
+
+<!-- ============================================================ STATS -->
+<section class="vue" id="v-stats" hidden>
+  <div class="tete">
+    <div class="section" style="gap:6px">
+      <span class="eyebrow">Chiffres de TikTok Studio, saisis le dimanche</span>
+      <h2>Stats</h2>
+    </div>
+    <div class="actions">
+      <button type="button" id="btn-ajout-video" class="primaire">Ajouter une vidéo</button>
+      <button type="button" id="btn-ajout-suivi">Point du dimanche</button>
+    </div>
+  </div>
+  <div class="bandeau" id="stats-etat">Chargement des données…</div>
+
+  <div class="grille g2">
+    <div class="carte">
+      <div class="jauge" id="jauge-1k"></div>
+    </div>
+    <div class="carte">
+      <div class="jauge" id="jauge-10k"></div>
+    </div>
+  </div>
+
+  <div class="grille g3" id="kpis"></div>
+
+  <div class="carte" id="carte-conseils">
+    <h3>À faire maintenant</h3>
+    <ul class="liste" id="conseils"></ul>
+  </div>
+
+  <div class="grille g2">
+    <div class="carte">
+      <h3>Vues par vidéo <span class="small muted">ordre de publication</span></h3>
+      <div class="graph" id="g-vues"></div>
+    </div>
+    <div class="carte">
+      <h3>Abonnés <span class="small muted">points du dimanche</span></h3>
+      <div class="graph" id="g-abos"></div>
+    </div>
+  </div>
+
+  <div class="carte">
+    <div class="tete">
+      <h3>Vues médianes</h3>
+      <div class="segment" role="group" aria-label="Regrouper par">
+        <button type="button" data-par="createur" aria-pressed="true">Par créateur</button>
+        <button type="button" data-par="format" aria-pressed="false">Par format</button>
+      </div>
+    </div>
+    <div class="graph" id="g-groupes" style="min-height:120px"></div>
+  </div>
+
+  <div class="carte" id="carte-form-video" hidden>
+    <h3 id="titre-form-video">Ajouter une vidéo</h3>
+    <form class="form" id="form-video" autocomplete="off">
+      <input type="hidden" id="f-id">
+      <div class="champ"><label for="f-date">Date de publication</label><input type="date" id="f-date" required></div>
+      <div class="champ" style="grid-column:span 2"><label for="f-titre">Accroche ou titre</label><input type="text" id="f-titre" maxlength="80" required placeholder="IL A PAS VU LE CROCO"></div>
+      <div class="champ"><label for="f-createur">Créateur clippé</label><input type="text" id="f-createur" maxlength="40" placeholder="@pseudo"></div>
+      <div class="champ"><label for="f-format">Format</label><select id="f-format"><option>Clip Twitch</option><option>TOP du jour</option><option>Clip VOD</option><option>Clip communauté</option><option>Clip campagne</option></select></div>
+      <div class="champ"><label for="f-duree">Durée (s)</label><input type="number" id="f-duree" min="1" max="600" step="1" inputmode="numeric"></div>
+      <div class="champ"><label for="f-vues">Vues</label><input type="number" id="f-vues" min="0" step="1" inputmode="numeric" required></div>
+      <div class="champ"><label for="f-likes">J'aime</label><input type="number" id="f-likes" min="0" step="1" inputmode="numeric"></div>
+      <div class="champ"><label for="f-comms">Commentaires</label><input type="number" id="f-comms" min="0" step="1" inputmode="numeric"></div>
+      <div class="champ"><label for="f-partages">Partages</label><input type="number" id="f-partages" min="0" step="1" inputmode="numeric"></div>
+      <div class="champ"><label for="f-abos">Abonnés gagnés</label><input type="number" id="f-abos" min="0" step="1" inputmode="numeric"></div>
+      <div class="champ"><label for="f-campagne">Campagne</label><input type="text" id="f-campagne" maxlength="40" placeholder="vide si aucune"></div>
+      <div class="champ"><label for="f-gains">Gains réels (€)</label><input type="number" id="f-gains" min="0" step="0.01" inputmode="decimal"></div>
+      <div class="actions champ large">
+        <button type="submit" class="primaire" id="f-valider">Enregistrer</button>
+        <button type="button" id="f-annuler">Fermer</button>
+        <button type="button" id="f-supprimer" class="lien" hidden>Supprimer cette vidéo</button>
+        <span class="small" id="f-msg" role="status"></span>
+      </div>
+    </form>
+  </div>
+
+  <div class="carte" id="carte-form-suivi" hidden>
+    <h3>Point du dimanche</h3>
+    <p class="small muted">Dans TikTok Studio → Analyses : nombre d'abonnés et vues des vidéos sur les 28 à 30 derniers jours.</p>
+    <form class="form" id="form-suivi" autocomplete="off">
+      <div class="champ"><label for="s-date">Date</label><input type="date" id="s-date" required></div>
+      <div class="champ"><label for="s-abonnes">Abonnés</label><input type="number" id="s-abonnes" min="0" step="1" inputmode="numeric" required></div>
+      <div class="champ"><label for="s-vues30">Vues sur 30 jours</label><input type="number" id="s-vues30" min="0" step="1" inputmode="numeric" required></div>
+      <div class="actions champ large">
+        <button type="submit" class="primaire">Enregistrer</button>
+        <button type="button" id="s-annuler">Fermer</button>
+        <span class="small" id="s-msg" role="status"></span>
+      </div>
+    </form>
+  </div>
+
+  <div class="section">
+    <div class="tete"><h3>Vidéos suivies</h3><span class="small muted">Touche une ligne pour la modifier</span></div>
+    <div class="tableau">
+      <table>
+        <thead><tr><th>Date</th><th>Accroche</th><th>Créateur</th><th>Format</th><th class="n">Vues</th><th class="n">Engag.</th><th class="n">Abos</th><th class="n">Gains</th><th>Niveau</th></tr></thead>
+        <tbody id="t-videos"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Points du dimanche</h3>
+    <div class="tableau">
+      <table>
+        <thead><tr><th>Date</th><th class="n">Abonnés</th><th class="n">Vues sur 30 j</th><th></th></tr></thead>
+        <tbody id="t-suivi"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ REVENUS -->
+<section class="vue" id="v-revenus" hidden>
+  <div class="tete">
+    <div class="section" style="gap:6px">
+      <span class="eyebrow">Simulation sur 6 mois</span>
+      <h2>Revenus</h2>
+      <p class="small muted">Des hypothèses, pas des promesses : règle les curseurs, ou pars de tes vraies stats dès que tu as une dizaine de vidéos.</p>
+    </div>
+    <div class="actions">
+      <div class="segment" role="group" aria-label="Scénario">
+        <button type="button" data-scen="prudent" aria-pressed="false">Prudent</button>
+        <button type="button" data-scen="realiste" aria-pressed="true">Réaliste</button>
+        <button type="button" data-scen="explosif" aria-pressed="false">Explosif</button>
+      </div>
+      <button type="button" id="btn-vraies">Mes vraies stats</button>
+    </div>
+  </div>
+  <div class="bandeau" id="sim-note" hidden></div>
+
+  <div class="grille g4" id="sim-kpis"></div>
+
+  <div class="grille g2">
+    <div class="carte">
+      <h3>Gains par mois et par source</h3>
+      <div class="legende" id="leg-pile"></div>
+      <div class="graph" id="g-pile"></div>
+    </div>
+    <div class="carte">
+      <h3>Abonnés en fin de mois</h3>
+      <div class="graph" id="g-sim-abos"></div>
+    </div>
+  </div>
+
+  <div class="tableau">
+    <table>
+      <thead><tr><th>Mois</th><th class="n">Vues</th><th class="n">Abonnés</th><th class="n">Campagnes</th><th class="n">Creator Rewards</th><th class="n">Partenariats</th><th class="n">Affiliation</th><th class="n">Total</th></tr></thead>
+      <tbody id="t-sim"></tbody>
+    </table>
+  </div>
+
+  <div class="carte">
+    <h3>Hypothèses</h3>
+    <div class="reglages" id="curseurs"></div>
+  </div>
+
+  <div class="carte plate small">
+    <h3>Comment c'est calculé</h3>
+    <ul class="liste">
+      <li>Vues du mois = vidéos par jour × 30 × vues moyennes, qui évoluent chaque mois du pourcentage choisi.</li>
+      <li>Campagnes = vues × part des vidéos en campagne × tarif × (1 − commission). Payées dès la première vidéo, dans la limite du budget de chaque campagne.</li>
+      <li>Creator Rewards démarre le mois qui suit le passage des 10 000 abonnés, si le mois dépasse 100 000 vues, et ne compte que la part des vues faite par les compilations de plus d'une minute.</li>
+      <li>Partenariats à partir de 10 000 abonnés : nombre de vidéos sponsorisées × vues moyennes × tarif pour 1 000 vues.</li>
+      <li>Affiliation à partir de 1 000 abonnés (lien en bio).</li>
+      <li>Montants bruts, avant impôts et cotisations. En France, déclare ces revenus dès le premier euro (micro-entreprise la plupart du temps).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================ KIT -->
+<section class="vue" id="v-kit" hidden>
+  <div class="section" style="gap:6px">
+    <span class="eyebrow">Tout est prêt à copier</span>
+    <h2>Kit</h2>
+  </div>
+
+  <div class="carte">
+    <h3>Les 40 accroches du pilote <span class="small muted">touche pour copier</span></h3>
+    <p class="small muted">Le pilote les utilise à tour de rôle quand le titre du clip Twitch ne fait pas une bonne accroche. Le mot en orange passe en jaune sur la vidéo.</p>
+    <div class="accroches" id="accroches"></div>
+    <span class="ok-copie" id="ok-accroche" role="status"></span>
+  </div>
+
+  <div class="grille g2" id="textes"></div>
+
+  <div class="carte">
+    <h3>Programmer dans TikTok Studio</h3>
+    <ul class="liste">
+      <li>Sur ordinateur : tiktok.com/tiktokstudio → <b>Téléverser</b>.</li>
+      <li>Glisse la vidéo, colle la légende de <span class="mono">publications.txt</span>.</li>
+      <li>Couverture : garde une image où l'accroche est lisible.</li>
+      <li>Commentaires, Duo et Stitch : autorisés (ça nourrit l'engagement).</li>
+      <li>Vidéo d'une campagne payée par une marque ou un créateur : <b>Divulgation du contenu → Contenu de marque</b>.</li>
+      <li><b>Quand publier → Programmer</b>, l'heure du fichier. Si elle est passée, publie tout de suite.</li>
+      <li>Une fois en ligne : copie le lien et soumets-le dans la campagne concernée.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+(() => {
+"use strict";
+
+/* ------------------------------------------------------------------ outils */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const fmtN = new Intl.NumberFormat("fr-FR");
+const fmtE = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+const fmtE2 = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const fmtP = new Intl.NumberFormat("fr-FR", { style: "percent", maximumFractionDigits: 1 });
+const compact = v => v >= 1e6 ? (v / 1e6).toLocaleString("fr-FR", { maximumFractionDigits: 1 }) + " M" : v >= 1e4 ? Math.round(v / 1e3).toLocaleString("fr-FR") + " k" : fmtN.format(Math.round(v));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const num = v => { const n = Number(v); return Number.isFinite(n) ? n : 0; };
+const mediane = a => { if (!a.length) return 0; const s = [...a].sort((x, y) => x - y); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const deIso = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+const JOURS = ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."];
+const MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
+const dateCourte = s => { const d = deIso(s); return `${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]}`; };
+const store = {
+  get(k, def) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch { return def; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* stockage indisponible */ } }
+};
+
+async function copier(texte, bouton, cible) {
+  let ok = false;
+  try { await navigator.clipboard.writeText(texte); ok = true; } catch { ok = false; }
+  if (!ok && cible) {
+    const r = document.createRange(); r.selectNodeContents(cible);
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+  return ok;
+}
+
+/* ------------------------------------------------------------------ navigation */
+const VUES = ["plan", "calendrier", "stats", "revenus", "kit"];
+function montrer() {
+  const v = VUES.includes(location.hash.slice(1)) ? location.hash.slice(1) : "plan";
+  VUES.forEach(n => { $("#v-" + n).hidden = n !== v; });
+  $$("nav.onglets a").forEach(a => { if (a.dataset.vue === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  requestAnimationFrame(() => redessiner(v));
+}
+window.addEventListener("hashchange", montrer);
+
+/* ------------------------------------------------------------------ calendrier */
+const SORTIE = deIso("2026-11-19");
+const DEBUT = deIso("2026-11-17");
+const FIN = deIso("2026-12-18");
+const THEMES = [
+  "Les premières minutes dans Leonida",
+  "La police de Leonida",
+  "Alligators et faune sauvage",
+  "Crashs et physique",
+  "Les PNJ les plus bizarres",
+  "Vice City de nuit",
+  "Bilan de la semaine : TOP du jour renforcé",
+  "Bugs et glitches du lancement",
+  "Braquages qui tournent mal",
+  "Bateaux, marais et Keys",
+  "Les réseaux sociaux du jeu",
+  "Courses-poursuites",
+  "Lucia et Jason en duo",
+  "Bilan des deux premières semaines",
+  "Rage et fous rires",
+  "Easter eggs trouvés en live",
+  "Les plus belles images",
+  "Fails de conduite",
+  "Missions qui dérapent (sans spoiler)",
+  "Duos de streamers",
+  "Bilan de la semaine 3",
+  "Plages et vie nocturne",
+  "Défis de streamers",
+  "Le grand n'importe quoi",
+  "Faune sauvage, le retour",
+  "Records et speedruns",
+  "Les clips de la communauté",
+  "Le mois en 10 moments",
+  "Les streamers qui ont le plus fait rire",
+  "Bilan du mois et passage en monétisation"
+];
+const PREPA = {
+  "-2": {
+    theme: "Tout installer",
+    taches: [
+      "Créer le compte TikTok personnel @gta6zap (nom, photo, bio : onglet Kit)",
+      "Installer Python, ffmpeg et les dépendances (LISEZMOI, partie 1)",
+      "Créer l'application Twitch et coller les clés dans config.json",
+      "S'inscrire sur une plateforme de campagnes de clipping et repérer les campagnes GTA VI et gaming",
+      "Envoyer le message d'autorisation à 15 streamers FR qui lancent GTA VI"
+    ]
+  },
+  "-1": {
+    theme: "Tester et brancher",
+    taches: [
+      "Ajouter dans config.json les streamers qui ont dit oui, avec la preuve",
+      "Lancer python automate.py --essai pour vérifier les clés",
+      "Programmer le lancement automatique à 6 h (LISEZMOI, partie 3)",
+      "Relancer les streamers sans réponse (message de relance : Kit)",
+      "Suivre 30 comptes gaming FR et regarder 20 min de vidéos GTA depuis le compte"
+    ]
+  }
+};
+function infoJour(d) {
+  const j = Math.round((d - SORTIE) / 864e5);
+  const n = j >= 0 ? j + 1 : j; // J1 = 19 nov, J-1 = 18 nov
+  let phase = "Préparation", theme, taches = [];
+  if (n < 0) { theme = PREPA[String(n)].theme; taches = PREPA[String(n)].taches.slice(); }
+  else {
+    phase = n <= 14 ? "Ruée" : "Consolidation";
+    theme = THEMES[n - 1];
+    if (n === 1) taches.push("23 h : relancer le pilote avec \"heures\": 6 pour poster les premiers moments avant tout le monde");
+    taches.push("Programmer les vidéos du jour depuis a_publier/ (10 min)");
+    taches.push("Coller les liens publiés dans les campagnes (2 min)");
+    if (d.getDay() === 0) {
+      taches.push("Point du dimanche : stats de la semaine dans l'onglet Stats");
+      taches.push("Envoyer le message d'autorisation à 5 nouveaux streamers");
+    }
+    if ([7, 14, 21, 28].includes(n)) taches.push("Bilan : garder les créateurs et les accroches qui marchent le mieux, retirer les autres de config.json");
+    if (n === 3) taches.push("Épingler la meilleure vidéo du compte");
+    if (n === 10) taches.push("Publier l'appel « Envoie ton clip » (Kit) et l'épingler");
+    if (n === 15) taches.push("Phase 2 : activer les sous-titres (montage.sous_titres = true)");
+    if (n === 20) taches.push("Reposter les 10 meilleures vidéos sur YouTube Shorts et Instagram Reels si tes campagnes paient ces vues");
+    if (n === 30) taches.push("10 000 abonnés et 100 000 vues sur 30 jours ? Demander Creator Rewards dans TikTok Studio");
+  }
+  return { n, phase, theme, taches, videos: n < 0 ? 0 : 6 };
+}
+function jours() {
+  const out = [];
+  for (let d = new Date(DEBUT); d <= FIN; d.setDate(d.getDate() + 1)) out.push(new Date(d));
+  return out;
+}
+function clefTache(dIso, i) { return `${dIso}_${i}`; }
+
+const etat = { videos: [], suivi: [], planning: {}, pret: { videos: false, suivi: false, planning: false }, db: null, ecriture: true, horsLigne: false, groupe: "createur" };
+
+function rendreTache(dIso, i, texte) {
+  const k = clefTache(dIso, i);
+  const fait = !!etat.planning[k];
+  const lab = document.createElement("label");
+  lab.className = "tache" + (fait ? " fait" : "");
+  const cb = document.createElement("input");
+  cb.type = "checkbox"; cb.checked = fait; cb.id = "t_" + k.replace(/[^a-z0-9_]/gi, "_");
+  cb.disabled = !etat.db || !etat.ecriture;
+  cb.addEventListener("change", () => basculer(k, cb.checked));
+  const sp = document.createElement("span"); sp.textContent = texte;
+  lab.append(cb, sp);
+  return lab;
+}
+
+function rendreCalendrier() {
+  const cal = $("#cal"); cal.textContent = "";
+  const auj = iso(new Date());
+  let total = 0, faits = 0;
+  for (const d of jours()) {
+    const di = iso(d), info = infoJour(d);
+    const c = document.createElement("article");
+    c.className = "jour" + (di === auj ? " aujourdhui" : "") + (di < auj ? " passe" : "");
+    const pillCls = info.phase === "Ruée" ? "acc" : info.phase === "Préparation" ? "ex" : "bon";
+    c.innerHTML = `<div class="ent"><div><div class="date">${esc(dateCourte(di))}${di === auj ? " · aujourd'hui" : ""}</div><span class="pill ${pillCls}">${esc(info.phase)}</span></div><div class="jn">${info.n < 0 ? "J" + info.n : "J" + info.n}</div></div>
+      <div class="theme">${esc(info.theme)}</div>${info.videos ? `<div class="small muted">${info.videos} vidéos à programmer</div>` : ""}`;
+    info.taches.forEach((t, i) => { c.append(rendreTache(di, i, t)); total++; if (etat.planning[clefTache(di, i)]) faits++; });
+    cal.append(c);
+  }
+  $("#cal-progres-txt").textContent = `${faits} / ${total}`;
+  $("#cal-progres").style.width = total ? (100 * faits / total) + "%" : "0%";
+  rendreAujourdhui();
+}
+
+function rendreAujourdhui() {
+  const now = new Date(), di = iso(now);
+  const zone = $("#aujourdhui-taches"); zone.textContent = "";
+  $("#aujourdhui-date").textContent = dateCourte(di);
+  const note = $("#aujourdhui-note");
+  if (now < DEBUT || now > new Date(FIN.getTime() + 864e5)) {
+    note.textContent = now > FIN ? "Le calendrier de lancement est terminé : garde la routine quotidienne et le point du dimanche." : "Le calendrier commence le 17 novembre.";
+    return;
+  }
+  const info = infoJour(deIso(di));
+  const t = document.createElement("div"); t.className = "small"; t.innerHTML = `<b>${info.n < 0 ? "J" + info.n : "J" + info.n} · ${esc(info.phase)}</b> · ${esc(info.theme)}`;
+  zone.append(t);
+  info.taches.forEach((x, i) => zone.append(rendreTache(di, i, x)));
+  note.textContent = !etat.db ? "Les coches s'enregistrent quand la page est ouverte sur claude.ai." : "";
+}
+
+function majCompteur() {
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const j = Math.round((now - SORTIE) / 864e5);
+  const el = $("#compteur");
+  if (j < 0) el.textContent = `Sortie dans ${-j} jour${-j > 1 ? "s" : ""} · jeudi 19 novembre`;
+  else if (j === 0) el.textContent = "GTA VI sort aujourd'hui · J1";
+  else el.textContent = `J${j + 1} de la chaîne${j + 1 <= 14 ? " · Ruée" : j + 1 <= 30 ? " · Consolidation" : " · Monétisation"}`;
+}
+
+/* ------------------------------------------------------------------ base de données */
+let file = Promise.resolve();
+function ecrire(fn, msgEl) {
+  file = file.then(fn).catch(e => {
+    const code = e && e.code;
+    if (code === "invalid_argument" || code === "not_granted") { etat.ecriture = false; majEtatDonnees(); }
+    const m = code === "quota_exceeded" ? "Base pleine : supprime d'anciennes lignes." : code === "invalid_argument" ? "Tu peux consulter cette page mais pas la modifier." : "Enregistrement impossible pour le moment, réessaie dans un instant.";
+    if (msgEl) msgEl.textContent = m; else majEtatDonnees(m);
+  });
+  return file;
+}
+function basculer(k, val) {
+  if (!etat.db) return;
+  const fait = { ...etat.planning };
+  if (val) fait[k] = true; else delete fait[k];
+  etat.planning = fait;
+  rendreCalendrier();
+  ecrire(() => etat.db.doc("etat/planning").set({ fait }));
+}
+
+function majEtatDonnees(message) {
+  const b = $("#stats-etat");
+  const ce = $("#cal-etat");
+  if (!etat.db) {
+    const t = etat.horsLigne ? "Les données ne sont disponibles que sur la page publiée, connecté à claude.ai." : "Connexion aux données…";
+    b.textContent = t; b.hidden = false; ce.textContent = t; ce.hidden = !etat.horsLigne;
+    return;
+  }
+  ce.hidden = true;
+  if (message) { b.textContent = message; b.hidden = false; b.classList.add("alerte"); return; }
+  b.classList.remove("alerte");
+  const ex = etat.videos.filter(v => v.exemple).length + etat.suivi.filter(s => s.exemple).length;
+  const reels = etat.videos.filter(v => !v.exemple).length;
+  b.textContent = ""; b.hidden = true;
+  if (!etat.ecriture) { b.hidden = false; b.textContent = "Lecture seule : seul le propriétaire du QG peut saisir des chiffres."; }
+  if (ex) {
+    b.hidden = false; b.textContent = "";
+    const s = document.createElement("span");
+    s.textContent = reels ? `${ex} lignes d'exemple restent dans le tableau ; elles sont exclues des calculs dès que tu as tes propres vidéos.` : `Ce sont des chiffres d'exemple pour montrer l'outil. Ajoute ta première vraie vidéo, ils disparaissent des calculs.`;
+    const btn = document.createElement("button"); btn.type = "button"; btn.textContent = "Effacer les exemples"; btn.disabled = !etat.ecriture;
+    btn.addEventListener("click", effacerExemples);
+    b.append(s, btn);
+  }
+}
+function effacerExemples() {
+  const v = etat.videos.filter(x => x.exemple), s = etat.suivi.filter(x => x.exemple);
+  v.forEach(x => ecrire(() => etat.db.collection("videos").doc(x.id).delete()));
+  s.forEach(x => ecrire(() => etat.db.collection("suivi").doc(x.id).delete()));
+}
+
+async function brancher() {
+  let db = null;
+  try { db = window.claude && typeof window.claude.use === "function" ? await window.claude.use("db") : null; } catch { db = null; }
+  if (!db) { etat.horsLigne = true; majEtatDonnees(); rendreStats(); rendreCalendrier(); return; }
+  etat.db = db;
+  try {
+    const u = await window.claude.use("user");
+    if (u && typeof u.can === "function") { const c = await u.can("data.write"); if (c === false) etat.ecriture = false; }
+  } catch { /* on garde les champs actifs, un refus d'écriture tranchera */ }
+  majEtatDonnees();
+  rendreCalendrier();
+  const minuteur = setTimeout(() => { if (!etat.pret.videos) majEtatDonnees("Les données ne répondent pas encore. Elles s'afficheront dès que la connexion revient."); }, 10000);
+  db.collection("videos").onSnapshot(snap => {
+    etat.videos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (!snap.metadata.fromCache) { etat.pret.videos = true; clearTimeout(minuteur); }
+    majEtatDonnees(); rendreStats();
+  }, e => { clearTimeout(minuteur); majEtatDonnees("Impossible de lire les vidéos : " + (e.code || "erreur") + "."); });
+  db.collection("suivi").onSnapshot(snap => {
+    etat.suivi = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    etat.pret.suivi = true; majEtatDonnees(); rendreStats();
+  }, () => {});
+  db.doc("etat/planning").onSnapshot(snap => {
+    etat.planning = snap.exists ? { ...(snap.data().fait || {}) } : {};
+    etat.pret.planning = true; rendreCalendrier();
+  }, () => {});
+}
+
+/* ------------------------------------------------------------------ graphiques */
+const tip = $("#tip");
+function attacherTip(svg) {
+  svg.addEventListener("pointermove", e => {
+    const t = e.target.closest("[data-tip]");
+    if (!t) { tip.hidden = true; return; }
+    tip.textContent = t.getAttribute("data-tip");
+    tip.hidden = false;
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = e.clientX + 12, y = e.clientY - h - 10;
+    if (x + w > innerWidth - 8) x = e.clientX - w - 12;
+    if (y < 8) y = e.clientY + 14;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  });
+  svg.addEventListener("pointerleave", () => { tip.hidden = true; });
+}
+function pas(max) {
+  if (max <= 0) return { max: 1, pas: 1 };
+  const brut = max / 4, p10 = Math.pow(10, Math.floor(Math.log10(brut)));
+  const m = [1, 2, 2.5, 5, 10].find(x => x * p10 >= brut) * p10;
+  return { max: Math.ceil(max / m) * m, pas: m };
+}
+function vide(el, texte) { el.innerHTML = `<svg viewBox="0 0 400 120" role="img" aria-label="${esc(texte)}"><text class="vide" x="200" y="64" text-anchor="middle">${esc(texte)}</text></svg>`; }
+const SVGNS = "http://www.w3.org/2000/svg";
+
+function colonnes(el, items, opts = {}) {
+  if (!items.length) return vide(el, opts.vide || "Pas encore de données");
+  const W = Math.max(300, el.clientWidth || 600), H = opts.h || 220, g = 44, d = 10, hm = 12, bm = 26;
+  const vmax = Math.max(...items.map(i => i.v), opts.ref || 0);
+  const ech = pas(vmax), iw = W - g - d, ih = H - hm - bm;
+  const bande = iw / items.length, bw = Math.min(24, Math.max(3, bande - 2));
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.label || "")}">`;
+  for (let v = 0; v <= ech.max + 1e-9; v += ech.pas) {
+    const y = hm + ih - ih * v / ech.max;
+    s += `<line class="axe" x1="${g}" x2="${W - d}" y1="${y}" y2="${y}"/><text x="${g - 6}" y="${y + 4}" text-anchor="end">${compact(v)}</text>`;
+  }
+  if (opts.ref) {
+    const y = hm + ih - ih * opts.ref / ech.max;
+    s += `<line x1="${g}" x2="${W - d}" y1="${y}" y2="${y}" stroke="var(--ink-3)" stroke-width="1"/><text x="${W - d}" y="${y - 5}" text-anchor="end" style="fill:var(--ink-2)">médiane ${compact(opts.ref)}</text>`;
+  }
+  const tous = Math.max(1, Math.ceil(items.length / Math.floor(iw / 56)));
+  items.forEach((it, i) => {
+    const h = Math.max(1, ih * it.v / ech.max), x = g + i * bande + (bande - bw) / 2, y = hm + ih - h, r = Math.min(4, bw / 2, h);
+    const coul = it.c || "var(--accent)";
+    s += `<path d="M${x},${hm + ih} V${y + r} Q${x},${y} ${x + r},${y} H${x + bw - r} Q${x + bw},${y} ${x + bw},${y + r} V${hm + ih} Z" fill="${coul}" opacity="${it.attenue ? .45 : 1}"/>`;
+    s += `<rect x="${g + i * bande}" y="${hm}" width="${bande}" height="${ih}" fill="transparent" data-tip="${esc(it.tip)}"/>`;
+    if (i % tous === 0) s += `<text x="${x + bw / 2}" y="${H - 8}" text-anchor="middle">${esc(it.l)}</text>`;
+  });
+  s += "</svg>";
+  el.innerHTML = s; attacherTip(el.firstChild);
+}
+
+function courbe(el, pts, opts = {}) {
+  if (pts.length < 1) return vide(el, opts.vide || "Pas encore de données");
+  const W = Math.max(300, el.clientWidth || 600), H = opts.h || 220, g = 48, d = 18, hm = 14, bm = 26;
+  const seuils = (opts.seuils || []).filter(s => s.v <= Math.max(...pts.map(p => p.v)) * 1.6 || s.toujours);
+  const vmax = Math.max(...pts.map(p => p.v), ...seuils.map(s => s.v));
+  const ech = pas(vmax), iw = W - g - d, ih = H - hm - bm;
+  const X = i => pts.length === 1 ? g + iw / 2 : g + iw * i / (pts.length - 1);
+  const Y = v => hm + ih - ih * v / ech.max;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.label || "")}">`;
+  for (let v = 0; v <= ech.max + 1e-9; v += ech.pas) s += `<line class="axe" x1="${g}" x2="${W - d}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${g - 6}" y="${Y(v) + 4}" text-anchor="end">${compact(v)}</text>`;
+  seuils.forEach(sl => { s += `<line x1="${g}" x2="${W - d}" y1="${Y(sl.v)}" y2="${Y(sl.v)}" stroke="var(--ink-3)" stroke-width="1"/><text x="${g + 4}" y="${Y(sl.v) - 5}" style="fill:var(--ink-2)">${esc(sl.l)}</text>`; });
+  const coul = opts.c || "var(--teal)";
+  if (pts.length > 1) {
+    const ligne = pts.map((p, i) => `${i ? "L" : "M"}${X(i)},${Y(p.v)}`).join(" ");
+    s += `<path d="${ligne} L${X(pts.length - 1)},${Y(0)} L${X(0)},${Y(0)} Z" fill="${coul}" opacity=".10"/>`;
+    s += `<path d="${ligne}" fill="none" stroke="${coul}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  }
+  const tous = Math.max(1, Math.ceil(pts.length / Math.floor(iw / 64)));
+  pts.forEach((p, i) => {
+    if (i % tous === 0 || i === pts.length - 1) s += `<text x="${X(i)}" y="${H - 8}" text-anchor="middle">${esc(p.l)}</text>`;
+  });
+  const dern = pts[pts.length - 1];
+  s += `<circle cx="${X(pts.length - 1)}" cy="${Y(dern.v)}" r="5" fill="${coul}" stroke="var(--surface)" stroke-width="2"/>`;
+  s += `<text x="${X(pts.length - 1) - 8}" y="${Y(dern.v) - 10}" text-anchor="end" style="fill:var(--ink);font-weight:600">${compact(dern.v)}</text>`;
+  pts.forEach((p, i) => { s += `<circle cx="${X(i)}" cy="${Y(p.v)}" r="12" fill="transparent" data-tip="${esc(p.tip)}"/>`; });
+  s += "</svg>";
+  el.innerHTML = s; attacherTip(el.firstChild);
+}
+
+function barresH(el, items, opts = {}) {
+  if (!items.length) return vide(el, opts.vide || "Pas encore de données");
+  const W = Math.max(300, el.clientWidth || 600), lg = Math.min(170, W * 0.36), d = 64, ligne = 30, H = items.length * ligne + 8;
+  const vmax = Math.max(...items.map(i => i.v)), iw = W - lg - d;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.label || "")}">`;
+  items.forEach((it, i) => {
+    const y = 4 + i * ligne, w = Math.max(2, iw * it.v / (vmax || 1)), bh = 16, by = y + (ligne - bh) / 2 - 2, r = Math.min(4, w / 2);
+    const nom = it.l.length > 22 ? it.l.slice(0, 21) + "…" : it.l;
+    s += `<text x="${lg - 8}" y="${by + 12}" text-anchor="end" style="fill:var(--ink-2)">${esc(nom)}</text>`;
+    s += `<path d="M${lg},${by} H${lg + w - r} Q${lg + w},${by} ${lg + w},${by + r} V${by + bh - r} Q${lg + w},${by + bh} ${lg + w - r},${by + bh} H${lg} Z" fill="var(--accent)"/>`;
+    s += `<text x="${lg + w + 6}" y="${by + 12}" style="fill:var(--ink);font-weight:600">${compact(it.v)}</text>`;
+    s += `<rect x="0" y="${y}" width="${W}" height="${ligne}" fill="transparent" data-tip="${esc(it.tip)}"/>`;
+  });
+  s += "</svg>";
+  el.innerHTML = s; attacherTip(el.firstChild);
+}
+
+function pile(el, mois, series) {
+  const W = Math.max(300, el.clientWidth || 600), H = 240, g = 52, d = 10, hm = 12, bm = 26;
+  const tot = mois.map((_, i) => series.reduce((a, s) => a + s.v[i], 0));
+  const ech = pas(Math.max(...tot)), iw = W - g - d, ih = H - hm - bm;
+  const bande = iw / mois.length, bw = Math.min(40, bande * 0.55);
+  const Y = v => hm + ih - ih * v / ech.max;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gains par mois et par source">`;
+  for (let v = 0; v <= ech.max + 1e-9; v += ech.pas) s += `<line class="axe" x1="${g}" x2="${W - d}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${g - 6}" y="${Y(v) + 4}" text-anchor="end">${compact(v)} €</text>`;
+  mois.forEach((m, i) => {
+    const x = g + i * bande + (bande - bw) / 2;
+    let base = 0;
+    const visibles = series.filter(sr => sr.v[i] > 0);
+    visibles.forEach((sr, k) => {
+      const v = sr.v[i], y0 = Y(base), y1 = Y(base + v), h = y0 - y1;
+      const haut = k === visibles.length - 1, r = haut ? Math.min(4, h) : 0;
+      const yb = y0 - (k ? 1 : 0), yt = y1 + (haut ? 0 : 1);
+      if (yb - yt > 0.5) s += haut
+        ? `<path d="M${x},${yb} V${yt + r} Q${x},${yt} ${x + r},${yt} H${x + bw - r} Q${x + bw},${yt} ${x + bw},${yt + r} V${yb} Z" fill="${sr.c}"/>`
+        : `<rect x="${x}" y="${yt}" width="${bw}" height="${yb - yt}" fill="${sr.c}"/>`;
+      base += v;
+    });
+    s += `<text x="${x + bw / 2}" y="${Y(tot[i]) - 6}" text-anchor="middle" style="fill:var(--ink);font-weight:600">${compact(tot[i])} €</text>`;
+    s += `<text x="${x + bw / 2}" y="${H - 8}" text-anchor="middle">${esc(m)}</text>`;
+    const det = series.map(sr => `${sr.n} : ${fmtE.format(sr.v[i])}`).join(" · ");
+    s += `<rect x="${g + i * bande}" y="${hm}" width="${bande}" height="${ih}" fill="transparent" data-tip="${esc(m + " · " + fmtE.format(tot[i]) + " — " + det)}"/>`;
+  });
+  s += "</svg>";
+  el.innerHTML = s; attacherTip(el.firstChild);
+}
+
+/* ------------------------------------------------------------------ stats */
+function donneesStats() {
+  const reels = etat.videos.filter(v => !v.exemple);
+  const videos = (reels.length ? reels : etat.videos).slice().sort((a, b) => String(a.date).localeCompare(String(b.date)) || num(a.cree) - num(b.cree));
+  const sreels = etat.suivi.filter(s => !s.exemple);
+  const suivi = (sreels.length ? sreels : etat.suivi).slice().sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  return { videos, suivi };
+}
+const engagement = v => num(v.vues) ? (num(v.likes) + num(v.comms) + num(v.partages)) / num(v.vues) : 0;
+
+function rendreStats() {
+  const { videos, suivi } = donneesStats();
+  const vues = videos.map(v => num(v.vues));
+  const med = mediane(vues);
+  const totalVues = vues.reduce((a, b) => a + b, 0);
+  const gains = videos.reduce((a, v) => a + num(v.gains), 0);
+  const vuesCamp = videos.filter(v => (v.campagne || "").trim()).reduce((a, v) => a + num(v.vues), 0);
+  const abos = videos.reduce((a, v) => a + num(v.abos), 0);
+  const engMoy = videos.length ? videos.reduce((a, v) => a + engagement(v), 0) / videos.length : 0;
+  const dernier = suivi[suivi.length - 1];
+  const abonnes = dernier ? num(dernier.abonnes) : abos;
+  const vues30 = dernier ? num(dernier.vues30) : videos.filter(v => (Date.now() - deIso(v.date || "2000-01-01")) <= 30 * 864e5).reduce((a, v) => a + num(v.vues), 0);
+
+  // jauges
+  const j1 = $("#jauge-1k"), j2 = $("#jauge-10k");
+  const p1 = Math.min(1, abonnes / 1000), p2a = Math.min(1, abonnes / 10000), p2b = Math.min(1, vues30 / 100000);
+  j1.innerHTML = `<div class="lig"><b>1 000 abonnés</b><span class="muted">lien en bio, affiliation, LIVE</span></div>
+    <div class="piste ${p1 >= 1 ? "ok" : ""}"><span style="width:${(p1 * 100).toFixed(1)}%"></span></div>
+    <div class="lig small"><span class="num">${fmtN.format(abonnes)} abonnés</span><span class="pill ${p1 >= 1 ? "bon" : "moyen"}">${p1 >= 1 ? "Atteint" : "Reste " + fmtN.format(1000 - abonnes)}</span></div>`;
+  const ok2 = p2a >= 1 && p2b >= 1;
+  j2.innerHTML = `<div class="lig"><b>Creator Rewards</b><span class="muted">10 000 abonnés + 100 000 vues sur 30 j</span></div>
+    <div class="piste ${p2a >= 1 ? "ok" : ""}" title="Abonnés"><span style="width:${(p2a * 100).toFixed(1)}%"></span></div>
+    <div class="piste ${p2b >= 1 ? "ok" : ""}" title="Vues sur 30 jours"><span style="width:${(p2b * 100).toFixed(1)}%"></span></div>
+    <div class="lig small"><span class="num">${fmtN.format(abonnes)} / 10 000 abonnés · ${compact(vues30)} / 100 k vues</span><span class="pill ${ok2 ? "bon" : "moyen"}">${ok2 ? "Éligible" : "En route"}</span></div>`;
+
+  // KPI
+  const kp = [
+    ["Vidéos suivies", fmtN.format(videos.length), videos.length ? `du ${dateCourte(videos[0].date)} au ${dateCourte(videos[videos.length - 1].date)}` : "aucune pour l'instant"],
+    ["Vues totales", compact(totalVues), `médiane ${compact(med)} par vidéo`],
+    ["Gains réels", fmtE2.format(gains), vuesCamp ? `${fmtE2.format(gains / vuesCamp * 1000)} pour 1 000 vues en campagne` : "saisis les gains des campagnes"],
+    ["Abonnés pour 1 000 vues", totalVues ? (abos / totalVues * 1000).toLocaleString("fr-FR", { maximumFractionDigits: 1 }) : "0", "bon niveau : 3 et plus"],
+    ["Engagement moyen", fmtP.format(engMoy), "(j'aime + comm. + partages) ÷ vues"],
+    ["Meilleure vidéo", videos.length ? compact(Math.max(...vues)) : "0", videos.length ? (videos.reduce((a, b) => num(b.vues) > num(a.vues) ? b : a).titre || "") : "vues"]
+  ];
+  $("#kpis").innerHTML = kp.map(([l, v, s]) => `<div class="carte kpi"><span class="lab">${esc(l)}</span><span class="val">${esc(v)}</span><span class="sous">${esc(s)}</span></div>`).join("");
+
+  // conseils
+  const c = [];
+  if (!videos.length) c.push("Après tes premières publications, note chaque vidéo à J+2 (les vues se stabilisent) : vues, abonnés gagnés, gains.");
+  else {
+    if (videos.length < 10) c.push(`Encore ${10 - videos.length} vidéo${10 - videos.length > 1 ? "s" : ""} à saisir pour que les tendances veuillent dire quelque chose.`);
+    const parCreateur = grouper(videos, "createur").filter(g => g.n >= 2);
+    if (parCreateur.length >= 2) {
+      const top = parCreateur[0], bas = parCreateur[parCreateur.length - 1];
+      if (med && top.v >= 1.5 * med) c.push(`Les clips de ${top.l} font ${(top.v / med).toLocaleString("fr-FR", { maximumFractionDigits: 1 })} fois ta médiane : monte « clips_par_streamer » à 5 pour lui dans config.json.`);
+      if (med && bas.v < 0.5 * med && bas.l !== top.l) c.push(`${bas.l} plafonne à ${compact(bas.v)} vues médianes : passe-le en "actif": false et contacte un nouveau streamer.`);
+    }
+    if (engMoy && engMoy < 0.04) c.push("Engagement sous 4 % : essaie le style d'accroche « boite » (montage.style) et des clips plus courts, 15 à 20 s.");
+    if (totalVues > 20000 && abos / totalVues * 1000 < 2) c.push("Peu d'abonnés par vue : épingle ton meilleur TOP du jour et garde l'appel « ABONNE-TOI POUR LA SUITE » à la fin des clips.");
+    if (vuesCamp === 0 && videos.length >= 5) c.push("Aucune vue en campagne : inscris-toi sur une campagne de clipping, c'est le seul revenu disponible avant 10 000 abonnés.");
+    if (vuesCamp && gains === 0) c.push("Des vues en campagne mais 0 € saisi : vérifie que chaque lien est bien soumis et approuvé dans la campagne.");
+    const top = parFormat(videos);
+    if (top) c.push(top);
+  }
+  if (!c.length) c.push("Rien à corriger cette semaine : garde le rythme de 6 vidéos par jour.");
+  $("#conseils").innerHTML = c.map(x => `<li>${esc(x)}</li>`).join("");
+
+  // tableau vidéos
+  const tb = $("#t-videos"); tb.textContent = "";
+  if (!videos.length && !etat.videos.length) tb.innerHTML = `<tr><td colspan="9" class="muted">Aucune vidéo pour l'instant. « Ajouter une vidéo » en haut de l'onglet.</td></tr>`;
+  etat.videos.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)) || num(b.cree) - num(a.cree)).forEach(v => {
+    const tr = document.createElement("tr"); tr.className = "cliquable"; tr.tabIndex = 0;
+    const ratio = med ? num(v.vues) / med : 1;
+    const niv = v.exemple ? `<span class="pill ex">Exemple</span>` : ratio >= 2 ? `<span class="pill bon">▲ Pépite</span>` : ratio < 0.5 ? `<span class="pill faible">▼ Faible</span>` : `<span class="pill moyen">● Normal</span>`;
+    tr.innerHTML = `<td class="num">${esc(dateCourte(v.date || iso(new Date())))}</td><td>${esc(v.titre)}</td><td>${esc(v.createur)}</td><td>${esc(v.format)}</td><td class="n">${fmtN.format(num(v.vues))}</td><td class="n">${fmtP.format(engagement(v))}</td><td class="n">${fmtN.format(num(v.abos))}</td><td class="n">${num(v.gains) ? fmtE2.format(num(v.gains)) : "—"}</td><td>${niv}</td>`;
+    const ouvrir = () => ouvrirVideo(v);
+    tr.addEventListener("click", ouvrir);
+    tr.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); ouvrir(); } });
+    tb.append(tr);
+  });
+
+  const ts = $("#t-suivi"); ts.textContent = "";
+  if (!etat.suivi.length) ts.innerHTML = `<tr><td colspan="4" class="muted">Aucun point pour l'instant. « Point du dimanche » en haut de l'onglet.</td></tr>`;
+  etat.suivi.slice().sort((a, b) => String(b.date).localeCompare(String(a.date))).forEach(s => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td class="num">${esc(dateCourte(s.date))}${s.exemple ? ' <span class="pill ex">Exemple</span>' : ""}</td><td class="n">${fmtN.format(num(s.abonnes))}</td><td class="n">${fmtN.format(num(s.vues30))}</td><td class="n"></td>`;
+    const b = document.createElement("button"); b.type = "button"; b.className = "lien"; b.textContent = "Supprimer"; b.disabled = !etat.db || !etat.ecriture;
+    b.addEventListener("click", () => ecrire(() => etat.db.collection("suivi").doc(s.id).delete()));
+    tr.lastElementChild.append(b);
+    ts.append(tr);
+  });
+
+  if (!$("#v-stats").hidden) dessinerStats();
+}
+
+function grouper(videos, champ) {
+  const m = new Map();
+  videos.forEach(v => { const k = (v[champ] || "Sans nom").trim() || "Sans nom"; if (!m.has(k)) m.set(k, []); m.get(k).push(num(v.vues)); });
+  return [...m.entries()].map(([l, a]) => ({ l, v: mediane(a), n: a.length, tip: `${l} · ${a.length} vidéo${a.length > 1 ? "s" : ""} · médiane ${fmtN.format(Math.round(mediane(a)))} vues` })).sort((a, b) => b.v - a.v);
+}
+function parFormat(videos) {
+  const g = grouper(videos, "format").filter(x => x.n >= 3);
+  if (g.length < 2) return "";
+  return `Le format « ${g[0].l} » fait les meilleures vues médianes (${compact(g[0].v)}) : garde-le en créneau du soir.`;
+}
+
+function dessinerStats() {
+  const { videos, suivi } = donneesStats();
+  const med = mediane(videos.map(v => num(v.vues)));
+  colonnes($("#g-vues"), videos.map((v, i) => ({ v: num(v.vues), l: dateCourte(v.date).split(" ").slice(1, 3).join(" "), tip: `${dateCourte(v.date)} · ${v.titre || ""} · ${fmtN.format(num(v.vues))} vues` })), { ref: videos.length >= 3 ? med : 0, label: "Vues par vidéo", vide: "Les vues apparaîtront ici après ta première saisie" });
+  courbe($("#g-abos"), suivi.map(s => ({ v: num(s.abonnes), l: dateCourte(s.date).split(" ").slice(1, 3).join(" "), tip: `${dateCourte(s.date)} · ${fmtN.format(num(s.abonnes))} abonnés · ${fmtN.format(num(s.vues30))} vues sur 30 j` })), { seuils: [{ v: 1000, l: "1 000 · lien en bio" }, { v: 10000, l: "10 000 · Creator Rewards" }], label: "Abonnés", vide: "Le premier point du dimanche lancera la courbe" });
+  barresH($("#g-groupes"), grouper(videos, etat.groupe), { label: "Vues médianes", vide: "Pas encore de vidéos" });
+}
+
+/* formulaires */
+function ouvrirVideo(v) {
+  const c = $("#carte-form-video"); c.hidden = false;
+  $("#titre-form-video").textContent = v ? "Modifier la vidéo" : "Ajouter une vidéo";
+  $("#f-id").value = v ? v.id : "";
+  $("#f-date").value = v ? v.date : iso(new Date());
+  $("#f-titre").value = v ? v.titre || "" : "";
+  $("#f-createur").value = v ? v.createur || "" : "";
+  $("#f-format").value = v ? v.format || "Clip Twitch" : "Clip Twitch";
+  ["duree", "vues", "likes", "comms", "partages", "abos", "gains"].forEach(k => { $("#f-" + k).value = v && v[k] != null ? v[k] : ""; });
+  $("#f-campagne").value = v ? v.campagne || "" : "";
+  $("#f-supprimer").hidden = !v;
+  $("#f-msg").textContent = !etat.db ? "Saisie possible uniquement sur la page publiée." : "";
+  $("#f-valider").disabled = !etat.db || !etat.ecriture;
+  c.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  $("#f-titre").focus({ preventScroll: true });
+}
+$("#btn-ajout-video").addEventListener("click", () => ouvrirVideo(null));
+$("#f-annuler").addEventListener("click", () => { $("#carte-form-video").hidden = true; });
+$("#f-supprimer").addEventListener("click", () => {
+  const id = $("#f-id").value; if (!id || !etat.db) return;
+  const b = $("#f-supprimer");
+  if (b.dataset.confirme !== "1") { b.dataset.confirme = "1"; b.textContent = "Confirmer la suppression"; setTimeout(() => { b.dataset.confirme = ""; b.textContent = "Supprimer cette vidéo"; }, 4000); return; }
+  b.dataset.confirme = ""; b.textContent = "Supprimer cette vidéo";
+  ecrire(() => etat.db.collection("videos").doc(id).delete(), $("#f-msg")).then(() => { $("#carte-form-video").hidden = true; });
+});
+$("#form-video").addEventListener("submit", e => {
+  e.preventDefault();
+  if (!etat.db) return;
+  const id = $("#f-id").value || null;
+  const existant = id ? etat.videos.find(v => v.id === id) : null;
+  const doc = {
+    date: $("#f-date").value, titre: $("#f-titre").value.trim().toUpperCase(), createur: $("#f-createur").value.trim(),
+    format: $("#f-format").value, duree: num($("#f-duree").value), vues: num($("#f-vues").value), likes: num($("#f-likes").value),
+    comms: num($("#f-comms").value), partages: num($("#f-partages").value), abos: num($("#f-abos").value),
+    campagne: $("#f-campagne").value.trim(), gains: Math.round(num($("#f-gains").value) * 100) / 100,
+    cree: existant ? num(existant.cree) : Date.now()
+  };
+  const ref = id ? etat.db.collection("videos").doc(id) : etat.db.collection("videos").doc();
+  const msg = $("#f-msg"); msg.textContent = "Enregistrement…";
+  ecrire(() => ref.set(doc).then(() => {
+    msg.textContent = "Enregistré.";
+    if (!id) { ["titre", "duree", "vues", "likes", "comms", "partages", "abos", "gains"].forEach(k => { $("#f-" + k).value = ""; }); $("#f-titre").focus(); }
+  }), msg);
+});
+$("#btn-ajout-suivi").addEventListener("click", () => {
+  const c = $("#carte-form-suivi"); c.hidden = false;
+  $("#s-date").value = iso(new Date());
+  const { suivi } = donneesStats(); const d = suivi[suivi.length - 1];
+  $("#s-abonnes").value = d && !d.exemple ? d.abonnes : ""; $("#s-vues30").value = "";
+  $("#s-msg").textContent = !etat.db ? "Saisie possible uniquement sur la page publiée." : "";
+  c.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  $("#s-abonnes").focus({ preventScroll: true });
+});
+$("#s-annuler").addEventListener("click", () => { $("#carte-form-suivi").hidden = true; });
+$("#form-suivi").addEventListener("submit", e => {
+  e.preventDefault(); if (!etat.db) return;
+  const date = $("#s-date").value;
+  const msg = $("#s-msg"); msg.textContent = "Enregistrement…";
+  ecrire(() => etat.db.collection("suivi").doc(date).set({ date, abonnes: num($("#s-abonnes").value), vues30: num($("#s-vues30").value) }).then(() => { msg.textContent = "Enregistré."; }), msg);
+});
+$$("[data-par]").forEach(b => b.addEventListener("click", () => {
+  etat.groupe = b.dataset.par;
+  $$("[data-par]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  dessinerStats();
+}));
+
+/* ------------------------------------------------------------------ simulateur */
+const CURSEURS = [
+  { k: "ppj", l: "Vidéos par jour", min: 1, max: 10, pas: 1, f: v => v, aide: "le pilote en prépare 6 par défaut" },
+  { k: "v0", l: "Vues moyennes par vidéo, mois 1", min: 200, max: 50000, pas: 100, f: v => fmtN.format(v), aide: "un compte neuf démarre souvent entre 300 et 3 000" },
+  { k: "g", l: "Évolution des vues moyennes par mois", min: -30, max: 100, pas: 5, f: v => (v > 0 ? "+" : "") + v + " %", aide: "croissance de l'audience mois après mois" },
+  { k: "camp", l: "Part des vidéos en campagne payée", min: 0, max: 100, pas: 5, f: v => v + " %", aide: "le reste vient de streamers non rémunérés" },
+  { k: "tarif", l: "Tarif des campagnes (€ / 1 000 vues)", min: 0.1, max: 4, pas: 0.05, f: v => fmtE2.format(v), aide: "médiane du marché ≈ 0,90 € (1 $)" },
+  { k: "com", l: "Commission de la plateforme", min: 0, max: 25, pas: 1, f: v => v + " %", aide: "7 à 10 % selon la plateforme" },
+  { k: "taux", l: "Abonnés gagnés pour 1 000 vues", min: 0.5, max: 15, pas: 0.5, f: v => v.toLocaleString("fr-FR"), aide: "clips : 2 à 6 en général" },
+  { k: "compil", l: "Part des vues faite par les TOP de plus d'1 min", min: 0, max: 60, pas: 5, f: v => v + " %", aide: "seules ces vues comptent pour Creator Rewards" },
+  { k: "rpm", l: "Creator Rewards (€ / 1 000 vues)", min: 0.1, max: 1.2, pas: 0.05, f: v => fmtE2.format(v), aide: "net des vues non qualifiées" },
+  { k: "deals", l: "Vidéos sponsorisées par mois", min: 0, max: 6, pas: 1, f: v => v, aide: "à partir de 10 000 abonnés" },
+  { k: "cpm", l: "Tarif sponsor (€ / 1 000 vues moyennes)", min: 5, max: 50, pas: 1, f: v => v + " €", aide: "comptes gaming FR : 15 à 30 €" },
+  { k: "affil", l: "Affiliation (€ / 1 000 vues)", min: 0, max: 0.5, pas: 0.01, f: v => fmtE2.format(v), aide: "à partir de 1 000 abonnés" }
+];
+const SCENARIOS = {
+  prudent: { ppj: 4, v0: 800, g: 15, camp: 50, tarif: 0.6, com: 10, taux: 3, compil: 10, rpm: 0.2, deals: 0, cpm: 15, affil: 0.03 },
+  realiste: { ppj: 6, v0: 2500, g: 25, camp: 70, tarif: 0.9, com: 10, taux: 4, compil: 15, rpm: 0.3, deals: 1, cpm: 20, affil: 0.05 },
+  explosif: { ppj: 6, v0: 12000, g: 35, camp: 80, tarif: 1.5, com: 10, taux: 6, compil: 20, rpm: 0.45, deals: 2, cpm: 25, affil: 0.08 }
+};
+let sim = store.get("qg-sim", null) || { ...SCENARIOS.realiste };
+let scen = store.get("qg-scen", "realiste");
+CURSEURS.forEach(c => { if (typeof sim[c.k] !== "number") sim[c.k] = SCENARIOS.realiste[c.k]; });
+
+function construireCurseurs() {
+  const z = $("#curseurs"); z.textContent = "";
+  CURSEURS.forEach(c => {
+    const d = document.createElement("div"); d.className = "curseur";
+    d.innerHTML = `<div class="lig"><label for="r-${c.k}">${esc(c.l)}</label><b id="o-${c.k}"></b></div><input type="range" id="r-${c.k}" min="${c.min}" max="${c.max}" step="${c.pas}"><span class="aide">${esc(c.aide)}</span>`;
+    z.append(d);
+    const r = d.querySelector("input"); r.value = sim[c.k];
+    r.addEventListener("input", () => { sim[c.k] = Number(r.value); scen = ""; majScen(); calculer(); store.set("qg-sim", sim); store.set("qg-scen", scen); });
+  });
+}
+function majScen() { $$("[data-scen]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.scen === scen))); }
+function appliquer(vals) { Object.assign(sim, vals); CURSEURS.forEach(c => { $("#r-" + c.k).value = sim[c.k]; }); calculer(); store.set("qg-sim", sim); store.set("qg-scen", scen); }
+$$("[data-scen]").forEach(b => b.addEventListener("click", () => { scen = b.dataset.scen; majScen(); $("#sim-note").hidden = true; appliquer(SCENARIOS[scen]); }));
+$("#btn-vraies").addEventListener("click", () => {
+  const note = $("#sim-note"); note.hidden = false;
+  const reels = etat.videos.filter(v => !v.exemple);
+  if (reels.length < 5) { note.textContent = `Il faut au moins 5 vraies vidéos dans l'onglet Stats (tu en as ${reels.length}).`; return; }
+  const med = mediane(reels.map(v => num(v.vues)));
+  const vues = reels.reduce((a, v) => a + num(v.vues), 0);
+  const abos = reels.reduce((a, v) => a + num(v.abos), 0);
+  const vc = reels.filter(v => (v.campagne || "").trim());
+  const vuesC = vc.reduce((a, v) => a + num(v.vues), 0), gainsC = vc.reduce((a, v) => a + num(v.gains), 0);
+  const jours = new Set(reels.map(v => v.date)).size || 1;
+  const vals = { v0: Math.max(200, Math.round(med / 100) * 100), taux: Math.min(15, Math.max(0.5, Math.round(abos / Math.max(1, vues) * 2000) / 2)), camp: Math.round(vc.length / reels.length * 20) * 5, ppj: Math.min(10, Math.max(1, Math.round(reels.length / jours))) };
+  if (vuesC > 0 && gainsC > 0) { vals.tarif = Math.min(4, Math.max(0.1, Math.round(gainsC / vuesC * 1000 / (1 - sim.com / 100) * 20) / 20)); }
+  scen = ""; majScen(); appliquer(vals);
+  note.textContent = `Repris de tes ${reels.length} vidéos : ${fmtN.format(vals.v0)} vues médianes, ${vals.ppj} vidéos par jour, ${vals.taux.toLocaleString("fr-FR")} abonnés pour 1 000 vues, ${vals.camp} % en campagne${vals.tarif ? ", " + fmtE2.format(vals.tarif) + " pour 1 000 vues" : ""}.`;
+});
+
+let resultat = null;
+function calculer() {
+  CURSEURS.forEach(c => { $("#o-" + c.k).textContent = c.f(sim[c.k]); });
+  const mois = [], noms = ["M1", "M2", "M3", "M4", "M5", "M6"];
+  let abonnes = 0, crDebut = null;
+  for (let m = 0; m < 6; m++) {
+    const vm = sim.v0 * Math.pow(1 + sim.g / 100, m);
+    const vues = sim.ppj * 30 * vm;
+    const debut = abonnes;
+    const campagnes = vues * (sim.camp / 100) * sim.tarif / 1000 * (1 - sim.com / 100);
+    const cr = (debut >= 10000 && vues >= 100000) ? vues * (sim.compil / 100) * sim.rpm / 1000 : 0;
+    if (cr > 0 && crDebut === null) crDebut = noms[m];
+    const part = debut >= 10000 ? sim.deals * vm * sim.cpm / 1000 : 0;
+    const affil = debut >= 1000 ? vues / 1000 * sim.affil : 0;
+    abonnes = debut + vues * sim.taux / 1000;
+    mois.push({ m: noms[m], vues, abonnes, campagnes, cr, part, affil, total: campagnes + cr + part + affil });
+  }
+  resultat = { mois, crDebut };
+  const t6 = mois.reduce((a, x) => a + x.total, 0);
+  const k = [
+    ["Mois 1", fmtE.format(mois[0].total), `${compact(mois[0].vues)} vues`],
+    ["Mois 3", fmtE.format(mois[2].total), `${compact(mois[2].abonnes)} abonnés`],
+    ["Mois 6", fmtE.format(mois[5].total), `${compact(mois[5].abonnes)} abonnés`],
+    ["Total sur 6 mois", fmtE.format(t6), crDebut ? `Creator Rewards dès ${crDebut}` : "Creator Rewards pas atteint"]
+  ];
+  $("#sim-kpis").innerHTML = k.map(([l, v, s]) => `<div class="carte kpi"><span class="lab">${esc(l)}</span><span class="val">${esc(v)}</span><span class="sous">${esc(s)}</span></div>`).join("");
+  $("#t-sim").innerHTML = mois.map(x => `<tr><td><b>${x.m}</b></td><td class="n">${compact(x.vues)}</td><td class="n">${fmtN.format(Math.round(x.abonnes))}</td><td class="n">${fmtE.format(x.campagnes)}</td><td class="n">${x.cr ? fmtE.format(x.cr) : "—"}</td><td class="n">${x.part ? fmtE.format(x.part) : "—"}</td><td class="n">${x.affil ? fmtE.format(x.affil) : "—"}</td><td class="n"><b>${fmtE.format(x.total)}</b></td></tr>`).join("");
+  if (!$("#v-revenus").hidden) dessinerRevenus();
+}
+const SERIES = [
+  { k: "campagnes", n: "Campagnes", c: "var(--s1)" },
+  { k: "cr", n: "Creator Rewards", c: "var(--s2)" },
+  { k: "part", n: "Partenariats", c: "var(--s3)" },
+  { k: "affil", n: "Affiliation", c: "var(--s4)" }
+];
+function dessinerRevenus() {
+  if (!resultat) return;
+  $("#leg-pile").innerHTML = SERIES.map(s => `<span><i style="background:${s.c}"></i>${esc(s.n)}</span>`).join("");
+  pile($("#g-pile"), resultat.mois.map(x => x.m), SERIES.map(s => ({ n: s.n, c: s.c, v: resultat.mois.map(x => x[s.k]) })));
+  courbe($("#g-sim-abos"), resultat.mois.map(x => ({ v: Math.round(x.abonnes), l: x.m, tip: `${x.m} · ${fmtN.format(Math.round(x.abonnes))} abonnés · ${compact(x.vues)} vues` })), { seuils: [{ v: 1000, l: "1 000" }, { v: 10000, l: "10 000 · Creator Rewards", toujours: true }], label: "Abonnés simulés" });
+}
+
+/* ------------------------------------------------------------------ kit */
+const ACCROCHES = ["ATTENDS LA *FIN*...", "IL S'Y ATTENDAIT *PAS DU TOUT*", "LE MOMENT LE PLUS *FOU* DU STREAM", "PERSONNE N'A COMPRIS CE QUI S'EST *PASSÉ*", "GTA 6 EST TROP *RÉALISTE*", "LA POLICE DE GTA 6 NE *RIGOLE PAS*", "IL A PAS VU ÇA *ARRIVER*", "LE CHAT A *EXPLOSÉ*", "C'EST *LÉGAL* ÇA ?", "0 % DE CHANCE QUE ÇA *MARCHE*...", "LA PHYSIQUE DE GTA 6 EST *ABUSÉE*", "ROCKSTAR A PENSÉ À *TOUT*", "IL A *RAGE QUIT* EN DIRECT", "LE PIRE *TIMING* DE L'HISTOIRE", "REGARDE BIEN LE *PNJ*", "3... 2... 1... *CATASTROPHE*", "ON EN PARLE DE CE *BUG* ?", "TU L'AURAIS FAIT *TOI* ?", "LES ALLIGATORS DE LEONIDA SONT *FOUS*", "VICE CITY À *3 H DU MATIN*", "LE JEU LE PLUS *BEAU* DU MONDE ?", "IL A TOUT PERDU EN *10 SECONDES*", "QUI A ÉCRIT CE *PNJ* ?!", "JE CROIS QU'IL A *CASSÉ* LE JEU", "LA POURSUITE LA PLUS *LONGUE* DE GTA 6", "L'IA DE GTA 6 EST TROP *FORTE*", "ÇA DEVAIT PAS SE PASSER *COMME ÇA*", "LE DUO LE PLUS *NUL* DE LEONIDA", "IL A TROUVÉ UN *EASTER EGG*", "DIS-MOI QUE C'EST PAS *RÉEL*", "LE *FOU RIRE* QUI A TUÉ LE STREAM", "IL PENSAIT ÊTRE *DISCRET*...", "*5 ÉTOILES* EN 30 SECONDES", "CETTE VOITURE N'A *RIEN COMPRIS*", "C'EST PAS UN JEU, C'EST UN *FILM*", "REGARDE LE *RÉTRO*", "LA CHUTE LA PLUS *LONGUE* DE LEONIDA", "IL A VOULU FAIRE LE *MALIN*", "TU L'AS REGARDÉ *COMBIEN* DE FOIS ?", "LE CLIP QUE TOUT LE MONDE *PARTAGE*"];
+function construireKit() {
+  const z = $("#accroches");
+  ACCROCHES.forEach(a => {
+    const b = document.createElement("button"); b.type = "button";
+    b.innerHTML = esc(a).replace(/\*(.+?)\*/g, "<em>$1</em>");
+    b.addEventListener("click", async () => { const ok = await copier(a, b, b); $("#ok-accroche").textContent = ok ? `Copié : ${a.replace(/\*/g, "")}` : "Copie bloquée : le texte est sélectionné, fais Ctrl+C."; });
+    z.append(b);
+  });
+  const TEXTES = [
+    ["Bio du compte (80 caractères max)", "Le meilleur de GTA 6 chaque jour 🇫🇷 Clips crédités · Compte fan non officiel"],
+    ["Message d'autorisation aux streamers", "Salut ! Je lance GTA 6 ZAP, une chaîne TikTok FR qui publie chaque jour les meilleurs moments GTA VI des streamers français.\n\nJ'aimerais clipper tes lives GTA VI. Chaque clip affiche ton pseudo à l'écran (« CLIP : @toi ») et dans la description, avec le lien de ta chaîne. Tu n'as rien à faire et ça t'amène des viewers.\n\nTu peux me demander de retirer n'importe quel clip, je le fais dans l'heure.\n\nTu es d'accord ? Un simple « ok » me suffit."],
+    ["Version courte (commentaire ou DM rapide)", "Salut ! Je poste les meilleurs moments GTA VI des streamers FR sur TikTok (@gta6zap), avec ton pseudo à l'écran et en description. Je peux clipper tes lives ? Je retire n'importe quel clip sur simple demande."],
+    ["Relance après 3 jours", "Petite relance pour les clips GTA VI : je publie 6 vidéos par jour avec le pseudo des streamers à l'écran et en description. Si tu es partant, réponds juste « ok » et je commence par tes meilleurs moments d'hier."],
+    ["Appel « Envoie ton clip »", "Tu as un clip de fou sur GTA 6 ? Envoie-le en DM avec ton pseudo : s'il est retenu, il passe dans le TOP du jour avec ton nom à l'écran.\n\nEn l'envoyant, tu nous autorises à le publier sur nos réseaux."],
+    ["Légende type", "Il a pas vu le croco arriver\n🎥 NomDuStreamer (twitch.tv/nomdustreamer)\nAbonne-toi pour le meilleur de GTA 6 chaque jour\n#gta6 #gtavi #gta6clips #twitchfr #gaming"],
+    ["Les 4 jeux de hashtags", "#gta6 #gtavi #gta6clips #twitchfr #gaming\n#gta6 #leonida #vicecity #clipsfr #jeuxvideo\n#gta6 #gtavi #gta6fr #streamerfr #fyp\n#gta6 #gta6funny #gamingfr #twitchclips #rockstargames"],
+    ["Réponse à une demande de retrait", "Pas de souci, c'est retiré. Merci de m'avoir prévenu, et bon stream !"]
+  ];
+  const zt = $("#textes");
+  TEXTES.forEach(([t, txt], i) => {
+    const c = document.createElement("div"); c.className = "carte copie";
+    c.innerHTML = `<h3>${esc(t)}</h3><pre class="txt" id="txt-${i}">${esc(txt)}</pre><div class="actions"><button type="button">Copier</button><span class="ok-copie" role="status"></span></div>`;
+    const b = c.querySelector("button"), ok = c.querySelector(".ok-copie");
+    b.addEventListener("click", async () => { const r = await copier(txt, b, c.querySelector("pre")); ok.textContent = r ? "Copié" : "Texte sélectionné : Ctrl+C"; setTimeout(() => { ok.textContent = ""; }, 2500); });
+    zt.append(c);
+  });
+}
+
+/* ------------------------------------------------------------------ dessin selon l'onglet */
+function redessiner(v) {
+  if (v === "stats") dessinerStats();
+  if (v === "revenus") dessinerRevenus();
+}
+let minuterieTaille = 0;
+window.addEventListener("resize", () => { clearTimeout(minuterieTaille); minuterieTaille = setTimeout(() => redessiner(VUES.find(n => !$("#v-" + n).hidden)), 150); });
+
+/* ------------------------------------------------------------------ démarrage */
+majCompteur();
+construireCurseurs(); majScen(); calculer();
+construireKit();
+rendreCalendrier();
+rendreStats();
+montrer();
+brancher();
+})();
+</script>

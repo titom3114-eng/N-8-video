@@ -6,3 +6,11 @@ footage/clips/
 footage/override/*.mp4
 footage/sfx/
 footage/music/
+gta-tiktok/config.json
+gta-tiktok/.etat/
+gta-tiktok/a_traiter/
+gta-tiktok/a_publier/
+gta-tiktok/exports/
+gta-tiktok/journaux/
+gta-tiktok/journal_publications.csv
+gta-tiktok/preuves/
