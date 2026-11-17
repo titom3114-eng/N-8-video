@@ -295,7 +295,7 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
     <div class="carte">
       <h3>Où trouver le contenu</h3>
       <ul class="liste">
-        <li><b>Campagnes de clipping</b> (Whop Content Rewards et plateformes équivalentes) : les créateurs fournissent leurs rushs, fixent les règles et paient au millier de vues. Filtre sur « GTA », « gaming », « Twitch ».</li>
+        <li><b>Campagnes de clipping</b> (Whop Content Rewards et plateformes équivalentes) : les créateurs fournissent leurs rushs, fixent les règles et paient au millier de vues. Filtre sur « GTA » et « gaming ».</li>
         <li><b>Créateurs TikTok GTA 6</b> : les petits comptes acceptent souvent en échange de leur @ affiché à l'écran. Message type dans l'onglet Kit. Garde chaque accord en capture d'écran.</li>
         <li><b>Ta communauté</b> : « Envoie ton clip » en vidéo épinglée à partir de J10. Un envoi en DM vaut accord : ajoute le lien dans une source « liens ».</li>
       </ul>
@@ -412,7 +412,7 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
       <div class="champ"><label for="f-date">Date de publication</label><input type="date" id="f-date" required></div>
       <div class="champ" style="grid-column:span 2"><label for="f-titre">Accroche ou titre</label><input type="text" id="f-titre" maxlength="80" required placeholder="IL A PAS VU LE CROCO"></div>
       <div class="champ"><label for="f-createur">Créateur clippé</label><input type="text" id="f-createur" maxlength="40" placeholder="@pseudo"></div>
-      <div class="champ"><label for="f-format">Format</label><select id="f-format"><option>Clip Twitch</option><option>TOP du jour</option><option>Clip VOD</option><option>Clip communauté</option><option>Clip campagne</option></select></div>
+      <div class="champ"><label for="f-format">Format</label><select id="f-format"><option>Clip campagne</option><option>Clip créateur TikTok</option><option>Clip communauté</option><option>TOP du jour</option></select></div>
       <div class="champ"><label for="f-duree">Durée (s)</label><input type="number" id="f-duree" min="1" max="600" step="1" inputmode="numeric"></div>
       <div class="champ"><label for="f-vues">Vues</label><input type="number" id="f-vues" min="0" step="1" inputmode="numeric" required></div>
       <div class="champ"><label for="f-likes">J'aime</label><input type="number" id="f-likes" min="0" step="1" inputmode="numeric"></div>
@@ -533,7 +533,7 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
 
   <div class="carte">
     <h3>Les 40 accroches du pilote <span class="small muted">touche pour copier</span></h3>
-    <p class="small muted">Le pilote les utilise à tour de rôle quand le titre du clip Twitch ne fait pas une bonne accroche. Le mot en orange passe en jaune sur la vidéo.</p>
+    <p class="small muted">Le pilote en pose une sur chaque clip, à tour de rôle. Le mot en orange passe en jaune sur la vidéo.</p>
     <div class="accroches" id="accroches"></div>
     <span class="ok-copie" id="ok-accroche" role="status"></span>
   </div>
@@ -626,16 +626,16 @@ const THEMES = [
   "Les plus belles images",
   "Fails de conduite",
   "Missions qui dérapent (sans spoiler)",
-  "Duos de streamers",
+  "Duos de créateurs",
   "Bilan de la semaine 3",
   "Plages et vie nocturne",
-  "Défis de streamers",
+  "Défis de créateurs",
   "Le grand n'importe quoi",
   "Faune sauvage, le retour",
   "Records et speedruns",
   "Les clips de la communauté",
   "Le mois en 10 moments",
-  "Les streamers qui ont le plus fait rire",
+  "Les créateurs qui ont le plus fait rire",
   "Bilan du mois et passage en monétisation"
 ];
 const PREPA = {
@@ -1010,8 +1010,8 @@ function rendreStats() {
     const parCreateur = grouper(videos, "createur").filter(g => g.n >= 2);
     if (parCreateur.length >= 2) {
       const top = parCreateur[0], bas = parCreateur[parCreateur.length - 1];
-      if (med && top.v >= 1.5 * med) c.push(`Les clips de ${top.l} font ${(top.v / med).toLocaleString("fr-FR", { maximumFractionDigits: 1 })} fois ta médiane : monte « clips_par_streamer » à 5 pour lui dans config.json.`);
-      if (med && bas.v < 0.5 * med && bas.l !== top.l) c.push(`${bas.l} plafonne à ${compact(bas.v)} vues médianes : passe-le en "actif": false et contacte un nouveau streamer.`);
+      if (med && top.v >= 1.5 * med) c.push(`Les clips de ${top.l} font ${(top.v / med).toLocaleString("fr-FR", { maximumFractionDigits: 1 })} fois ta médiane : demande à Claude d'augmenter « videos_par_jour » pour cette source.`);
+      if (med && bas.v < 0.5 * med && bas.l !== top.l) c.push(`${bas.l} plafonne à ${compact(bas.v)} vues médianes : mets sa source en pause et rejoins une autre campagne.`);
     }
     if (engMoy && engMoy < 0.04) c.push("Engagement sous 4 % : essaie le style d'accroche « boite » (montage.style) et des clips plus courts, 15 à 20 s.");
     if (totalVues > 20000 && abos / totalVues * 1000 < 2) c.push("Peu d'abonnés par vue : épingle ton meilleur TOP du jour et garde l'appel « ABONNE-TOI POUR LA SUITE » à la fin des clips.");
@@ -1078,7 +1078,7 @@ function ouvrirVideo(v) {
   $("#f-date").value = v ? v.date : iso(new Date());
   $("#f-titre").value = v ? v.titre || "" : "";
   $("#f-createur").value = v ? v.createur || "" : "";
-  $("#f-format").value = v ? v.format || "Clip Twitch" : "Clip Twitch";
+  $("#f-format").value = v ? v.format || "Clip campagne" : "Clip campagne";
   ["duree", "vues", "likes", "comms", "partages", "abos", "gains"].forEach(k => { $("#f-" + k).value = v && v[k] != null ? v[k] : ""; });
   $("#f-campagne").value = v ? v.campagne || "" : "";
   $("#f-supprimer").hidden = !v;
@@ -1142,7 +1142,7 @@ const CURSEURS = [
   { k: "ppj", l: "Vidéos par jour", min: 1, max: 10, pas: 1, f: v => v, aide: "le pilote en prépare 6 par défaut" },
   { k: "v0", l: "Vues moyennes par vidéo, mois 1", min: 200, max: 50000, pas: 100, f: v => fmtN.format(v), aide: "un compte neuf démarre souvent entre 300 et 3 000" },
   { k: "g", l: "Évolution des vues moyennes par mois", min: -30, max: 100, pas: 5, f: v => (v > 0 ? "+" : "") + v + " %", aide: "croissance de l'audience mois après mois" },
-  { k: "camp", l: "Part des vidéos en campagne payée", min: 0, max: 100, pas: 5, f: v => v + " %", aide: "le reste vient de streamers non rémunérés" },
+  { k: "camp", l: "Part des vidéos en campagne payée", min: 0, max: 100, pas: 5, f: v => v + " %", aide: "le reste vient de créateurs non rémunérés" },
   { k: "tarif", l: "Tarif des campagnes (€ / 1 000 vues)", min: 0.1, max: 4, pas: 0.05, f: v => fmtE2.format(v), aide: "médiane du marché ≈ 0,90 € (1 $)" },
   { k: "com", l: "Commission de la plateforme", min: 0, max: 25, pas: 1, f: v => v + " %", aide: "7 à 10 % selon la plateforme" },
   { k: "taux", l: "Abonnés gagnés pour 1 000 vues", min: 0.5, max: 15, pas: 0.5, f: v => v.toLocaleString("fr-FR"), aide: "clips : 2 à 6 en général" },
@@ -1244,9 +1244,7 @@ function construireKit() {
   });
   const TEXTES = [
     ["Bio du compte (80 caractères max)", "Le meilleur de GTA 6 chaque jour 🇫🇷 Clips crédités · Compte fan non officiel"],
-    ["Message d'autorisation aux streamers", "Salut ! Je lance GTA 6 ZAP, une chaîne TikTok FR qui publie chaque jour les meilleurs moments GTA VI des streamers français.\n\nJ'aimerais clipper tes lives GTA VI. Chaque clip affiche ton pseudo à l'écran (« CLIP : @toi ») et dans la description, avec le lien de ta chaîne. Tu n'as rien à faire et ça t'amène des viewers.\n\nTu peux me demander de retirer n'importe quel clip, je le fais dans l'heure.\n\nTu es d'accord ? Un simple « ok » me suffit."],
-    ["Version courte (commentaire ou DM rapide)", "Salut ! Je poste les meilleurs moments GTA VI des streamers FR sur TikTok (@gta6zap), avec ton pseudo à l'écran et en description. Je peux clipper tes lives ? Je retire n'importe quel clip sur simple demande."],
-    ["Relance après 3 jours", "Petite relance pour les clips GTA VI : je publie 6 vidéos par jour avec le pseudo des streamers à l'écran et en description. Si tu es partant, réponds juste « ok » et je commence par tes meilleurs moments d'hier."],
+    ["Relance d'un créateur TikTok après 3 jours", "Petite relance : je publie 6 vidéos GTA 6 par jour, avec le @ des créateurs à l'écran et en description. Si tu es partant, réponds juste « ok » et envoie-moi tes meilleurs clips."],
     ["Demande d'accord à un créateur TikTok", "Salut ! Je gère @gta6zap, un compte FR qui publie chaque jour les meilleurs moments de GTA 6.\n\nJ'aimerais reprendre ton clip dans notre TOP du jour, avec ton @ affiché à l'écran et dans la description pour t'envoyer des abonnés.\n\nTu es d'accord ? Si oui, envoie-moi le fichier sans filigrane. Je retire la vidéo sur simple demande."],
     ["Appel « Envoie ton clip »", "Tu as un clip de fou sur GTA 6 ? Envoie-le en DM avec ton pseudo : s'il est retenu, il passe dans le TOP du jour avec ton nom à l'écran.\n\nEn l'envoyant, tu nous autorises à le publier sur nos réseaux."],
     ["Légende type", "Collaboration commerciale\nIl a pas vu le croco arriver\n🎥 @compte_du_createur\nAbonne-toi pour le meilleur de GTA 6 chaque jour\n#gta6 #gtavi #gta6clips #gamingtiktok #gaming"],
