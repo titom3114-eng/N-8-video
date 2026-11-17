@@ -1,5 +1,6 @@
 {
   "pseudo": "@gta6zap",
+  "fuseau": "Europe/Paris",
   "dossier_sortie": "a_publier",
   "dossier_vod": "a_traiter",
   "max_clips_par_lancement": 5,
@@ -63,6 +64,15 @@
         "#twitchclips",
         "#rockstargames"
       ]
-    ]
+    ],
+    "auto": {
+      "actif": false,
+      "service": "upload-post",
+      "profil": "",
+      "cle_api": "",
+      "plateformes": [
+        "tiktok"
+      ]
+    }
   }
 }

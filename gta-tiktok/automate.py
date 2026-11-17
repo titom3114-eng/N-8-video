@@ -9,16 +9,22 @@ automate.py : le pilote automatique de la chaîne.
   2. traite aussi les longues vidéos déposées dans a_traiter/ (VOD autorisées, tes captures) ;
   3. monte chaque clip en 9:16 (accroche, crédit, sous-titres si activés, appel à l'abonnement) ;
   4. fabrique la compilation TOP 5 du jour (plus d'1 min) ;
-  5. écrit publications.csv / publications.txt : horaire, fichier, légende et hashtags à copier.
+  5. écrit publications.csv / publications.txt : horaire, fichier, légende et hashtags ;
+  6. si la publication automatique est activée (publication.auto.actif), programme chaque vidéo
+     sur TikTok via Upload-Post : plus rien à faire à la main.
 
 Premier lancement :  python automate.py --init
 Lancement normal  :  python automate.py
 Voir sans rien télécharger : python automate.py --essai
+Autre configuration : python automate.py --config config.cloud.json  (ou variable GTA6ZAP_CONFIG)
+Les clés peuvent venir de variables d'environnement : TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET,
+UPLOAD_POST_API_KEY (c'est ainsi que les fournit GitHub Actions).
 """
 
 import argparse
 import csv
 import json
+import os
 import re
 import shutil
 import sys
@@ -33,8 +39,9 @@ from pathlib import Path
 ICI = Path(__file__).resolve().parent
 sys.path.insert(0, str(ICI))
 import clipper  # noqa: E402
+import publication  # noqa: E402
 
-CONFIG = ICI / "config.json"
+CONFIG = ICI / (os.environ.get("GTA6ZAP_CONFIG") or "config.json")
 EXEMPLE = ICI / "config.exemple.json"
 ETAT = ICI / ".etat"
 VIDEO_EXT = {".mp4", ".mkv", ".mov", ".webm", ".m4v", ".ts", ".flv"}
@@ -66,12 +73,33 @@ def ecrire_json(chemin, donnees):
 
 def charger_config():
     if not CONFIG.exists():
-        clipper.stop("config.json n'existe pas encore. Lance d'abord : python automate.py --init")
+        clipper.stop(f"{CONFIG.name} n'existe pas encore. Lance d'abord : python automate.py --init")
     try:
         c = json.loads(CONFIG.read_text(encoding="utf-8"))
     except json.JSONDecodeError as e:
-        clipper.stop(f"config.json n'est pas un JSON valide (ligne {e.lineno}, colonne {e.colno}) : {e.msg}")
+        clipper.stop(f"{CONFIG.name} n'est pas un JSON valide (ligne {e.lineno}, colonne {e.colno}) : {e.msg}")
+    t = c.setdefault("twitch", {})
+    if os.environ.get("TWITCH_CLIENT_ID"):
+        t["client_id"] = os.environ["TWITCH_CLIENT_ID"].strip()
+    if os.environ.get("TWITCH_CLIENT_SECRET"):
+        t["client_secret"] = os.environ["TWITCH_CLIENT_SECRET"].strip()
+    auto = c.setdefault("publication", {}).setdefault("auto", {})
+    if os.environ.get("UPLOAD_POST_API_KEY"):
+        auto["cle_api"] = os.environ["UPLOAD_POST_API_KEY"].strip()
     return c
+
+
+def fuseau(config):
+    try:
+        from zoneinfo import ZoneInfo
+        return ZoneInfo(config.get("fuseau") or "Europe/Paris")
+    except Exception:
+        clipper.stop("Fuseau horaire introuvable. Installe tzdata : python -m pip install tzdata")
+
+
+def maintenant(config):
+    """Heure locale du fuseau de la chaîne (Paris par défaut), sans fuseau attaché."""
+    return datetime.now(fuseau(config)).replace(tzinfo=None)
 
 
 # --------------------------------------------------------------------------- Twitch
@@ -435,7 +463,7 @@ def ecrire_planning(config, produits, etat):
     horaires = pub.get("horaires") or ["12:00", "14:00", "17:00", "18:30", "20:30", "22:30"]
     jeux_hashtags = pub.get("hashtags") or [["#gta6", "#gtavi", "#gta6clips", "#twitchfr", "#gaming"]]
     file_attente = etat.get("file_attente_fin")
-    depart = datetime.now()
+    depart = maintenant(config)
     if file_attente:
         try:
             depart = max(depart, datetime.fromisoformat(file_attente))
@@ -455,37 +483,70 @@ def ecrire_planning(config, produits, etat):
             "date": slot.strftime("%Y-%m-%d"), "heure": slot.strftime("%H:%M"),
             "fichier": Path(p["fichier"]).name, "duree_s": f"{p['duree']:.0f}",
             "legende": legende(p, hashtags), "origine": p.get("origine", ""),
-            "fait": "",
+            "publication": "à programmer", "_quand": slot, "_chemin": Path(p["fichier"]),
         })
     etat["hashtag_index"] = etat.get("hashtag_index", 0) + len(lignes)
     if slots:
         etat["file_attente_fin"] = max(slots).isoformat()
-        avance = (max(slots) - datetime.now()).total_seconds() / 86400
+        avance = (max(slots) - maintenant(config)).total_seconds() / 86400
         if avance > 3:
             dire(f"ATTENTION : la file de publication est pleine jusqu'au {max(slots):%d/%m %H:%M}. "
                  f"Baisse max_clips_par_lancement ou clips_par_vod, ou ajoute des horaires.")
+
+    publier_auto(config, lignes)
+
     jour = config["_jour"]
+    colonnes = ["date", "heure", "fichier", "duree_s", "legende", "origine", "publication"]
     with open(jour / "publications.csv", "w", newline="", encoding="utf-8-sig") as f:
-        w = csv.DictWriter(f, fieldnames=list(lignes[0].keys()) if lignes else ["date"], delimiter=";")
+        w = csv.DictWriter(f, fieldnames=colonnes, delimiter=";", extrasaction="ignore")
         w.writeheader()
         w.writerows(lignes)
+    manuelles = [l for l in lignes if not l["publication"].startswith("programmée")]
     with open(jour / "publications.txt", "w", encoding="utf-8") as f:
-        f.write("À PROGRAMMER (TikTok Studio sur ordinateur > Téléverser > Programmer)\n")
-        f.write("Coche chaque ligne une fois programmée. Si une heure est déjà passée, publie la vidéo tout de suite.\n")
-        f.write("Après publication : colle le lien de chaque vidéo dans ta campagne de clipping.\n\n")
-        for l in sorted(lignes, key=lambda x: (x["date"], x["heure"])):
-            f.write(f"[ ] {l['date']} {l['heure']}  ->  {l['fichier']}  ({l['duree_s']} s)\n")
-            f.write("-" * 60 + "\n" + l["legende"] + "\n\n")
+        auto = [l for l in lignes if l["publication"].startswith("programmée")]
+        if auto:
+            f.write(f"DÉJÀ PROGRAMMÉES AUTOMATIQUEMENT ({len(auto)})\n")
+            for l in sorted(auto, key=lambda x: (x["date"], x["heure"])):
+                f.write(f"[x] {l['date']} {l['heure']}  ->  {l['fichier']}  ({l['publication']})\n")
+            f.write("\n")
+        if manuelles:
+            f.write("À PROGRAMMER (TikTok Studio sur ordinateur > Téléverser > Programmer)\n")
+            f.write("Coche chaque ligne une fois programmée. Si une heure est déjà passée, publie la vidéo tout de suite.\n\n")
+            for l in sorted(manuelles, key=lambda x: (x["date"], x["heure"])):
+                note = "" if l["publication"] == "à programmer" else f"   [{l['publication']}]"
+                f.write(f"[ ] {l['date']} {l['heure']}  ->  {l['fichier']}  ({l['duree_s']} s){note}\n")
+                f.write("-" * 60 + "\n" + l["legende"] + "\n\n")
+        f.write("Après publication : colle le lien de chaque vidéo dans ta campagne de clipping.\n")
     journal = ICI / "journal_publications.csv"
     neuf = not journal.exists()
     with open(journal, "a", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f, delimiter=";")
         if neuf:
-            w.writerow(["genere_le", "date_prevue", "heure", "dossier", "fichier", "origine"])
+            w.writerow(["genere_le", "date_prevue", "heure", "dossier", "fichier", "origine", "publication"])
         for l in lignes:
-            w.writerow([datetime.now().strftime("%Y-%m-%d %H:%M"), l["date"], l["heure"], jour.name,
-                        l["fichier"], l["origine"]])
+            w.writerow([maintenant(config).strftime("%Y-%m-%d %H:%M"), l["date"], l["heure"], jour.name,
+                        l["fichier"], l["origine"], l["publication"]])
     return lignes
+
+
+def publier_auto(config, lignes):
+    """Programme chaque vidéo via Upload-Post si publication.auto.actif est vrai."""
+    auto = (config.get("publication", {}) or {}).get("auto", {}) or {}
+    if not auto.get("actif") or not lignes:
+        return
+    tz = fuseau(config)
+    plateformes = auto.get("plateformes") or ["tiktok"]
+    dire(f"\nPublication automatique ({', '.join(plateformes)}) via Upload-Post :")
+    for l in sorted(lignes, key=lambda x: x["_quand"]):
+        quand = l["_quand"].replace(tzinfo=tz)
+        try:
+            ident = publication.programmer(auto.get("cle_api", ""), auto.get("profil", ""), l["_chemin"],
+                                           l["legende"], quand, plateformes)
+            l["publication"] = f"programmée, tâche {ident}"
+            dire(f"  OK      {l['date']} {l['heure']}  {l['fichier']}")
+        except publication.ErreurPublication as e:
+            l["publication"] = f"ÉCHEC : {e}"
+            dire(f"  ÉCHEC   {l['date']} {l['heure']}  {l['fichier']} : {e}")
 
 
 def init():
@@ -509,7 +570,13 @@ def main():
     ap.add_argument("--essai", action="store_true", help="liste les clips Twitch qui seraient pris, sans rien télécharger")
     ap.add_argument("--sans-twitch", action="store_true")
     ap.add_argument("--sans-dossier", action="store_true")
+    ap.add_argument("--config", help="fichier de configuration (défaut config.json)")
     a = ap.parse_args()
+    global CONFIG
+    if a.config:
+        CONFIG = (Path.cwd() / a.config) if not Path(a.config).is_absolute() else Path(a.config)
+        if not CONFIG.exists():
+            CONFIG = ICI / a.config
     if a.init:
         init()
         return
@@ -517,10 +584,10 @@ def main():
     clipper.importer_pillow()
     config = charger_config()
     etat = lire_json(ETAT / "etat.json", {})
-    jour = ICI / config.get("dossier_sortie", "a_publier") / datetime.now().strftime("%Y-%m-%d")
+    jour = ICI / config.get("dossier_sortie", "a_publier") / maintenant(config).strftime("%Y-%m-%d")
     jour.mkdir(parents=True, exist_ok=True)
     config["_jour"] = jour
-    dire(f"=== Pilote automatique {datetime.now():%d/%m/%Y %H:%M} ===")
+    dire(f"=== Pilote automatique {maintenant(config):%d/%m/%Y %H:%M} ({config.get('fuseau') or 'Europe/Paris'}) ===")
 
     produits = []
     try:
@@ -543,8 +610,15 @@ def main():
 
     dire(f"\n{len(produits)} vidéos prêtes dans {jour}")
     for l in sorted(lignes, key=lambda x: (x["date"], x["heure"])):
-        dire(f"  {l['date']} {l['heure']}  {l['fichier']}  ({l['duree_s']} s)")
-    dire(f"\nOuvre {jour / 'publications.txt'} et programme les vidéos dans TikTok Studio.")
+        dire(f"  {l['date']} {l['heure']}  {l['fichier']}  ({l['duree_s']} s)  {l['publication']}")
+    echecs = [l for l in lignes if l["publication"].startswith("ÉCHEC")]
+    restantes = [l for l in lignes if not l["publication"].startswith("programmée")]
+    if not restantes:
+        dire("\nTout est programmé automatiquement. Rien à faire.")
+    else:
+        dire(f"\n{len(restantes)} vidéo(s) à programmer à la main : voir {jour / 'publications.txt'}")
+    if echecs:
+        sys.exit(2)  # fait échouer l'exécution GitHub Actions : GitHub t'envoie un e-mail
 
 
 if __name__ == "__main__":

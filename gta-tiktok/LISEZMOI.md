@@ -13,9 +13,69 @@ Ce dossier fait tout le travail de production :
 5. **Prépare** `publications.txt` : pour chaque vidéo, l'heure de publication, la légende et les hashtags à
    copier-coller.
 
-Ce qu'il te reste : programmer les vidéos dans TikTok Studio (10 min par jour), coller les liens dans tes
-campagnes de clipping (2 min) et noter tes stats le dimanche (10 min). TikTok n'autorise la publication
-automatique qu'aux outils partenaires validés : un robot qui publie à ta place ferait bannir le compte.
+6. **Programme** lui-même chaque vidéo sur TikTok via Upload-Post (mode 100 % automatique ci-dessous).
+
+---
+
+## Mode 100 % automatique (recommandé) : rien à faire au quotidien
+
+Le pilote tourne chaque matin à 5 h 30 sur les serveurs de GitHub (ton ordinateur peut rester éteint) et
+programme les vidéos sur TikTok via **Upload-Post**, un service partenaire de l'API officielle de TikTok.
+C'est la seule voie automatique qui ne met pas le compte en danger : TikTok n'autorise la publication par
+API qu'aux applications qu'il a auditées, et un robot qui clique à ta place sur TikTok fait bannir le compte.
+
+### Une seule fois (30 minutes)
+
+1. **Upload-Post** (upload-post.com) : crée un compte, crée un profil nommé `gta6zap`, connecte ton compte
+   TikTok à ce profil (fenêtre de connexion officielle TikTok), puis copie ta clé API. Le forfait gratuit
+   est limité en nombre d'envois par mois : à 6 vidéos par jour (environ 180 par mois), il faut un forfait
+   payant, vérifie le tarif du moment sur leur site.
+2. **Twitch** : crée tes clés comme indiqué en 2.1.
+3. **Secrets GitHub** : sur github.com, dans ce dépôt → **Settings** → **Secrets and variables** →
+   **Actions** → **New repository secret**. Crée ces trois secrets (nom exact, puis la valeur) :
+   - `TWITCH_CLIENT_ID`
+   - `TWITCH_CLIENT_SECRET`
+   - `UPLOAD_POST_API_KEY`
+
+   Les clés ne se tapent jamais dans un fichier du dépôt ni dans une conversation.
+4. **Créateurs autorisés** : ajoute-les dans `gta-tiktok/config.cloud.json` (bloc `"createurs"`, même
+   format qu'en 2.2). Sur github.com, ouvre le fichier et clique sur le crayon pour le modifier, ou demande
+   à Claude de le faire.
+5. Si ton profil Upload-Post ne s'appelle pas `gta6zap`, change `publication.auto.profil` dans
+   `config.cloud.json`.
+6. **Activation** : `.github/workflows/gta6zap.yml` doit se trouver sur la branche par défaut du dépôt.
+   Ensuite : onglet **Actions** → **GTA 6 Zap - pilote quotidien** → **Run workflow**, coche
+   « Essai à blanc » pour vérifier les clés et la liste des clips retenus, puis relance sans cocher.
+
+### Ensuite, chaque jour, tout seul
+
+- 5 h 30 : récolte des clips, montage, TOP du jour, programmation des 6 vidéos entre 12 h et 22 h 30
+  (les meilleures le soir).
+- Les vidéos du jour restent téléchargeables 7 jours : onglet **Actions** → l'exécution → **Artifacts**.
+- Si un envoi échoue (clé expirée, vidéo refusée), l'exécution passe en rouge et **GitHub t'envoie un
+  e-mail**. La vidéo concernée figure dans `publications.txt` de l'artefact, prête à publier à la main.
+- La mémoire du pilote (clips déjà traités, file de publication) est conservée d'un jour à l'autre.
+
+Ce qui reste à toi : coller les liens de tes vidéos dans tes campagnes de clipping, si tu en fais
+(2 minutes par jour), et contacter de nouveaux streamers le dimanche.
+
+### Coût
+
+- GitHub Actions : gratuit dans la limite de 2 000 minutes par mois pour un dépôt privé (illimité pour un
+  dépôt public). Une exécution prend 15 à 25 minutes, soit 450 à 750 minutes par mois.
+- Upload-Post : selon le forfait choisi.
+
+### Autres plateformes
+
+Les mêmes vidéos peuvent partir sur YouTube Shorts et Instagram Reels : connecte ces comptes au même profil
+Upload-Post et mets `"plateformes": ["tiktok", "youtube", "instagram"]` dans `config.cloud.json`.
+Cette option n'a pas été testée en conditions réelles : fais d'abord un essai sur une journée.
+
+### Publication automatique depuis ton propre PC
+
+Si tu préfères garder le pilote sur ton ordinateur : dans `config.json`, mets `publication.auto.actif` à
+`true`, renseigne `publication.auto.profil`, et fournis la clé dans la variable d'environnement
+`UPLOAD_POST_API_KEY` (Windows : `setx UPLOAD_POST_API_KEY "ta_clé"` puis rouvre le terminal).
 
 ---
 
@@ -143,7 +203,7 @@ Dans le dossier `gta-tiktok` :
 
 ---
 
-## 4. Ta routine (environ 12 minutes par jour)
+## 4. Ta routine si la publication automatique est désactivée (environ 12 minutes par jour)
 
 1. Ouvre `a_publier/<date du jour>/publications.txt`.
 2. Sur ordinateur, va sur TikTok Studio (tiktok.com/tiktokstudio) → **Téléverser**. Pour chaque ligne :
@@ -266,7 +326,10 @@ Le classement d'une compilation va du dernier au premier : mets le meilleur segm
 
 | Fichier | Rôle |
 |---|---|
-| `automate.py` | pilote automatique (récolte Twitch, dossier `a_traiter/`, montage, TOP 5, planning) |
+| `automate.py` | pilote automatique (récolte Twitch, dossier `a_traiter/`, montage, TOP 5, planning, publication) |
+| `publication.py` | programmation automatique sur TikTok via l'API Upload-Post |
+| `config.cloud.json` | configuration utilisée par GitHub Actions (sans aucune clé : elles sont dans les secrets) |
+| `../.github/workflows/gta6zap.yml` | exécution quotidienne à 5 h 30 sur GitHub Actions |
 | `clipper.py` | moteur de montage et commandes manuelles |
 | `config.exemple.json` | modèle de configuration copié par `--init` |
 | `createur.exemple.json` | bloc à recopier pour chaque créateur autorisé |

@@ -206,12 +206,12 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
     <span class="eyebrow">Chaîne TikTok FR · clips GTA VI</span>
     <h1>GTA 6 ZAP</h1>
     <div class="raie" aria-hidden="true"></div>
-    <p class="lead">Le pilote automatique récupère chaque matin les clips des streamers qui t'ont dit oui, les monte en vertical et prépare chaque publication. Toi, tu programmes les vidéos et tu encaisses les campagnes.</p>
+    <p class="lead">Chaque matin, le pilote récupère les clips des streamers qui t'ont dit oui, les monte en vertical et les programme lui-même sur TikTok. Ton ordinateur peut rester éteint.</p>
     <div class="puces">
       <span class="puce forte" id="compteur">Sortie le jeudi 19 novembre 2026</span>
       <span class="puce">PS5 · Xbox Series X|S</span>
       <span class="puce">6 vidéos par jour</span>
-      <span class="puce">≈ 12 min de travail par jour</span>
+      <span class="puce">≈ 2 min de travail par jour</span>
     </div>
   </div>
 
@@ -227,14 +227,14 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
       <div class="tableau" style="border:0">
         <table>
           <tbody>
-            <tr><td><b>Une fois</b></td><td class="n">1 h</td><td class="muted">Compte, installation, clés Twitch, 15 messages aux streamers</td></tr>
-            <tr><td><b>Chaque matin</b></td><td class="n">0 min</td><td class="muted">Le PC lance le pilote à 6 h : récolte, montage, légendes</td></tr>
-            <tr><td><b>Chaque jour</b></td><td class="n">12 min</td><td class="muted">Programmer les 6 vidéos, coller les liens dans les campagnes</td></tr>
-            <tr><td><b>Le dimanche</b></td><td class="n">20 min</td><td class="muted">Stats de la semaine, 5 nouveaux streamers contactés</td></tr>
+            <tr><td><b>Une fois</b></td><td class="n">1 h 30</td><td class="muted">Compte TikTok, Upload-Post, clés Twitch, secrets GitHub, 15 messages aux streamers</td></tr>
+            <tr><td><b>Chaque matin</b></td><td class="n">0 min</td><td class="muted">GitHub lance le pilote à 5 h 30 : récolte, montage, programmation des 6 vidéos</td></tr>
+            <tr><td><b>Chaque jour</b></td><td class="n">2 min</td><td class="muted">Coller les liens publiés dans les campagnes de clipping</td></tr>
+            <tr><td><b>Le dimanche</b></td><td class="n">15 min</td><td class="muted">5 nouveaux streamers contactés, stats de la semaine (saisies, ou importées par Claude avec Metricool)</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="small muted">La publication reste manuelle : TikTok ne laisse publier automatiquement que les outils partenaires validés. Un robot qui poste à ta place fait bannir le compte.</p>
+      <p class="small muted">La publication passe par Upload-Post, partenaire validé de l'API TikTok : c'est la seule voie automatique qui ne met pas le compte en danger. Si un envoi échoue, GitHub t'envoie un e-mail.</p>
     </div>
   </div>
 
@@ -242,9 +242,9 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
     <h2>La chaîne de production</h2>
     <div class="flux">
       <div class="etape"><span class="qui">Sources autorisées</span><b>Streamers et campagnes</b><span class="small muted">Streamers FR qui ont dit oui, rushs fournis par les campagnes de clipping, clips de ta communauté.</span></div>
-      <div class="etape"><span class="qui">automate.py · 6 h</span><b>Récolte et montage</b><span class="small muted">Clips Twitch les plus vus des 24 h, moments forts des VOD, accroche, crédit, sous-titres, TOP 5 du jour.</span></div>
-      <div class="etape"><span class="qui">a_publier/date/</span><b>6 vidéos prêtes</b><span class="small muted">publications.txt donne l'heure, la légende et les hashtags de chaque vidéo.</span></div>
-      <div class="etape"><span class="qui">TikTok Studio</span><b>Programmation</b><span class="small muted">Téléverser, coller, programmer. Les meilleurs clips partent le soir.</span></div>
+      <div class="etape"><span class="qui">GitHub Actions · 5 h 30</span><b>Récolte et montage</b><span class="small muted">Clips Twitch les plus vus des 24 h, moments forts des VOD, accroche, crédit, sous-titres, TOP 5 du jour.</span></div>
+      <div class="etape"><span class="qui">Légendes et horaires</span><b>6 vidéos par jour</b><span class="small muted">Légende, hashtags et crédit écrits automatiquement ; copie gardée 7 jours dans GitHub.</span></div>
+      <div class="etape"><span class="qui">Upload-Post → TikTok</span><b>Programmation automatique</b><span class="small muted">Chaque vidéo part à son créneau entre 12 h et 22 h 30, les meilleures le soir.</span></div>
       <div class="etape"><span class="qui">Campagnes · Stats</span><b>Encaisser et ajuster</b><span class="small muted">Liens soumis aux campagnes, chiffres du dimanche dans l'onglet Stats.</span></div>
     </div>
     <p class="small muted">Outil et notice complète : dossier <span class="mono">gta-tiktok/</span> du dépôt, fichier <span class="mono">LISEZMOI.md</span>.</p>
@@ -308,7 +308,7 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
         <li>Publier dans les 24 h qui suivent le stream : un moment viral s'use en deux jours.</li>
         <li>Les meilleurs clips le soir (18 h 30 → 22 h 30), quand l'audience gaming FR est en ligne.</li>
         <li>3 à 5 hashtags, toujours #gta6, jamais 30.</li>
-        <li>Répondre aux 3 premiers commentaires quand tu programmes : facultatif, mais ça relance la vidéo.</li>
+        <li>Répondre aux 3 premiers commentaires quand tu passes sur l'appli : facultatif, mais ça relance la vidéo.</li>
       </ul>
     </div>
   </div>
@@ -541,7 +541,7 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
   <div class="grille g2" id="textes"></div>
 
   <div class="carte">
-    <h3>Programmer dans TikTok Studio</h3>
+    <h3>Publier à la main, en secours</h3>
     <ul class="liste">
       <li>Sur ordinateur : tiktok.com/tiktokstudio → <b>Téléverser</b>.</li>
       <li>Glisse la vidéo, colle la légende de <span class="mono">publications.txt</span>.</li>
@@ -643,8 +643,8 @@ const PREPA = {
     theme: "Tout installer",
     taches: [
       "Créer le compte TikTok personnel @gta6zap (nom, photo, bio : onglet Kit)",
-      "Installer Python, ffmpeg et les dépendances (LISEZMOI, partie 1)",
-      "Créer l'application Twitch et coller les clés dans config.json",
+      "Créer le compte Upload-Post, un profil « gta6zap » et y connecter TikTok",
+      "Créer l'application Twitch, puis ajouter les 3 secrets dans GitHub (LISEZMOI, mode 100 % automatique)",
       "S'inscrire sur une plateforme de campagnes de clipping et repérer les campagnes GTA VI et gaming",
       "Envoyer le message d'autorisation à 15 streamers FR qui lancent GTA VI"
     ]
@@ -652,9 +652,9 @@ const PREPA = {
   "-1": {
     theme: "Tester et brancher",
     taches: [
-      "Ajouter dans config.json les streamers qui ont dit oui, avec la preuve",
-      "Lancer python automate.py --essai pour vérifier les clés",
-      "Programmer le lancement automatique à 6 h (LISEZMOI, partie 3)",
+      "Ajouter dans config.cloud.json les streamers qui ont dit oui, avec la preuve (ou le demander à Claude)",
+      "Essai à blanc : GitHub → Actions → GTA 6 Zap → Run workflow, case « Essai » cochée",
+      "Lancer une vraie exécution et vérifier dans TikTok Studio que les vidéos sont programmées",
       "Relancer les streamers sans réponse (message de relance : Kit)",
       "Suivre 30 comptes gaming FR et regarder 20 min de vidéos GTA depuis le compte"
     ]
@@ -668,8 +668,8 @@ function infoJour(d) {
   else {
     phase = n <= 14 ? "Ruée" : "Consolidation";
     theme = THEMES[n - 1];
-    if (n === 1) taches.push("23 h : relancer le pilote avec \"heures\": 6 pour poster les premiers moments avant tout le monde");
-    taches.push("Programmer les vidéos du jour depuis a_publier/ (10 min)");
+    if (n === 1) taches.push("23 h : lancer le pilote à la main (Actions → Run workflow) pour poster les premiers moments avant tout le monde");
+    taches.push("Pas d'e-mail d'échec de GitHub ? Tout est programmé. Sinon, publier à la main la vidéo signalée");
     taches.push("Coller les liens publiés dans les campagnes (2 min)");
     if (d.getDay() === 0) {
       taches.push("Point du dimanche : stats de la semaine dans l'onglet Stats");
@@ -717,7 +717,7 @@ function rendreCalendrier() {
     c.className = "jour" + (di === auj ? " aujourdhui" : "") + (di < auj ? " passe" : "");
     const pillCls = info.phase === "Ruée" ? "acc" : info.phase === "Préparation" ? "ex" : "bon";
     c.innerHTML = `<div class="ent"><div><div class="date">${esc(dateCourte(di))}${di === auj ? " · aujourd'hui" : ""}</div><span class="pill ${pillCls}">${esc(info.phase)}</span></div><div class="jn">${info.n < 0 ? "J" + info.n : "J" + info.n}</div></div>
-      <div class="theme">${esc(info.theme)}</div>${info.videos ? `<div class="small muted">${info.videos} vidéos à programmer</div>` : ""}`;
+      <div class="theme">${esc(info.theme)}</div>${info.videos ? `<div class="small muted">${info.videos} vidéos programmées automatiquement</div>` : ""}`;
     info.taches.forEach((t, i) => { c.append(rendreTache(di, i, t)); total++; if (etat.planning[clefTache(di, i)]) faits++; });
     cal.append(c);
   }

@@ -1,0 +1,91 @@
+# Pilote automatique GTA 6 ZAP : tourne chaque matin sur les serveurs de GitHub, sans ton ordinateur.
+# Récolte les clips Twitch des créateurs autorisés (gta-tiktok/config.cloud.json), les monte,
+# fabrique le TOP du jour et les programme sur TikTok via Upload-Post.
+#
+# Secrets à créer une fois (dépôt > Settings > Secrets and variables > Actions > New repository secret) :
+#   TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET, UPLOAD_POST_API_KEY
+#
+# Les exécutions planifiées ne partent que depuis la branche par défaut du dépôt.
+
+name: GTA 6 Zap - pilote quotidien
+
+on:
+  schedule:
+    - cron: "30 4 * * *"   # 05:30 à Paris en hiver, 06:30 en été
+  workflow_dispatch:
+    inputs:
+      essai:
+        description: "Essai à blanc : liste les clips Twitch retenus, sans rien monter ni publier"
+        type: boolean
+        default: false
+
+concurrency:
+  group: gta6zap
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  pilote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    defaults:
+      run:
+        working-directory: gta-tiktok
+    env:
+      GTA6ZAP_CONFIG: config.cloud.json
+      TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+      TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+      UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: gta-tiktok/requirements.txt
+
+      - name: Installer ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Installer les dépendances
+        run: python -m pip install -q -r requirements.txt
+
+      - name: Vérifier les secrets
+        run: |
+          manque=""
+          [ -n "$TWITCH_CLIENT_ID" ] || manque="$manque TWITCH_CLIENT_ID"
+          [ -n "$TWITCH_CLIENT_SECRET" ] || manque="$manque TWITCH_CLIENT_SECRET"
+          [ -n "$UPLOAD_POST_API_KEY" ] || manque="$manque UPLOAD_POST_API_KEY"
+          if [ -n "$manque" ]; then
+            echo "::error::Secrets manquants :$manque (Settings > Secrets and variables > Actions)"
+            exit 1
+          fi
+
+      - name: Retrouver la mémoire du pilote
+        uses: actions/cache/restore@v4
+        with:
+          path: gta-tiktok/.etat/etat.json
+          key: gta6zap-etat-${{ github.run_id }}
+          restore-keys: gta6zap-etat-
+
+      - name: Lancer le pilote
+        run: python automate.py ${{ inputs.essai && '--essai' || '' }}
+
+      - name: Sauvegarder la mémoire du pilote
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: gta-tiktok/.etat/etat.json
+          key: gta6zap-etat-${{ github.run_id }}
+
+      - name: Garder les vidéos du jour 7 jours
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos-${{ github.run_id }}
+          path: gta-tiktok/a_publier/
+          retention-days: 7
+          if-no-files-found: ignore
