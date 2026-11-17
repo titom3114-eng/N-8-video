@@ -3,11 +3,13 @@
   "fuseau": "Europe/Paris",
   "dossier_sortie": "a_publier",
   "dossier_vod": "a_traiter",
-  "max_clips_par_lancement": 5,
+  "max_clips_par_lancement": 6,
   "clips_par_vod": 4,
-  "compilation_du_jour": true,
+  "compilation_du_jour": false,
   "accroche_titre_twitch": true,
+  "sources": [],
   "twitch": {
+    "actif": false,
     "client_id": "",
     "client_secret": "",
     "jeu": "Grand Theft Auto VI",
@@ -41,7 +43,7 @@
         "#gta6",
         "#gtavi",
         "#gta6clips",
-        "#twitchfr",
+        "#gamingtiktok",
         "#gaming"
       ],
       [
@@ -55,14 +57,14 @@
         "#gta6",
         "#gtavi",
         "#gta6fr",
-        "#streamerfr",
+        "#gamertiktok",
         "#fyp"
       ],
       [
         "#gta6",
         "#gta6funny",
         "#gamingfr",
-        "#twitchclips",
+        "#gtaclips",
         "#rockstargames"
       ]
     ],

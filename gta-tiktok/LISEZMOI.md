@@ -3,10 +3,11 @@
 Chaîne TikTok française de clips GTA VI (sortie le jeudi 19 novembre 2026 sur PS5 et Xbox Series).
 Ce dossier fait tout le travail de production :
 
-1. **Récolte** chaque matin les clips Twitch GTA VI les plus vus des dernières 24 h, uniquement chez les
-   streamers qui t'ont donné leur accord.
-2. **Découpe** aussi les longs streams que tu déposes dans `a_traiter/` (VOD fournies par une campagne de
-   clipping, rushs autorisés, tes propres parties) : il repère tout seul les moments forts.
+1. **Récupère** chaque matin les nouvelles vidéos de tes boîtes de réception : dossiers Google Drive des
+   campagnes de clipping que tu as rejointes, liens envoyés par des créateurs TikTok qui ont dit oui.
+   Une source sans autorisation notée est ignorée.
+2. **Découpe** les longues vidéos : il repère tout seul les moments forts (pics de son : cris, rires,
+   explosions). Les fichiers déposés dans `a_traiter/` sur ton PC sont traités de la même façon.
 3. **Monte** chaque clip en vertical 1080×1920 : accroche en gros avec un mot en jaune, crédit du créateur,
    ton @, appel à s'abonner à la fin, son normalisé à −14 LUFS, sous-titres mot à mot en option.
 4. **Assemble** le TOP 5 du jour (plus d'une minute, le format qui compte pour Creator Rewards).
@@ -30,34 +31,33 @@ API qu'aux applications qu'il a auditées, et un robot qui clique à ta place su
    TikTok à ce profil (fenêtre de connexion officielle TikTok), puis copie ta clé API. Le forfait gratuit
    est limité en nombre d'envois par mois : à 6 vidéos par jour (environ 180 par mois), il faut un forfait
    payant, vérifie le tarif du moment sur leur site.
-2. **Twitch** : crée tes clés comme indiqué en 2.1.
-3. **Secrets GitHub** : sur github.com, dans ce dépôt → **Settings** → **Secrets and variables** →
-   **Actions** → **New repository secret**. Crée ces trois secrets (nom exact, puis la valeur) :
-   - `TWITCH_CLIENT_ID`
-   - `TWITCH_CLIENT_SECRET`
-   - `UPLOAD_POST_API_KEY`
-
-   Les clés ne se tapent jamais dans un fichier du dépôt ni dans une conversation.
-4. **Créateurs autorisés** : ajoute-les dans `gta-tiktok/config.cloud.json` (bloc `"createurs"`, même
-   format qu'en 2.2). Sur github.com, ouvre le fichier et clique sur le crayon pour le modifier, ou demande
-   à Claude de le faire.
+2. **Campagnes** : inscris-toi sur une plateforme de campagnes de clipping (Content Rewards de Whop, par
+   exemple), rejoins 2 ou 3 campagnes GTA VI ou gaming, et note pour chacune le lien du dossier Google
+   Drive fourni, le @ TikTok du créateur et les mentions imposées dans la légende.
+3. **Secret GitHub** : sur github.com, dans ce dépôt → **Settings** → **Secrets and variables** →
+   **Actions** → **New repository secret**. Nom : `UPLOAD_POST_API_KEY`, valeur : ta clé Upload-Post.
+   La clé ne se tape jamais dans un fichier du dépôt ni dans une conversation.
+4. **Boîtes de réception** : ajoute chaque campagne dans le bloc `"sources"` de
+   `gta-tiktok/config.cloud.json` (modèle : `source.exemple.json`, détail en partie 2.4). Sur github.com,
+   ouvre le fichier et clique sur le crayon, ou donne simplement à Claude le nom de la campagne, le lien du
+   dossier et le @ du créateur.
 5. Si ton profil Upload-Post ne s'appelle pas `gta6zap`, change `publication.auto.profil` dans
    `config.cloud.json`.
 6. **Activation** : `.github/workflows/gta6zap.yml` doit se trouver sur la branche par défaut du dépôt.
    Ensuite : onglet **Actions** → **GTA 6 Zap - pilote quotidien** → **Run workflow**, coche
-   « Essai à blanc » pour vérifier les clés et la liste des clips retenus, puis relance sans cocher.
+   « Essai à blanc » pour voir les vidéos trouvées dans tes dossiers, puis relance sans cocher.
 
 ### Ensuite, chaque jour, tout seul
 
-- 5 h 30 : récolte des clips, montage, TOP du jour, programmation des 6 vidéos entre 12 h et 22 h 30
+- 5 h 30 : nouvelles vidéos des dossiers, montage, programmation des 6 vidéos entre 12 h et 22 h 30
   (les meilleures le soir).
 - Les vidéos du jour restent téléchargeables 7 jours : onglet **Actions** → l'exécution → **Artifacts**.
 - Si un envoi échoue (clé expirée, vidéo refusée), l'exécution passe en rouge et **GitHub t'envoie un
   e-mail**. La vidéo concernée figure dans `publications.txt` de l'artefact, prête à publier à la main.
 - La mémoire du pilote (clips déjà traités, file de publication) est conservée d'un jour à l'autre.
 
-Ce qui reste à toi : coller les liens de tes vidéos dans tes campagnes de clipping, si tu en fais
-(2 minutes par jour), et contacter de nouveaux streamers le dimanche.
+Ce qui reste à toi : coller les liens de tes vidéos dans tes campagnes de clipping (2 minutes par jour,
+c'est ce qui déclenche le paiement), et rejoindre une nouvelle campagne quand l'une des tiennes se termine.
 
 ### Coût
 
@@ -119,7 +119,9 @@ python automate.py --init
 Cela crée `config.json` (jamais envoyé sur GitHub : il contient tes clés) et les dossiers `a_traiter/` et
 `a_publier/`. Ouvre `config.json` avec le Bloc-notes et remplis trois choses.
 
-### 2.1 Les clés Twitch (gratuites)
+### 2.1 Twitch (facultatif, désactivé par défaut)
+
+Ne sert que si tu mets `"actif": true` dans le bloc `"twitch"` de la configuration.
 
 1. Va sur https://dev.twitch.tv/console/apps et connecte-toi avec ton compte Twitch (active la double
    authentification si Twitch la demande).
@@ -136,7 +138,7 @@ Cela crée `config.json` (jamais envoyé sur GitHub : il contient tes clés) et 
      "client_secret": "ton_client_secret",
    ```
 
-### 2.2 Les créateurs qui t'ont dit oui
+### 2.2 Les créateurs Twitch qui t'ont dit oui (facultatif)
 
 Pour chaque streamer qui accepte (message type dans l'onglet « Kit » du QG), ajoute un bloc dans
 `"createurs"` en recopiant `createur.exemple.json` :
@@ -163,7 +165,52 @@ Pour chaque streamer qui accepte (message type dans l'onglet « Kit » du QG), a
 
 `"pseudo": "@gta6zap"` : remplace par ton @ TikTok exact.
 
-### 2.4 Test à blanc
+### 2.4 Les boîtes de réception (sources)
+
+Une source = un endroit où arrivent des vidéos que tu as le droit de publier. Ajoute un bloc par source
+dans `"sources"` (modèles : `source.exemple.json` pour un dossier Google Drive, `source-liens.exemple.json`
+pour une liste de liens).
+
+```json
+"sources": [
+  {
+    "nom": "Campagne GTA 6 de NomDuCreateur",
+    "type": "gdrive",
+    "lien": "https://drive.google.com/drive/folders/IDENTIFIANT_DU_DOSSIER",
+    "credit": "@compte_tiktok_du_createur",
+    "autorisation": "Campagne Content Rewards rejointe le 18/11/2026",
+    "collaboration_commerciale": true,
+    "legende_ajout": "",
+    "videos_par_jour": 3,
+    "clips_par_video": 3,
+    "duree_max_clip": 75,
+    "retouche": true,
+    "accroche": true,
+    "actif": true
+  }
+]
+```
+
+| Champ | Effet |
+|---|---|
+| `type` | `gdrive` (dossier Google Drive partagé « Tous les utilisateurs disposant du lien ») ou `liens` (liste `"liens": [...]` : Dropbox, fichier Drive, lien .mp4, vidéo TikTok ou YouTube d'un créateur qui a dit oui) |
+| `credit` | @ affiché sur la vidéo (« CLIP : @... ») et dans la légende |
+| `autorisation` | preuve : campagne rejointe ou accord écrit. **Vide = source ignorée** |
+| `collaboration_commerciale` | `true` = la légende commence par « Collaboration commerciale » (obligatoire en France pour une campagne payée) |
+| `legende_ajout` | texte imposé par la campagne (hashtag, mention), ajouté à chaque légende |
+| `videos_par_jour` | nouvelles vidéos prises dans la source à chaque lancement |
+| `clips_par_video` | moments forts gardés dans une vidéo longue |
+| `duree_max_clip` | en dessous de cette durée (s), la vidéo est gardée en entier |
+| `retouche` | `false` = publiée telle quelle, sans accroche ni recadrage (si la campagne l'exige) |
+| `accroche` | `false` = pas d'accroche ajoutée en haut de la vidéo |
+| `actif` | `false` = source en pause |
+
+Le pilote retient les fichiers déjà traités : une vidéo n'est jamais publiée deux fois. Le total quotidien
+est plafonné par `max_clips_par_lancement` (6 dans `config.cloud.json`) ; le reste attend le lendemain.
+Les dossiers Google Drive partagés trop souvent peuvent atteindre un quota de téléchargement : le pilote
+réessaie au lancement suivant.
+
+### 2.5 Test à blanc
 
 ```
 python automate.py --essai
@@ -328,6 +375,8 @@ Le classement d'une compilation va du dernier au premier : mets le meilleur segm
 |---|---|
 | `automate.py` | pilote automatique (récolte Twitch, dossier `a_traiter/`, montage, TOP 5, planning, publication) |
 | `publication.py` | programmation automatique sur TikTok via l'API Upload-Post |
+| `sources.py` | boîtes de réception : dossiers Google Drive des campagnes, liens de créateurs autorisés |
+| `source.exemple.json` / `source-liens.exemple.json` | blocs à recopier dans `"sources"` |
 | `config.cloud.json` | configuration utilisée par GitHub Actions (sans aucune clé : elles sont dans les secrets) |
 | `../.github/workflows/gta6zap.yml` | exécution quotidienne à 5 h 30 sur GitHub Actions |
 | `clipper.py` | moteur de montage et commandes manuelles |

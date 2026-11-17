@@ -206,7 +206,7 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
     <span class="eyebrow">Chaîne TikTok FR · clips GTA VI</span>
     <h1>GTA 6 ZAP</h1>
     <div class="raie" aria-hidden="true"></div>
-    <p class="lead">Chaque matin, le pilote récupère les clips des streamers qui t'ont dit oui, les monte en vertical et les programme lui-même sur TikTok. Ton ordinateur peut rester éteint.</p>
+    <p class="lead">Chaque matin, le pilote récupère les nouvelles vidéos de tes campagnes de clipping, les monte en vertical et les programme lui-même sur TikTok. Ton ordinateur peut rester éteint.</p>
     <div class="puces">
       <span class="puce forte" id="compteur">Sortie le jeudi 19 novembre 2026</span>
       <span class="puce">PS5 · Xbox Series X|S</span>
@@ -227,10 +227,10 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
       <div class="tableau" style="border:0">
         <table>
           <tbody>
-            <tr><td><b>Une fois</b></td><td class="n">1 h 30</td><td class="muted">Compte TikTok, Upload-Post, clés Twitch, secrets GitHub, 15 messages aux streamers</td></tr>
+            <tr><td><b>Une fois</b></td><td class="n">1 h 30</td><td class="muted">Compte TikTok, Upload-Post, secret GitHub, 2 ou 3 campagnes rejointes</td></tr>
             <tr><td><b>Chaque matin</b></td><td class="n">0 min</td><td class="muted">GitHub lance le pilote à 5 h 30 : récolte, montage, programmation des 6 vidéos</td></tr>
             <tr><td><b>Chaque jour</b></td><td class="n">2 min</td><td class="muted">Coller les liens publiés dans les campagnes de clipping</td></tr>
-            <tr><td><b>Le dimanche</b></td><td class="n">15 min</td><td class="muted">5 nouveaux streamers contactés, stats de la semaine (saisies, ou importées par Claude avec Metricool)</td></tr>
+            <tr><td><b>Le dimanche</b></td><td class="n">15 min</td><td class="muted">Nouvelle campagne si une se termine, stats de la semaine (saisies, ou importées par Claude avec Metricool)</td></tr>
           </tbody>
         </table>
       </div>
@@ -241,8 +241,8 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
   <div class="section">
     <h2>La chaîne de production</h2>
     <div class="flux">
-      <div class="etape"><span class="qui">Sources autorisées</span><b>Streamers et campagnes</b><span class="small muted">Streamers FR qui ont dit oui, rushs fournis par les campagnes de clipping, clips de ta communauté.</span></div>
-      <div class="etape"><span class="qui">GitHub Actions · 5 h 30</span><b>Récolte et montage</b><span class="small muted">Clips Twitch les plus vus des 24 h, moments forts des VOD, accroche, crédit, sous-titres, TOP 5 du jour.</span></div>
+      <div class="etape"><span class="qui">Sources autorisées</span><b>Campagnes et créateurs TikTok</b><span class="small muted">Dossiers Google Drive des campagnes de clipping, clips envoyés par des créateurs qui ont dit oui.</span></div>
+      <div class="etape"><span class="qui">GitHub Actions · 5 h 30</span><b>Récolte et montage</b><span class="small muted">Nouvelles vidéos des dossiers, moments forts des vidéos longues, accroche, crédit, mention « Collaboration commerciale ».</span></div>
       <div class="etape"><span class="qui">Légendes et horaires</span><b>6 vidéos par jour</b><span class="small muted">Légende, hashtags et crédit écrits automatiquement ; copie gardée 7 jours dans GitHub.</span></div>
       <div class="etape"><span class="qui">Upload-Post → TikTok</span><b>Programmation automatique</b><span class="small muted">Chaque vidéo part à son créneau entre 12 h et 22 h 30, les meilleures le soir.</span></div>
       <div class="etape"><span class="qui">Campagnes · Stats</span><b>Encaisser et ajuster</b><span class="small muted">Liens soumis aux campagnes, chiffres du dimanche dans l'onglet Stats.</span></div>
@@ -296,8 +296,8 @@ pre.txt{white-space:pre-wrap;font-family:var(--f-body);font-size:.92rem;margin:0
       <h3>Où trouver le contenu</h3>
       <ul class="liste">
         <li><b>Campagnes de clipping</b> (Whop Content Rewards et plateformes équivalentes) : les créateurs fournissent leurs rushs, fixent les règles et paient au millier de vues. Filtre sur « GTA », « gaming », « Twitch ».</li>
-        <li><b>Streamers FR qui lancent GTA VI</b> : vise les chaînes de 500 à 5 000 spectateurs, plus enclines à dire oui. Message type dans l'onglet Kit. Garde chaque accord en capture d'écran.</li>
-        <li><b>Ta communauté</b> : « Envoie ton clip » en vidéo épinglée à partir de J10. Un envoi en DM vaut accord, dépose le fichier dans <span class="mono">a_traiter/</span>.</li>
+        <li><b>Créateurs TikTok GTA 6</b> : les petits comptes acceptent souvent en échange de leur @ affiché à l'écran. Message type dans l'onglet Kit. Garde chaque accord en capture d'écran.</li>
+        <li><b>Ta communauté</b> : « Envoie ton clip » en vidéo épinglée à partir de J10. Un envoi en DM vaut accord : ajoute le lien dans une source « liens ».</li>
       </ul>
     </div>
     <div class="carte">
@@ -644,18 +644,18 @@ const PREPA = {
     taches: [
       "Créer le compte TikTok personnel @gta6zap (nom, photo, bio : onglet Kit)",
       "Créer le compte Upload-Post, un profil « gta6zap » et y connecter TikTok",
-      "Créer l'application Twitch, puis ajouter les 3 secrets dans GitHub (LISEZMOI, mode 100 % automatique)",
+      "Ajouter le secret UPLOAD_POST_API_KEY dans GitHub (LISEZMOI, mode 100 % automatique)",
       "S'inscrire sur une plateforme de campagnes de clipping et repérer les campagnes GTA VI et gaming",
-      "Envoyer le message d'autorisation à 15 streamers FR qui lancent GTA VI"
+      "Rejoindre 2 ou 3 campagnes GTA VI ou gaming et noter les liens de leurs dossiers Google Drive"
     ]
   },
   "-1": {
     theme: "Tester et brancher",
     taches: [
-      "Ajouter dans config.cloud.json les streamers qui ont dit oui, avec la preuve (ou le demander à Claude)",
+      "Donner à Claude le nom, le lien Drive et le @ du créateur de chaque campagne pour qu'il les ajoute",
       "Essai à blanc : GitHub → Actions → GTA 6 Zap → Run workflow, case « Essai » cochée",
       "Lancer une vraie exécution et vérifier dans TikTok Studio que les vidéos sont programmées",
-      "Relancer les streamers sans réponse (message de relance : Kit)",
+      "Envoyer la demande d'accord (Kit) à 10 créateurs TikTok GTA 6",
       "Suivre 30 comptes gaming FR et regarder 20 min de vidéos GTA depuis le compte"
     ]
   }
@@ -673,7 +673,7 @@ function infoJour(d) {
     taches.push("Coller les liens publiés dans les campagnes (2 min)");
     if (d.getDay() === 0) {
       taches.push("Point du dimanche : stats de la semaine dans l'onglet Stats");
-      taches.push("Envoyer le message d'autorisation à 5 nouveaux streamers");
+      taches.push("Rejoindre une nouvelle campagne si l'une des tiennes se termine");
     }
     if ([7, 14, 21, 28].includes(n)) taches.push("Bilan : garder les créateurs et les accroches qui marchent le mieux, retirer les autres de config.json");
     if (n === 3) taches.push("Épingler la meilleure vidéo du compte");
@@ -1249,8 +1249,8 @@ function construireKit() {
     ["Relance après 3 jours", "Petite relance pour les clips GTA VI : je publie 6 vidéos par jour avec le pseudo des streamers à l'écran et en description. Si tu es partant, réponds juste « ok » et je commence par tes meilleurs moments d'hier."],
     ["Demande d'accord à un créateur TikTok", "Salut ! Je gère @gta6zap, un compte FR qui publie chaque jour les meilleurs moments de GTA 6.\n\nJ'aimerais reprendre ton clip dans notre TOP du jour, avec ton @ affiché à l'écran et dans la description pour t'envoyer des abonnés.\n\nTu es d'accord ? Si oui, envoie-moi le fichier sans filigrane. Je retire la vidéo sur simple demande."],
     ["Appel « Envoie ton clip »", "Tu as un clip de fou sur GTA 6 ? Envoie-le en DM avec ton pseudo : s'il est retenu, il passe dans le TOP du jour avec ton nom à l'écran.\n\nEn l'envoyant, tu nous autorises à le publier sur nos réseaux."],
-    ["Légende type", "Il a pas vu le croco arriver\n🎥 NomDuStreamer (twitch.tv/nomdustreamer)\nAbonne-toi pour le meilleur de GTA 6 chaque jour\n#gta6 #gtavi #gta6clips #twitchfr #gaming"],
-    ["Les 4 jeux de hashtags", "#gta6 #gtavi #gta6clips #twitchfr #gaming\n#gta6 #leonida #vicecity #clipsfr #jeuxvideo\n#gta6 #gtavi #gta6fr #streamerfr #fyp\n#gta6 #gta6funny #gamingfr #twitchclips #rockstargames"],
+    ["Légende type", "Collaboration commerciale\nIl a pas vu le croco arriver\n🎥 @compte_du_createur\nAbonne-toi pour le meilleur de GTA 6 chaque jour\n#gta6 #gtavi #gta6clips #gamingtiktok #gaming"],
+    ["Les 4 jeux de hashtags", "#gta6 #gtavi #gta6clips #gamingtiktok #gaming\n#gta6 #leonida #vicecity #clipsfr #jeuxvideo\n#gta6 #gtavi #gta6fr #gamertiktok #fyp\n#gta6 #gta6funny #gamingfr #gtaclips #rockstargames"],
     ["Réponse à une demande de retrait", "Pas de souci, c'est retiré. Merci de m'avoir prévenu, et bon stream !"]
   ];
   const zt = $("#textes");

@@ -1,0 +1,15 @@
+{
+  "nom": "Campagne GTA 6 de NomDuCreateur",
+  "type": "gdrive",
+  "lien": "https://drive.google.com/drive/folders/IDENTIFIANT_DU_DOSSIER",
+  "credit": "@compte_tiktok_du_createur",
+  "autorisation": "Campagne Content Rewards rejointe le 18/11/2026",
+  "collaboration_commerciale": true,
+  "legende_ajout": "",
+  "videos_par_jour": 3,
+  "clips_par_video": 3,
+  "duree_max_clip": 75,
+  "retouche": true,
+  "accroche": true,
+  "actif": true
+}

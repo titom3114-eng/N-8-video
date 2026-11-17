@@ -7,7 +7,9 @@
   "clips_par_vod": 4,
   "compilation_du_jour": true,
   "accroche_titre_twitch": true,
+  "sources": [],
   "twitch": {
+    "actif": false,
     "client_id": "",
     "client_secret": "",
     "jeu": "Grand Theft Auto VI",
@@ -40,7 +42,7 @@
         "#gta6",
         "#gtavi",
         "#gta6clips",
-        "#twitchfr",
+        "#gamingtiktok",
         "#gaming"
       ],
       [
@@ -54,14 +56,14 @@
         "#gta6",
         "#gtavi",
         "#gta6fr",
-        "#streamerfr",
+        "#gamertiktok",
         "#fyp"
       ],
       [
         "#gta6",
         "#gta6funny",
         "#gamingfr",
-        "#twitchclips",
+        "#gtaclips",
         "#rockstargames"
       ]
     ],

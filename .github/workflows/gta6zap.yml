@@ -1,9 +1,11 @@
 # Pilote automatique GTA 6 ZAP : tourne chaque matin sur les serveurs de GitHub, sans ton ordinateur.
-# Récolte les clips Twitch des créateurs autorisés (gta-tiktok/config.cloud.json), les monte,
-# fabrique le TOP du jour et les programme sur TikTok via Upload-Post.
+# Récupère les nouvelles vidéos des boîtes de réception déclarées dans gta-tiktok/config.cloud.json
+# (dossiers Google Drive des campagnes de clipping, liens de créateurs autorisés), les monte et les
+# programme sur TikTok via Upload-Post.
 #
-# Secrets à créer une fois (dépôt > Settings > Secrets and variables > Actions > New repository secret) :
-#   TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET, UPLOAD_POST_API_KEY
+# Secret obligatoire (dépôt > Settings > Secrets and variables > Actions > New repository secret) :
+#   UPLOAD_POST_API_KEY
+# Secrets facultatifs, seulement si tu réactives Twitch (twitch.actif) : TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET
 #
 # Les exécutions planifiées ne partent que depuis la branche par défaut du dépôt.
 
@@ -55,12 +57,8 @@ jobs:
 
       - name: Vérifier les secrets
         run: |
-          manque=""
-          [ -n "$TWITCH_CLIENT_ID" ] || manque="$manque TWITCH_CLIENT_ID"
-          [ -n "$TWITCH_CLIENT_SECRET" ] || manque="$manque TWITCH_CLIENT_SECRET"
-          [ -n "$UPLOAD_POST_API_KEY" ] || manque="$manque UPLOAD_POST_API_KEY"
-          if [ -n "$manque" ]; then
-            echo "::error::Secrets manquants :$manque (Settings > Secrets and variables > Actions)"
+          if [ -z "$UPLOAD_POST_API_KEY" ]; then
+            echo "::error::Secret manquant : UPLOAD_POST_API_KEY (Settings > Secrets and variables > Actions)"
             exit 1
           fi
 

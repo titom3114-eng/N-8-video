@@ -4,8 +4,9 @@
 automate.py : le pilote automatique de la chaîne.
 
 À chaque lancement (idéalement tous les matins, tout seul via le planificateur de tâches) :
-  1. récupère sur Twitch les clips GTA VI les plus vus des dernières 24 h, UNIQUEMENT chez les
-     créateurs listés dans config.json avec une autorisation notée ;
+  1. récupère les nouvelles vidéos des boîtes de réception (« sources » : dossiers Google Drive des
+     campagnes de clipping, liens fournis par des créateurs qui ont dit oui) ;
+     en option, les clips Twitch des créateurs autorisés (twitch.actif) ;
   2. traite aussi les longues vidéos déposées dans a_traiter/ (VOD autorisées, tes captures) ;
   3. monte chaque clip en 9:16 (accroche, crédit, sous-titres si activés, appel à l'abonnement) ;
   4. fabrique la compilation TOP 5 du jour (plus d'1 min) ;
@@ -40,6 +41,7 @@ ICI = Path(__file__).resolve().parent
 sys.path.insert(0, str(ICI))
 import clipper  # noqa: E402
 import publication  # noqa: E402
+import sources as boites  # noqa: E402
 
 CONFIG = ICI / (os.environ.get("GTA6ZAP_CONFIG") or "config.json")
 EXEMPLE = ICI / "config.exemple.json"
@@ -266,12 +268,17 @@ def creneaux(horaires, depart, nombre):
 
 def legende(item, hashtags):
     lignes = []
+    if item.get("commercial"):
+        lignes.append("Collaboration commerciale")
     accroche = phrase(item["hook"])
     if accroche:
         lignes.append(accroche)
     if item.get("credits"):
         lignes.append("🎥 " + " · ".join(item["credits"]))
     lignes.append("Abonne-toi pour le meilleur de GTA 6 chaque jour")
+    for ajout in item.get("legende_ajout") or []:
+        if ajout and ajout not in lignes:
+            lignes.append(ajout)
     lignes.append(" ".join(hashtags))
     return "\n".join(lignes)
 
@@ -285,8 +292,85 @@ def reglages_montage(config):
     return clipper.reglages(m)
 
 
+def recolte_sources(config, etat, essai=False):
+    """Boîtes de réception : dossiers Google Drive des campagnes, liens de créateurs autorisés."""
+    liste = [s for s in config.get("sources", []) or [] if s.get("actif", True) is not False]
+    if not liste:
+        dire("Boîtes de réception : aucune source dans la configuration.")
+        return []
+    reg = reglages_montage(config)
+    vus = set(etat.get("fichiers_vus", []))
+    budget = int(config.get("max_clips_par_lancement", 5))
+    produits = []
+    for s in liste:
+        nom = s.get("nom") or (s.get("lien") or "source")[:40]
+        if not str(s.get("autorisation", "")).strip():
+            dire(f"Source « {nom} » ignorée : aucune autorisation notée (campagne rejointe ou accord écrit).")
+            continue
+        if len(produits) >= budget:
+            dire(f"Source « {nom} » : quota du jour atteint, elle passera au prochain lancement.")
+            continue
+        cache = ETAT / "telechargements" / clipper.slug(nom, 30)
+        try:
+            fichiers = boites.nouveaux_fichiers(s, cache, vus, int(s.get("videos_par_jour", 3)))
+        except boites.ErreurSource as e:
+            dire(f"Source « {nom} » : {e}")
+            continue
+        except Exception as e:  # noqa: BLE001 - une source en panne ne bloque pas les autres
+            dire(f"Source « {nom} » : erreur inattendue ({str(e)[:200]})")
+            continue
+        dire(f"Source « {nom} » : {len(fichiers)} nouvelle(s) vidéo(s).")
+        if essai:
+            for _, chemin, nom_fichier in fichiers:
+                dire(f"  [essai] {nom_fichier}")
+            continue
+        credit = s.get("credit", "")
+        ajout = s.get("legende_ajout", "")
+        commun = {"credits": [credit] if credit else [], "credit": credit,
+                  "commercial": bool(s.get("collaboration_commerciale", True)),
+                  "legende_ajout": [ajout] if ajout else []}
+        for ident, chemin, nom_fichier in fichiers:
+            if len(produits) >= budget:
+                break  # vidéo non marquée comme vue : elle sera reprise au prochain lancement
+            vus.add(ident)
+            info = essayer(nom_fichier, clipper.sonder, chemin)
+            if info is None:
+                continue
+            if s.get("retouche", True) is False:
+                sortie = config["_jour"] / f"src_{clipper.slug(nom, 16)}_{len(produits) + 1:02d}{chemin.suffix.lower()}"
+                shutil.copy(chemin, sortie)
+                dire(f"[{nom}] {sortie.name} (publiée telle quelle, sans retouche)")
+                produits.append({"fichier": sortie, "duree": info["duree"], "hook": "", "poids": 1000.0,
+                                 "source": chemin, "debut": 0.0, "fin": info["duree"],
+                                 "origine": f"source:{nom}", **commun})
+                continue
+            if info["duree"] <= float(s.get("duree_max_clip", 75)) or not info["audio"]:
+                moments = [{"debut": 0.0, "fin": info["duree"], "score": 10.0}]
+            else:
+                r = essayer(nom_fichier, clipper.reperer_moments, chemin, nombre=int(s.get("clips_par_video", 3)))
+                moments = r[0] if r else []
+            for m in sorted(moments, key=lambda m: m["score"], reverse=True):
+                if len(produits) >= budget:
+                    break
+                hook = hook_auto(etat) if s.get("accroche", True) is not False else ""
+                sortie = config["_jour"] / (f"src_{clipper.slug(nom, 16)}_{len(produits) + 1:02d}_"
+                                            f"{clipper.slug(sans_etoiles(hook) or nom_fichier)}.mp4")
+                dire(f"[{nom}] {sortie.name}  ({clipper.fmt_temps(m['debut'])} -> {clipper.fmt_temps(m['fin'])})")
+                d = essayer(sortie.name, clipper.rendre, chemin, m["debut"], m["fin"], sortie,
+                            dict(reg, credit=credit), hook=hook)
+                if d is None:
+                    continue
+                produits.append({"fichier": sortie, "duree": d, "hook": hook, "poids": m["score"] * 100,
+                                 "source": chemin, "debut": m["debut"], "fin": m["fin"],
+                                 "origine": f"source:{nom}", **commun})
+    etat["fichiers_vus"] = sorted(vus)[-20000:]
+    return produits
+
+
 def recolte_twitch(config, etat, essai):
     t = config.get("twitch", {}) or {}
+    if t.get("actif") is False:
+        return []
     if not t.get("client_id") or not t.get("client_secret"):
         dire("Twitch : client_id / client_secret vides dans config.json, étape ignorée.")
         return []
@@ -454,14 +538,20 @@ def compilation_du_jour(config, produits):
         for c in s["p"]["credits"]:
             if c not in credits:
                 credits.append(c)
+    ajouts = []
+    for s in segments:
+        for x in s["p"].get("legende_ajout") or []:
+            if x not in ajouts:
+                ajouts.append(x)
     return {"fichier": sortie, "duree": d, "hook": comp["titre"], "poids": 10 ** 9, "credits": credits,
-            "origine": "compilation"}
+            "origine": "compilation", "commercial": any(s["p"].get("commercial") for s in segments),
+            "legende_ajout": ajouts}
 
 
 def ecrire_planning(config, produits, etat):
     pub = config.get("publication", {}) or {}
     horaires = pub.get("horaires") or ["12:00", "14:00", "17:00", "18:30", "20:30", "22:30"]
-    jeux_hashtags = pub.get("hashtags") or [["#gta6", "#gtavi", "#gta6clips", "#twitchfr", "#gaming"]]
+    jeux_hashtags = pub.get("hashtags") or [["#gta6", "#gtavi", "#gta6clips", "#gamingtiktok", "#gaming"]]
     file_attente = etat.get("file_attente_fin")
     depart = maintenant(config)
     if file_attente:
@@ -591,6 +681,7 @@ def main():
 
     produits = []
     try:
+        produits += recolte_sources(config, etat, a.essai)
         if not a.sans_twitch:
             produits += recolte_twitch(config, etat, a.essai)
         if a.essai:

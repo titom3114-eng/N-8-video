@@ -1,0 +1,12 @@
+{
+  "nom": "Clips envoyés par NomDuCreateur",
+  "type": "liens",
+  "liens": [
+    "https://www.dropbox.com/s/exemple/clip.mp4?dl=0"
+  ],
+  "credit": "@compte_tiktok_du_createur",
+  "autorisation": "Accord écrit par DM TikTok le 18/11/2026, capture dans preuves/",
+  "collaboration_commerciale": false,
+  "videos_par_jour": 3,
+  "actif": true
+}
